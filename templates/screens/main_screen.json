@@ -1,0 +1,24 @@
+{
+  "screen": "MAIN_PAGE",
+  "label": "Главный экран",
+  "attributes": [
+
+  ],
+  "events": {
+
+  },
+  "buttons": {
+    "BUTTON_SELECT": {
+      "label": "Выбрать",
+      "onPress": {
+        "path": "/select"
+      }
+    },
+    "BUTTON_BACK": {
+      "label": "Назад",
+      "onPress": {
+        "path": "/back"
+      }
+    }
+  }
+}

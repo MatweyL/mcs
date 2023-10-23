@@ -1,0 +1,56 @@
+{
+  "screen": "EDITOR_PAGE",
+  "label": "Редактор канала",
+  "attributes": {
+    "CHANNEL_MODE": {
+      "type": "SELECT_BOX",
+      "selectType": "MODE"
+    },
+    "FORBIDDEN_SEND": {
+      "type": "BOOLEAN",
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "SHOW"
+          ],
+          "excludeFiringValues": ["Не задано"]
+        },
+        {
+          "CHANNEL_MODE": {
+            "instructions": [
+              "SHOW"
+            ],
+            "excludeFiringValues": ["Не задано"]
+          }
+        },
+        {
+          "CHANNEL_MODE": {
+            "instructions": [
+              "HIDE"
+            ],
+            "firingValues": ["Не задано"]
+          }
+        }
+      ]
+    }
+  },
+  "buttons": {
+    "BUTTON_SELECT": {
+      "label": "Выбрать",
+      "onPress": {
+        "path": "/select"
+      }
+    },
+    "BUTTON_BACK": {
+      "label": "Назад",
+      "onPress": {
+        "path": "/back"
+      }
+    }
+  },
+  "buttons_list": [
+    "BUTTON_BACK",
+    "BUTTON_SELECT"
+  ]
+}
