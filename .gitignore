@@ -1,0 +1,8 @@
+*.pyc
+__pycache__/
+.idea/
+*.db
+*.session
+*.session-journal
+*.txt
+!requirements.txt
