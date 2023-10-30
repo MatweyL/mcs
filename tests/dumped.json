@@ -4,40 +4,50 @@
   "attributes": {
     "CHANNEL_MODE": {
       "name": "CHANNEL_MODE",
-      "label": "Режим",
       "type": "DICTIONARY",
-      "dictionaryType": "MODE"
+      "label": "Режим",
+      "events": []
     },
     "SAMPLE_TEXT": {
       "name": "SAMPLE_TEXT",
       "type": "TEXT",
-      "label": "MODE"
+      "label": "MODE",
+      "events": []
     },
     "DOUBLE_FREQUENCY": {
       "name": "DOUBLE_FREQUENCY",
       "type": "TEXT",
-      "label": "MODE"
-
+      "label": "MODE",
+      "events": []
     },
     "FORBIDDEN_SEND": {
       "name": "FORBIDDEN_SEND",
-      "label": "Запрет ПРД",
       "type": "BOOLEAN",
+      "label": "Запрет ПРД",
       "events": [
         {
           "attribute_name": "CHANNEL_MODE",
           "instructions": [
             "SHOW"
           ],
-          "excludeFiringValues": ["Не задано"]
+          "firing_values": [],
+          "exclude_firing_values": [
+            "Не задано"
+          ]
         },
         {
           "attribute_name": "DOUBLE_FREQUENCY",
           "instructions": [
             "SHOW"
           ],
-          "firingValues": ["Не задано", true, 1, 1.0]
-          }
+          "firing_values": [
+            "Не задано",
+            true,
+            1,
+            1.0
+          ],
+          "exclude_firing_values": []
+        }
       ]
     }
   },
@@ -45,14 +55,14 @@
     "BUTTON_SELECT": {
       "name": "BUTTON_SELECT",
       "label": "Выбрать",
-      "onPress": {
+      "on_press": {
         "path": "/select"
       }
     },
     "BUTTON_BACK": {
       "name": "BUTTON_BACK",
       "label": "Назад",
-      "onPress": {
+      "on_press": {
         "path": "/back"
       }
     }

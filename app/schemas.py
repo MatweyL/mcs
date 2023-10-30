@@ -19,19 +19,29 @@ class AttributeType(str, enum.Enum):
     TEXT = "TEXT"
 
 
+class InstructionType(str, enum.Enum):
+    SHOW = "SHOW"
+    HIDE = "HIDE"
+
+
+class Event(BaseModel):
+    attribute_name: AttributeName
+    instructions: List[InstructionType] = Field(default_factory=list)
+    firing_values: List[str | bool | int | float] = Field(default_factory=list,
+                                                          validation_alias=AliasChoices('firing_values',
+                                                                                        'firingValues'),
+                                                          serialization_alias='firingValues')
+    exclude_firing_values: List[str | bool | int | float] = Field(default_factory=list,
+                                                                  validation_alias=AliasChoices('exclude_firing_values',
+                                                                                                'excludeFiringValues'),
+                                                                  serialization_alias='excludeFiringValues')
+
+
 class Attribute(BaseModel):
     name: AttributeName
     type: AttributeType
-
-
-class AttributesMap(BaseModel):
-    map: Dict[AttributeName, Attribute]
-
-    def __getitem__(self, item: AttributeName | str):
-        return self.map[item]
-
-    def __setitem__(self, key: AttributeName | str, value: Attribute | dict):
-        self.map[key] = value
+    label: str
+    events: List[Event] = Field(default_factory=list)
 
 
 class ButtonOnPress(BaseModel):
