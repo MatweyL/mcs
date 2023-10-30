@@ -8,8 +8,7 @@ class AttributeName(str, enum.Enum):
     CHANNEL_MODE = "CHANNEL_MODE"
     SAMPLE_TEXT = "SAMPLE_TEXT"
     FORBIDDEN_SEND = "FORBIDDEN_SEND"
-    BUTTON_SELECT = "BUTTON_SELECT"
-    BUTTON_BACK = "BUTTON_BACK"
+    DOUBLE_FREQUENCY = "DOUBLE_FREQUENCY"
 
 
 class AttributeType(str, enum.Enum):
@@ -31,28 +30,29 @@ class AttributesMap(BaseModel):
     def __getitem__(self, item: AttributeName | str):
         return self.map[item]
 
-    def __setitem__(self, key: AttributeName, value: Attribute):
+    def __setitem__(self, key: AttributeName | str, value: Attribute | dict):
         self.map[key] = value
-
-
-class ButtonName(str, enum.Enum):
-    BUTTON_BACK = "BUTTON_BACK"
-    BUTTON_SELECT = "BUTTON_SELECT"
 
 
 class ButtonOnPress(BaseModel):
     path: str
 
 
+class ButtonName(str, enum.Enum):
+    BUTTON_SELECT = "BUTTON_SELECT"
+    BUTTON_BACK = "BUTTON_BACK"
+
+
 class Button(BaseModel):
     name: ButtonName
     label: str
-    on_press: ButtonOnPress = Field(validation_alias=AliasChoices('on_press', 'onPress'), serialization_alias='onPress')
+    on_press: ButtonOnPress = Field(validation_alias=AliasChoices('on_press', 'onPress'),
+                                    serialization_alias='onPress')
 
 
 class Screen(BaseModel):
     name: str
     label: str
-    attributes: AttributesMap
-    buttons: Dict
+    attributes: Dict[AttributeName, Attribute]
+    buttons: Dict[ButtonName, Button]
     buttons_list: List[ButtonName]

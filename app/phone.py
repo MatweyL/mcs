@@ -1,7 +1,7 @@
 import enum
 from typing import List
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, AliasChoices
 
 
 class ChannelMode(str, enum.Enum):
@@ -21,9 +21,13 @@ class Channel(BaseModel):
 
 
 class ChannelCHM25(Channel):
-    mode: ChannelMode = ChannelMode.CHM25
-    prd_forbidden: bool = False
-    two_frequency: bool = False
+    mode: ChannelMode = Field(default=ChannelMode.CHM25)
+    prd_forbidden: bool = Field(default=False,
+                                validation_alias=AliasChoices('prd_forbidden', 'prdForbidden'),
+                                serialization_alias='prdForbidden')
+    two_frequency: bool = Field(default=False,
+                                validation_alias=AliasChoices('two_frequency', 'twoFrequency'),
+                                serialization_alias='twoFrequency')
     frequency: float = 0
     ctcss: bool = False
     name: str = ''
