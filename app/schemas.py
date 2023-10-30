@@ -1,31 +1,12 @@
-import enum
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from pydantic import BaseModel, Field, AliasChoices
 
-
-class AttributeName(str, enum.Enum):
-    CHANNEL_MODE = "CHANNEL_MODE"
-    SAMPLE_TEXT = "SAMPLE_TEXT"
-    FORBIDDEN_SEND = "FORBIDDEN_SEND"
-    DOUBLE_FREQUENCY = "DOUBLE_FREQUENCY"
-
-
-class AttributeType(str, enum.Enum):
-    DICTIONARY = "DICTIONARY"
-    BOOLEAN = "BOOLEAN"
-    INTEGER = "INTEGER"
-    DOUBLE = "DOUBLE"
-    TEXT = "TEXT"
-
-
-class InstructionType(str, enum.Enum):
-    SHOW = "SHOW"
-    HIDE = "HIDE"
+from app.enums import AttributeName, InstructionType, AttributeType, ButtonName
 
 
 class Event(BaseModel):
-    attribute_name: AttributeName
+    attribute: AttributeName
     instructions: List[InstructionType] = Field(default_factory=list)
     firing_values: List[str | bool | int | float] = Field(default_factory=list,
                                                           validation_alias=AliasChoices('firing_values',
@@ -40,17 +21,14 @@ class Event(BaseModel):
 class Attribute(BaseModel):
     name: AttributeName
     type: AttributeType
-    label: str
+    label: Optional[str] = None
     events: List[Event] = Field(default_factory=list)
+    dictionary_type: Optional[str] = Field(default=None, serialization_alias='dictionaryType')
+    values: Optional[List[str]] = None
 
 
 class ButtonOnPress(BaseModel):
     path: str
-
-
-class ButtonName(str, enum.Enum):
-    BUTTON_SELECT = "BUTTON_SELECT"
-    BUTTON_BACK = "BUTTON_BACK"
 
 
 class Button(BaseModel):
@@ -65,4 +43,3 @@ class Screen(BaseModel):
     label: str
     attributes: Dict[AttributeName, Attribute]
     buttons: Dict[ButtonName, Button]
-    buttons_list: List[ButtonName]

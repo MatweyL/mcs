@@ -6,19 +6,9 @@
       "name": "CHANNEL_MODE",
       "type": "DICTIONARY",
       "label": "Режим",
-      "events": []
-    },
-    "SAMPLE_TEXT": {
-      "name": "SAMPLE_TEXT",
-      "type": "TEXT",
-      "label": "MODE",
-      "events": []
-    },
-    "DOUBLE_FREQUENCY": {
-      "name": "DOUBLE_FREQUENCY",
-      "type": "TEXT",
-      "label": "MODE",
-      "events": []
+      "events": [],
+      "dictionaryType": null,
+      "values": null
     },
     "FORBIDDEN_SEND": {
       "name": "FORBIDDEN_SEND",
@@ -26,49 +16,160 @@
       "label": "Запрет ПРД",
       "events": [
         {
-          "attribute_name": "CHANNEL_MODE",
+          "attribute": "CHANNEL_MODE",
           "instructions": [
             "SHOW"
           ],
-          "firing_values": [],
-          "exclude_firing_values": [
-            "Не задано"
+          "firingValues": [],
+          "excludeFiringValues": [
+            "NOT_DEFINED"
           ]
         },
         {
-          "attribute_name": "DOUBLE_FREQUENCY",
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": [
+            "NOT_DEFINED"
+          ],
+          "excludeFiringValues": []
+        }
+      ],
+      "dictionaryType": null,
+      "values": null
+    },
+    "DOUBLE_FREQUENCY": {
+      "name": "DOUBLE_FREQUENCY",
+      "type": "BOOLEAN",
+      "label": "Двойная частота",
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
           "instructions": [
             "SHOW"
           ],
-          "firing_values": [
-            "Не задано",
-            true,
-            1,
-            1.0
+          "firingValues": [],
+          "excludeFiringValues": [
+            "NOT_DEFINED"
+          ]
+        },
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "HIDE"
           ],
-          "exclude_firing_values": []
+          "firingValues": [
+            "NOT_DEFINED"
+          ],
+          "excludeFiringValues": []
         }
-      ]
+      ],
+      "dictionaryType": null,
+      "values": null
+    },
+    "FREQUENCY": {
+      "name": "FREQUENCY",
+      "type": "TEXT",
+      "label": "Частота",
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "SHOW"
+          ],
+          "firingValues": [],
+          "excludeFiringValues": [
+            "NOT_DEFINED"
+          ]
+        },
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": [
+            "NOT_DEFINED"
+          ],
+          "excludeFiringValues": []
+        }
+      ],
+      "dictionaryType": null,
+      "values": null
+    },
+    "CTCSS": {
+      "name": "CTCSS",
+      "type": "DICTIONARY",
+      "label": "CTCSS",
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "SHOW"
+          ],
+          "firingValues": [],
+          "excludeFiringValues": [
+            "NOT_DEFINED"
+          ]
+        },
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": [
+            "NOT_DEFINED"
+          ],
+          "excludeFiringValues": []
+        }
+      ],
+      "dictionaryType": null,
+      "values": null
+    },
+    "NAME": {
+      "name": "NAME",
+      "type": "TEXT",
+      "label": "Имя",
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "SHOW"
+          ],
+          "firingValues": [],
+          "excludeFiringValues": [
+            "NOT_DEFINED"
+          ]
+        },
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": [
+            "NOT_DEFINED"
+          ],
+          "excludeFiringValues": []
+        }
+      ],
+      "dictionaryType": null,
+      "values": null
     }
   },
   "buttons": {
     "BUTTON_SELECT": {
       "name": "BUTTON_SELECT",
       "label": "Выбрать",
-      "on_press": {
+      "onPress": {
         "path": "/select"
       }
     },
-    "BUTTON_BACK": {
-      "name": "BUTTON_BACK",
-      "label": "Назад",
-      "on_press": {
-        "path": "/back"
+    "BUTTON_ERASE": {
+      "name": "BUTTON_ERASE",
+      "label": "Стереть",
+      "onPress": {
+        "path": "/erase"
       }
     }
-  },
-  "buttons_list": [
-    "BUTTON_BACK",
-    "BUTTON_SELECT"
-  ]
+  }
 }

@@ -5,15 +5,15 @@ from pydantic import BaseModel, Field, AliasChoices
 
 
 class ChannelMode(str, enum.Enum):
-    NOT_DEFINED = "Не задано"
-    TETRA_DMO = "TETRA DMO"
-    TETRA_TMO = "TETRA DMO"
-    VPD = "ВПД"
-    AM25 = "АМ25"
-    CHM25 = "ЧМ25"
-    CHM50 = "ЧМ50"
-    OBP = "ОБП"
-    FM_RADIO = "FM радио"
+    NOT_DEFINED = "NOT_DEFINED"
+    TETRA_DMO = "TETRA_DMO"  # TETRA_DMO - value; TETRA DMO - name (FOR SELECT BUTTON)
+    TETRA_TMO = "TETRA_TMO"
+    VPD = "VPD"
+    AM25 = "AM25"
+    CHM25 = "CHM25"
+    CHM50 = "CHM50"
+    OBP = "OBP"
+    FM_RADIO = "FM_RADIO"
 
 
 class Channel(BaseModel):
@@ -23,11 +23,10 @@ class Channel(BaseModel):
 class ChannelCHM25(Channel):
     mode: ChannelMode = Field(default=ChannelMode.CHM25)
     prd_forbidden: bool = Field(default=False,
-                                validation_alias=AliasChoices('prd_forbidden', 'prdForbidden'),
-                                serialization_alias='prdForbidden')
-    two_frequency: bool = Field(default=False,
-                                validation_alias=AliasChoices('two_frequency', 'twoFrequency'),
-                                serialization_alias='twoFrequency')
+                                validation_alias=AliasChoices('prd_forbidden', 'prdForbidden', 'PRD_FORBIDDEN'))
+    double_frequency: bool = Field(default=False,
+                                   validation_alias=AliasChoices('double_frequency', 'doubleFrequency',
+                                                                 'DOUBLE_FREQUENCY'))
     frequency: float = 0
     ctcss: bool = False
     name: str = ''
