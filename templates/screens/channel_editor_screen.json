@@ -1,12 +1,18 @@
 {
-  "screen": "EDITOR_PAGE",
+  "screen": "CHANNEL_EDITOR",
   "label": "Редактор канала",
   "attributes": {
     "CHANNEL_MODE": {
-      "type": "SELECT_BOX",
-      "selectType": "MODE"
+      "label": "Режим",
+      "type": "DICTIONARY",
+      "dictionaryType": "MODE"
+    },
+    "SAMPLE_TEXT": {
+      "type": "TEXT",
+      "label": "MODE"
     },
     "FORBIDDEN_SEND": {
+      "label": "Запрет ПРД",
       "type": "BOOLEAN",
       "events": [
         {
