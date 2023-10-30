@@ -1,6 +1,10 @@
 {
   "dictionaryValues": [
     {
+      "value": "NOT_DEFINED",
+      "name": "Не задано"
+    },
+    {
       "value": "TETRA_DMO",
       "name": "TETRA DMO"
     },

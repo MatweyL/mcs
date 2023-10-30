@@ -1,0 +1,8 @@
+{
+  "name": "CHANNEL_EDITOR",
+  "attributes": {
+    "CHANNEL_MODE": "NOT_DEFINED",
+    "FORBIDDEN_SENT": true,
+    "DOUBLE_FREQUENCY": null
+  }
+}

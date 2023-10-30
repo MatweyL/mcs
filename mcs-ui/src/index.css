@@ -8,6 +8,14 @@
   padding: 15px;
 }
 
+.buttons {
+  background: darkblue;
+  justify-content: space-between;
+  color: aliceblue;
+  display: flex;
+  align-self: end;
+}
+
 label {
   display: flex;
   justify-content: space-between;
