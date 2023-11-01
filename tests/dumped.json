@@ -1,0 +1,74 @@
+{
+  "name": "CHANNEL_EDITOR",
+  "label": "Редактор канала",
+  "attributes": {
+    "CHANNEL_MODE": {
+      "name": "CHANNEL_MODE",
+      "type": "DICTIONARY",
+      "label": "Режим",
+      "events": []
+    },
+    "SAMPLE_TEXT": {
+      "name": "SAMPLE_TEXT",
+      "type": "TEXT",
+      "label": "MODE",
+      "events": []
+    },
+    "DOUBLE_FREQUENCY": {
+      "name": "DOUBLE_FREQUENCY",
+      "type": "TEXT",
+      "label": "MODE",
+      "events": []
+    },
+    "FORBIDDEN_SEND": {
+      "name": "FORBIDDEN_SEND",
+      "type": "BOOLEAN",
+      "label": "Запрет ПРД",
+      "events": [
+        {
+          "attribute_name": "CHANNEL_MODE",
+          "instructions": [
+            "SHOW"
+          ],
+          "firing_values": [],
+          "exclude_firing_values": [
+            "Не задано"
+          ]
+        },
+        {
+          "attribute_name": "DOUBLE_FREQUENCY",
+          "instructions": [
+            "SHOW"
+          ],
+          "firing_values": [
+            "Не задано",
+            true,
+            1,
+            1.0
+          ],
+          "exclude_firing_values": []
+        }
+      ]
+    }
+  },
+  "buttons": {
+    "BUTTON_SELECT": {
+      "name": "BUTTON_SELECT",
+      "label": "Выбрать",
+      "on_press": {
+        "path": "/select"
+      }
+    },
+    "BUTTON_BACK": {
+      "name": "BUTTON_BACK",
+      "label": "Назад",
+      "on_press": {
+        "path": "/back"
+      }
+    }
+  },
+  "buttons_list": [
+    "BUTTON_BACK",
+    "BUTTON_SELECT"
+  ]
+}
