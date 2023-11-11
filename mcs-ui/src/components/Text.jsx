@@ -1,19 +1,30 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-const Text = ({attribute, update}) => {
+const Text = ({attribute, dispatch}) => {
     const [formAttribute, setAttribute] = useState(attribute)
 
     const updateAttribute = (e) => {
         let updatedAttribute = {...formAttribute, value: e.target.value};
         setAttribute(updatedAttribute);
-        update(updatedAttribute);
+        dispatch({type: "UPDATE_ATTRIBUTE", payload: updatedAttribute})
     }
+
+    useEffect(() => {
+        if (attribute.active) {
+            document.getElementById(attribute.name).focus();
+        }
+    }, [attribute.value, attribute.active]);
 
     return (
         <label>
             {attribute.label}
             <input value={formAttribute.value}
-                   onChange={updateAttribute}/>
+                   key={attribute.name}
+                   id={attribute.name}
+                   onChange={updateAttribute}
+                   className={`attribute${attribute.active ? '-active' : ''}`}
+                   readOnly={!attribute.active}
+            />
         </label>
     );
 };

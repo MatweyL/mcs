@@ -3,11 +3,15 @@ import API from "../API/api";
 import Selectbox from "./Selectbox";
 import Checkbox from "./Checkbox";
 import Text from "./Text";
+import Button from "./Button";
+import button from "./Button";
 import attribute from "./Attribute";
 
 const Screen = () => {
     const [attributes, setAttributes] = useState({});
+    const [screenLabel, setScreenLabel] = useState("")
     const [buttons, setButtons] = useState({});
+    const [selectedAttributeIndex, setSelectedAttributeIndex] = useState(-1)
 
     const updateAttribute = (attribute) => {
         console.log("Call update attribute on screen", attribute.name)
@@ -35,10 +39,6 @@ const Screen = () => {
         }
     }
 
-    const defaultProcess = (attribute) => {
-        attribute.visible = true;
-    }
-
     const compileInstruction = (i, linkedAttribute) => {
         console.log('Выполнение инструкции', i)
         TYPE_TO_INSTRUCTION[i](linkedAttribute);
@@ -53,9 +53,29 @@ const Screen = () => {
         return firing || excludeFiring;
     }
 
+    useEffect(() => {
+        API.getScreen("CHANNEL_EDITOR")
+            .then(rs => updateScreen(rs.data))
+    }, []);
+
+    const updateScreen = (data) => {
+        fillAttributes(data.attributes);
+        setScreenLabel(data.label);
+        fillButtons(data.buttons);
+    }
+
+    const fillButtons = (buttons) => {
+        Object.keys(buttons).forEach(name => {
+                buttons[name].name = name;
+            }
+        )
+        setButtons(buttons);
+    }
+
     const fillAttributes = (attributes) => {
         Object.keys(attributes).forEach(name => {
             attributes[name].name = name;
+            attributes[name].selected = false;
             processEvents(attributes[name], attributes);
             if (attributes[name].visible === undefined) {
                 attributes[name].visible = true;
@@ -65,42 +85,84 @@ const Screen = () => {
     }
 
     useEffect(() => {
-        API.getScreen("CHANNEL_EDITOR")
-            .then(rs => fillAttributes(rs.data.attributes))
-    }, []);
-
-    useEffect(() => {
         console.log("Текущее состояние формы:");
         console.log(attributes);
     }, [attributes])
 
+    const selectNext = () => {
+        let names = Object.keys(attributes);
+        let nextIndex =  (selectedAttributeIndex + 1) % names.length
+        let name = names.at(nextIndex);
+        document.getElementById(name).setAttribute("class", "attribute-active");
+        document.getElementById(name).setAttribute("class", "attribute-active");
+        setSelectedAttributeIndex(nextIndex);
+    }
+
     return (
-        <div className="screen">
-            {Object.keys(attributes)
-                .map(name => convert(attributes[name], updateAttribute))
-            }
-            <div className="buttons">
-                <div>Меню</div>
-                <div>Назад</div>
+        <div>
+            <div className="screen">
+                <div className="screen-label">
+                    {screenLabel}
+                </div>
+                {Object.keys(attributes)
+                    .map(name => convert(attributes[name], updateAttribute))
+                }
+                <div className="buttons">
+                    {Object.keys(buttons)
+                        .map(name => <Button button={buttons[name]}/> )
+                    }
+                </div>
+            </div>
+
+                <div className="keyboard">
+                <div className="keys-row">
+                    <div className="key">^</div>
+                    <div className="key" onClick={selectNext}>/\</div>
+                    <div className="key">^</div>
+                </div>
+                <div className="keys-row">
+                    <div className="key">Связь</div>
+                    <div className="key">\/</div>
+                    <div className="key">Конец</div>
+                </div>
+                <div className="keys-row">
+                    <div className="key">1</div>
+                    <div className="key">2</div>
+                    <div className="key">3</div>
+                </div>
+                <div className="keys-row">
+                    <div className="key">4</div>
+                    <div className="key">5</div>
+                    <div className="key">6</div>
+                </div>
+                <div className="keys-row">
+                    <div className="key">7</div>
+                    <div className="key">8</div>
+                    <div className="key">9</div>
+                </div>
+                <div className="keys-row">
+                    <div className="key">*</div>
+                    <div className="key">0</div>
+                    <div className="key">#</div>
+                </div>
             </div>
         </div>
     );
 };
 
+let TYPE_TO_INSTRUCTION = {
+    "SHOW": (a) => a.visible = true,
+    "HIDE": hide,
+}
+function hide(attribute) {
+    attribute.value = null;
+    attribute.visible = false;
+}
+
 function convert(attribute, update) {
     return attribute.visible
         ? TYPE_TO_CREATE_ELEMENT[attribute.type](attribute, update)
         : null
-}
-
-function unfoldContainer(attribute) {
-    if (attribute.type !== "CONTAINER") {
-        return [attribute];
-    }
-
-
-    let childrenAttributes = attribute.childrenAttributes;
-    return Object.values(childrenAttributes).flatMap(a => unfoldContainer(a));
 }
 
 let TYPE_TO_CREATE_ELEMENT = {
@@ -109,15 +171,7 @@ let TYPE_TO_CREATE_ELEMENT = {
     "DICTIONARY": createSelectbox,
 }
 
-let TYPE_TO_INSTRUCTION = {
-    "SHOW": (a) => a.visible = true,
-    "HIDE": hide,
-}
 
-function hide(attribute) {
-    attribute.value = null;
-    attribute.visible = false;
-}
 
 function createSelectbox(attribute, update) {
     return (

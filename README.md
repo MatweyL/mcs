@@ -16,19 +16,3 @@ TEXT - поле для ввода текстового значения
 
 
 
-```js
-
-const updateAttribute = (e) => {
-    e.target.value
-    setAttribute
-}
-
-Screen:
- - Attribute1 (attribute, updateAttribute)
- - Attribute2
- - Attribute3
-
-```
-
-
-
