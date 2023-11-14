@@ -20,7 +20,7 @@ class Navigator {
 
     tail() {
         let navigator = this._get();
-        return navigator.slice(-1);
+        return navigator.slice(-1)[0];
     }
 
     _get() {

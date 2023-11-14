@@ -1,36 +1,22 @@
 import React, {useEffect, useReducer} from 'react';
-import Button from "./Button";
+import Button from "./attributes/Button";
 import {reducer} from "../store/reducer";
 import {convert} from "../store/convert";
-import API from "../API/api";
 import {executeAction} from "../store/action";
-
-const defaultState = {
-    attributes: {},
-    selectedAttribute: null,
-    buttons: {
-        leftButton: {
-            "name": "SELECT", "label": "Выбрать", "type": "LEFT"
-        },
-        rightButton: {
-            "name": "ERASE", "label": "Стереть", "type": "RIGHT"
-        }
-    }
-}
+import {DOWN, LOAD, UP} from "../store/constants";
 
 const ReducerManagedScreen = () => {
     const [state, dispatch] = useReducer(reducer, {attributes: {}})
 
 
     useEffect(() => {
-        executeAction(dispatch, "LOAD", null)
+        executeAction(dispatch, LOAD, null)
     }, []);
 
     const left = () => {
         const actionName = state.buttons.leftButton.name;
         const nowAttribute = state.attributes[state.selectedAttribute];
         executeAction(dispatch, actionName, nowAttribute);
-        // dispatch({type: state.buttons.leftButton.name});
     }
 
     const right = () => {
@@ -40,11 +26,11 @@ const ReducerManagedScreen = () => {
     }
 
     const up = () => {
-        dispatch({type: "UP", payload: state.selectedAttribute});
+        dispatch({type: UP, payload: state.selectedAttribute});
     }
 
     const down = () => {
-        dispatch({type: "DOWN", payload: state.selectedAttribute});
+        dispatch({type: DOWN, payload: state.selectedAttribute});
     }
 
     return (
@@ -53,9 +39,9 @@ const ReducerManagedScreen = () => {
                 <div className="screen-label">
                     {state?.label}
                 </div>
-                    { state.attributes !== undefined ?
+                {state.attributes !== undefined ?
                     Object.keys(state?.attributes)
-                    .map(name => convert(state.attributes[name], dispatch))
+                        .map(name => convert(state.attributes[name], dispatch))
                     : null
                 }
                 <div className="buttons">

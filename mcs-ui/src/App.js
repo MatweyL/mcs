@@ -1,5 +1,3 @@
-import Screen from "./components/Screen";
-import ManagedScreen from "./components/ManagedScreen";
 import ReducerManagedScreen from "./components/ReducerManagedScreen";
 
 function App() {

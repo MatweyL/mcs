@@ -1,11 +1,13 @@
 import {navigator} from "./navigator";
+import {BACK, DOWN, EDIT, ERASE, INIT, SAVE, SELECT, UP, UPDATE_ATTRIBUTE} from "./constants";
 
 /// Reducer - описывает преобразование состояния
 /// на основе данных в action
 
+
 export const reducer = (state, action) => {
     switch (action.type) {
-        case "INIT": {
+        case INIT: {
             const data = action.payload;
             console.log("DATA IN REDUCER", data);
             updateScreen(state, data);
@@ -18,18 +20,17 @@ export const reducer = (state, action) => {
             return {...state}
         }
 
-        case "UPDATE_ATTRIBUTE": {
+        case UPDATE_ATTRIBUTE: {
             const attribute = action.payload;
             console.log("Call update attribute on screen", attribute.name)
             processEvents(attribute, state.attributes);
-            let copiedAttributes = {...state.attributes, [attribute.name]: attribute};
-            state.attributes = copiedAttributes;
+            state.attributes = {...state.attributes, [attribute.name]: attribute};
             const updatedState = {...state};
             logState(updatedState);
             return updatedState;
         }
 
-        case "UP": {
+        case UP: {
             selectNext(state,
                 action.payload,
                 "up",
@@ -37,7 +38,7 @@ export const reducer = (state, action) => {
             return {...state};
         }
 
-        case "DOWN": {
+        case DOWN: {
             selectNext(state,
                 action.payload,
                 "down",
@@ -45,23 +46,24 @@ export const reducer = (state, action) => {
             return {...state};
         }
 
-        case "SELECT": {
+        case SELECT: {
             const attribute = state.attributes[state.selectedAttribute];
             if (attribute.type === "MENU_ITEM") {
                 navigator.push(attribute.value);
 
                 return {...state}
             }
+            return state;
         }
 
-        case "EDIT": {
+        case EDIT: {
             console.log(action.payload);
             const attribute = state.attributes[state.selectedAttribute];
             attribute.value = !attribute.value;
             return {...state, attributes: {...state.attributes, [attribute.name]: attribute}};
         }
 
-        case "ERASE": {
+        case ERASE: {
             const attribute = state.attributes[state.selectedAttribute];
             attribute.value = attribute.value.slice(0, -1);
             return {...state, attributes: {...state.attributes, [attribute.name]: attribute}};
@@ -182,11 +184,11 @@ const updateButtons = (selectedAttributeType, state) => {
     }
 }
 
-const SAVE_BUTTON_PARAMS = {name: "SAVE", label: "Сохранить"}
-const SELECT_BUTTON_PARAMS = {name: "SELECT", label: "Выбрать"}
-const BACK_BUTTON_PARAMS = {name: "BACK", label: "Назад"}
-const ERASE_BUTTON_PARAMS = {name: "ERASE", label: "Стереть"}
-const EDIT_BUTTON_PARAMS = {name: "EDIT", label: "Изменить"}
+const SAVE_BUTTON_PARAMS = {name: SAVE, label: "Сохранить"}
+const SELECT_BUTTON_PARAMS = {name: SELECT, label: "Выбрать"}
+const BACK_BUTTON_PARAMS = {name: BACK, label: "Назад"}
+const ERASE_BUTTON_PARAMS = {name: ERASE, label: "Стереть"}
+const EDIT_BUTTON_PARAMS = {name: EDIT, label: "Изменить"}
 
 const SELECT_BOX = "DICTIONARY"
 const TEXT = "TEXT"

@@ -1,8 +1,8 @@
-import Selectbox from "../components/Selectbox";
-import Text from "../components/Text";
-import Checkbox from "../components/Checkbox";
+import Selectbox from "../components/attributes/Selectbox";
+import Text from "../components/attributes/Text";
+import Checkbox from "../components/attributes/Checkbox";
 import React from "react";
-import MenuItem from "../components/MenuItem";
+import MenuItem from "../components/attributes/MenuItem";
 
 export function convert(attribute, dispatch) {
     return attribute.visible

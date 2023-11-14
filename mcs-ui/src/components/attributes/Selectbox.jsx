@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import API from "../API/api";
+import API from "../../API/api";
 
 const Selectbox = ({attribute, dispatch}) => {
     const [dictionaryValues, setDictionaryValues] = useState([])
