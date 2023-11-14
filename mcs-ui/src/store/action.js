@@ -50,7 +50,8 @@ export const executeAction = (dispatch, action, attribute) => {
         }
 
         case SAVE: {
-            // запрос на сохранение
+            // TODO: Здесь будет отправляться запрос на сохранение
+            // API.saveScreen(data);
             navigator.pop();
             const prevScreen = navigator.tail();
             API.getScreen(prevScreen)

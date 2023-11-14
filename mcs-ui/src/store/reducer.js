@@ -4,6 +4,7 @@ import {BACK, DOWN, EDIT, ERASE, INIT, SAVE, SELECT, UP, UPDATE_ATTRIBUTE} from 
 /// Reducer - описывает преобразование состояния
 /// на основе данных в action
 
+// TODO: Чуть позже зарефакторить, разбить большое полотно методов на части
 
 export const reducer = (state, action) => {
     switch (action.type) {
