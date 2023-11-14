@@ -1,6 +1,7 @@
 import API from "../API/api";
 import {navigator} from "./navigator";
 import {BACK, EDIT, ERASE, INIT, LOAD, SAVE, SELECT} from "./constants";
+import {get} from "axios";
 
 /// Action - описывают действия, здесь работа с запросами
 /// и передача готовых данных в reducer
@@ -10,10 +11,7 @@ export const executeAction = (dispatch, action, attribute) => {
     switch (action) {
         case SELECT: {
             if (attribute.type === "MENU_ITEM") {
-                API.getScreen(attribute.value)
-                    .then(rs => {
-                        dispatch({type: INIT, payload: rs.data})
-                    });
+                getScreen(attribute.value, dispatch);
             }
             return;
         }
@@ -21,21 +19,16 @@ export const executeAction = (dispatch, action, attribute) => {
         case BACK: {
             navigator.pop();
             const prevScreen = navigator.tail();
-            API.getScreen(prevScreen)
-                .then(rs => {
-                    dispatch({type: INIT, payload: rs.data})
-                })
+            getScreen(prevScreen, dispatch);
             return;
         }
 
         case LOAD: {
             const nowScreen = navigator.tail();
             console.log(nowScreen)
+            // FIXME: для отладки возвращается константа, когда навигатор пустой
             const screen = nowScreen === undefined ? "SERVICE_MENU" : nowScreen;
-            API.getScreen(screen)
-                .then(rs => {
-                    dispatch({type: INIT, payload: rs.data})
-                })
+            getScreen(screen, dispatch);
             return;
         }
 
@@ -54,11 +47,15 @@ export const executeAction = (dispatch, action, attribute) => {
             // API.saveScreen(data);
             navigator.pop();
             const prevScreen = navigator.tail();
-            API.getScreen(prevScreen)
-                .then(rs => {
-                    dispatch({type: INIT, payload: rs.data})
-                })
+            getScreen(prevScreen, dispatch);
             return;
         }
     }
+}
+
+const getScreen = (prevScreen, dispatch) => {
+    API.getScreen(prevScreen)
+        .then(rs => {
+            dispatch({type: INIT, payload: rs.data})
+        })
 }
