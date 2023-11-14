@@ -5,7 +5,8 @@
     "CHANNEL_MODE": {
       "label": "Режим",
       "type": "DICTIONARY",
-      "dictionaryType": "MODE"
+      "dictionaryType": "MODE",
+      "value": "NOT_DEFINED"
     },
     "FORBIDDEN_SEND": {
       "name": "FORBIDDEN_SEND",

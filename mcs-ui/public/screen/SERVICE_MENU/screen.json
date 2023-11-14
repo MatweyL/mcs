@@ -1,0 +1,31 @@
+{
+  "name": "SERVICE_MENU",
+  "label": "Сервисное меню",
+  "attributes": {
+    "DIRECTIONS_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "Направления",
+      "value": "DIRECTIONS"
+    },
+    "USB_ACCEPT_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "USB. Прием.",
+      "value": "USB_ACCEPT"
+    },
+    "RS_485_TRANSFER_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "RS-485. Передача.",
+      "value": "RS_485_TRANSFER"
+    }
+  },
+  "buttons": {
+    "leftButton": {
+      "name": "SELECT",
+      "label": "Выбрать"
+    },
+    "rightButton": {
+      "name": "SELECT",
+      "label": "Выбрать"
+    }
+  }
+}

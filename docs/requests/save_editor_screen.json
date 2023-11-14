@@ -1,0 +1,17 @@
+{
+  "name": "CHANNEL_EDITOR",
+  "attributes": [
+    {
+      "name": "CHANNEL_MODE",
+      "value": "CHM25"
+    },
+    {
+      "name": "FORBIDDEN_SENT",
+      "value": true
+    },
+    {
+      "name": "DOUBLE_FREQUENCY",
+      "value": null
+    }
+  ]
+}

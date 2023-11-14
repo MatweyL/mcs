@@ -4,8 +4,6 @@ import Selectbox from "./Selectbox";
 import Checkbox from "./Checkbox";
 import Text from "./Text";
 import Button from "./Button";
-import button from "./Button";
-import attribute from "./Attribute";
 
 const Screen = () => {
     const [attributes, setAttributes] = useState({});
