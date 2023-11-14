@@ -3,6 +3,7 @@ import Button from "./Button";
 import {reducer} from "../store/reducer";
 import {convert} from "../store/convert";
 import API from "../API/api";
+import {executeAction} from "../store/action";
 
 const defaultState = {
     attributes: {},
@@ -20,27 +21,22 @@ const defaultState = {
 const ReducerManagedScreen = () => {
     const [state, dispatch] = useReducer(reducer, {attributes: {}})
 
-    const handleGetScreen = async () => {
-        const data = await API.getScreen(
-            "SERVICE_MENU"
-        );
-        dispatch({
-            type: "INIT",
-            payload: data,
-        });
-    };
 
     useEffect(() => {
-        handleGetScreen();
+        executeAction(dispatch, "LOAD", null)
     }, []);
 
     const left = () => {
-        dispatch({type: state.buttons.leftButton.name});
+        const actionName = state.buttons.leftButton.name;
+        const nowAttribute = state.attributes[state.selectedAttribute];
+        executeAction(dispatch, actionName, nowAttribute);
+        // dispatch({type: state.buttons.leftButton.name});
     }
 
     const right = () => {
-        dispatch({type: state.buttons.rightButton.name,
-            payload: state.attributes[state.selectedAttribute]});
+        const actionName = state.buttons.rightButton.name;
+        const nowAttribute = state.attributes[state.selectedAttribute];
+        executeAction(dispatch, actionName, nowAttribute);
     }
 
     const up = () => {
@@ -102,15 +98,5 @@ const ReducerManagedScreen = () => {
         </div>
     );
 };
-
-const TYPE_TO_INSTRUCTION = {
-    "SHOW": (a) => a.visible = true,
-    "HIDE": hide,
-}
-
-function hide(attribute) {
-    attribute.value = null;
-    attribute.visible = false;
-}
 
 export default ReducerManagedScreen;

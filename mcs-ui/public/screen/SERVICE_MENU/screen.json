@@ -16,6 +16,11 @@
       "type": "MENU_ITEM",
       "label": "RS-485. Передача.",
       "value": "RS_485_TRANSFER"
+    },
+    "CHANNEL_EDITOR_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "Редактор каналов.",
+      "value": "CHANNEL_EDITOR"
     }
   },
   "buttons": {

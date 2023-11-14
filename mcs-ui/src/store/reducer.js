@@ -1,7 +1,12 @@
+import {navigator} from "./navigator";
+
+/// Reducer - описывает преобразование состояния
+/// на основе данных в action
+
 export const reducer = (state, action) => {
     switch (action.type) {
         case "INIT": {
-            const data = action.payload.data;
+            const data = action.payload;
             console.log("DATA IN REDUCER", data);
             updateScreen(state, data);
             Object.keys(state.attributes).slice(1)
@@ -9,12 +14,7 @@ export const reducer = (state, action) => {
             state.selectedAttribute = Object.keys(state.attributes)[0];
             state.attributes[state.selectedAttribute].active = true;
             state.label = data.label;
-            return {...state}
-        }
-
-        case "SELECT_ATTRIBUTE": {
-            const name = action.payload;
-            selectAttribute(state, name);
+            navigator.push(data.name);
             return {...state}
         }
 
@@ -45,12 +45,10 @@ export const reducer = (state, action) => {
             return {...state};
         }
 
-        // TODO: Реализовать
         case "SELECT": {
             const attribute = state.attributes[state.selectedAttribute];
-            if (attribute.type == "MENU_ITEM") {
-                localStorage.stack.push(attribute.name);
-                // get screen on item name
+            if (attribute.type === "MENU_ITEM") {
+                navigator.push(attribute.value);
 
                 return {...state}
             }
@@ -72,28 +70,6 @@ export const reducer = (state, action) => {
             return state;
     }
 }
-
-// const initializer = async () => {
-//     console.log("CALL INITIALIZER");
-//     const data = await getData();
-//     console.log(data);
-//     updateScreen(data);
-//     // fetch template
-//
-//     Object.keys(defaultState.attributes).slice(1)
-//         .forEach(name => defaultState.attributes[name].active = false);
-//
-//     defaultState.selectedAttribute = Object.keys(defaultState.attributes)[0];
-//     defaultState.attributes[defaultState.selectedAttribute].active = true;
-//     console.log("STATE INITIALIZED")
-//     console.log(defaultState);
-//     return defaultState;
-// }
-//
-// const getData = async ()=> {
-//
-//     // return await rs.data;
-// }
 
 const updateScreen = (state, data) => {
     console.log("FILL ATTRIBUTES")
@@ -208,6 +184,7 @@ const updateButtons = (selectedAttributeType, state) => {
 
 const SAVE_BUTTON_PARAMS = {name: "SAVE", label: "Сохранить"}
 const SELECT_BUTTON_PARAMS = {name: "SELECT", label: "Выбрать"}
+const BACK_BUTTON_PARAMS = {name: "BACK", label: "Назад"}
 const ERASE_BUTTON_PARAMS = {name: "ERASE", label: "Стереть"}
 const EDIT_BUTTON_PARAMS = {name: "EDIT", label: "Изменить"}
 
@@ -220,12 +197,13 @@ const BUTTONS_PARAMS = {
     "LEFT": {
         [SELECT_BOX]: SAVE_BUTTON_PARAMS,
         [TEXT]: SAVE_BUTTON_PARAMS,
-        [CHECKBOX]: SAVE_BUTTON_PARAMS
+        [CHECKBOX]: SAVE_BUTTON_PARAMS,
+        [MENU_ITEM]: SELECT_BUTTON_PARAMS
     },
     "RIGHT": {
         [SELECT_BOX]: SELECT_BUTTON_PARAMS,
         [TEXT]: ERASE_BUTTON_PARAMS,
         [CHECKBOX]: EDIT_BUTTON_PARAMS,
-        [MENU_ITEM]: SELECT_BUTTON_PARAMS
+        [MENU_ITEM]: BACK_BUTTON_PARAMS
     }
 }
