@@ -5,7 +5,7 @@ import {convert} from "../store/convert";
 import {executeAction} from "../store/action";
 import {DOWN, LOAD, UP} from "../store/constants";
 
-const ReducerManagedScreen = () => {
+const Screen = () => {
     const [state, dispatch] = useReducer(reducer, {attributes: {}})
 
     useEffect(() => {
@@ -84,4 +84,4 @@ const ReducerManagedScreen = () => {
     );
 };
 
-export default ReducerManagedScreen;
+export default Screen;

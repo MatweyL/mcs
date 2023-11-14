@@ -1,11 +1,11 @@
-import ReducerManagedScreen from "./components/ReducerManagedScreen";
+import Screen from "./components/Screen";
 
 function App() {
 
     return (
         <main className="container">
             <div className="body">
-                <ReducerManagedScreen/>
+                <Screen/>
             </div>
         </main>
     );
