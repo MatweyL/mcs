@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {UPDATE_ATTRIBUTE} from "../../store/constants";
 
 const Checkbox = ({attribute, dispatch}) => {
     const [formAttribute, setAttribute] = useState(attribute)
@@ -7,7 +8,7 @@ const Checkbox = ({attribute, dispatch}) => {
         let updatedAttribute = {...formAttribute, value: e.target.checked};
         // Подумать, возможно не нужно
         setAttribute(updatedAttribute);
-        dispatch({type: "UPDATE_ATTRIBUTE", payload: updatedAttribute})
+        dispatch({type: UPDATE_ATTRIBUTE, payload: updatedAttribute})
     }
 
     return (

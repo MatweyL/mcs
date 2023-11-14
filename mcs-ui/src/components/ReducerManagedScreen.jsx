@@ -8,7 +8,6 @@ import {DOWN, LOAD, UP} from "../store/constants";
 const ReducerManagedScreen = () => {
     const [state, dispatch] = useReducer(reducer, {attributes: {}})
 
-
     useEffect(() => {
         executeAction(dispatch, LOAD, null)
     }, []);

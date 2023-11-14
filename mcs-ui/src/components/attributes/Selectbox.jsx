@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import API from "../../API/api";
+import {UPDATE_ATTRIBUTE} from "../../store/constants";
 
 const Selectbox = ({attribute, dispatch}) => {
     const [dictionaryValues, setDictionaryValues] = useState([])
@@ -18,7 +19,7 @@ const Selectbox = ({attribute, dispatch}) => {
     const updateAttribute = (e) => {
         let updatedAttribute = {...formAttribute, value: e.target.value};
         setAttribute(updatedAttribute);
-        dispatch({type: "UPDATE_ATTRIBUTE", payload: updatedAttribute})
+        dispatch({type: UPDATE_ATTRIBUTE, payload: updatedAttribute})
     }
 
     useEffect(() => {

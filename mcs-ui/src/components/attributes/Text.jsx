@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {UPDATE_ATTRIBUTE} from "../../store/constants";
 
 const Text = ({attribute, dispatch}) => {
     const [formAttribute, setAttribute] = useState(attribute)
@@ -6,7 +7,7 @@ const Text = ({attribute, dispatch}) => {
     const updateAttribute = (e) => {
         let updatedAttribute = {...formAttribute, value: e.target.value};
         setAttribute(updatedAttribute);
-        dispatch({type: "UPDATE_ATTRIBUTE", payload: updatedAttribute})
+        dispatch({type: UPDATE_ATTRIBUTE, payload: updatedAttribute})
     }
 
     useEffect(() => {
