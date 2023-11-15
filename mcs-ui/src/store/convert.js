@@ -11,33 +11,33 @@ export function convert(attribute, dispatch) {
 }
 
 
-const TYPE_TO_CREATE_ELEMENT = {
-    "TEXT": createText,
-    "BOOLEAN": createCheckbox,
-    "DICTIONARY": createSelectbox,
-    "MENU_ITEM": createMenuItem,
-}
-
-function createSelectbox(attribute, dispatch) {
+const createSelectbox = (attribute, dispatch) => {
     return (
         <Selectbox attribute={attribute} dispatch={dispatch} key={attribute.name}/>
     );
 }
 
-function createText(attribute, dispatch) {
+const createText = (attribute, dispatch) => {
     return (
         <Text attribute={attribute} dispatch={dispatch} key={attribute.name}/>
     );
 }
 
-function createCheckbox(attribute, dispatch) {
+const createCheckbox = (attribute, dispatch) => {
     return (
         <Checkbox attribute={attribute} dispatch={dispatch} key={attribute.name}/>
     );
 }
 
-function createMenuItem(attribute) {
+const createMenuItem = (attribute) => {
     return (
         <MenuItem attribute={attribute} key={attribute.name}/>
     );
+}
+
+const TYPE_TO_CREATE_ELEMENT = {
+    "TEXT": createText,
+    "BOOLEAN": createCheckbox,
+    "DICTIONARY": createSelectbox,
+    "MENU_ITEM": createMenuItem,
 }

@@ -7,6 +7,7 @@ const Selectbox = ({attribute, dispatch}) => {
     const [formAttribute, setAttribute] = useState(attribute)
     
     useEffect(() => {
+        // TODO: в будущем стоит рассмотреть кеширование, чтобы не для всех словарей делать запросы на BE
         console.log(formAttribute);
         API.getDictionary(attribute.dictionaryType)
             .then(rs => setDictionaryValues(rs.data.dictionaryValues))
