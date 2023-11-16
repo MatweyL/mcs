@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import API from "../../API/api";
 import {UPDATE_ATTRIBUTE} from "../../store/constants";
 
+/// Атрибут - Селектбокс (множественный выбор)
 const Selectbox = ({attribute, dispatch}) => {
     const [dictionaryValues, setDictionaryValues] = useState([])
     const [formAttribute, setAttribute] = useState(attribute)
@@ -22,12 +23,6 @@ const Selectbox = ({attribute, dispatch}) => {
         setAttribute(updatedAttribute);
         dispatch({type: UPDATE_ATTRIBUTE, payload: updatedAttribute})
     }
-
-    useEffect(() => {
-        if (attribute.active) {
-
-        }
-    }, [attribute.active]);
 
     return (
         <label>

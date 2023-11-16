@@ -7,6 +7,11 @@
       "label": "Направления",
       "value": "DIRECTIONS"
     },
+    "PPRCH_FREQUENCY_PLAN_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "Частотные планы ППРЧ",
+      "value": "PPRCH_FREQUENCY_PLAN"
+    },
     "USB_ACCEPT_MENU_ITEM": {
       "type": "MENU_ITEM",
       "label": "USB. Прием.",

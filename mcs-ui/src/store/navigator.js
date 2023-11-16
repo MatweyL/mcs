@@ -1,5 +1,7 @@
 
 const NAVIGATOR = "navigator";
+
+/// Навигатор - хранит стек экранов, посещенных пользователем
 class Navigator {
 
     push(item) {

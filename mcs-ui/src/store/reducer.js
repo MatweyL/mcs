@@ -1,11 +1,9 @@
 import {navigator} from "./navigator";
-import {BACK, DOWN, EDIT, ERASE, INIT, SAVE, SELECT, UP, UPDATE_ATTRIBUTE} from "./constants";
+import {BACK, DOWN, EDIT, ERASE, INIT, MENU, SAVE, SELECT, UP, UPDATE_ATTRIBUTE} from "./constants";
 
+/// TODO: Чуть позже зарефакторить, разбить большое полотно методов на части
 /// Reducer - описывает преобразование состояния
 /// на основе данных в action
-
-// TODO: Чуть позже зарефакторить, разбить большое полотно методов на части
-
 export const reducer = (state, action) => {
     switch (action.type) {
         case INIT: {
@@ -77,8 +75,6 @@ export const reducer = (state, action) => {
 const updateScreen = (state, data) => {
     console.log("FILL ATTRIBUTES")
     fillAttributes(state, data.attributes);
-    // setScreenLabel(data.label);
-    // fillButtons(data.buttons);
 }
 
 const logState = (state) => {
@@ -93,7 +89,6 @@ const fillButtons = (buttons) => {
             buttons[name].name = name;
         }
     )
-    // setButtons(buttons);
 }
 
 const fillAttributes = (state, attributes) => {
@@ -107,7 +102,6 @@ const fillAttributes = (state, attributes) => {
         }
     });
     state.attributes = attributes;
-    // setAttributes(attributes);
 }
 
 const processEvents = (attribute, attributes) => {
@@ -190,23 +184,27 @@ const SELECT_BUTTON_PARAMS = {name: SELECT, label: "Выбрать"}
 const BACK_BUTTON_PARAMS = {name: BACK, label: "Назад"}
 const ERASE_BUTTON_PARAMS = {name: ERASE, label: "Стереть"}
 const EDIT_BUTTON_PARAMS = {name: EDIT, label: "Изменить"}
+const MENU_BUTTON_PARAMS = {name: MENU, label: "Меню"}
 
 const SELECT_BOX = "DICTIONARY"
 const TEXT = "TEXT"
 const CHECKBOX = "BOOLEAN"
 const MENU_ITEM = "MENU_ITEM"
+const CARD_ITEM = "CARD_ITEM"
 
 const BUTTONS_PARAMS = {
     "LEFT": {
         [SELECT_BOX]: SAVE_BUTTON_PARAMS,
         [TEXT]: SAVE_BUTTON_PARAMS,
         [CHECKBOX]: SAVE_BUTTON_PARAMS,
-        [MENU_ITEM]: SELECT_BUTTON_PARAMS
+        [MENU_ITEM]: SELECT_BUTTON_PARAMS,
+        [CARD_ITEM]: MENU_BUTTON_PARAMS,
     },
     "RIGHT": {
         [SELECT_BOX]: SELECT_BUTTON_PARAMS,
         [TEXT]: ERASE_BUTTON_PARAMS,
         [CHECKBOX]: EDIT_BUTTON_PARAMS,
-        [MENU_ITEM]: BACK_BUTTON_PARAMS
+        [MENU_ITEM]: BACK_BUTTON_PARAMS,
+        [CARD_ITEM]: BACK_BUTTON_PARAMS,
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
-/// Атрибут - Элемент списка меню
-const MenuItem = ({attribute}) => {
+/// Атрибут - Карточка
+const CardItem = ({attribute}) => {
     return (
         <div className={`attribute${attribute.active ? '-active' : ''}`}>
             {attribute.label}
@@ -9,4 +9,4 @@ const MenuItem = ({attribute}) => {
     );
 };
 
-export default MenuItem;
+export default CardItem;

@@ -3,6 +3,7 @@ import Text from "../components/attributes/Text";
 import Checkbox from "../components/attributes/Checkbox";
 import React from "react";
 import MenuItem from "../components/attributes/MenuItem";
+import CardItem from "../components/attributes/CardItem";
 
 export function convert(attribute, dispatch) {
     return attribute.visible
@@ -10,6 +11,11 @@ export function convert(attribute, dispatch) {
         : null
 }
 
+const createCardItem = (attribute, dispatch) => {
+    return (
+        <CardItem attribute={attribute}/>
+    );
+}
 
 const createSelectbox = (attribute, dispatch) => {
     return (
@@ -40,4 +46,5 @@ const TYPE_TO_CREATE_ELEMENT = {
     "BOOLEAN": createCheckbox,
     "DICTIONARY": createSelectbox,
     "MENU_ITEM": createMenuItem,
+    "CARD_ITEM": createCardItem,
 }

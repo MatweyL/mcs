@@ -1,11 +1,9 @@
 import API from "../API/api";
 import {navigator} from "./navigator";
 import {BACK, EDIT, ERASE, INIT, LOAD, SAVE, SELECT} from "./constants";
-import {get} from "axios";
 
 /// Action - описывают действия, здесь работа с запросами
 /// и передача готовых данных в reducer
-
 export const executeAction = (dispatch, action, attribute) => {
     console.log("ACTION", action);
     switch (action) {

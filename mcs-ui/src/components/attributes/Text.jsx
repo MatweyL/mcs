@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {UPDATE_ATTRIBUTE} from "../../store/constants";
 
+/// Атрибут - Текстовое поле
 const Text = ({attribute, dispatch}) => {
     const [formAttribute, setAttribute] = useState(attribute)
 
