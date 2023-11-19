@@ -1,0 +1,41 @@
+{
+  "name": "SERVICE_MENU",
+  "label": "Сервисное меню",
+  "attributes": {
+    "DIRECTIONS_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "Направления",
+      "value": "DIRECTIONS"
+    },
+    "PPRCH_FREQUENCY_PLAN_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "Частотные планы ППРЧ",
+      "value": "PPRCH_FREQUENCY_PLAN"
+    },
+    "USB_ACCEPT_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "USB. Прием.",
+      "value": "USB_ACCEPT"
+    },
+    "RS_485_TRANSFER_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "RS-485. Передача.",
+      "value": "RS_485_TRANSFER"
+    },
+    "CHANNEL_EDITOR_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "Редактор каналов.",
+      "value": "CHANNEL_EDITOR"
+    }
+  },
+  "buttons": {
+    "leftButton": {
+      "name": "SELECT",
+      "label": "Выбрать"
+    },
+    "rightButton": {
+      "name": "SELECT",
+      "label": "Выбрать"
+    }
+  }
+}
