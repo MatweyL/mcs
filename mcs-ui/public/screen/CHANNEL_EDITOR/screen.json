@@ -2,11 +2,16 @@
   "name": "CHANNEL_EDITOR",
   "label": "Редактор канала",
   "attributes": {
+    "CHANNEL_ID": {
+      "label": "Скрытый атрибут с идентификатором канала",
+      "visible": false,
+      "type": "UUID"
+    },
     "CHANNEL_MODE": {
       "label": "Режим",
       "type": "DICTIONARY",
       "dictionaryType": "MODE",
-      "value": "NOT_DEFINED"
+      "defaultValue": "NOT_DEFINED"
     },
     "FORBIDDEN_SEND": {
       "name": "FORBIDDEN_SEND",
@@ -76,6 +81,7 @@
       "label": "CTCSS",
       "type": "DICTIONARY",
       "dictionaryType": "CTCSS",
+      "defaultValue": "NO",
       "events": [
         {
           "attribute": "CHANNEL_MODE",

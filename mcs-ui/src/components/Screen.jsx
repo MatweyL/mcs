@@ -9,19 +9,17 @@ const Screen = () => {
     const [state, dispatch] = useReducer(reducer, {attributes: {}})
 
     useEffect(() => {
-        executeAction(dispatch, LOAD, null)
+        executeAction(dispatch, {action: LOAD})
     }, []);
 
     const left = () => {
-        const actionName = state.buttons.leftButton.name;
         const nowAttribute = state.attributes[state.selectedAttribute];
-        executeAction(dispatch, actionName, nowAttribute);
+        executeAction(dispatch, state.buttons.leftButton, nowAttribute, state);
     }
 
     const right = () => {
-        const actionName = state.buttons.rightButton.name;
         const nowAttribute = state.attributes[state.selectedAttribute];
-        executeAction(dispatch, actionName, nowAttribute);
+        executeAction(dispatch, state.buttons.rightButton, nowAttribute, state);
     }
 
     const up = () => {
