@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import API from "../../API/api";
 import {UPDATE_ATTRIBUTE} from "../../store/constants";
 
+/// Deprecated
 /// Атрибут - Селектбокс (множественный выбор)
-const Selectbox = ({attribute, dispatch}) => {
+const SelectBox = ({attribute, dispatch}) => {
     const [dictionaryValues, setDictionaryValues] = useState([])
     const [formAttribute, setAttribute] = useState(attribute)
-    
+
     useEffect(() => {
         // TODO: в будущем стоит рассмотреть кеширование, чтобы не для всех словарей делать запросы на BE
         console.log(formAttribute);
-        API.getDictionary(attribute.dictionaryType)
-            .then(rs => setDictionaryValues(rs.data.dictionaryValues))
+        // API.getDictionary(attribute.dictionaryType)
+        //     .then(rs => setDictionaryValues(rs.data.dictionaryValues))
     }, []);
 
     useEffect(() => {
@@ -43,4 +43,4 @@ const Selectbox = ({attribute, dispatch}) => {
     );
 };
 
-export default Selectbox;
+export default SelectBox;

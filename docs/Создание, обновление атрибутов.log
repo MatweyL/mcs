@@ -1,0 +1,23 @@
+1. Создали канал
+
+CHANNEL:
+---
+CH_ID: 1
+CHANNEL_MODE: CHM25
+---
+CH_ID: 2
+CHANNEL_MODE: CHM10
+
+2. Открыли GET /{phoneId}/CHANNEL_EDITOR/2
+3. Меняю значение CHM10 -> CHM8
+4. Сохранить POST CHANNEL_EDITOR/2
+
+===========
+Phone phone = Repository.loadPhone(phoneId)
+
+phone => Updaters.get(screenName).update(phone, screenUpdated)
+===========
+
+channelId = screenUpdated.get("ID");
+Channel channel = phone.getChannel(channelId)
+channel.name = screenUpdated.get("NAME")

@@ -1,0 +1,11 @@
+.elevatedListItem {
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.elevatedListItemActive {
+    padding-bottom: 10px;
+    padding-left: 10px;
+    background: black;
+    color: aliceblue;
+}

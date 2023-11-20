@@ -1,0 +1,11 @@
+.ownSelectBoxListItem {
+    padding-left: 10px;
+    padding-bottom: 5px;
+}
+
+.ownSelectBoxListItemActive {
+    padding-bottom: 10px;
+    padding-left: 10px;
+    background: black;
+    color: aliceblue;
+}
