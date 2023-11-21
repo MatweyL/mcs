@@ -1,4 +1,5 @@
-from typing import List, Dict, Optional
+import pprint
+from typing import List, Dict, Optional, Any
 
 from pydantic import BaseModel, Field, AliasChoices
 
@@ -24,7 +25,7 @@ class Attribute(BaseModel):
     label: Optional[str] = None
     events: List[Event] = Field(default_factory=list)
     dictionary_type: Optional[str] = Field(default=None, serialization_alias='dictionaryType')
-    values: Optional[List[str]] = None
+    value: Any = Field(default=None, description="Значение элемента")
 
 
 class ButtonOnPress(BaseModel):
@@ -43,3 +44,18 @@ class Screen(BaseModel):
     label: str
     attributes: Dict[AttributeName, Attribute]
     buttons: Dict[ButtonName, Button]
+
+
+class AttributeUpdated(BaseModel):
+    name: str
+    value: Any
+
+
+class ScreenUpdated(BaseModel):
+    name: str
+    attributes: List[AttributeUpdated]
+
+
+class ScreenUpdated2(BaseModel):
+    name: str
+    attributes: Dict[str, Any]

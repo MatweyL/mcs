@@ -1,8 +1,8 @@
-import json
 import pprint
 from pathlib import Path
 
-from app.schemas import Button, ButtonOnPress, ButtonName, Screen
+from app.phone import ChannelCHM25
+from app.schemas import Button, ButtonOnPress, ButtonName
 from app.services import ScreenBuilder
 
 
@@ -20,3 +20,9 @@ def test_screen_builder():
 
     pprint.pprint(screen.model_dump())
     Path('dumped.json').write_text(screen.model_dump_json(by_alias=True, indent=2), encoding='utf-8')
+
+
+def test_channel_updating():
+    channel = ChannelCHM25()
+    channel.update_attribute('frequency', 25)
+    channel.update_attribute('FREQUENCY', 50)

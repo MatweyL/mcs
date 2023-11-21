@@ -9,6 +9,7 @@ class AttributeName(str, enum.Enum):
     FREQUENCY = "FREQUENCY"
     NAME = "NAME"
     CTCSS = "CTCSS"
+    PRD_FORBIDDEN = "PRD_FORBIDDEN"
 
 
 class AttributeType(str, enum.Enum):
