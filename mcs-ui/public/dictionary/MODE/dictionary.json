@@ -1,0 +1,41 @@
+{
+  "dictionaryName": "MODE",
+  "dictionaryValues": [
+    {
+      "value": "NOT_DEFINED",
+      "name": "Не задано"
+    },
+    {
+      "value": "TETRA_DMO",
+      "name": "TETRA DMO"
+    },
+    {
+      "value": "TETRA_TMO",
+      "name": "TETRA TMO"
+    },
+    {
+      "value": "VPD",
+      "name": "ВПД"
+    },
+    {
+      "value": "CHM25",
+      "name": "ЧМ25"
+    },
+    {
+      "value": "CHM50",
+      "name": "ЧМ50"
+    },
+    {
+      "value": "OBP",
+      "name": "ОБП"
+    },
+    {
+      "value": "FM_RADIO",
+      "name": "FM Радио"
+    },
+    {
+      "value": "AM25",
+      "name": "АМ25"
+    }
+  ]
+}

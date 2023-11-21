@@ -1,0 +1,10 @@
+{
+  "name": "CHANNEL_EDITOR",
+  "attributes":
+    {
+      "CHANNEL_MODE": "CHM_25",
+      "CHANNEL_ID": "DFASDFADSF12",
+      "FORBIDDEN_SENT": true,
+      "DOUBLE_FREQUENCY": null
+    }
+}
