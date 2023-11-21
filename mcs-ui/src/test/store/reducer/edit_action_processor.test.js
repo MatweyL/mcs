@@ -1,6 +1,9 @@
 import {EditActionProcessor} from "../../../store/reducer/edit_action_processor";
+import Actions from "../../../store/constants/actions";
 
 describe('EditActionProcessor', () => {
+    const processor = new EditActionProcessor();
+
     test.each`
     previous | expected
     ${true}  | ${false}
@@ -17,11 +20,14 @@ describe('EditActionProcessor', () => {
         }
 
         // WHEN
-        let processor = new EditActionProcessor();
         const actualState = processor.process(state);
 
         // THEN
         expect(actualState).not.toEqual(state);
         expect(actualState.attributes.ATTRIBUTE.value).toBe(expected);
+    })
+
+    test('должен возвращать верный тип действия', () => {
+        expect(processor.getType()).toBe(Actions.EDIT)
     })
 })
