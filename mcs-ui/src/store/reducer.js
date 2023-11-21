@@ -1,37 +1,15 @@
 import {navigator} from "./navigator";
-import {
-    BACK,
-    CARD_ITEM,
-    CHECKBOX,
-    CLOSE_MENU,
-    CLOSE_SELECT_BOX,
-    CREATE,
-    DELETE,
-    DOWN,
-    EDIT,
-    ERASE,
-    INIT,
-    MENU_ITEM,
-    MULTISELECT,
-    OPEN,
-    OPEN_MENU,
-    OPEN_SELECT_BOX,
-    SAVE,
-    SAVE_SELECTED,
-    SELECT,
-    SELECT_BOX,
-    TEXT,
-    UP,
-    UPDATE_ATTRIBUTE
-} from "./constants";
 import {calculateNextByDirection, convertState} from "./util";
+import Actions from "./constants/actions";
+import Attributes from "./constants/attributes";
+import Buttons from "./constants/buttons";
 
 /// TODO: Чуть позже зарефакторить, разбить большое полотно методов на части
 /// Reducer - описывает преобразование состояния
 /// на основе данных в action
 export const reducer = (state, action) => {
     switch (action.type) {
-        case INIT: {
+        case Actions.INIT: {
             const data = action.payload;
             console.log("DATA IN REDUCER", data);
             updateScreen(state, data);
@@ -47,19 +25,19 @@ export const reducer = (state, action) => {
             return {...state}
         }
 
-        case OPEN_SELECT_BOX: {
+        case Actions.OPEN_SELECT_BOX: {
             const attribute = action.payload;
             attribute.open = true;
             attribute.dictionaryValues[0].active = true;
             state.attributes = {...state.attributes, [attribute.name]: attribute};
 
-            state.buttons.rightButton = CLOSE_SELECT_BOX_BUTTON;
-            state.buttons.leftButton = SAVE_SELECTED_BUTTON;
+            state.buttons.rightButton = Buttons.CLOSE_SELECT_BOX_BUTTON;
+            state.buttons.leftButton = Buttons.SAVE_SELECTED_BUTTON;
 
             return {...state};
         }
 
-        case CLOSE_SELECT_BOX: {
+        case Actions.CLOSE_SELECT_BOX: {
             const attribute = action.payload;
             attribute.open = false;
             Object.values(attribute.dictionaryValues)
@@ -67,13 +45,13 @@ export const reducer = (state, action) => {
 
             state.attributes = {...state.attributes, [attribute.name]: attribute};
 
-            state.buttons.rightButton = OPEN_SELECT_BOX_BUTTON;
-            state.buttons.leftButton = SAVE_BUTTON;
+            state.buttons.rightButton = Buttons.OPEN_SELECT_BOX_BUTTON;
+            state.buttons.leftButton = Buttons.SAVE_BUTTON;
 
             return {...state};
         }
 
-        case SAVE_SELECTED: {
+        case Actions.SAVE_SELECTED: {
             const attribute = action.payload;
             console.log(attribute);
             const activeValue = attribute.dictionaryValues.find(dictValue => dictValue.active);
@@ -85,13 +63,13 @@ export const reducer = (state, action) => {
             processEvents(attribute, state.attributes);
             state.attributes = {...state.attributes, [attribute.name]: attribute};
 
-            state.buttons.rightButton = OPEN_SELECT_BOX_BUTTON;
-            state.buttons.leftButton = SAVE_BUTTON;
+            state.buttons.rightButton = Buttons.OPEN_SELECT_BOX_BUTTON;
+            state.buttons.leftButton = Buttons.SAVE_BUTTON;
 
             return {...state};
         }
 
-        case UPDATE_ATTRIBUTE: {
+        case Actions.UPDATE_ATTRIBUTE: {
             const attribute = action.payload;
             console.log("Call update attribute on screen", attribute.name)
             processEvents(attribute, state.attributes);
@@ -101,34 +79,33 @@ export const reducer = (state, action) => {
             return updatedState;
         }
 
-        case OPEN_MENU: {
-            state.buttons.leftButton = MULTISELECT_BUTTON;
+        case Actions.OPEN_MENU: {
+            state.buttons.leftButton = Buttons.MULTISELECT_BUTTON;
             state.buttons.leftButton.open = true;
-            state.buttons.leftButton.items = items;
-            state.buttons.rightButton = CLOSE_MENU_BUTTON;
+            state.buttons.rightButton = Buttons.CLOSE_MENU_BUTTON;
             return {...state}
         }
 
-        case CLOSE_MENU: {
-            state.buttons.leftButton = OPEN_MENU_BUTTON;
+        case Actions.CLOSE_MENU: {
+            state.buttons.leftButton = Buttons.OPEN_MENU_BUTTON;
             state.buttons.leftButton.open = false;
-            state.buttons.rightButton = RETURN_BACK_BUTTON;
+            state.buttons.rightButton = Buttons.RETURN_BACK_BUTTON;
             return {...state}
         }
 
-        case UP: {
-            selectNext(state, action.payload, UP);
+        case Actions.UP: {
+            selectNext(state, action.payload, Actions.UP);
             return {...state};
         }
 
-        case DOWN: {
-            selectNext(state, action.payload, DOWN)
+        case Actions.DOWN: {
+            selectNext(state, action.payload, Actions.DOWN)
             return {...state};
         }
 
-        case SELECT: {
+        case Actions.SELECT: {
             const attribute = state.attributes[state.selectedAttribute];
-            if (attribute.type === "MENU_ITEM") {
+            if (attribute.type === Attributes.MENU_ITEM) {
                 navigator.push(attribute.value);
 
                 return {...state}
@@ -136,14 +113,14 @@ export const reducer = (state, action) => {
             return state;
         }
 
-        case EDIT: {
+        case Actions.EDIT: {
             console.log(action.payload);
             const attribute = state.attributes[state.selectedAttribute];
             attribute.value = !attribute.value;
             return {...state, attributes: {...state.attributes, [attribute.name]: attribute}};
         }
 
-        case ERASE: {
+        case Actions.ERASE: {
             const attribute = state.attributes[state.selectedAttribute];
             attribute.value = attribute.value.slice(0, -1);
             return {...state, attributes: {...state.attributes, [attribute.name]: attribute}};
@@ -216,7 +193,7 @@ const needProcess = (e, updatedAttribute) => {
 
 const selectNext = (state, name, direction) => {
     let nowAttribute = state.attributes[name];
-    if (nowAttribute.type === SELECT_BOX && nowAttribute.open) {
+    if (nowAttribute.type === Attributes.SELECT_BOX && nowAttribute.open) {
         selectNextSelectBoxOption(state, nowAttribute, direction);
     } else if (state.buttons.leftButton.open) {
         selectNextMultiButtonOption(state, 'leftButton', direction);
@@ -266,7 +243,7 @@ const isVisible = (attribute) => {
 
 const show = (attribute) => {
     attribute.visible = true;
-    if (attribute.type === SELECT_BOX) {
+    if (attribute.type === Attributes.SELECT_BOX) {
         attribute.value = attribute.defaultValue;
     }
 }
@@ -297,42 +274,19 @@ const updateButtons = (selectedAttributeType, state) => {
     }
 }
 
-const items = [
-    {label: "Редактировать", active: true, action: OPEN},
-    {label: "Добавить", active: false, action: CREATE},
-    {label: "Удалить", active: false, action: DELETE},
-]
-
-
-const SAVE_BUTTON = {action: SAVE, label: "Сохранить"}
-const SELECT_BUTTON_PARAMS = {action: SELECT, label: "Выбрать"}
-
-const ERASE_BUTTON_PARAMS = {action: ERASE, label: "Стереть"}
-const EDIT_BUTTON_PARAMS = {action: EDIT, label: "Изменить"}
-
-const CLOSE_MENU_BUTTON = {action: CLOSE_MENU, label: "Назад"}
-const RETURN_BACK_BUTTON = {action: BACK, label: "Назад"}
-const CLOSE_SELECT_BOX_BUTTON = {action: CLOSE_SELECT_BOX, label: "Назад"}
-
-const OPEN_MENU_BUTTON = {action: OPEN_MENU, label: "Меню"}
-const OPEN_SELECT_BOX_BUTTON = {action: OPEN_SELECT_BOX, label: "Выбрать"}
-
-const MULTISELECT_BUTTON = {action: MULTISELECT, label: "Выбрать"}
-const SAVE_SELECTED_BUTTON = {action: SAVE_SELECTED, label: "Выбрать"}
-
 const BUTTONS_PARAMS = {
     "LEFT": {
-        [SELECT_BOX]: SAVE_BUTTON,
-        [TEXT]: SAVE_BUTTON,
-        [CHECKBOX]: SAVE_BUTTON,
-        [MENU_ITEM]: SELECT_BUTTON_PARAMS,
-        [CARD_ITEM]: OPEN_MENU_BUTTON,
+        [Attributes.SELECT_BOX]: Buttons.SAVE_BUTTON,
+        [Attributes.TEXT]: Buttons.SAVE_BUTTON,
+        [Attributes.CHECKBOX]: Buttons.SAVE_BUTTON,
+        [Attributes.MENU_ITEM]: Buttons.SELECT_BUTTON_PARAMS,
+        [Attributes.CARD_ITEM]: Buttons.OPEN_MENU_BUTTON,
     },
     "RIGHT": {
-        [SELECT_BOX]: OPEN_SELECT_BOX_BUTTON,
-        [TEXT]: ERASE_BUTTON_PARAMS,
-        [CHECKBOX]: EDIT_BUTTON_PARAMS,
-        [MENU_ITEM]: RETURN_BACK_BUTTON,
-        [CARD_ITEM]: RETURN_BACK_BUTTON,
+        [Attributes.SELECT_BOX]: Buttons.OPEN_SELECT_BOX_BUTTON,
+        [Attributes.TEXT]: Buttons.ERASE_BUTTON_PARAMS,
+        [Attributes.CHECKBOX]: Buttons.EDIT_BUTTON_PARAMS,
+        [Attributes.MENU_ITEM]: Buttons.RETURN_BACK_BUTTON,
+        [Attributes.CARD_ITEM]: Buttons.RETURN_BACK_BUTTON,
     }
 }

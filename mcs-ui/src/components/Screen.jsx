@@ -3,13 +3,13 @@ import Button from "./attributes/Button";
 import {reducer} from "../store/reducer";
 import {convert} from "../store/convert";
 import {executeAction} from "../store/action";
-import {DOWN, LOAD, UP} from "../store/constants";
+import Actions from "../store/constants/actions";
 
 const Screen = () => {
     const [state, dispatch] = useReducer(reducer, {attributes: {}})
 
     useEffect(() => {
-        executeAction(dispatch, {action: LOAD})
+        executeAction(dispatch, {action: Actions.LOAD})
     }, []);
 
     const left = () => {
@@ -23,11 +23,11 @@ const Screen = () => {
     }
 
     const up = () => {
-        dispatch({type: UP, payload: state.selectedAttribute});
+        dispatch({type: Actions.UP, payload: state.selectedAttribute});
     }
 
     const down = () => {
-        dispatch({type: DOWN, payload: state.selectedAttribute});
+        dispatch({type: Actions.DOWN, payload: state.selectedAttribute});
     }
 
     return (
