@@ -139,13 +139,6 @@ const logState = (state) => {
     console.log("ТЕКУЩЕЕ СОСТОЯНИЕ ФОРМЫ:", convertState(state));
 }
 
-const fillButtons = (buttons) => {
-    Object.keys(buttons).forEach(name => {
-            buttons[name].name = name;
-        }
-    )
-}
-
 const fillAttributes = (state, attributes) => {
     console.log(attributes);
     Object.keys(attributes).forEach(name => {
@@ -204,7 +197,7 @@ const selectNext = (state, name, direction) => {
     }
 }
 
-const selectNextSelectBoxOption = (state, selectBox, direction) => {
+const selectNextSelectBoxOption = (selectBox, direction) => {
     let values = selectBox.dictionaryValues;
     const activeOptionIndex = values.findIndex(dictValue => dictValue.active);
     values[activeOptionIndex].active = false;

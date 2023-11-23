@@ -1,5 +1,5 @@
-import Actions from "../constants/actions";
-import {ActionProcessor} from "./action_processor";
+import Actions from "../../../constants/actions";
+import {ActionProcessor} from "../action_processor";
 
 export class EditActionProcessor extends ActionProcessor {
 

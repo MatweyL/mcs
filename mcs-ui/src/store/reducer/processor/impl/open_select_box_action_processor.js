@@ -1,7 +1,8 @@
-import Actions from "../constants/actions";
-import Buttons from "../constants/buttons";
+import Buttons from "../../../constants/buttons";
+import Actions from "../../../constants/actions";
+import {ActionProcessor} from "../action_processor";
 
-class OpenSelectBoxActionProcessor extends ActionProcessor {
+export class OpenSelectBoxActionProcessor extends ActionProcessor {
     process(state, action) {
         const attribute = action.payload;
         attribute.open = true;

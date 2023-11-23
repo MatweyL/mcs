@@ -1,14 +1,14 @@
-import {EditActionProcessor} from "../../../store/reducer/edit_action_processor";
-import Actions from "../../../store/constants/actions";
+import Actions from "../../../../../store/constants/actions";
+import {EraseActionProcessor} from "../../../../../store/reducer/processor/impl/erase_action_processor";
 
-describe('EditActionProcessor', () => {
-    const processor = new EditActionProcessor();
+describe('EraseActionProcessor', () => {
+    const processor = new EraseActionProcessor();
 
     test.each`
-    previous | expected
-    ${true}  | ${false}
-    ${false} | ${true}
-    `('должен изменять значение текущего атрибута на противоположное', ({previous, expected}) => {
+    previous  | expected
+    ${"123"}  | ${"12"}
+    ${""}     | ${""}
+    `('должен стирать последний символ', ({previous, expected}) => {
         // GIVEN
         const state = {
             attributes: {
@@ -28,6 +28,6 @@ describe('EditActionProcessor', () => {
     })
 
     test('должен возвращать верный тип действия', () => {
-        expect(processor.getType()).toBe(Actions.EDIT)
+        expect(processor.getType()).toBe(Actions.ERASE)
     })
 })

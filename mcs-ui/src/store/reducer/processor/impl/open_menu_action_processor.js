@@ -1,7 +1,8 @@
-import Actions from "../constants/actions";
-import Buttons from "../constants/buttons";
+import Actions from "../../../constants/actions";
+import Buttons from "../../../constants/buttons";
+import {ActionProcessor} from "../action_processor";
 
-class OpenMenuActionProcessor extends ActionProcessor {
+export class OpenMenuActionProcessor extends ActionProcessor {
     process(state, action) {
         state.buttons.leftButton = Buttons.MULTISELECT_BUTTON;
         state.buttons.leftButton.open = true;
