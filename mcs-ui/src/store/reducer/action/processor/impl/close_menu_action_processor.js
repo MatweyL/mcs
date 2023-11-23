@@ -1,5 +1,5 @@
-import Actions from "../../../constants/actions";
-import Buttons from "../../../constants/buttons";
+import Actions from "../../../../constants/actions";
+import Buttons from "../../../../constants/buttons";
 import {ActionProcessor} from "../action_processor";
 
 export class CloseMenuActionProcessor extends ActionProcessor {

@@ -1,6 +1,6 @@
-import Actions from "../../../../../store/constants/actions";
-import {CloseSelectBoxActionProcessor} from "../../../../../store/reducer/processor/impl/close_select_box_action_processor";
-import Buttons from "../../../../../store/constants/buttons";
+import Actions from "../../../../../../store/constants/actions";
+import {CloseSelectBoxActionProcessor} from "../../../../../../store/reducer/action/processor/impl/close_select_box_action_processor";
+import Buttons from "../../../../../../store/constants/buttons";
 
 describe('CloseSelectBoxActionProcessor', () => {
     const processor = new CloseSelectBoxActionProcessor();

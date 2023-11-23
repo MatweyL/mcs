@@ -103,6 +103,7 @@ export const reducer = (state, action) => {
             return {...state};
         }
 
+        // TODO: Возможно перенести логику по вызову навигатора в другое место
         case Actions.SELECT: {
             const attribute = state.attributes[state.selectedAttribute];
             if (attribute.type === Attributes.MENU_ITEM) {
@@ -152,6 +153,7 @@ const fillAttributes = (state, attributes) => {
     state.attributes = attributes;
 }
 
+// TODO: Вынести в класс
 const processEvents = (attribute, attributes) => {
     Object.keys(attributes)
         .forEach(attributeName => processAttributeEvents(attribute, attributes[attributeName]))

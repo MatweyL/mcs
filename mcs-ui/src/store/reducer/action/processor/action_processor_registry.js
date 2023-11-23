@@ -7,11 +7,11 @@ import {OpenSelectBoxActionProcessor} from "./impl/open_select_box_action_proces
 import {UpActionProcessor} from "./impl/up_action_processor";
 import {DownActionProcessor} from "./impl/down_action_processor";
 import {EditActionProcessor} from "./impl/edit_action_processor";
-import {SelectBoxOptionSelector} from "../selector/select_box_option_selector";
-import {MultiButtonOptionSelector} from "../selector/multi_button_option_selector";
-import {AttributeSelector} from "../selector/attribute_selector";
-import {NextCalculator} from "../calculator/next_calculator";
-import {ButtonsUpdater} from "../button/buttons_updater";
+import {SelectBoxOptionSelector} from "../../selector/select_box_option_selector";
+import {MultiButtonOptionSelector} from "../../selector/multi_button_option_selector";
+import {AttributeSelector} from "../../selector/attribute_selector";
+import {NextCalculator} from "../../calculator/next_calculator";
+import {ButtonsUpdater} from "../../button/buttons_updater";
 
 class ActionProcessorRegistry {
     process(state, action) {

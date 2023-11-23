@@ -1,6 +1,16 @@
 export default class Actions {
+    // TODO: Возможно эти 4 действия - INIT, OPEN, LOAD, SELECT означают одно и то же
     // Инициализация состояния
     static INIT = "INIT";
+
+    // Открыть экран
+    static OPEN = "OPEN";
+
+    // Загрузка экрана
+    static LOAD = "LOAD";
+
+    // Нажатие на кнопку "Выбрать"
+    static SELECT = "SELECT";
 
     // Обновление атрибута
     static UPDATE_ATTRIBUTE = "UPDATE_ATTRIBUTE";
@@ -11,9 +21,6 @@ export default class Actions {
     // Выбор следующего атрибута кнопкой "Вниз"
     static DOWN = "DOWN";
 
-    // Нажатие на кнопку "Выбрать"
-    static SELECT = "SELECT";
-
     // Стереть символ текстового поля
     static ERASE = "ERASE";
 
@@ -22,9 +29,6 @@ export default class Actions {
 
     // Нажатие на кнопку "Назад"
     static BACK = "BACK";
-
-    // Загрузка экрана
-    static LOAD = "LOAD";
 
     // Сохранение экрана
     static SAVE = "SAVE";
@@ -46,9 +50,6 @@ export default class Actions {
 
     // Выбрать из пунктов
     static MULTISELECT = "MULTISELECT";
-
-    // Открыть экран
-    static OPEN = "OPEN";
 
     // Добавить / создать новый
     static CREATE = "CREATE";

@@ -1,4 +1,4 @@
-import Actions from "../../../constants/actions";
+import Actions from "../../../../constants/actions";
 import {ActionProcessor} from "../action_processor";
 
 export class OpenActionProcessor extends ActionProcessor {
