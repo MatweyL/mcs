@@ -119,6 +119,7 @@ const getScreen = async (prevScreen, dispatch) => {
         console.log(dictionaryName);
         await fillDictionary(attributes[dictionaryName]);
     }
+    navigator.push(data.name);
 
     dispatch({type: Actions.INIT, payload: data});
 }

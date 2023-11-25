@@ -1,6 +1,5 @@
 import {ActionProcessor} from "../action_processor";
 import Actions from "../../../../constants/actions";
-import {navigator} from "../../../../navigator";
 import AttributeHelper from "../../../../helper/attribute_helper";
 import Instructions from "../../../../constants/instructions";
 
@@ -14,9 +13,6 @@ export class InitActionProcessor extends ActionProcessor {
     process(state, action) {
         const data = action.payload;
         this.initState(state, data);
-        // FIXME: вынести в preAction все побочные эффекты ?
-        navigator.push(data.name);
-        console.log("AFTER INIT", state);
         return {...state}
     }
 

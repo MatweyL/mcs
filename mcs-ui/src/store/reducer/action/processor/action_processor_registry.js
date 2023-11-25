@@ -15,7 +15,6 @@ import {EventProcessor} from "../../event/event_processor";
 import {InitActionProcessor} from "./impl/init_action_processor";
 import {SaveSelectedActionProcessor} from "./impl/save_selected_action_processor";
 import {UpdateAttributeActionProcessor} from "./impl/update_attribute_action_processor";
-import {SelectActionProcessor} from "./impl/select_action_processor";
 
 
 class ActionProcessorRegistry {
@@ -30,6 +29,8 @@ const calculator = new NextCalculator();
 const buttonsFactory = new ButtonsFactory();
 const eventProcessor = new EventProcessor();
 
+//FIXME: На данный момент порядок селектор в  массиве имеет значение
+// последним всегда должен быть AttributeSelector
 const selectors = [
     new SelectBoxOptionSelector(calculator),
     new MultiButtonOptionSelector(calculator),
@@ -51,7 +52,6 @@ const processors = [
     new UpActionProcessor(selectors),
     new DownActionProcessor(selectors),
 
-    new SelectActionProcessor(),
     new EditActionProcessor(),
     new EraseActionProcessor(),
 ]
