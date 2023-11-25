@@ -5,14 +5,10 @@ export class ActionProcessor {
     /**
      * Обработка состояния на основе действия
      */
-    process(state, action) {
-
-    }
+    process(state, action) {}
 
     /**
      * Тип действия
      */
-    getType() {
-
-    }
+    getType() {}
 }

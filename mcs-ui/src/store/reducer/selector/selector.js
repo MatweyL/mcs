@@ -9,9 +9,7 @@ export class Selector {
      * @param name название текущего выбранного атрибута
      * @param direction направление
      */
-    select(state, name, direction) {
-
-    }
+    select(state, name, direction) {}
 
     /**
      * Должен ли вызываться метод select()
@@ -19,7 +17,5 @@ export class Selector {
      * @param state состояние
      * @param name название текущего выбранного атрибута
      */
-    shouldCall(state, name) {
-
-    }
+    shouldCall(state, name) {}
 }

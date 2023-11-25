@@ -3,7 +3,6 @@ import Actions from "../../../../constants/actions";
 import Buttons from "../../../../constants/buttons";
 
 export class SaveSelectedActionProcessor extends ActionProcessor {
-
     constructor(eventProcessor) {
         super();
         this.eventProcessor = eventProcessor;

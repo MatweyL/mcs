@@ -5,7 +5,7 @@ describe('NextCalculator', () => {
     const calculator = new NextCalculator();
 
     test.each`
-    direction       | nowIndex     | length    | nextIndex
+    direction       | nowIndex          | length    | nextIndex
     ${Actions.UP}     ${0}                ${3}        ${2}
     ${Actions.UP}     ${1}                ${3}        ${0}
     ${Actions.UP}     ${2}                ${3}        ${1}

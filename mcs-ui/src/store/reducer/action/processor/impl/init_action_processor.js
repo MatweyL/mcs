@@ -5,7 +5,6 @@ import AttributeHelper from "../../../../helper/attribute_helper";
 import Instructions from "../../../../constants/instructions";
 
 export class InitActionProcessor extends ActionProcessor {
-
     constructor(buttonsFactory, eventProcessor) {
         super();
         this.buttonsFactory = buttonsFactory;
@@ -30,6 +29,7 @@ export class InitActionProcessor extends ActionProcessor {
 
         const firstVisibleAttribute = this._findFirstVisibleAttribute(state.attributes);
         firstVisibleAttribute.active = true;
+
         state.selectedAttribute = firstVisibleAttribute.name;
         state.buttons = this.buttonsFactory.create(firstVisibleAttribute.type);
     }
