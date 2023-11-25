@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {UPDATE_ATTRIBUTE} from "../../store/constants";
+import Actions from "../../store/constants/actions";
 
 /// Атрибут - Текстовое поле
 const Text = ({attribute, dispatch}) => {
@@ -8,7 +8,7 @@ const Text = ({attribute, dispatch}) => {
     const updateAttribute = (e) => {
         let updatedAttribute = {...formAttribute, value: e.target.value};
         setAttribute(updatedAttribute);
-        dispatch({type: UPDATE_ATTRIBUTE, payload: updatedAttribute})
+        dispatch({type: Actions.UPDATE_ATTRIBUTE, payload: updatedAttribute})
     }
 
     useEffect(() => {

@@ -1,11 +1,10 @@
-import SelectBox from "../components/attributes/SelectBox";
 import Text from "../components/attributes/Text";
 import Checkbox from "../components/attributes/Checkbox";
 import React from "react";
 import MenuItem from "../components/attributes/MenuItem";
 import CardItem from "../components/attributes/CardItem";
 import OwnSelectBox from "../components/attributes/OwnSelectBox";
-import {BOOLEAN, CARD_ITEM, DICTIONARY, MENU_ITEM, TEXT} from "./constants";
+import Attributes from "./constants/attributes";
 
 export function convert(attribute, dispatch) {
     return attribute.visible
@@ -18,13 +17,6 @@ const createCardItem = (attribute) => {
         <CardItem attribute={attribute}/>
     );
 }
-
-const createSelectBox = (attribute, dispatch) => {
-    return (
-        <SelectBox attribute={attribute} dispatch={dispatch} key={attribute.name}/>
-    );
-}
-
 
 const createOwnSelectBox = (attribute) => {
     return (
@@ -51,9 +43,9 @@ const createMenuItem = (attribute) => {
 }
 
 const TYPE_TO_CREATE_ELEMENT = {
-    [TEXT]: createText,
-    [BOOLEAN]: createCheckbox,
-    [DICTIONARY]: createOwnSelectBox,
-    [MENU_ITEM]: createMenuItem,
-    [CARD_ITEM]: createCardItem,
+    [Attributes.TEXT]: createText,
+    [Attributes.BOOLEAN]: createCheckbox,
+    [Attributes.DICTIONARY]: createOwnSelectBox,
+    [Attributes.MENU_ITEM]: createMenuItem,
+    [Attributes.CARD_ITEM]: createCardItem,
 }

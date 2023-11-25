@@ -1,6 +1,7 @@
 /// Конвертирует состояние в виде
 /// {name: SCREEN_NAME, attributes: {ATTRIBUTE_NAME: value}}
-import {DOWN, UP} from "./constants";
+
+import Actions from "./constants/actions";
 
 export const convertState = (state) => {
     const attributesState = {};
@@ -12,7 +13,6 @@ export const convertState = (state) => {
         attributes: attributesState
     };
 }
-
 
 export const calculateNextByDirection = (direction, nowIndex, length) => {
     return CALCULATORS[direction](nowIndex, length);
@@ -29,6 +29,6 @@ const calculateNextUp = (nowIndex, length) => {
 }
 
 const CALCULATORS = {
-    [UP]: calculateNextUp,
-    [DOWN]: calculateNextDown
+    [Actions.UP]: calculateNextUp,
+    [Actions.DOWN]: calculateNextDown
 }

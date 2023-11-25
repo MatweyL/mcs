@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {UPDATE_ATTRIBUTE} from "../../store/constants";
+import Actions from "../../store/constants/actions";
 
 /// Атрибут - Чекбокс (True/False)
 const Checkbox = ({attribute, dispatch}) => {
@@ -9,7 +9,7 @@ const Checkbox = ({attribute, dispatch}) => {
         let updatedAttribute = {...formAttribute, value: e.target.checked};
         // TODO: Подумать, возможно не нужно
         setAttribute(updatedAttribute);
-        dispatch({type: UPDATE_ATTRIBUTE, payload: updatedAttribute})
+        dispatch({type: Actions.UPDATE_ATTRIBUTE, payload: updatedAttribute})
     }
 
     return (

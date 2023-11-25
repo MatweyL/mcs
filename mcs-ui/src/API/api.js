@@ -1,5 +1,5 @@
 import axios from "axios";
-import {dictionaryCache} from "../store/dictionarycache";
+import {dictionaryCache} from "../store/dictionary_cache";
 
 const URL = "https://056f0a88-8d8e-4a2b-b6a5-8f196f1bee39.mock.pstmn.io";
 const MOCK_URL = "http://localhost:3000";

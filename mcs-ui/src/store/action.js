@@ -1,112 +1,101 @@
 import API from "../API/api";
 import {navigator} from "./navigator";
-import {
-    BACK,
-    CLOSE_MENU,
-    CLOSE_SELECT_BOX,
-    CREATE,
-    DELETE,
-    DICTIONARY,
-    EDIT,
-    ERASE,
-    INIT,
-    LOAD,
-    MULTISELECT,
-    OPEN,
-    OPEN_MENU,
-    OPEN_SELECT_BOX,
-    SAVE, SAVE_SELECTED,
-    SELECT
-} from "./constants";
-import {convertState} from "./util";
 
+import {convertState} from "./util";
+import Actions from "./constants/actions";
+import Attributes from "./constants/attributes";
+
+//FIXME: по идее executeAction это прослойка для получения данных и отправки их в reducer через dispatch()
+// возможно не стоит завязывать их на одну константу Actions, может стоит рассмотреть, чтобы у них были разные константы
+// например, прослойка работает с типами запросов (константа Requests) , а делает dispatch уже константы Action
 /// Action - описывают действия, здесь работа с запросами
 /// и передача готовых данных в reducer
+
 export const executeAction = async (dispatch, actionHolder, attribute,  state) => {
     const action = actionHolder.action;
     console.log("ACTION", action);
     switch (action) {
-        case SELECT: {
-            if (attribute.type === "MENU_ITEM") {
+        case Actions.SELECT: {
+            if (attribute.type === Attributes.MENU_ITEM) {
                 getScreen(attribute.value, dispatch);
             }
             return;
         }
 
-        case OPEN_MENU: {
-            dispatch({type: OPEN_MENU}, )
+        case Actions.OPEN_MENU: {
+            dispatch({type: Actions.OPEN_MENU}, )
             return;
         }
 
-        case CLOSE_MENU: {
-            dispatch({type: CLOSE_MENU})
+        case Actions.CLOSE_MENU: {
+            dispatch({type: Actions.CLOSE_MENU})
             return;
         }
 
-        case BACK: {
+        case Actions.BACK: {
             navigator.pop();
             const prevScreen = navigator.tail();
-            getScreen(prevScreen, dispatch);
+            await getScreen(prevScreen, dispatch);
             return;
         }
 
-        case LOAD: {
+        case Actions.EDIT: {
+            dispatch({type: Actions.EDIT})
+            return;
+        }
+
+        case Actions.ERASE: {
+            dispatch({type: Actions.ERASE})
+            return;
+        }
+
+        case Actions.LOAD: {
             const nowScreen = navigator.tail();
             console.log(nowScreen)
             // FIXME: для отладки возвращается константа, когда навигатор пустой
             const screen = nowScreen === undefined ? "SERVICE_MENU" : nowScreen;
-            getScreen(screen, dispatch);
+            await getScreen(screen, dispatch);
             return;
         }
 
-        case EDIT: {
-            dispatch({type: EDIT})
+        case Actions.OPEN_SELECT_BOX: {
+            dispatch({type: Actions.OPEN_SELECT_BOX, payload: attribute})
             return;
         }
 
-        case ERASE: {
-            dispatch({type: ERASE})
+        case Actions.CLOSE_SELECT_BOX: {
+            dispatch({type: Actions.CLOSE_SELECT_BOX, payload: attribute})
             return;
         }
 
-        case OPEN_SELECT_BOX: {
-            dispatch({type: OPEN_SELECT_BOX, payload: attribute})
+        case Actions.SAVE_SELECTED: {
+            dispatch({type: Actions.SAVE_SELECTED, payload: attribute})
             return;
         }
 
-        case CLOSE_SELECT_BOX: {
-            dispatch({type: CLOSE_SELECT_BOX, payload: attribute})
-            return;
-        }
-
-        case SAVE_SELECTED: {
-            dispatch({type: SAVE_SELECTED, payload: attribute})
-            return;
-        }
-
-        case MULTISELECT: {
+        case Actions.MULTISELECT: {
             const activeItem = actionHolder.items.find(item => item.active);
             const action = activeItem.action;
-            executeAction(dispatch, {action}, attribute)
+            await executeAction(dispatch, {action}, attribute)
             return;
         }
 
-        case OPEN: {
+        case Actions.OPEN: {
             // открытие страницы с существующим эл-том
             return;
         }
 
-        case DELETE: {
+        case Actions.DELETE: {
             // удаление выбранного элемента
             return;
         }
 
-        case CREATE: {
+        case Actions.CREATE: {
             // создание нового эл-та == переход на страницу
             return;
         }
 
-        case SAVE: {
+        case Actions.SAVE: {
             // TODO: Здесь будет отправляться запрос на сохранение
             API.saveScreen(convertState(state))
                 .then(() => {{
@@ -127,15 +116,16 @@ const getScreen = async (prevScreen, dispatch) => {
 
     const attributes = data.attributes;
     const dictionaries = Object.keys(attributes)
-        .filter(name => attributes[name].type === DICTIONARY);
+        .filter(name => attributes[name].type === Attributes.DICTIONARY);
 
     console.log(dictionaries);
     for (let dictionaryName of dictionaries) {
         console.log(dictionaryName);
         await fillDictionary(attributes[dictionaryName]);
     }
+    navigator.push(data.name);
 
-    dispatch({type: INIT, payload: data});
+    dispatch({type: Actions.INIT, payload: data});
 }
 
 const fillDictionary = async (emptyDictionary) => {
