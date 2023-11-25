@@ -22,5 +22,6 @@ export default class Buttons {
             {label: Labels.DELETE, active: false, action: Actions.DELETE},
         ]
     }
+
     static SAVE_SELECTED_BUTTON = {action: Actions.SAVE_SELECTED, label: Labels.SELECT}
 }

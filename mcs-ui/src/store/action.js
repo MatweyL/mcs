@@ -5,8 +5,12 @@ import {convertState} from "./util";
 import Actions from "./constants/actions";
 import Attributes from "./constants/attributes";
 
+//FIXME: по идее executeAction это прослойка для получения данных и отправки их в reducer через dispatch()
+// возможно не стоит завязывать их на одну константу Actions, может стоит рассмотреть, чтобы у них были разные константы
+// например, прослойка работает с типами запросов (константа Requests) , а делает dispatch уже константы Action
 /// Action - описывают действия, здесь работа с запросами
 /// и передача готовых данных в reducer
+
 export const executeAction = async (dispatch, actionHolder, attribute,  state) => {
     const action = actionHolder.action;
     console.log("ACTION", action);
@@ -35,15 +39,6 @@ export const executeAction = async (dispatch, actionHolder, attribute,  state) =
             return;
         }
 
-        case Actions.LOAD: {
-            const nowScreen = navigator.tail();
-            console.log(nowScreen)
-            // FIXME: для отладки возвращается константа, когда навигатор пустой
-            const screen = nowScreen === undefined ? "SERVICE_MENU" : nowScreen;
-            await getScreen(screen, dispatch);
-            return;
-        }
-
         case Actions.EDIT: {
             dispatch({type: Actions.EDIT})
             return;
@@ -51,6 +46,15 @@ export const executeAction = async (dispatch, actionHolder, attribute,  state) =
 
         case Actions.ERASE: {
             dispatch({type: Actions.ERASE})
+            return;
+        }
+
+        case Actions.LOAD: {
+            const nowScreen = navigator.tail();
+            console.log(nowScreen)
+            // FIXME: для отладки возвращается константа, когда навигатор пустой
+            const screen = nowScreen === undefined ? "SERVICE_MENU" : nowScreen;
+            await getScreen(screen, dispatch);
             return;
         }
 
