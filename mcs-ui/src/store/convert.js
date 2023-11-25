@@ -1,9 +1,9 @@
-import Text from "../components/attributes/Text";
-import Checkbox from "../components/attributes/Checkbox";
+import Text from "../components/attributes/Text/Text";
+import Checkbox from "../components/attributes/Checkbox/Checkbox";
 import React from "react";
-import MenuItem from "../components/attributes/MenuItem";
+import MenuItem from "../components/attributes/MenuItem/MenuItem";
 import CardItem from "../components/attributes/CardItem";
-import OwnSelectBox from "../components/attributes/OwnSelectBox";
+import OwnSelectBox from "../components/attributes/OwnSelectBox/OwnSelectBox";
 import Attributes from "./constants/attributes";
 
 export function convert(attribute, dispatch) {

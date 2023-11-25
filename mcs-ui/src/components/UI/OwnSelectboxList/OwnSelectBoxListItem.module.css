@@ -1,11 +1,9 @@
 .ownSelectBoxListItem {
-    padding-left: 10px;
-    padding-bottom: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .ownSelectBoxListItemActive {
-    padding-bottom: 10px;
-    padding-left: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
     background: black;
     color: aliceblue;
 }

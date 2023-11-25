@@ -4,6 +4,7 @@ import {convert} from "../store/convert";
 import {executeAction} from "../store/action";
 import Actions from "../store/constants/actions";
 import {reducer_v2} from "../store/reducer_v2";
+import Key from "./UI/Key";
 
 const Screen = () => {
     const [state, dispatch] = useReducer(reducer_v2, {attributes: {}})
@@ -31,51 +32,58 @@ const Screen = () => {
     }
 
     return (
-        <div>
-            <div className="screen">
-                <div className="screen-label">
-                    {state?.label}
-                </div>
-                {state.attributes !== undefined ?
-                    Object.keys(state?.attributes)
-                        .map(name => convert(state.attributes[name], dispatch))
-                    : null
-                }
-                <div className="buttons">
-                    <Button button={state?.buttons?.leftButton}/>
-                    <Button button={state?.buttons?.rightButton}/>
+        <div className="body">
+            <div className="phone-header"/>
+            <div className="screen-wrapper">
+                <div className="screen">
+                    <div className="screen-label">
+                        {state?.label}
+                    </div>
+                    {state.attributes !== undefined ?
+                        Object.keys(state?.attributes)
+                            .map(name => convert(state.attributes[name], dispatch))
+                        : null
+                    }
+                    <div className="buttons">
+                        <Button button={state?.buttons?.leftButton}/>
+                        <Button button={state?.buttons?.rightButton}/>
+                    </div>
                 </div>
             </div>
             <div className="keyboard">
-                <div className="keys-row">
-                    <div className="key" onClick={left}>^</div>
-                    <div className="key" onClick={up}>/\</div>
-                    <div className="key" onClick={right}>^</div>
+                <div className="control-keyboard">
+                    <div className="keys-row">
+                        <Key onClick={left}><img src="buttons/left.svg" alt="call"/></Key>
+                        <Key onClick={up}><img src="buttons/up.svg" alt="call"/></Key>
+                        <Key onClick={right}><img src="buttons/right.svg" alt="call"/></Key>
+                    </div>
+                    <div className="keys-row">
+                        <Key><img src="buttons/green.svg" alt="call"/></Key>
+                        <Key onClick={down}><img src="buttons/down.svg" alt="call"/></Key>
+                        <Key><img src="buttons/red.svg" alt="cancel"/></Key>
+                    </div>
                 </div>
-                <div className="keys-row">
-                    <div className="key">Связь</div>
-                    <div className="key" onClick={down}>\/</div>
-                    <div className="key">Конец</div>
-                </div>
-                <div className="keys-row">
-                    <div className="key">1</div>
-                    <div className="key">2</div>
-                    <div className="key">3</div>
-                </div>
-                <div className="keys-row">
-                    <div className="key">4</div>
-                    <div className="key">5</div>
-                    <div className="key">6</div>
-                </div>
-                <div className="keys-row">
-                    <div className="key">7</div>
-                    <div className="key">8</div>
-                    <div className="key">9</div>
-                </div>
-                <div className="keys-row">
-                    <div className="key">*</div>
-                    <div className="key">0</div>
-                    <div className="key">#</div>
+                <div className="numpad-keyboard">
+                    <div className="keys-row">
+                        <Key>1</Key>
+                        <Key>2<small>АБВ</small></Key>
+                        <Key>3<small>ГДЕЁ</small></Key>
+                    </div>
+                    <div className="keys-row">
+                        <Key>4<small>ЖЗИЙ</small></Key>
+                        <Key>5<small>КЛМН</small></Key>
+                        <Key>6<small>ОПРС</small></Key>
+                    </div>
+                    <div className="keys-row">
+                        <Key>7<small>ТУФХ</small></Key>
+                        <Key>8<small>ЦЧШ</small></Key>
+                        <Key>9<small>ЩЪЫ</small></Key>
+                    </div>
+                    <div className="keys-row">
+                        <Key>*</Key>
+                        <Key>0<small>ЬЭЮЯ</small></Key>
+                        <Key>#</Key>
+                    </div>
                 </div>
             </div>
         </div>
