@@ -2,9 +2,9 @@ import {Selector} from "./selector";
 import AttributeHelper from "../../helper/attribute_helper";
 
 export class AttributeSelector extends Selector {
-    constructor(updater, calculator) {
+    constructor(buttonsFactory, calculator) {
         super();
-        this.updater = updater;
+        this.buttonsFactory = buttonsFactory;
         this.calculator = calculator;
     }
 
@@ -26,7 +26,7 @@ export class AttributeSelector extends Selector {
         const prevName = state.selectedAttribute;
         state.attributes[prevName].active = false;
         state.attributes[name].active = true;
-        this.updater.update(state.attributes[name].type, state);
+        state.buttons = this.buttonsFactory.create(state.attributes[name].type);
         state.selectedAttribute = name;
     }
 

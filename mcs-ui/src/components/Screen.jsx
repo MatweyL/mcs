@@ -1,12 +1,12 @@
 import React, {useEffect, useReducer} from 'react';
 import Button from "./attributes/Button";
-import {reducer} from "../store/reducer";
 import {convert} from "../store/convert";
 import {executeAction} from "../store/action";
 import Actions from "../store/constants/actions";
+import {reducer_v2} from "../store/reducer_v2";
 
 const Screen = () => {
-    const [state, dispatch] = useReducer(reducer, {attributes: {}})
+    const [state, dispatch] = useReducer(reducer_v2, {attributes: {}})
 
     useEffect(() => {
         executeAction(dispatch, {action: Actions.LOAD})

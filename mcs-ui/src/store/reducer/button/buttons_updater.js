@@ -2,9 +2,9 @@ import ButtonsLayout from "../../constants/buttons_layout";
 import Attributes from "../../constants/attributes";
 import Buttons from "../../constants/buttons";
 
-export class ButtonsUpdater {
-    update(attributeType, state) {
-        state.buttons = {
+export class ButtonsFactory {
+    create(attributeType) {
+        return {
             leftButton: BUTTONS_STATE[ButtonsLayout.LEFT][attributeType],
             rightButton: BUTTONS_STATE[ButtonsLayout.RIGHT][attributeType],
         }

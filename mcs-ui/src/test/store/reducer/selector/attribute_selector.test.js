@@ -1,8 +1,8 @@
-import {ButtonsUpdater} from "../../../../store/reducer/button/buttons_updater";
+import {ButtonsFactory} from "../../../../store/reducer/button/buttons_updater";
 import {AttributeSelector} from "../../../../store/reducer/selector/attribute_selector";
 
 describe('AttributeSelector', () => {
-    const updater = new ButtonsUpdater();
+    const updater = new ButtonsFactory();
     const mockMethod = jest.fn();
     const calculator = {calculateNextByDirection: mockMethod}
     const selector = new AttributeSelector(updater, calculator);

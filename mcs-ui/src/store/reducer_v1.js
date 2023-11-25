@@ -7,7 +7,7 @@ import Buttons from "./constants/buttons";
 /// TODO: Чуть позже зарефакторить, разбить большое полотно методов на части
 /// Reducer - описывает преобразование состояния
 /// на основе данных в action
-export const reducer = (state, action) => {
+export const reducer_v1 = (state, action) => {
     switch (action.type) {
         case Actions.INIT: {
             const data = action.payload;

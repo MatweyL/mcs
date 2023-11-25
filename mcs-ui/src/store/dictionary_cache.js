@@ -1,7 +1,7 @@
 const DICTIONARY_CACHE = "dictionaryCache";
 
 /// Кеширование словарей
-class DictionaryCache {
+class Dictionary_cache {
     contains(dictionaryType) {
         let cached = this.get(dictionaryType);
         return cached !== null
@@ -26,4 +26,4 @@ class DictionaryCache {
     }
 }
 
-export const dictionaryCache = new DictionaryCache();
+export const dictionaryCache = new Dictionary_cache();

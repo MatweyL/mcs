@@ -8,7 +8,8 @@ export class DirectionActionProcessor extends ActionProcessor {
 
     process(state, action) {
         const name = action.payload;
-        this.selectors.find(s => s.shouldCall(state, action))
+        this.selectors.find(s => s.shouldCall(state, name))
             .select(state, name, this.getType());
+        return {...state};
     }
 }
