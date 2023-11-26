@@ -31,6 +31,10 @@ const Screen = () => {
         dispatch({type: Actions.DOWN, payload: state.selectedAttribute});
     }
 
+    const keyPress = (keys) => {
+        dispatch({type: Actions.PRESS_KEY, payload: keys});
+    }
+
     return (
         <div className="body">
             <div className="phone-header"/>
@@ -63,26 +67,27 @@ const Screen = () => {
                         <Key><img src="buttons/red.svg" alt="cancel"/></Key>
                     </div>
                 </div>
+                <div className="divider-keyboard"/>
                 <div className="numpad-keyboard">
                     <div className="keys-row">
-                        <Key>1</Key>
-                        <Key>2<small>АБВ</small></Key>
-                        <Key>3<small>ГДЕЁ</small></Key>
+                        <Key onClick={() => keyPress(['1'])}>1</Key>
+                        <Key onClick={() => keyPress("2АБВ".split(''))}>2<small>АБВ</small></Key>
+                        <Key onClick={() => keyPress("3ГДЕЁ".split(''))}>3<small>ГДЕЁ</small></Key>
                     </div>
                     <div className="keys-row">
-                        <Key>4<small>ЖЗИЙ</small></Key>
-                        <Key>5<small>КЛМН</small></Key>
-                        <Key>6<small>ОПРС</small></Key>
+                        <Key onClick={() => keyPress("4ЖЗИЙ".split(''))}>4<small>ЖЗИЙ</small></Key>
+                        <Key onClick={() => keyPress("5КЛМН".split(''))}>5<small>КЛМН</small></Key>
+                        <Key onClick={() => keyPress("6ОПРС".split(''))}>6<small>ОПРС</small></Key>
                     </div>
                     <div className="keys-row">
-                        <Key>7<small>ТУФХ</small></Key>
-                        <Key>8<small>ЦЧШ</small></Key>
-                        <Key>9<small>ЩЪЫ</small></Key>
+                        <Key onClick={() => keyPress("7ТУФХ".split(''))}>7<small>ТУФХ</small></Key>
+                        <Key onClick={() => keyPress("8ЦЧШ".split(''))}>8<small>ЦЧШ</small></Key>
+                        <Key onClick={() => keyPress("9ЩЪЫ".split(''))}>9<small>ЩЪЫ</small></Key>
                     </div>
                     <div className="keys-row">
-                        <Key>*</Key>
-                        <Key>0<small>ЬЭЮЯ</small></Key>
-                        <Key>#</Key>
+                        <Key onClick={() => keyPress(["*"])}>*</Key>
+                        <Key onClick={() => keyPress("0ЬЭЮЯ".split(''))}>0<small>ЬЭЮЯ</small></Key>
+                        <Key onClick={() => keyPress(["#"])}>#</Key>
                     </div>
                 </div>
             </div>

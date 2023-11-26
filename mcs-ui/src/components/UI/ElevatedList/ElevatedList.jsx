@@ -6,7 +6,7 @@ const ElevatedList = ({items}) => {
     return (
         <div className={classes.elevatedList}>
             {items.map(item =>
-                <ElevatedListItem item={item}/>
+                <ElevatedListItem item={item} key={item.label}/>
             )}
         </div>
     );

@@ -2,6 +2,9 @@ import {ActionProcessor} from "../action_processor";
 import Actions from "../../../../constants/actions";
 import AttributeHelper from "../../../../helper/attribute_helper";
 import Instructions from "../../../../constants/instructions";
+import Attributes from "../../../../constants/attributes";
+
+const EMPTY = "";
 
 export class InitActionProcessor extends ActionProcessor {
     constructor(buttonsFactory, eventProcessor) {
@@ -39,6 +42,10 @@ export class InitActionProcessor extends ActionProcessor {
 
             if (AttributeHelper.isVisible(attribute)) {
                 Instructions.SHOW(attribute);
+            }
+
+            if (attribute.type === Attributes.TEXT) {
+                attribute.value = EMPTY;
             }
 
             this.eventProcessor.process(attribute, processedAttributes)

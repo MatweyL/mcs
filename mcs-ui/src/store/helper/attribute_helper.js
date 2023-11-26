@@ -1,5 +1,7 @@
 import EventHelper from "./event_helper";
 
+const EMPTY = "";
+
 export default class AttributeHelper {
     static isVisible(attribute) {
         return attribute.visible !== false;
@@ -23,5 +25,9 @@ export default class AttributeHelper {
     static _isEventTriggeredByAttributeValue(event, value) {
          return EventHelper.isTriggeredByFiringValues(event, value)
              || EventHelper.isTriggeredByExcludeFiringValues(event, value);
+    }
+
+    static getTextValueOrEmpty(attribute) {
+        return attribute.value ? attribute.value : EMPTY;
     }
 }

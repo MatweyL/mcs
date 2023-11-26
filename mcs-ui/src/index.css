@@ -1,6 +1,11 @@
 .container {
   display: flex;
   justify-content: center;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .body {
@@ -118,6 +123,12 @@ label {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+}
+
+.divider-keyboard {
+  width: 100%;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 small {
