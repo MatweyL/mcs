@@ -13,7 +13,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.25) inset, -4px -4px 5px 0px rgba(0, 0, 0, 0.25) inset, 0px 10px 15px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.25) inset, -4px -4px 5px 0 rgba(0, 0, 0, 0.25) inset, 0 10px 15px 3px rgba(0, 0, 0, 0.25);
 }
 
 .key-button {
@@ -26,9 +26,9 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25), -1px -1px 5px 0px rgba(0, 0, 0, 0.25) inset, 0px 3px 3px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25), -1px -1px 5px 0 rgba(0, 0, 0, 0.25) inset, 0 3px 3px 0 rgba(0, 0, 0, 0.25);
   &:active {
-    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25), -1px -1px 5px 0px rgba(0, 0, 0, 0.25) inset, 0px 1px 3px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25), -1px -1px 5px 0 rgba(0, 0, 0, 0.25) inset, 0 1px 3px 0 rgba(0, 0, 0, 0.25);
   }
 }
 
@@ -40,7 +40,7 @@
   width: 224px;
   height: 67px;
   margin-bottom: 16px;
-  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25) inset, -1px -1px 5px 0px rgba(0, 0, 0, 0.25) inset;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25) inset, -1px -1px 5px 0 rgba(0, 0, 0, 0.25) inset;
 }
 
 .screen-label {
@@ -67,7 +67,7 @@
   border: 1px solid #000;
   background: #657D67;
   margin-bottom: 30px;
-  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25) inset, -1px -1px 5px 0px rgba(0, 0, 0, 0.25) inset;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25) inset, -1px -1px 5px 0 rgba(0, 0, 0, 0.25) inset;
 }
 
 .mcs-button {
@@ -109,7 +109,7 @@ label {
   flex-direction: column;
   justify-content: space-between;
   background-color: #466256;
-  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25) inset, -1px -1px 5px 0px rgba(0, 0, 0, 0.25) inset;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25) inset, -1px -1px 5px 0 rgba(0, 0, 0, 0.25) inset;
 }
 
 .control-keyboard {
