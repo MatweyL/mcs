@@ -14,7 +14,7 @@ export function convert(attribute, dispatch) {
 
 const createCardItem = (attribute) => {
     return (
-        <CardItem attribute={attribute}/>
+        <CardItem attribute={attribute} key={attribute.name}/>
     );
 }
 
