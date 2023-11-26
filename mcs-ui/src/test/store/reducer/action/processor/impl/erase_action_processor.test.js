@@ -8,6 +8,7 @@ describe('EraseActionProcessor', () => {
     previous  | expected
     ${"123"}  | ${"12"}
     ${""}     | ${""}
+    ${null}   | ${""}
     `('должен стирать последний символ', ({previous, expected}) => {
         // GIVEN
         const state = {

@@ -86,6 +86,13 @@ const Screen = () => {
                     </div>
                 </div>
             </div>
+            <svg width='0' height='0'>
+                <filter id='grainy' x='0' y='0' width='100%' height='100%'>
+                    <feTurbulence type='fractalNoise' baseFrequency='.537'/>
+                    <feColorMatrix type='saturate' values='0'/>
+                    <feBlend in='SourceGraphic' mode='multiply'/>
+                </filter>
+            </svg>
         </div>
     );
 };
