@@ -1,26 +1,78 @@
 .container {
   display: flex;
   justify-content: center;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .body {
-  background: #006400;
+  border-radius: 42px;
+  width: 320px;
+  height: 850px;
+  background: #627B6A;
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.25) inset, -4px -4px 5px 0 rgba(0, 0, 0, 0.25) inset, 0 10px 15px 3px rgba(0, 0, 0, 0.25);
+}
+
+.key-button {
+  width: 64px;
+  height: 36px;
+  border-radius: 12px;
+  border: 3px solid #000;
+  background: #2C3F50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25), -1px -1px 5px 0 rgba(0, 0, 0, 0.25) inset, 0 3px 3px 0 rgba(0, 0, 0, 0.25);
+  &:active {
+    box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25), -1px -1px 5px 0 rgba(0, 0, 0, 0.25) inset, 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+  }
+}
+
+.phone-header {
+  filter: url(#grainy);
+  mix-blend-mode: darken;
+  border-radius: 20px 20px 38px 38px;
+  background: #475E52;
+  width: 224px;
+  height: 67px;
+  margin-bottom: 16px;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25) inset, -1px -1px 5px 0 rgba(0, 0, 0, 0.25) inset;
 }
 
 .screen-label {
   width: 100%;
   background: blue;
   color: white;
-  height: 30px;
-  margin-bottom: 10px;
+  height: 20px;
+  font-size: 12px;
 }
 
 .screen {
-  width: 300px;
-  height: 450px;
+  font-size: 14px;
+  width: 200px;
+  height: 230px;
   background: lightblue;
+  border: 5px solid black;
   position: relative;
+  font-family: 'Roboto', sans-serif;
+}
+
+.screen-wrapper {
+  padding: 15px;
+  border-radius: 20px;
+  border: 1px solid #000;
+  background: #657D67;
+  margin-bottom: 30px;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25) inset, -1px -1px 5px 0 rgba(0, 0, 0, 0.25) inset;
 }
 
 .mcs-button {
@@ -35,14 +87,16 @@
   align-self: end;
   position: absolute;
   width: 100%;
-  height: 25px;
+  height: 20px;
   bottom: 0;
+  font-size: 12px;
 }
 
 label {
   display: flex;
   justify-content: space-between;
   pointer-events: none;
+  height: 25px;
 }
 
 .attribute-active {
@@ -52,7 +106,45 @@ label {
 
 .keyboard {
   margin-top: 5px;
-  width: 300px;
+  padding: 20px;
+  border-radius: 20px;
+  width: 240px;
+  height: 355px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #466256;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25) inset, -1px -1px 5px 0 rgba(0, 0, 0, 0.25) inset;
+}
+
+.control-keyboard {
+  width: 100%;
+  height: 95px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.divider-keyboard {
+  width: 100%;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+small {
+  font-size: 10px;
+  padding-left: 5px;
+}
+
+.numpad-keyboard {
+  width: 100%;
+  font-size: 22px;
+  height: 223px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  color: whitesmoke;
 }
 
 .keys-row {

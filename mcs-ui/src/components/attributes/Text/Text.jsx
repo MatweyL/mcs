@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import Actions from "../../store/constants/actions";
+import Actions from "../../../store/constants/actions";
+import classes from "./Text.module.css";
 
 /// Атрибут - Текстовое поле
 const Text = ({attribute, dispatch}) => {
@@ -18,16 +19,16 @@ const Text = ({attribute, dispatch}) => {
     }, [attribute.value, attribute.active]);
 
     return (
-        <label>
+        <div className={classes.textWrapper}>
             {attribute.label}
             <input value={formAttribute.value}
                    key={attribute.name}
                    id={attribute.name}
                    onChange={updateAttribute}
-                   className={`attribute${attribute.active ? '-active' : ''}`}
+                   className={attribute.active ? classes.textActive : classes.text}
                    readOnly={!attribute.active}
             />
-        </label>
+        </div>
     );
 };
 

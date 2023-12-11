@@ -15,6 +15,7 @@ import {EventProcessor} from "../../event/event_processor";
 import {InitActionProcessor} from "./impl/init_action_processor";
 import {SaveSelectedActionProcessor} from "./impl/save_selected_action_processor";
 import {UpdateAttributeActionProcessor} from "./impl/update_attribute_action_processor";
+import {PressKeyActionProcessor} from "./impl/press_key_action_processor";
 
 
 class ActionProcessorRegistry {
@@ -54,4 +55,6 @@ const processors = [
 
     new EditActionProcessor(),
     new EraseActionProcessor(),
+
+    new PressKeyActionProcessor(calculator)
 ]

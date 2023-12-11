@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import Actions from "../../store/constants/actions";
+import Actions from "../../../store/constants/actions";
+import classes from "./Checkbox.module.css";
 
 /// Атрибут - Чекбокс (True/False)
 const Checkbox = ({attribute, dispatch}) => {
@@ -13,14 +14,16 @@ const Checkbox = ({attribute, dispatch}) => {
     }
 
     return (
-        <label>
+        <div className={classes.checkboxWrapper}>
             {attribute.label}
-            <input type="checkbox"
-                   checked={formAttribute.value}
-                   onChange={updateAttribute}
-                   id={attribute.name}
-                   className={`attribute${attribute.active ? '-active' : ''}`}/>
-        </label>
+            <div className={attribute.active ? classes.checkboxActive : classes.checkbox}>
+                <input type="checkbox"
+                       checked={formAttribute.value}
+                       onChange={updateAttribute}
+                       id={attribute.name}
+                />
+            </div>
+        </div>
     );
 };
 

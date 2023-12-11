@@ -1,0 +1,17 @@
+.checkbox {
+    width: 70px;
+    height: 23px;
+}
+
+.checkboxWrapper {
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+}
+
+.checkboxActive {
+    height: 23px;
+    width: 70px;
+    outline: 2px solid black;
+    pointer-events: fill;
+}

@@ -56,4 +56,7 @@ export default class Actions {
 
     // Удалить
     static DELETE = "DELETE";
+
+    // Ввод символа в текстовое поле
+    static PRESS_KEY = "PRESS_KEY"
 }

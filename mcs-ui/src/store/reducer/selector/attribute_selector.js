@@ -13,7 +13,6 @@ export class AttributeSelector extends Selector {
         let index = names.indexOf(name);
 
         let nextIndex = this.calculator.calculateNextByDirection(direction, index, names.length);
-        console.log("Next index:", nextIndex, " index:", index);
         let nextAttribute = Object.values(state.attributes).at(nextIndex);
         while (AttributeHelper.isNotVisible(nextAttribute)) {
             nextIndex = this.calculator.calculateNextByDirection(direction, nextIndex, names.length);

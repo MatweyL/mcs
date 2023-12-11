@@ -1,0 +1,14 @@
+.menuItem {
+    height: 25px;
+    background-color: whitesmoke;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding-left: 10px;
+}
+
+.menuItemActive {
+    height: 25px;
+    background-color: black;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding-left: 10px;
+    color: whitesmoke;
+}

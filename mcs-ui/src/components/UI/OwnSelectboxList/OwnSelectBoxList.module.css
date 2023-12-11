@@ -1,8 +1,7 @@
 .ownSelectBoxList {
     position: absolute;
     background: aliceblue;
-    width: 40%;
+    width: inherit;
     color: black;
-    top: 60px;
     right: 0;
 }

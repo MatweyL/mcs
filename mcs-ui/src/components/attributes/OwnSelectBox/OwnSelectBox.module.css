@@ -1,0 +1,17 @@
+.ownSelectBox {
+    width: 120px;
+    height: 23px;
+}
+
+.ownSelectBoxWrapper {
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+}
+
+.ownSelectBoxActive {
+    height: 20px;
+    width: 120px;
+    outline: 2px solid black;
+    pointer-events: fill;
+}
