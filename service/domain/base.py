@@ -28,3 +28,14 @@ def get_attribute(obj, name: str):
             logger.warning(f'no field {name} in {obj.__class__.__name__}')
             raise ValueError(f'wrong attr name: {name} for obj: {obj}')
     return attr_value
+
+
+def get_attribute_from_dict(name: str, dictionary: dict, ignore_case: bool = True):
+    try:
+        value = dictionary[name]
+    except KeyError as e:
+        if ignore_case:
+            value = dictionary[name.lower()]
+        else:
+            raise e
+    return value

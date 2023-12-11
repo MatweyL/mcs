@@ -1,13 +1,10 @@
 from copy import deepcopy
 
 from service.common.logs import logger
-from service.schemas.base import get_attribute
+from service.domain.base import get_attribute
 
 
 class ScreenFiller:
-
-    def __init__(self):
-        pass
 
     def fill(self, screen: dict, obj):
         filled_screen = deepcopy(screen)

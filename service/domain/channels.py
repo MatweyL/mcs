@@ -1,9 +1,9 @@
 import enum
-from typing import List, Generator, Any, Optional
+from typing import Any
 
 from pydantic import BaseModel, Field, AliasChoices
 
-from service.schemas.base import update_attribute, get_attribute
+from service.domain.base import update_attribute, get_attribute
 
 
 class ChannelMode(str, enum.Enum):
@@ -19,7 +19,7 @@ class ChannelMode(str, enum.Enum):
 
 
 class Channel(BaseModel):
-    channel_id: str
+    channel_uid: str
     channel_mode: ChannelMode
 
     def update_attribute(self, name: str, value: Any):
@@ -44,39 +44,3 @@ class ChannelCHM25(Channel):
 channel_mode_schema_map = {
     ChannelMode.CHM25: ChannelCHM25
 }
-
-
-class Phone:
-
-    def __init__(self, channels: List[Channel]):
-        self._channels = channels
-
-    def iter_channels(self) -> Generator[Channel, Any, None]:
-        for channel in self._channels:
-            yield channel
-
-    def get_channel_by_mode(self, channel_mode: ChannelMode) -> Channel:
-        for channel in self.iter_channels():
-            if channel.channel_mode == channel_mode:
-                return channel
-        raise ValueError(f"no channel with mode: {channel_mode}")
-
-    def add_channel(self, channel: Channel):
-        self._channels.append(channel)
-
-    def get_attribute(self, name: str):
-        for channel in self.iter_channels():
-            if channel.channel_mode == name:
-                return channel
-        raise ValueError(f'no attribute with name: {name}')
-
-    def get_channel(self, channel_id: str) -> Optional[Channel]:
-        for channel in self._channels:
-            if channel.channel_id == channel_id:
-                return channel
-
-    def get_element_by_id(self, id: str):
-        """ Ищет во всех полях объект с заданным атрибутом """
-        for channel in self._channels:
-            if channel.channel_id == id:
-                return channel
