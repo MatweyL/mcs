@@ -1,0 +1,26 @@
+{
+  "name": "CHANNEL_LIST",
+  "label": "Список каналов",
+  "attributes": {
+    "CHANNEL_EDITOR_EMPTY": {
+      "type": "CARD_ITEM",
+      "label": "Пустой список",
+      "openOnCreate": "CHANNEL_EDITOR",
+      "openOnEdit": "CHANNEL_EDITOR",
+      "fieldName": "id",
+      "default": true
+    },
+    "KP1": {
+      "type": "CARD_ITEM",
+      "label": "KP1",
+      "used": true,
+      "id": "123"
+    },
+    "KP2": {
+      "type": "CARD_ITEM",
+      "label": "Название канала КР2",
+      "used": false,
+      "id": "1213123"
+    }
+  }
+}

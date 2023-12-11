@@ -1,26 +1,27 @@
 import React, {useEffect, useReducer} from 'react';
 import Button from "./attributes/Button";
 import {convert} from "../store/convert";
-import {executeAction} from "../store/action";
+import {executeRequest} from "../store/request";
 import Actions from "../store/constants/actions";
 import {reducer_v2} from "../store/reducer_v2";
 import Key from "./UI/Key";
+import Requests from "../store/constants/requests";
 
 const Screen = () => {
     const [state, dispatch] = useReducer(reducer_v2, {attributes: {}})
 
     useEffect(() => {
-        executeAction(dispatch, {action: Actions.LOAD})
+        executeRequest(dispatch, {action: Requests.LOAD})
     }, []);
 
     const left = () => {
         const nowAttribute = state.attributes[state.selectedAttribute];
-        executeAction(dispatch, state.buttons.leftButton, nowAttribute, state);
+        executeRequest(dispatch, state.buttons.leftButton, nowAttribute, state);
     }
 
     const right = () => {
         const nowAttribute = state.attributes[state.selectedAttribute];
-        executeAction(dispatch, state.buttons.rightButton, nowAttribute, state);
+        executeRequest(dispatch, state.buttons.rightButton, nowAttribute, state);
     }
 
     const up = () => {

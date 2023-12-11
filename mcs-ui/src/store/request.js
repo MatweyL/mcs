@@ -4,52 +4,31 @@ import {navigator} from "./navigator";
 import {convertState} from "./util";
 import Actions from "./constants/actions";
 import Attributes from "./constants/attributes";
+import Requests from "./constants/requests";
+import AttributeHelper from "./helper/attribute_helper";
 
-//FIXME: по идее executeAction это прослойка для получения данных и отправки их в reducer через dispatch()
-// возможно не стоит завязывать их на одну константу Actions, может стоит рассмотреть, чтобы у них были разные константы
-// например, прослойка работает с типами запросов (константа Requests) , а делает dispatch уже константы Action
-/// Action - описывают действия, здесь работа с запросами
-/// и передача готовых данных в reducer
-
-export const executeAction = async (dispatch, actionHolder, attribute,  state) => {
+/// Requests - описывают запросы, к-е необходимов выполнить перед осуществлением действий по изменению состояния
+export const executeRequest = async (dispatch, actionHolder, attribute, state) => {
     const action = actionHolder.action;
     console.log("ACTION", action);
     switch (action) {
         case Actions.SELECT: {
-            if (attribute.type === Attributes.MENU_ITEM) {
+            // FIXME: временная заглушка disabled, чтобы не открывать неготовые экраны
+            if (attribute.type === Attributes.MENU_ITEM
+                && AttributeHelper.isNotDisabled(attribute)) {
                 getScreen(attribute.value, dispatch);
             }
             return;
         }
 
-        case Actions.OPEN_MENU: {
-            dispatch({type: Actions.OPEN_MENU}, )
-            return;
-        }
-
-        case Actions.CLOSE_MENU: {
-            dispatch({type: Actions.CLOSE_MENU})
-            return;
-        }
-
-        case Actions.BACK: {
+        case Requests.BACK: {
             navigator.pop();
             const prevScreen = navigator.tail();
             await getScreen(prevScreen, dispatch);
             return;
         }
 
-        case Actions.EDIT: {
-            dispatch({type: Actions.EDIT})
-            return;
-        }
-
-        case Actions.ERASE: {
-            dispatch({type: Actions.ERASE})
-            return;
-        }
-
-        case Actions.LOAD: {
+        case Requests.LOAD: {
             const nowScreen = navigator.tail();
             console.log(nowScreen)
             // FIXME: для отладки возвращается константа, когда навигатор пустой
@@ -58,53 +37,47 @@ export const executeAction = async (dispatch, actionHolder, attribute,  state) =
             return;
         }
 
-        case Actions.OPEN_SELECT_BOX: {
-            dispatch({type: Actions.OPEN_SELECT_BOX, payload: attribute})
-            return;
-        }
-
-        case Actions.CLOSE_SELECT_BOX: {
-            dispatch({type: Actions.CLOSE_SELECT_BOX, payload: attribute})
-            return;
-        }
-
-        case Actions.SAVE_SELECTED: {
-            dispatch({type: Actions.SAVE_SELECTED, payload: attribute})
-            return;
-        }
-
         case Actions.MULTISELECT: {
             const activeItem = actionHolder.items.find(item => item.active);
             const action = activeItem.action;
-            await executeAction(dispatch, {action}, attribute)
+            await executeRequest(dispatch, {action}, attribute)
             return;
         }
 
-        case Actions.OPEN: {
+        case Requests.OPEN: {
+            console.log(`/screen?screenName=${attribute.openOnEdit}&id=${attribute[attribute.fieldName]}`);
             // открытие страницы с существующим эл-том
             return;
         }
 
-        case Actions.DELETE: {
+        case Requests.DELETE: {
+
             // удаление выбранного элемента
             return;
         }
 
-        case Actions.CREATE: {
+        case Requests.CREATE: {
+            getScreen(attribute.openOnCreate, dispatch);
             // создание нового эл-та == переход на страницу
             return;
         }
 
-        case Actions.SAVE: {
+        case Requests.SAVE: {
             // TODO: Здесь будет отправляться запрос на сохранение
             API.saveScreen(convertState(state))
-                .then(() => {{
-                    // TODO: Возможно логику по возврату к предыдущей странице нужно поместить где-то в другом месте?
-                    navigator.pop();
-                    const prevScreen = navigator.tail();
-                    getScreen(prevScreen, dispatch);
-                }})
+                .then(() => {
+                    {
+                        // TODO: Возможно логику по возврату к предыдущей странице нужно поместить где-то в другом месте?
+                        navigator.pop();
+                        const prevScreen = navigator.tail();
+                        getScreen(prevScreen, dispatch);
+                    }
+                })
 
+            return;
+        }
+        default: {
+            dispatch({type: action, payload: attribute});
             return;
         }
     }

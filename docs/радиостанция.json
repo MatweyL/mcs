@@ -1,0 +1,44 @@
+{
+  "student": "Иванов ИИ",
+  "sessions": [
+    {
+      "channels": [
+        {
+          "mode": "CHM25",
+          "ctcss": "YES",
+          "frequency": 123123,
+          "forbidden_prd": true,
+          "double_frequency": true,
+          "mnc": 1,
+          "prd_only_retranslating": false,
+          "retranslator": true,
+          "chp_dmo": "123 | Ссылка на элемент frequencies_plans_pprch"
+        },
+        {
+          "mode": "CHM25",
+          "ctcss": "YES",
+          "frequency": 123123,
+          "forbidden_prd": true,
+          "double_frequency": true,
+          "name": "KP1"
+        }
+      ],
+      "directions": [
+        {
+          "channel": "KP1 | Ссылка на элемент channels",
+          "forbidden_prd": true,
+          "name": "123",
+          "economizer": "3"
+        }
+      ],
+      "frequencies_plans_pprch": [
+        {
+          "low": 745450,
+          "high": 123745450,
+          "order": 0,
+          "id": 123
+        }
+      ]
+    }
+  ]
+}

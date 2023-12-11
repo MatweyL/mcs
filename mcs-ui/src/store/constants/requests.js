@@ -1,4 +1,3 @@
-//TODO: для будущего разделения Actions
 export default class Requests {
     // Открыть экран
     static OPEN = "OPEN";

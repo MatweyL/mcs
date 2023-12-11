@@ -1,4 +1,5 @@
 import EventHelper from "./event_helper";
+import Attributes from "../constants/attributes";
 
 const EMPTY = "";
 
@@ -9,6 +10,25 @@ export default class AttributeHelper {
 
     static isNotVisible(attribute) {
         return attribute.visible !== true;
+    }
+
+    static isDefaultCardItem(attribute) {
+        return attribute.type === Attributes.CARD_ITEM
+            && attribute.default === true;
+    }
+
+    static countOfType(attributes, type) {
+        return Object.values(attributes)
+            .filter(attribute => attribute.type === type)
+            .length;
+    }
+
+    static isDisabled(attribute) {
+        return attribute.disabled === true;
+    }
+
+    static isNotDisabled(attribute) {
+        return attribute.disabled !== true;
     }
 
     static getEvents(attribute) {

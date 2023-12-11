@@ -40,6 +40,25 @@ export class InitActionProcessor extends ActionProcessor {
             attribute.name = attributeName;
             attribute.active = false;
 
+            if (AttributeHelper.isDefaultCardItem(attribute)) {
+                const defaultCardItem = attribute;
+
+                const menuItemsAmount = AttributeHelper.countOfType(attributes, Attributes.CARD_ITEM);
+                // Скрытие дефолтного cardItem, когда в списке уже есть новые элементы
+                if (menuItemsAmount > 1) {
+                    Instructions.HIDE(attribute);
+                }
+
+                // Перенос свойств дефолтного cardItem на новые элементы
+                Object.values(attributes)
+                    .filter(attr => attr.type === Attributes.CARD_ITEM)
+                    .forEach(attr => {
+                        attr.openOnCreate = defaultCardItem.openOnCreate;
+                        attr.fieldName = defaultCardItem.fieldName;
+                        attr.openOnEdit = defaultCardItem.openOnEdit;
+                    })
+            }
+
             if (AttributeHelper.isVisible(attribute)) {
                 Instructions.SHOW(attribute);
             }

@@ -5,7 +5,8 @@
     "DIRECTIONS_MENU_ITEM": {
       "type": "MENU_ITEM",
       "label": "Направления",
-      "value": "DIRECTIONS"
+      "value": "DIRECTIONS",
+      "disabled": true
     },
     "PPRCH_FREQUENCY_PLAN_MENU_ITEM": {
       "type": "MENU_ITEM",
@@ -15,17 +16,24 @@
     "USB_ACCEPT_MENU_ITEM": {
       "type": "MENU_ITEM",
       "label": "USB. Прием.",
-      "value": "USB_ACCEPT"
+      "value": "USB_ACCEPT",
+      "disabled": true
     },
     "RS_485_TRANSFER_MENU_ITEM": {
       "type": "MENU_ITEM",
       "label": "RS-485. Передача.",
-      "value": "RS_485_TRANSFER"
+      "value": "RS_485_TRANSFER",
+      "disabled": true
     },
     "CHANNEL_EDITOR_MENU_ITEM": {
       "type": "MENU_ITEM",
       "label": "Редактор каналов.",
       "value": "CHANNEL_EDITOR"
+    },
+    "CHANNEL_LIST": {
+      "type": "MENU_ITEM",
+      "label": "Список каналов.",
+      "value": "CHANNEL_LIST"
     }
   },
   "buttons": {
