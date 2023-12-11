@@ -6,6 +6,7 @@ from app.schemas import ScreenUpdated, Screen
 #     screen_name: ScreenUpdater
 # }
 
+
 class PhoneChannelFiller:
 
     def __init__(self, phone: Phone):

@@ -53,9 +53,9 @@ class ChannelCHM25(Channel):
     channel_mode: ChannelMode = Field(default=ChannelMode.CHM25,
                                       validation_alias=AliasChoices('channel_mode',
                                                                     AttributeName.CHANNEL_MODE))
-    prd_forbidden: bool = Field(default=False,
-                                validation_alias=AliasChoices('prd_forbidden', 'prdForbidden',
-                                                              AttributeName.PRD_FORBIDDEN))
+    forbidden_send: bool = Field(default=False,
+                                 validation_alias=AliasChoices('forbidden_send', 'sendForbidden',
+                                                               AttributeName.PRD_FORBIDDEN))
     double_frequency: bool = Field(default=False,
                                    validation_alias=AliasChoices('double_frequency', 'doubleFrequency',
                                                                  AttributeName.DOUBLE_FREQUENCY))
