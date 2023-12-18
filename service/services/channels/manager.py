@@ -1,6 +1,5 @@
 from typing import Dict, Any, Optional
 
-from service.common.logs import logger
 from service.domain.base import get_attribute_from_dict
 from service.domain.channels import Channel
 from service.domain.phone import Phone

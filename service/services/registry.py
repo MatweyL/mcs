@@ -1,8 +1,5 @@
 from typing import List
 
-from service.schemas.exceptions import NoProcessorWithScreenNameException
-from service.services.base import ScreenProcessorInterface
-
 
 class ScreenProcessorRegistry:
     """
