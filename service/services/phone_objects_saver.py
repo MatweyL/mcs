@@ -1,6 +1,6 @@
 from typing import Dict
 
-from service.schemas.screen import ScreenUpdated
+from service.schemas.screen import ScreenValues
 from service.common.logs import logger
 from service.services.base import PhoneObjectManagerInterface
 
@@ -10,7 +10,7 @@ class PhoneObjectsSaver:
     def __init__(self, screen_manager_map: Dict[str, PhoneObjectManagerInterface]):
         self._screen_facade_map = screen_manager_map
 
-    def save(self, screen_updated: ScreenUpdated):
+    def save(self, screen_updated: ScreenValues):
         logger.debug(f'start saving {screen_updated.name}')
         try:
             manager = self._screen_facade_map[screen_updated.name]
