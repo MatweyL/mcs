@@ -45,7 +45,10 @@ export const executeRequest = async (dispatch, actionHolder, attribute, state) =
         }
 
         case Requests.OPEN: {
-            console.log(`/screen?screenName=${attribute.openOnEdit}&id=${attribute[attribute.fieldName]}`);
+            const endpoint = `screen?screen_name=${attribute.openOnEdit}&id=${attribute[attribute.fieldName]}`;
+            console.log(endpoint);
+            API.getExistedScreen(endpoint)
+                .then()
             // открытие страницы с существующим эл-том
             return;
         }

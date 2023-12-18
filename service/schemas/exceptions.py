@@ -13,3 +13,9 @@ class NoChannelWithIdException(Exception):
 class WrongAttributeValueException(Exception):
     def __init__(self, wrong_value=None, correct_values=None):
         super(WrongAttributeValueException, self).__init__(f"{wrong_value} not in {correct_values}")
+
+
+class NoProcessorWithScreenNameException(Exception):
+    def __init__(self, screen_name: str = None):
+        super(NoProcessorWithScreenNameException, self).__init__(f"No processor with {screen_name}")
+
