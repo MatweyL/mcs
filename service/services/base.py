@@ -2,7 +2,7 @@ from abc import abstractmethod
 from typing import Dict, Any
 
 from service.domain.phone import Phone
-from service.schemas.screen import ScreenValues
+from service.schemas.screen import ScreenUpdated
 
 
 class PhoneObjectManagerInterface:
@@ -40,15 +40,17 @@ class ScreenProcessorInterface:
     """
 
     @abstractmethod
-    def save(self, phone: Phone, screen: ScreenValues):
+    def get_screen_name(self):
         """
-
-        :param phone: доменный объект телефона
-        :param screen: экран с данными
-
-        :return:
+        :return: название обрабатываемого экрана
         """
         pass
+
+
+class GetScreenProcessorInterface(ScreenProcessorInterface):
+    """
+    Обработчик получения экрана
+    """
 
     @abstractmethod
     def get(self, phone: Phone, screen: Dict[str, Any], context: dict):
@@ -62,9 +64,19 @@ class ScreenProcessorInterface:
         """
         pass
 
+
+class SaveScreenProcessorInterface(ScreenProcessorInterface):
+    """
+    Обработчик сохранение экрана
+    """
+
     @abstractmethod
-    def get_screen_name(self):
+    def save(self, phone: Phone, screen: ScreenUpdated):
         """
-        :return: название обрабатываемого экрана
+
+        :param phone: доменный объект телефона
+        :param screen: экран с данными
+
+        :return:
         """
         pass
