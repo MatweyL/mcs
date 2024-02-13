@@ -9,7 +9,7 @@ const MOCK_LOCAL_MODE = "MOCK_LOCAL";
 const MOCK_REMOTE = "MOCK_REMOTE";
 const LOCAL_PY_MODE = "LOCAL_PY";
 
-const NOW_MODE = LOCAL_PY_MODE
+const NOW_MODE = MOCK_LOCAL_MODE
 
 const endpoints = {
    getDictionary: {
