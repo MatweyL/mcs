@@ -5,12 +5,14 @@ import {executeAction} from "../store/action";
 import Actions from "../store/constants/actions";
 import {reducer_v2} from "../store/reducer_v2";
 import Key from "../components/UI/Key";
+import {useDispatch, useSelector} from "react-redux";
 
 /**
  * Страница экрана телефона
  */
 const ScreenPage = () => {
-    const [state, dispatch] = useReducer(reducer_v2, {attributes: {}})
+    const dispatch = useDispatch();
+    const state = useSelector(state => state.screen);
 
     useEffect(() => {
         executeAction(dispatch, {action: Actions.LOAD})
@@ -60,14 +62,14 @@ const ScreenPage = () => {
             <div className="keyboard">
                 <div className="control-keyboard">
                     <div className="keys-row">
-                        <Key onClick={left}><img src="buttons/left.svg" alt="call"/></Key>
-                        <Key onClick={up}><img src="buttons/up.svg" alt="call"/></Key>
-                        <Key onClick={right}><img src="buttons/right.svg" alt="call"/></Key>
+                        <Key onClick={left}><img src="/buttons/left.svg" alt="call"/></Key>
+                        <Key onClick={up}><img src="/buttons/up.svg" alt="call"/></Key>
+                        <Key onClick={right}><img src="/buttons/right.svg" alt="call"/></Key>
                     </div>
                     <div className="keys-row">
-                        <Key><img src="buttons/green.svg" alt="call"/></Key>
-                        <Key onClick={down}><img src="buttons/down.svg" alt="call"/></Key>
-                        <Key><img src="buttons/red.svg" alt="cancel"/></Key>
+                        <Key><img src="/buttons/green.svg" alt="call"/></Key>
+                        <Key onClick={down}><img src="/buttons/down.svg" alt="call"/></Key>
+                        <Key><img src="/buttons/red.svg" alt="cancel"/></Key>
                     </div>
                 </div>
                 <div className="divider-keyboard"/>

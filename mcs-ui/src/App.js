@@ -1,9 +1,13 @@
-import ScreenPage from "./pages/ScreenPage";
+import RoutedApp from "./RoutedApp";
+import {Provider} from "react-redux";
+import {store} from "./store";
 
 function App() {
     return (
         <main className="container">
-            <ScreenPage/>
+            <Provider store={store}>
+                <RoutedApp/>
+            </Provider>
         </main>
     );
 }

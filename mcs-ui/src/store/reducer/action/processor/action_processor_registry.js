@@ -20,8 +20,15 @@ import {PressKeyActionProcessor} from "./impl/press_key_action_processor";
 
 class ActionProcessorRegistry {
     process(state, action) {
-        return processors.find(p => p.getType() === action.type)
-            .process(state, action);
+        const processor = processors.find(p => p.getType() === action.type);
+        if (!processor) {
+            return state;
+        }
+
+        const updatedState = JSON.parse(JSON.stringify(state));
+
+        return processor
+            .process(updatedState, action);
     }
 }
 export const actionProcessorRegistry = new ActionProcessorRegistry();
