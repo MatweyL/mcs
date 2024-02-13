@@ -4,24 +4,18 @@ import {navigator} from "./screen/navigator";
 import {convertState} from "./util";
 import Actions from "../constants/actions";
 import Attributes from "../constants/attributes";
+import {screenService} from "../di";
 
-//FIXME: по идее executeAction это прослойка для получения данных и отправки их в reducer через dispatch()
-// возможно не стоит завязывать их на одну константу Actions, может стоит рассмотреть, чтобы у них были разные константы
-// например, прослойка работает с типами запросов (константа Requests) , а делает dispatch уже константы Action
-/// Action - описывают действия, здесь работа с запросами
-/// и передача готовых данных в reducer
-
+// FIXME: перенести запросы в executeRequest
+/**
+ * Action - описывают действия, здесь работа с запросами и передача готовых данных в reducer
+ */
 export const executeAction = async (dispatch, actionHolder, attribute,  state) => {
     const action = actionHolder.action;
     console.log("ACTION", action);
     switch (action) {
-        case Actions.SELECT: {
-            if (attribute.type === Attributes.MENU_ITEM) {
-                getScreen(attribute.value, dispatch);
-            }
-            return;
-        }
 
+        // По сути не нужно -> просто проксируются запросы в dispatch
         case Actions.OPEN_MENU: {
             dispatch({type: Actions.OPEN_MENU}, )
             return;
@@ -32,13 +26,6 @@ export const executeAction = async (dispatch, actionHolder, attribute,  state) =
             return;
         }
 
-        case Actions.BACK: {
-            navigator.pop();
-            const prevScreen = navigator.tail();
-            await getScreen(prevScreen, dispatch);
-            return;
-        }
-
         case Actions.EDIT: {
             dispatch({type: Actions.EDIT, payload: attribute})
             return;
@@ -46,15 +33,6 @@ export const executeAction = async (dispatch, actionHolder, attribute,  state) =
 
         case Actions.ERASE: {
             dispatch({type: Actions.ERASE})
-            return;
-        }
-
-        case Actions.LOAD: {
-            const nowScreen = navigator.tail();
-            console.log(nowScreen)
-            // FIXME: для отладки возвращается константа, когда навигатор пустой
-            const screen = nowScreen === undefined ? "SERVICE_MENU" : nowScreen;
-            await getScreen(screen, dispatch);
             return;
         }
 
@@ -73,10 +51,59 @@ export const executeAction = async (dispatch, actionHolder, attribute,  state) =
             return;
         }
 
+        // Получение данных
+        case Actions.BACK: {
+            navigator.pop();
+            const prevScreen = navigator.tail();
+            screenService.getScreen(prevScreen)
+                .then(screenData => {
+                    dispatch({type: Actions.INIT, payload: screenData})
+                })
+            return;
+        }
+
+        case Actions.SELECT: {
+            if (attribute.type === Attributes.MENU_ITEM) {
+                screenService.getScreen(attribute.value)
+                    .then(screenData => {
+                        dispatch({type: Actions.INIT, payload: screenData})
+                    })
+            }
+            return;
+        }
+
+        case Actions.LOAD: {
+            const nowScreen = navigator.tail();
+            console.log(nowScreen)
+            // FIXME: для отладки возвращается константа, когда навигатор пустой
+            const screen = nowScreen === undefined ? "SERVICE_MENU" : nowScreen;
+            screenService.getScreen(screen)
+                .then(screenData => {
+                    dispatch({type: Actions.INIT, payload: screenData})
+                })
+            return;
+        }
+
         case Actions.MULTISELECT: {
             const activeItem = actionHolder.items.find(item => item.active);
             const action = activeItem.action;
             await executeAction(dispatch, {action}, attribute)
+            return;
+        }
+
+        case Actions.SAVE: {
+            // TODO: Здесь будет отправляться запрос на сохранение
+            API.saveScreen(convertState(state))
+                .then(() => {{
+                    // TODO: Возможно логику по возврату к предыдущей странице нужно поместить где-то в другом месте?
+                    navigator.pop();
+                    const prevScreen = navigator.tail();
+                    screenService.getScreen(prevScreen)
+                        .then(screenData => {
+                            dispatch({type: Actions.INIT, payload: screenData})
+                        })
+                }})
+
             return;
         }
 
@@ -94,44 +121,6 @@ export const executeAction = async (dispatch, actionHolder, attribute,  state) =
             // создание нового эл-та == переход на страницу
             return;
         }
-
-        case Actions.SAVE: {
-            // TODO: Здесь будет отправляться запрос на сохранение
-            API.saveScreen(convertState(state))
-                .then(() => {{
-                    // TODO: Возможно логику по возврату к предыдущей странице нужно поместить где-то в другом месте?
-                    navigator.pop();
-                    const prevScreen = navigator.tail();
-                    getScreen(prevScreen, dispatch);
-                }})
-
-            return;
-        }
     }
 }
 
-const getScreen = async (prevScreen, dispatch) => {
-    const response = await API.getScreen(prevScreen);
-    const data = response.data;
-
-    const attributes = data.attributes;
-    const dictionaries = Object.keys(attributes)
-        .filter(name => attributes[name].type === Attributes.DICTIONARY);
-
-    console.log(dictionaries);
-    for (let dictionaryName of dictionaries) {
-        console.log(dictionaryName);
-        await fillDictionary(attributes[dictionaryName]);
-    }
-    navigator.push(data.name);
-
-    dispatch({type: Actions.INIT, payload: data});
-}
-
-const fillDictionary = async (emptyDictionary) => {
-    const response = await API.getDictionary(
-        emptyDictionary.dictionaryType,
-        emptyDictionary.noCache
-    );
-    emptyDictionary.dictionaryValues = response.data.dictionaryValues;
-}

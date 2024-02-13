@@ -1,12 +1,13 @@
-import React, {useEffect, useReducer} from 'react';
+import React, {useEffect} from 'react';
 import Button from "../components/attributes/Button";
 import {convert} from "../core/store/screen/convert";
 import {executeAction} from "../core/store/action";
 import Actions from "../core/constants/actions";
-import {screenReducer} from "../core/store/screen/screen_reducer";
 import Key from "../components/UI/Key";
 import {useDispatch, useSelector} from "react-redux";
 import {clone} from "../core/store/helper/clone_util";
+import {executeRequest} from "../core/store/request";
+import Requests from "../core/constants/requests";
 
 /**
  * Страница экрана телефона
@@ -16,7 +17,7 @@ const ScreenPage = () => {
     const screen = useSelector(state => state.screen);
 
     useEffect(() => {
-        executeAction(dispatch, {action: Actions.LOAD})
+        executeRequest(dispatch,{type: Requests.LOAD});
     }, []);
 
     const left = () => {

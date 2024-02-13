@@ -17,4 +17,7 @@ export default class Requests {
 
     // Удалить
     static DELETE = "DELETE";
+
+    // Выбрать ???
+    static SELECT = "SELECT"
 }

@@ -1,4 +1,4 @@
-import {actionProcessorRegistry} from "./action/processor/action_processor_registry";
+import {actionProcessorRegistry} from "../../di";
 
 const defaultState = {
     attributes: {}
