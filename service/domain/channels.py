@@ -31,14 +31,20 @@ class Channel(BaseModel):
 
 class ChannelCHM25(Channel):
     channel_mode: ChannelMode = Field(default=ChannelMode.CHM25,
-                                      validation_alias=AliasChoices('channel_mode',))
+                                      validation_alias=AliasChoices('channel_mode', 'MODE'),
+                                      serialization_alias='MODE')
     forbidden_send: bool = Field(default=False,
-                                 validation_alias=AliasChoices('forbidden_send', 'forbiddenSend',))
+                                 validation_alias=AliasChoices('forbidden_send', 'FORBIDDEN_SEND'),
+                                 serialization_alias='FORBIDDEN_SEND')
     double_frequency: bool = Field(default=False,
-                                   validation_alias=AliasChoices('double_frequency', 'doubleFrequency',))
-    frequency: float = Field(default=0, validation_alias=AliasChoices('frequency',))
-    ctcss: bool = Field(default=False, validation_alias=AliasChoices('ctcss',))
-    name: str = Field(default=None, validation_alias=AliasChoices('name',))
+                                   validation_alias=AliasChoices('double_frequency', 'DOUBLE_FREQUENCY',),
+                                   serialization_alias='DOUBLE_FREQUENCY')
+    frequency: float = Field(default=0, validation_alias=AliasChoices('frequency', 'FREQUENCY'),
+                             serialization_alias='FREQUENCY')
+    ctcss: bool = Field(default=False, validation_alias=AliasChoices('ctcss', 'CTCSS'),
+                        serialization_alias='CTCSS')
+    name: str = Field(default=None, validation_alias=AliasChoices('name', 'NAME'),
+                      serialization_alias='NAME')
 
 
 channel_mode_schema_map = {
