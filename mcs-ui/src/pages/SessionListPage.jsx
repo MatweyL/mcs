@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import SessionList from "../components/SessionList/SessionList";
+import SessionList from "../components/UI/SessionList/SessionList";
 import {useSessions} from "../hooks/useSessions";
 
 /**

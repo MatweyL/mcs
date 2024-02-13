@@ -1,0 +1,10 @@
+.loginButton {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    border-radius: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+}
