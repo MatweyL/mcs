@@ -1,12 +1,15 @@
 import React, {useEffect, useReducer} from 'react';
-import Button from "./attributes/Button";
+import Button from "../components/attributes/Button";
 import {convert} from "../store/convert";
 import {executeAction} from "../store/action";
 import Actions from "../store/constants/actions";
 import {reducer_v2} from "../store/reducer_v2";
-import Key from "./UI/Key";
+import Key from "../components/UI/Key";
 
-const Screen = () => {
+/**
+ * Страница экрана телефона
+ */
+const ScreenPage = () => {
     const [state, dispatch] = useReducer(reducer_v2, {attributes: {}})
 
     useEffect(() => {
@@ -102,4 +105,4 @@ const Screen = () => {
     );
 };
 
-export default Screen;
+export default ScreenPage;

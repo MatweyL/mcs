@@ -1,9 +1,9 @@
-import Screen from "./components/Screen";
+import ScreenPage from "./pages/ScreenPage";
 
 function App() {
     return (
         <main className="container">
-            <Screen/>
+            <ScreenPage/>
         </main>
     );
 }
