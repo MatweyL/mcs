@@ -20,6 +20,8 @@ import {PressKeyActionProcessor} from "./impl/press_key_action_processor";
 
 class ActionProcessorRegistry {
     process(state, action) {
+        console.log(`Process - ${action.type}`);
+
         const processor = processors.find(p => p.getType() === action.type);
         if (!processor) {
             return state;

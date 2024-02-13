@@ -6,9 +6,9 @@ import CardItem from "../components/attributes/CardItem";
 import OwnSelectBox from "../components/attributes/OwnSelectBox/OwnSelectBox";
 import Attributes from "./constants/attributes";
 
-export function convert(attribute, dispatch) {
+export function convert(attribute) {
     return attribute.visible
-        ? TYPE_TO_CREATE_ELEMENT[attribute.type](attribute, dispatch)
+        ? TYPE_TO_CREATE_ELEMENT[attribute.type](attribute)
         : null
 }
 
@@ -24,15 +24,15 @@ const createOwnSelectBox = (attribute) => {
     );
 }
 
-const createText = (attribute, dispatch) => {
+const createText = (attribute) => {
     return (
-        <Text attribute={attribute} dispatch={dispatch} key={attribute.name}/>
+        <Text attribute={attribute} key={attribute.name}/>
     );
 }
 
-const createCheckbox = (attribute, dispatch) => {
+const createCheckbox = (attribute) => {
     return (
-        <Checkbox attribute={attribute} dispatch={dispatch} key={attribute.name}/>
+        <Checkbox attribute={attribute} key={attribute.name}/>
     );
 }
 

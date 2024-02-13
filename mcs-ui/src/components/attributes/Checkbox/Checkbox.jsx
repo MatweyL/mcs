@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import Actions from "../../../store/constants/actions";
 import classes from "./Checkbox.module.css";
+import {useDispatch} from "react-redux";
 
-/// Атрибут - Чекбокс (True/False)
-const Checkbox = ({attribute, dispatch}) => {
-    const [formAttribute, setAttribute] = useState(attribute)
+/**
+ * Атрибут - Чекбокс (True/False)
+ */
+const Checkbox = ({attribute}) => {
+    const dispatch = useDispatch();
 
     const updateAttribute = (e) => {
-        let updatedAttribute = {...formAttribute, value: e.target.checked};
-        // TODO: Подумать, возможно не нужно
-        setAttribute(updatedAttribute);
+        let updatedAttribute = {...attribute, value: e.target.checked};
         dispatch({type: Actions.UPDATE_ATTRIBUTE, payload: updatedAttribute})
     }
 
@@ -18,7 +19,7 @@ const Checkbox = ({attribute, dispatch}) => {
             {attribute.label}
             <div className={attribute.active ? classes.checkboxActive : classes.checkbox}>
                 <input type="checkbox"
-                       checked={formAttribute.value}
+                       checked={attribute.value}
                        onChange={updateAttribute}
                        id={attribute.name}
                 />

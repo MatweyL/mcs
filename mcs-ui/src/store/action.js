@@ -40,7 +40,7 @@ export const executeAction = async (dispatch, actionHolder, attribute,  state) =
         }
 
         case Actions.EDIT: {
-            dispatch({type: Actions.EDIT})
+            dispatch({type: Actions.EDIT, payload: attribute})
             return;
         }
 

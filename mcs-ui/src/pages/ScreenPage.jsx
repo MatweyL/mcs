@@ -6,34 +6,35 @@ import Actions from "../store/constants/actions";
 import {reducer_v2} from "../store/reducer_v2";
 import Key from "../components/UI/Key";
 import {useDispatch, useSelector} from "react-redux";
+import {clone} from "../store/helper/clone_util";
 
 /**
  * Страница экрана телефона
  */
 const ScreenPage = () => {
     const dispatch = useDispatch();
-    const state = useSelector(state => state.screen);
+    const screen = useSelector(state => state.screen);
 
     useEffect(() => {
         executeAction(dispatch, {action: Actions.LOAD})
     }, []);
 
     const left = () => {
-        const nowAttribute = state.attributes[state.selectedAttribute];
-        executeAction(dispatch, state.buttons.leftButton, nowAttribute, state);
+        const nowAttribute = clone(screen.attributes[screen.selectedAttribute]);
+        executeAction(dispatch, screen.buttons.leftButton, nowAttribute, screen);
     }
 
     const right = () => {
-        const nowAttribute = state.attributes[state.selectedAttribute];
-        executeAction(dispatch, state.buttons.rightButton, nowAttribute, state);
+        const nowAttribute = clone((screen.attributes[screen.selectedAttribute]));
+        executeAction(dispatch, screen.buttons.rightButton, nowAttribute, screen);
     }
 
     const up = () => {
-        dispatch({type: Actions.UP, payload: state.selectedAttribute});
+        dispatch({type: Actions.UP, payload: screen.selectedAttribute});
     }
 
     const down = () => {
-        dispatch({type: Actions.DOWN, payload: state.selectedAttribute});
+        dispatch({type: Actions.DOWN, payload: screen.selectedAttribute});
     }
 
     const keyPress = (keys) => {
@@ -46,16 +47,16 @@ const ScreenPage = () => {
             <div className="screen-wrapper">
                 <div className="screen">
                     <div className="screen-label">
-                        {state?.label}
+                        {screen?.label}
                     </div>
-                    {state.attributes !== undefined ?
-                        Object.keys(state?.attributes)
-                            .map(name => convert(state.attributes[name], dispatch))
+                    {screen.attributes !== undefined ?
+                        Object.keys(screen?.attributes)
+                            .map(name => convert(screen.attributes[name]))
                         : null
                     }
                     <div className="buttons">
-                        <Button button={state?.buttons?.leftButton}/>
-                        <Button button={state?.buttons?.rightButton}/>
+                        <Button button={screen?.buttons?.leftButton}/>
+                        <Button button={screen?.buttons?.rightButton}/>
                     </div>
                 </div>
             </div>
