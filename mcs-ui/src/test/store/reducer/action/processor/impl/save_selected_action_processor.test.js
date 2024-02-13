@@ -1,8 +1,8 @@
-import Actions from "../../../../../../store/constants/actions";
-import Buttons from "../../../../../../store/constants/buttons";
+import Actions from "../../../../../../core/constants/actions";
+import Buttons from "../../../../../../core/constants/buttons";
 import {
     SaveSelectedActionProcessor
-} from "../../../../../../store/reducer/action/processor/impl/save_selected_action_processor";
+} from "../../../../../../core/store/screen/action/processor/impl/save_selected_action_processor";
 
 describe('SaveSelectedActionProcessor', () => {
     const mockMethod = jest.fn();

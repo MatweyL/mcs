@@ -1,12 +1,12 @@
 import React, {useEffect, useReducer} from 'react';
 import Button from "../components/attributes/Button";
-import {convert} from "../store/convert";
-import {executeAction} from "../store/action";
-import Actions from "../store/constants/actions";
-import {reducer_v2} from "../store/reducer_v2";
+import {convert} from "../core/store/screen/convert";
+import {executeAction} from "../core/store/action";
+import Actions from "../core/constants/actions";
+import {screenReducer} from "../core/store/screen/screen_reducer";
 import Key from "../components/UI/Key";
 import {useDispatch, useSelector} from "react-redux";
-import {clone} from "../store/helper/clone_util";
+import {clone} from "../core/store/helper/clone_util";
 
 /**
  * Страница экрана телефона

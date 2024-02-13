@@ -1,6 +1,6 @@
 import {ActionProcessor} from "../action_processor";
-import Actions from "../../../../constants/actions";
-import Buttons from "../../../../constants/buttons";
+import Actions from "../../../../../constants/actions";
+import Buttons from "../../../../../constants/buttons";
 
 export class SaveSelectedActionProcessor extends ActionProcessor {
     constructor(eventProcessor) {

@@ -1,6 +1,6 @@
-import Buttons from "../../../../../../store/constants/buttons";
-import Actions from "../../../../../../store/constants/actions";
-import {CloseMenuActionProcessor} from "../../../../../../store/reducer/action/processor/impl/close_menu_action_processor";
+import Buttons from "../../../../../../core/constants/buttons";
+import Actions from "../../../../../../core/constants/actions";
+import {CloseMenuActionProcessor} from "../../../../../../core/store/screen/action/processor/impl/close_menu_action_processor";
 
 describe('CloseMenuActionProcessor', () => {
     const processor = new CloseMenuActionProcessor();

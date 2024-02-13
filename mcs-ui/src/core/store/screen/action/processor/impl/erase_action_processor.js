@@ -1,4 +1,4 @@
-import Actions from "../../../../constants/actions";
+import Actions from "../../../../../constants/actions";
 import {ActionProcessor} from "../action_processor";
 import AttributeHelper from "../../../../helper/attribute_helper";
 

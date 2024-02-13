@@ -1,5 +1,5 @@
-import {EditActionProcessor} from "../../../../../../store/reducer/action/processor/impl/edit_action_processor";
-import Actions from "../../../../../../store/constants/actions";
+import {EditActionProcessor} from "../../../../../../core/store/screen/action/processor/impl/edit_action_processor";
+import Actions from "../../../../../../core/constants/actions";
 
 describe('EditActionProcessor', () => {
     const processor = new EditActionProcessor();

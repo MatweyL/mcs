@@ -1,8 +1,8 @@
 import {ActionProcessor} from "../action_processor";
-import Actions from "../../../../constants/actions";
+import Actions from "../../../../../constants/actions";
 import AttributeHelper from "../../../../helper/attribute_helper";
-import Instructions from "../../../../constants/instructions";
-import Attributes from "../../../../constants/attributes";
+import Instructions from "../../../../../constants/instructions";
+import Attributes from "../../../../../constants/attributes";
 
 const EMPTY = "";
 

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Actions from "../../../store/constants/actions";
+import Actions from "../../../core/constants/actions";
 import classes from "./Checkbox.module.css";
 import {useDispatch} from "react-redux";
 

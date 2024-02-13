@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Actions from "../../../store/constants/actions";
+import Actions from "../../../core/constants/actions";
 import classes from "./Text.module.css";
 import {useDispatch} from "react-redux";
 

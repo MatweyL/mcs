@@ -1,4 +1,4 @@
-import EventHelper from "../../../store/helper/event_helper";
+import EventHelper from "../../../core/store/helper/event_helper";
 
 describe('EventHelper', () => {
     test('должен возвращать пустой список, если поля нет', () => {

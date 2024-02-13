@@ -1,5 +1,5 @@
-import {NextCalculator} from "../../../../store/reducer/calculator/next_calculator";
-import Actions from "../../../../store/constants/actions";
+import {NextCalculator} from "../../../../core/store/screen/calculator/next_calculator";
+import Actions from "../../../../core/constants/actions";
 
 describe('NextCalculator', () => {
     const calculator = new NextCalculator();

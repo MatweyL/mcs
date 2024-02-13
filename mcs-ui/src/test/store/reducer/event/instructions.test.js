@@ -1,5 +1,5 @@
-import Instructions from "../../../../store/constants/instructions";
-import Attributes from "../../../../store/constants/attributes";
+import Instructions from "../../../../core/constants/instructions";
+import Attributes from "../../../../core/constants/attributes";
 
 describe('Instructions', () => {
     test('HIDE скрывает атрибут и сбрасывает значение', () => {

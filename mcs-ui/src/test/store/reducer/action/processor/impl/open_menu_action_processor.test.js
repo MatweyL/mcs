@@ -1,6 +1,6 @@
-import {OpenMenuActionProcessor} from "../../../../../../store/reducer/action/processor/impl/open_menu_action_processor";
-import Buttons from "../../../../../../store/constants/buttons";
-import Actions from "../../../../../../store/constants/actions";
+import {OpenMenuActionProcessor} from "../../../../../../core/store/screen/action/processor/impl/open_menu_action_processor";
+import Buttons from "../../../../../../core/constants/buttons";
+import Actions from "../../../../../../core/constants/actions";
 
 describe('OpenMenuActionProcessor', () => {
     const processor = new OpenMenuActionProcessor();

@@ -1,5 +1,5 @@
-import Actions from "../../../../../../store/constants/actions";
-import {EraseActionProcessor} from "../../../../../../store/reducer/action/processor/impl/erase_action_processor";
+import Actions from "../../../../../../core/constants/actions";
+import {EraseActionProcessor} from "../../../../../../core/store/screen/action/processor/impl/erase_action_processor";
 
 describe('EraseActionProcessor', () => {
     const processor = new EraseActionProcessor();

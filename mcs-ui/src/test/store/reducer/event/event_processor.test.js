@@ -1,5 +1,5 @@
-import {EventProcessor} from "../../../../store/reducer/event/event_processor";
-import Attributes from "../../../../store/constants/attributes";
+import {EventProcessor} from "../../../../core/store/screen/event/event_processor";
+import Attributes from "../../../../core/constants/attributes";
 
 describe('EventProcessor', () => {
     const eventProcessor = new EventProcessor();

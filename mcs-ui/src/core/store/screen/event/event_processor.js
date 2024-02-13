@@ -1,5 +1,5 @@
 import AttributeHelper from "../../helper/attribute_helper";
-import Instructions from "../../constants/instructions";
+import Instructions from "../../../constants/instructions";
 
 /**
  * Обработчик событий при изменении атрибута

@@ -1,5 +1,5 @@
 import {Selector} from "./selector";
-import Attributes from "../../constants/attributes";
+import Attributes from "../../../constants/attributes";
 
 export class SelectBoxOptionSelector extends Selector {
     constructor(calculator) {

@@ -1,6 +1,6 @@
 import {ActionProcessor} from "../action_processor";
-import Actions from "../../../../constants/actions";
-import Attributes from "../../../../constants/attributes";
+import Actions from "../../../../../constants/actions";
+import Attributes from "../../../../../constants/attributes";
 import AttributeHelper from "../../../../helper/attribute_helper";
 
 // Величина задержки, после которой добавляется новый символ, в мс

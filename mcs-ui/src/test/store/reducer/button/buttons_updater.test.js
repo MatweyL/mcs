@@ -1,6 +1,6 @@
-import {ButtonsFactory} from "../../../../store/reducer/button/buttons_updater";
-import Attributes from "../../../../store/constants/attributes";
-import Buttons from "../../../../store/constants/buttons";
+import {ButtonsFactory} from "../../../../core/store/screen/button/buttons_updater";
+import Attributes from "../../../../core/constants/attributes";
+import Buttons from "../../../../core/constants/buttons";
 
 describe('ButtonsFactory', () => {
     const factory = new ButtonsFactory();

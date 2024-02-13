@@ -1,4 +1,4 @@
-import {MultiButtonOptionSelector} from "../../../../store/reducer/selector/multi_button_option_selector";
+import {MultiButtonOptionSelector} from "../../../../core/store/screen/selector/multi_button_option_selector";
 
 describe('MultiButtonOptionSelector', () => {
     const mockMethod = jest.fn();

@@ -1,6 +1,6 @@
-import Actions from "../../../../../../store/constants/actions";
-import {InitActionProcessor} from "../../../../../../store/reducer/action/processor/impl/init_action_processor";
-import Attributes from "../../../../../../store/constants/attributes";
+import Actions from "../../../../../../core/constants/actions";
+import {InitActionProcessor} from "../../../../../../core/store/screen/action/processor/impl/init_action_processor";
+import Attributes from "../../../../../../core/constants/attributes";
 
 describe('InitActionProcessor', () => {
     const mockProcessMethod = jest.fn();

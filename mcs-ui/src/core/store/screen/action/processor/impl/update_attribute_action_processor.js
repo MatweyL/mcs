@@ -1,5 +1,5 @@
 import {ActionProcessor} from "../action_processor";
-import Actions from "../../../../constants/actions";
+import Actions from "../../../../../constants/actions";
 import {convertState} from "../../../../util";
 
 export class UpdateAttributeActionProcessor extends ActionProcessor {

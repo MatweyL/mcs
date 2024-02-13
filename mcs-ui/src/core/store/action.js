@@ -1,9 +1,9 @@
-import API from "../API/api";
-import {navigator} from "./navigator";
+import API from "../../API/api";
+import {navigator} from "./screen/navigator";
 
 import {convertState} from "./util";
-import Actions from "./constants/actions";
-import Attributes from "./constants/attributes";
+import Actions from "../constants/actions";
+import Attributes from "../constants/attributes";
 
 //FIXME: по идее executeAction это прослойка для получения данных и отправки их в reducer через dispatch()
 // возможно не стоит завязывать их на одну константу Actions, может стоит рассмотреть, чтобы у них были разные константы

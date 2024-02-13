@@ -1,6 +1,6 @@
-import ButtonsLayout from "../../constants/buttons_layout";
-import Attributes from "../../constants/attributes";
-import Buttons from "../../constants/buttons";
+import ButtonsLayout from "../../../constants/buttons_layout";
+import Attributes from "../../../constants/attributes";
+import Buttons from "../../../constants/buttons";
 
 export class ButtonsFactory {
     create(attributeType) {
