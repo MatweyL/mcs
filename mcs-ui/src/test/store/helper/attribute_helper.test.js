@@ -1,4 +1,4 @@
-import AttributeHelper from "../../../store/helper/attribute_helper";
+import AttributeHelper from "../../../core/store/helper/attribute_helper";
 
 describe('AttributeHelper', () => {
     test('должен возвращать пустой список событий, если событий нет', () => {

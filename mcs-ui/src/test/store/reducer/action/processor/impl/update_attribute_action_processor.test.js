@@ -1,7 +1,7 @@
-import Actions from "../../../../../../store/constants/actions";
+import Actions from "../../../../../../core/constants/actions";
 import {
     UpdateAttributeActionProcessor
-} from "../../../../../../store/reducer/action/processor/impl/update_attribute_action_processor";
+} from "../../../../../../core/store/screen/action/processor/impl/update_attribute_action_processor";
 
 describe('UpdateAttributeActionProcessor', () => {
     const mockMethod = jest.fn();

@@ -1,9 +1,13 @@
-import Screen from "./components/Screen";
+import RoutedApp from "./RoutedApp";
+import {Provider} from "react-redux";
+import {store} from "./core/store";
 
 function App() {
     return (
         <main className="container">
-            <Screen/>
+            <Provider store={store}>
+                <RoutedApp/>
+            </Provider>
         </main>
     );
 }

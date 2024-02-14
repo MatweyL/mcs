@@ -5,10 +5,11 @@
   -webkit-touch-callout: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+  font-family: 'Roboto', sans-serif;
 }
 
 .body {
+  user-select: none;
   border-radius: 42px;
   width: 320px;
   height: 850px;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {dictionaryCache} from "../store/dictionary_cache";
+import {dictionaryCache} from "../core/store/dictionary_cache";
 
 const MOCK_REMOTE_URL = "https://056f0a88-8d8e-4a2b-b6a5-8f196f1bee39.mock.pstmn.io";
 const LOCAL_PY_URL = "http://localhost:8080";

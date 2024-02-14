@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import Actions from "../../../store/constants/actions";
+import Actions from "../../../core/constants/actions";
 import classes from "./Text.module.css";
+import {useDispatch} from "react-redux";
 
-/// Атрибут - Текстовое поле
-const Text = ({attribute, dispatch}) => {
-    const [formAttribute, setAttribute] = useState(attribute)
+/**
+ * Атрибут - Текстовое поле
+ */
+const Text = ({attribute}) => {
+    const dispatch = useDispatch();
 
     const updateAttribute = (e) => {
-        let updatedAttribute = {...formAttribute, value: e.target.value};
-        setAttribute(updatedAttribute);
+        let updatedAttribute = {...attribute, value: e.target.value};
         dispatch({type: Actions.UPDATE_ATTRIBUTE, payload: updatedAttribute})
     }
 
@@ -21,7 +23,7 @@ const Text = ({attribute, dispatch}) => {
     return (
         <div className={classes.textWrapper}>
             {attribute.label}
-            <input value={formAttribute.value}
+            <input value={attribute.value}
                    key={attribute.name}
                    id={attribute.name}
                    onChange={updateAttribute}

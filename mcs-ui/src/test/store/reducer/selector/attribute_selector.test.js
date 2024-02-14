@@ -1,5 +1,5 @@
-import {ButtonsFactory} from "../../../../store/reducer/button/buttons_updater";
-import {AttributeSelector} from "../../../../store/reducer/selector/attribute_selector";
+import {ButtonsFactory} from "../../../../core/store/screen/button/buttons_updater";
+import {AttributeSelector} from "../../../../core/store/screen/selector/attribute_selector";
 
 describe('AttributeSelector', () => {
     const updater = new ButtonsFactory();

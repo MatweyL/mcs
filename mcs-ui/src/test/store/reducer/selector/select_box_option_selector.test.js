@@ -1,5 +1,5 @@
-import {SelectBoxOptionSelector} from "../../../../store/reducer/selector/select_box_option_selector";
-import Attributes from "../../../../store/constants/attributes";
+import {SelectBoxOptionSelector} from "../../../../core/store/screen/selector/select_box_option_selector";
+import Attributes from "../../../../core/constants/attributes";
 
 describe('SelectBoxOptionSelector', () => {
     const mockMethod = jest.fn();
