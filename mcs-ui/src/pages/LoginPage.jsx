@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import Field from "../components/UI/Field/Field";
 import LoginButton from "../components/UI/LoginButton/LoginButton";
+import LoginForm from "../components/UI/LoginForm/LoginForm";
 
 /**
  * Страница входа
@@ -16,7 +17,7 @@ const LoginPage = () => {
     }
 
     return (
-        <div>
+        <LoginForm>
             <h1 onClick={login} >Вход</h1>
             <Field title={"Фамилия"} value={user.patronymic}
                    onChange={e => setUser({...user, patronymic: e.target.value})}/>
@@ -30,7 +31,7 @@ const LoginPage = () => {
                    onChange={e => setUser({...user, group: e.target.value})}
             />
             <LoginButton onClick={login}/>
-        </div>
+        </LoginForm>
     );
 };
 
