@@ -2,7 +2,7 @@ from typing import Dict, Any
 
 from service.common.logs import logger
 from service.common.utils import generate_uid
-from service.domain.base import get_attribute, get_attribute_from_dict
+from service.domain.base import get_attribute_from_dict
 from service.domain.channels import Channel, channel_mode_schema_map
 from service.domain.phone import Phone
 from service.schemas.exceptions import NoChannelWithIdException, \
