@@ -49,48 +49,8 @@
   box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25) inset, -1px -1px 5px 0 rgba(0, 0, 0, 0.25) inset;
 }
 
-.screen-label {
-  width: 100%;
-  background: blue;
-  color: white;
-  height: 20px;
-  font-size: 12px;
-}
-
-.screen {
-  font-size: 14px;
-  width: 200px;
-  height: 230px;
-  background: lightblue;
-  border: 5px solid black;
-  position: relative;
-  font-family: 'Roboto', sans-serif;
-}
-
-.screen-wrapper {
-  padding: 15px;
-  border-radius: 20px;
-  border: 1px solid #000;
-  background: #657D67;
-  margin-bottom: 30px;
-  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25) inset, -1px -1px 5px 0 rgba(0, 0, 0, 0.25) inset;
-}
-
 .mcs-button {
   cursor: pointer;
-}
-
-.buttons {
-  background: darkblue;
-  justify-content: space-between;
-  color: aliceblue;
-  display: flex;
-  align-self: end;
-  position: absolute;
-  width: 100%;
-  height: 20px;
-  bottom: 0;
-  font-size: 12px;
 }
 
 label {
@@ -105,53 +65,11 @@ label {
   pointer-events: fill;
 }
 
-.keyboard {
-  margin-top: 5px;
-  padding: 20px;
-  border-radius: 20px;
-  width: 240px;
-  height: 355px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #466256;
-  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.25) inset, -1px -1px 5px 0 rgba(0, 0, 0, 0.25) inset;
-}
-
-.control-keyboard {
-  width: 100%;
-  height: 95px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-}
-
-.divider-keyboard {
-  width: 100%;
-  height: 2px;
-  background-color: rgba(0, 0, 0, 0.25);
-}
-
 small {
   font-size: 10px;
   padding-left: 5px;
 }
 
-.numpad-keyboard {
-  width: 100%;
-  font-size: 22px;
-  height: 223px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  font-family: 'Roboto', sans-serif;
-  color: whitesmoke;
-}
-
-.keys-row {
-  display: flex;
-  justify-content: space-between;
-}
 
 .key {
   background: #00FA9A;
