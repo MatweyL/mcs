@@ -1,0 +1,21 @@
+@startuml
+'Пользовательский путь при работе с MCS
+
+participant MCS_UI as ui
+participant MCS_BE as be
+
+autonumber
+
+ui -> be : Авторизация
+note left: Логин, пароль пользователя
+be -> ui : Токен
+ui -> be : Получение списка сессий
+note left: Токен
+be -> be : Извлечение пользовательских данных из токена
+be -> ui : Список сессий
+ui -> be : Открытие экрана сессии
+note left: Токен
+be -> be : Извлечение пользовательских данных из токена
+be -> ui : Экран
+
+@enduml
