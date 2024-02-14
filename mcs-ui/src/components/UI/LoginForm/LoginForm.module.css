@@ -1,0 +1,10 @@
+.loginForm {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.loginForm h1 {
+    text-align: center;
+}
