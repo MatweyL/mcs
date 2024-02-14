@@ -1,10 +1,15 @@
 .session {
-    border: 1px solid black;
+    border: 1px solid grey;
     border-radius: 5px;
     padding: 0 20px 0 20px;
     margin-top: 20px;
     font-size: 12px;
     cursor: pointer;
+}
+
+.session:hover {
+    opacity: 1;
+    transition: 0.3s;
 }
 
 .sessionList {
