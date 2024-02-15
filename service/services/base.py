@@ -2,6 +2,7 @@ from abc import abstractmethod
 from typing import Dict, Any
 
 from service.domain.phone import Phone
+from service.schemas.screen import ScreenUpdated
 
 
 class PhoneObjectManagerInterface:
