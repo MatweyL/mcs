@@ -2,17 +2,17 @@ from typing import Dict, Any
 
 from service.common.logs import logger
 from service.common.utils import generate_uid
+from service.core.processor.interfaces import ScreenProcessorInterface
 from service.domain.base import get_attribute_from_dict
 from service.domain.channels import Channel, channel_mode_schema_map
 from service.domain.phone import Phone
 from service.schemas.screen import ScreenValues
-from service.services.base import ScreenProcessorInterface
 
 
 class ChannelListScreenProcessor(ScreenProcessorInterface):
 
     def __init__(self, screen_name) -> None:
-        self.screen_name = screen_name
+        super().__init__(screen_name)
 
     def save(self, phone: Phone, screen: ScreenValues):
         """
@@ -33,7 +33,7 @@ class ChannelListScreenProcessor(ScreenProcessorInterface):
         return screen
 
     def get_screen_name(self):
-        return self.screen_name
+        return self._screen_name
 
 
 class ChannelEditorScreenProcessor(ScreenProcessorInterface):

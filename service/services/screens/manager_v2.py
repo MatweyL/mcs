@@ -1,8 +1,8 @@
 from typing import Dict, Any
 
+from service.core.registry import ScreenProcessorRegistry
 from service.schemas.screen import ScreenValues
 from service.services.base import ScreensStorageInterface, PhoneStorageInterface
-from service.services.registry import ScreenProcessorRegistry
 
 
 class ScreensManagerV2:

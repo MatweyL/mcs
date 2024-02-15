@@ -1,6 +1,6 @@
 from typing import List
 
-from service.core.processor.interfaces import AbstractScreenProcessor
+from service.core.processor.interfaces import ScreenProcessorInterface
 
 
 class ScreenProcessorRegistry:
@@ -9,8 +9,8 @@ class ScreenProcessorRegistry:
     """
 
     def __init__(self,
-                 processors: List[AbstractScreenProcessor],
-                 default_processor: AbstractScreenProcessor):
+                 processors: List[ScreenProcessorInterface],
+                 default_processor: ScreenProcessorInterface):
         self._processors = processors
         self._default_processor = default_processor
 
