@@ -3,9 +3,10 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
 from service.common.logs import logger
-from service.di import screen_endpoint
+from service.di import screen_endpoint, user_endpoint
 from service.schemas.screen import ScreenValues
 from service.screen.use_case import GetScreenRq
+from service.user.use_case import RegisterUserRq, AuthUserRq
 
 app = FastAPI()
 app.add_middleware(
@@ -31,6 +32,14 @@ async def get_screen(screen_name: str, element_uid: str = None):
 @app.post('/screen')
 async def save_screen(request: ScreenValues):
     return screen_endpoint.save_screen(request)
+
+@app.post("/register")
+async def register_user(request: RegisterUserRq):
+    return user_endpoint.register_user(request)
+
+@app.post("/auth")
+async def auth_user(request: AuthUserRq):
+    return user_endpoint.authenticate_user(request)
 
 
 if __name__ == "__main__":

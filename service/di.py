@@ -1,3 +1,4 @@
+from service.common.mapper import Mapper
 from service.common.utils import get_root_path
 from service.core.processor.default_processor import DefaultProcessor
 from service.core.registry import ScreenProcessorRegistry
@@ -13,6 +14,9 @@ from service.services.screens.manager import ScreensManager
 from service.services.screens.manager_v2 import ScreensManagerV2
 from service.services.screens.phone_storage import InMemoryPhoneStorage
 from service.services.screens.screens_storage import FileSystemScreensStorage
+from service.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl
+from service.user.impl.user_repo import UserRepoInMemory
+from service.user.user_endpoint import UserEndpoint
 
 phone = Phone([])
 screen_filler = ScreenFiller()
@@ -45,4 +49,15 @@ get_screen_use_case = GetScreenUseCaseImpl(screens_manager_v2)
 screen_endpoint = ScreenEndpoint(
     save_screen_use_case,
     get_screen_use_case
+)
+
+user_repo = UserRepoInMemory()
+mapper = Mapper()
+
+register_user_use_case = RegisterUserUseCaseImpl(user_repo, mapper)
+authenticate_user_use_case = AuthenticateUserUseCaseImpl(user_repo)
+
+user_endpoint = UserEndpoint(
+    register_user_use_case,
+    authenticate_user_use_case
 )

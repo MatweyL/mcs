@@ -1,0 +1,6 @@
+fastapi~=0.104.1
+pytest~=7.4.0
+pathlib~=1.0.1
+pydantic~=2.5.2
+uvicorn~=0.20.0
+starlette~=0.27.0

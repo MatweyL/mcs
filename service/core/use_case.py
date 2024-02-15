@@ -7,7 +7,7 @@ class Request(BaseModel):
     pass
 
 
-class Response(BaseModel):
+class Response:
     pass
 
 
