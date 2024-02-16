@@ -33,4 +33,3 @@ class ChannelsManager(PhoneObjectManagerInterface):
             pass
         else:
             return channel
-

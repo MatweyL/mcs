@@ -17,5 +17,3 @@ class GetChannelListProcessor(GetScreenProcessorInterface):
             }
             screen_template['attributes'][channel.name] = attribute
         return screen_template
-
-

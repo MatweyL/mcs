@@ -3,7 +3,7 @@ from service.common.utils import generate_uid
 from service.user.models import User
 from service.user.use_case import RegisterUserUseCase, RegisterUserRq, RegisteredUserRs, AuthenticateUserUseCase, \
     AuthUserRq, AuthTokenRs
-from service.user.user_repo import UserRepo
+from service.user.repo import UserRepo
 
 
 class RegisterUserUseCaseImpl(RegisterUserUseCase):

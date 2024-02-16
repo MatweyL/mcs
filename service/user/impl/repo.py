@@ -1,10 +1,10 @@
 from typing import Optional
 
 from service.user.models import User
-from service.user.user_repo import UserRepo
+from service.user.repo import UserRepo
 
 
-class UserRepoInMemory(UserRepo):
+class InMemoryUserRepo(UserRepo):
     def __init__(self):
         self.users = {}
 

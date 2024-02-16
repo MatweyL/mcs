@@ -9,6 +9,7 @@ class ScreenProcessorInterface(ABC):
     """
     Обработчик экрана
     """
+
     def __init__(self, screen_name: str = None):
         self._screen_name = screen_name
 
@@ -17,7 +18,6 @@ class ScreenProcessorInterface(ABC):
         :return: название обрабатываемого экрана
         """
         return self._screen_name
-
 
 
 class GetScreenProcessorInterface(ScreenProcessorInterface):

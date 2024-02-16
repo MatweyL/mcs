@@ -1,6 +1,5 @@
 import logging.config
 
-
 LOGGER_NAME = "service_logger"
 
 FORMAT = f"%(asctime)s : %(levelname)s : %(module)s : %(funcName)s : %(lineno)d : %(message)s"
@@ -9,7 +8,6 @@ DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
 class CustomFormatter(logging.Formatter):
-
     grey = "\033[92m"
     yellow = "\033[33;20m"
     red = "\033[31m"

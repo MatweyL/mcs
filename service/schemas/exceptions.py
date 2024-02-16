@@ -1,5 +1,3 @@
-
-
 class AttributeNotSpecifiedException(Exception):
     def __init__(self, name: str = None):
         super(AttributeNotSpecifiedException, self).__init__(f"No attribute {name} in json")
@@ -18,4 +16,3 @@ class WrongAttributeValueException(Exception):
 class NoProcessorWithScreenNameException(Exception):
     def __init__(self, screen_name: str = None):
         super(NoProcessorWithScreenNameException, self).__init__(f"No processor with {screen_name}")
-

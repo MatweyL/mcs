@@ -14,9 +14,12 @@ from service.services.screens.manager import ScreensManager
 from service.services.screens.manager_v2 import ScreensManagerV2
 from service.services.screens.phone_storage import InMemoryPhoneStorage
 from service.services.screens.screens_storage import FileSystemScreensStorage
+from service.session.endpoint import SessionEndpoint
+from service.session.impl.repo import InMemorySessionRepo
+from service.session.impl.use_case import GetSessionListUseCaseImpl
 from service.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl
-from service.user.impl.user_repo import UserRepoInMemory
-from service.user.user_endpoint import UserEndpoint
+from service.user.impl.repo import InMemoryUserRepo
+from service.user.endpoint import UserEndpoint
 
 phone = Phone([])
 screen_filler = ScreenFiller()
@@ -51,7 +54,7 @@ screen_endpoint = ScreenEndpoint(
     get_screen_use_case
 )
 
-user_repo = UserRepoInMemory()
+user_repo = InMemoryUserRepo()
 mapper = Mapper()
 
 register_user_use_case = RegisterUserUseCaseImpl(user_repo, mapper)
@@ -60,4 +63,12 @@ authenticate_user_use_case = AuthenticateUserUseCaseImpl(user_repo)
 user_endpoint = UserEndpoint(
     register_user_use_case,
     authenticate_user_use_case
+)
+
+session_repo = InMemorySessionRepo()
+
+get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
+
+session_endpoint = SessionEndpoint(
+    get_session_list_use_case
 )

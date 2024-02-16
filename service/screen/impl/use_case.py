@@ -20,4 +20,3 @@ class GetScreenUseCaseImpl(GetScreenUseCase):
         screen_name = request.screen_name
         uid = request.uid
         return self.screens_manager.get(screen_name, {"id": uid})
-
