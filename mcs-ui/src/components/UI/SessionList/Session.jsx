@@ -10,8 +10,8 @@ const Session = ({session}) => {
     }
 
     return (
-        <div className={classes.session} onClick={openScreenSession}>
-            <p>{session.name}</p>
+        <div className={classes.session} onClick={openScreenSession} key={session.uid}>
+            <p>{session.title}</p>
             <p>{session.date}</p>
         </div>
     );

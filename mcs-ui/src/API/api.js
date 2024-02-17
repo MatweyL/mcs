@@ -11,6 +11,13 @@ const LOCAL_PY_MODE = "LOCAL_PY";
 
 const NOW_MODE = MOCK_LOCAL_MODE
 
+const token = "e88fbc08-844f-46e7-b9f1-ebd3f59e1790"
+
+const config = {
+    headers: {Authorization: `Bearer ${token}`}
+}
+
+
 const endpoints = {
    getDictionary: {
         [LOCAL_PY_MODE]: dictionaryType =>   axios.get(`${LOCAL_PY_URL}/dictionary/${dictionaryType}`,),
@@ -27,6 +34,9 @@ const endpoints = {
     getExistedScreen: {
         [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/${endpoint}`),
         [MOCK_LOCAL_MODE]: endpoint => console.log(endpoint)
+    },
+    getSessions: {
+       [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/sessions`, config)
     }
 }
 
@@ -47,11 +57,11 @@ export default class API {
 
     static async getDictionary(dictionaryType, noCache) {
         if (noCache === true) {
-            const rs = await endpoints.getDictionary[NOW_MODE](dictionaryType);
+            const rs = await endpoints.getDictionary[MOCK_LOCAL_MODE](dictionaryType);
             console.log(rs);
             return rs;
         } else if (!dictionaryCache.contains(dictionaryType)) {
-            const rs = await endpoints.getDictionary[NOW_MODE](dictionaryType);
+            const rs = await endpoints.getDictionary[MOCK_LOCAL_MODE](dictionaryType);
             console.log("Кладем", dictionaryType, " в кеш");
             dictionaryCache.put(dictionaryType, rs.data);
             console.log(rs);
@@ -62,6 +72,12 @@ export default class API {
             console.log({data})
             return {data};
         }
+    }
+
+    static async getSessions() {
+        const rs = await endpoints.getSessions[LOCAL_PY_MODE]();
+        console.log(rs);
+        return rs.data;
     }
 
     static async saveScreen(screen) {

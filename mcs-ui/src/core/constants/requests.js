@@ -20,4 +20,7 @@ export default class Requests {
 
     // Выбрать ???
     static SELECT = "SELECT"
+
+    // Получить сессии
+    static GET_SESSIONS = "GET_SESSIONS";
 }

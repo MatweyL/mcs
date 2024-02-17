@@ -26,7 +26,6 @@ class Mapper:
 
     def _map_from_dict(self, dict_attributes: dict, instance):
         fields = vars(instance)
-        print(fields)
         for name in fields:
             value = dict_attributes.get(name, None)
             if value:

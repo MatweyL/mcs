@@ -3,6 +3,7 @@ import {screenService} from "../di";
 import Actions from "../constants/actions";
 import Attributes from "../constants/attributes";
 import {navigator} from "./screen/navigator";
+import API from "../../API/api";
 
 export const executeRequest = async (dispatch, request) => {
     switch (request.type) {
@@ -43,6 +44,11 @@ export const executeRequest = async (dispatch, request) => {
             const screenRs = await screenService.getScreen(prevScreen);
             dispatch({type: Actions.INIT, payload: screenRs});
             return;
+        }
+
+        case Requests.GET_SESSIONS: {
+            const sessionListRs = await API.getSessions();
+            dispatch({type: Actions.LOAD_SESSIONS, payload: sessionListRs});
         }
 
         case Requests.OPEN: {

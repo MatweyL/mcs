@@ -59,4 +59,7 @@ export default class Actions {
 
     // Ввод символа в текстовое поле
     static PRESS_KEY = "PRESS_KEY"
+
+    // Загрузить список сессий
+    static LOAD_SESSIONS = "LOAD_SESSIONS";
 }
