@@ -1,5 +1,5 @@
 from service.common.logs import logger
-from service.screen.use_case import SaveScreenUseCase, GetScreenUseCase, ScreenValues, GetScreenRq
+from service.screen.use_case import SaveScreenUseCase, GetScreenUseCase, GetScreenRq, SaveScreenRq
 
 
 class ScreenEndpoint:
@@ -9,7 +9,7 @@ class ScreenEndpoint:
         self.save_screen_use_case = save_screen_use_case
         self.get_screen_use_case = get_screen_use_case
 
-    def save_screen(self, request: ScreenValues):
+    def save_screen(self, request: SaveScreenRq):
         try:
             self.save_screen_use_case.apply(request)
         except BaseException as e:

@@ -26,15 +26,35 @@
     },
     {
       "uid": "12",
-      "title": "УТК-2",
-      "user_uid": "1668b4b4-6fee-4369-9108-b49403fb516e",
-      "date": "18/02/2024"
-    },
-    {
-      "uid": "12",
       "title": "УТК-4",
+      "date": "17/02/2024 14:42",
       "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "date": "17/02/2024 14:42"
+      "channels": [
+        {
+          "uid": "656dec4b-32d1-4d35-9691-7b30460d1e6d",
+          "mode": "TETRA_TMO"
+        },
+        {
+          "uid": "11abb745-fde7-44c3-b573-5285b98e1860",
+          "mode": "VPD"
+        },
+        {
+          "uid": "d3f3b31a-f0ad-4519-99c3-77c41af7f129",
+          "mode": "NOT_DEFINED"
+        },
+        {
+          "uid": "46278374-7c19-4256-993a-8009d1f16236",
+          "mode": "FM_RADIO"
+        },
+        {
+          "uid": "2adabd8f-dcd2-42da-a75c-bbc36cec5012",
+          "mode": "TETRA_TMO"
+        },
+        {
+          "uid": "e9283702-afda-4705-b354-15eecfe38a7a",
+          "mode": "TETRA_DMO"
+        }
+      ]
     },
     {
       "uid": "071d8a0d-d180-4f0e-873a-893cbe7eb237",

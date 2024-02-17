@@ -7,7 +7,7 @@ import ScreenShadow from "../components/UI/Screen/ScreenShadow";
 import TextButton from "../components/UI/TextButton/TextButton";
 import {useNavigate} from "react-router-dom";
 import {useScreenSessionId} from "../hooks/useScreenSessionId";
-import {execute} from "../core/store/executor";
+import {execute} from "../core/store/execute";
 
 /**
  * Страница экрана телефона
@@ -18,11 +18,11 @@ const ScreenPage = () => {
     const sessionId = useScreenSessionId();
 
     useEffect(() => {
-        execute(dispatch, {meta: {type: Requests.LOAD, request: true}, payload: {sessionId}});
+        execute(dispatch, {meta: {action: {type: Requests.LOAD, request: true}}, payload: {sessionId}});
     }, []);
 
     const back = () => {
-        execute(dispatch, {meta: {type: Requests.CLOSE_SCREEN_SESSION, request: true}});
+        execute(dispatch, {meta: {action: {type: Requests.CLOSE_SCREEN_SESSION, request: true}}});
         navigate("/sessions");
     }
 

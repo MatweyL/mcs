@@ -1,6 +1,8 @@
 import json
 import os
 
+from service.common.json import handler
+
 
 class JsonDb:
     def __init__(self, path):

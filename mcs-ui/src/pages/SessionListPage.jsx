@@ -5,7 +5,7 @@ import SearchBar from "../components/UI/SearchBar/SearchBar";
 import RoundButton from "../components/UI/RoundButton/RoundButton";
 import {useDispatch} from "react-redux";
 import Requests from "../core/constants/requests";
-import {execute} from "../core/store/executor";
+import {execute} from "../core/store/execute";
 
 /**
  * Страница списка сессий пользователя
@@ -15,11 +15,11 @@ const SessionListPage = () => {
     const sessions = useSessions();
 
     const createSession = () => {
-        execute(dispatch, {meta: {type: Requests.CREATE_SESSION, request: true}});
+        execute(dispatch, {meta: {action: {type: Requests.CREATE_SESSION, request: true}}});
     }
 
     useEffect(() => {
-        execute(dispatch, {meta: {type: Requests.GET_SESSIONS, request: true}});
+        execute(dispatch, {meta: {action: {type: Requests.GET_SESSIONS, request: true}}});
     }, []);
 
     return (

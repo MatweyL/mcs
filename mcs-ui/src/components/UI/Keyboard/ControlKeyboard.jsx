@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {useScreen} from "../../../hooks/useScreen";
 import Key from "../Key";
 import classes from "./Keyboard.module.css";
-import {execute} from "../../../core/store/executor";
+import {execute} from "../../../core/store/execute";
 import {useScreenSessionId} from "../../../hooks/useScreenSessionId";
 
 const ControlKeyboard = () => {
@@ -14,11 +14,11 @@ const ControlKeyboard = () => {
     const sessionId = useScreenSessionId();
 
     const left = () => {
-        execute(dispatch, {meta: screen.buttons.leftButton.action, payload: getPayload()})
+        execute(dispatch, {meta: screen.buttons.leftButton, payload: getPayload()})
     }
 
     const right = () => {
-        execute(dispatch, {meta: screen.buttons.rightButton.action, payload: getPayload()})
+        execute(dispatch, {meta: screen.buttons.rightButton, payload: getPayload()})
     }
 
     const getPayload = () => {

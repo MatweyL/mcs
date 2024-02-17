@@ -5,8 +5,7 @@ from starlette.middleware.cors import CORSMiddleware
 from service.auth.auth_context import AuthContext
 from service.common.logs import logger
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter
-from service.schemas.screen import ScreenValues
-from service.screen.use_case import GetScreenRq
+from service.screen.use_case import GetScreenRq, SaveScreenRq, Screen
 from service.session.use_case import GetSessionListRq, CreateSessionRq
 from service.user.use_case import RegisterUserRq, AuthUserRq
 
@@ -28,13 +27,13 @@ async def get_dictionary(dictionary_name: str):  # TODO: обсудить реа
 
 @app.get('/screen')
 async def get_screen(screen_name: str, session_id: str, element_uid: str = None):
-    logger.info(f'{screen_name}, {session_id}')
-    request = GetScreenRq(screen_name=screen_name, uid=element_uid)
+    request = GetScreenRq(screen_name=screen_name, session_id=session_id, uid=element_uid)
     return screen_endpoint.get_screen(request)
 
 
 @app.post('/screen')
-async def save_screen(request: ScreenValues):
+async def save_screen(screen: Screen, session_id: str):
+    request = SaveScreenRq(session_id=session_id, screen=screen)
     return screen_endpoint.save_screen(request)
 
 

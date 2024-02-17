@@ -1,5 +1,6 @@
 from typing import List
 
+from service.common.logs import logger
 from service.common.mapper import Mapper
 from service.common.utils import generate_uid
 from service.db.db import JsonDb
@@ -22,6 +23,7 @@ class InMemorySessionRepo(SessionRepo):
         return list(map(lambda s: self.mapper.map(s, Session), user_sessions))
 
     def save_session(self, session: Session) -> Session:
+        logger.info(session)
         if not session.uid:
             session.uid = generate_uid()
 
@@ -39,3 +41,10 @@ class InMemorySessionRepo(SessionRepo):
         self.db.save_json(json)
 
         return session
+
+    def get_session(self, session_id: str) -> Session:
+        json = self.db.get_json()
+        sessions = json['sessions']
+        session = next(filter(lambda s: s['uid'] == session_id, sessions), None)
+
+        return self.mapper.map(session, Session)

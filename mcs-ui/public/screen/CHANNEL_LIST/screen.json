@@ -4,7 +4,10 @@
   "attributes": {
     "EMPTY": {
       "type": "CARD_ITEM",
-      "label": "Пустой список"
+      "label": "Пустой список",
+      "actions": {
+        "screen": "CHANNEL_EDITOR"
+      }
     }
   }
 }

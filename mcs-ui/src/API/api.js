@@ -25,16 +25,21 @@ const endpoints = {
         [MOCK_LOCAL_MODE]: dictionaryType => axios.get(`${MOCK_LOCAL_URL}/dictionary/${dictionaryType}/dictionary.json`, config)
     },
     getScreen: {
-        [LOCAL_PY_MODE]: (screenName, sessionId) => {
-            return axios.get(`${LOCAL_PY_URL}/screen?screen_name=${screenName}&session_id=${sessionId}`, config)
+        [LOCAL_PY_MODE]: (screenName, sessionId, id) => {
+            return axios.get(`${LOCAL_PY_URL}/screen?screen_name=${screenName}&session_id=${sessionId}&element_id=${id}`, config)
         },
-        [MOCK_LOCAL_MODE]: (screenName, sessionId) => {
+        [MOCK_LOCAL_MODE]: (screenName, sessionId, id) => {
             return axios.get(`${MOCK_LOCAL_URL}/screen/${screenName}/screen.json`, config)
         }
     },
     saveScreen: {
-        [LOCAL_PY_MODE]: body => axios.post(`${LOCAL_PY_URL}/screen`, body, config),
-        [MOCK_LOCAL_MODE]: body => console.log(body)
+        [LOCAL_PY_MODE]: (body, sessionId) => {
+            return axios.post(`${LOCAL_PY_URL}/screen?session_id=${sessionId}`, body, config)
+        },
+        [MOCK_LOCAL_MODE]: (body, sessionId) => {
+            console.log(body)
+            console.log(sessionId)
+        }
     },
     getExistedScreen: {
         [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/${endpoint}`, config),
@@ -52,8 +57,8 @@ const endpoints = {
 
 export default class API {
 
-    static async getScreen(screenName, sessionId) {
-        const rs = await endpoints.getScreen[NOW_MODE](screenName, sessionId);
+    static async getScreen(screenName, sessionId, id) {
+        const rs = await endpoints.getScreen[NOW_MODE](screenName, sessionId, id);
         console.log(rs)
         return rs;
     }
@@ -96,9 +101,9 @@ export default class API {
         return rs.data;
     }
 
-    static async saveScreen(screen) {
+    static async saveScreen(screen, sessionId) {
         console.log(screen);
-        const rs = await endpoints.saveScreen[MOCK_LOCAL_MODE](screen);
+        const rs = await endpoints.saveScreen[NOW_MODE](screen, sessionId);
         console.log(rs);
     }
 }

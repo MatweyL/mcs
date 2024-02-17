@@ -17,7 +17,9 @@ export default class Buttons {
 
     static OPEN_SELECT_BOX_BUTTON = {action: {type: Actions.OPEN_SELECT_BOX}, label: Labels.SELECT}
     static MULTISELECT_BUTTON = {
-        action: Actions.MULTISELECT, label: Labels.SELECT, items: [
+        action: {type: Actions.MULTISELECT},
+        label: Labels.SELECT,
+        items: [
             {label: Labels.EDIT, active: true, action: {type: Requests.OPEN, request: true}},
             {label: Labels.ADD, active: false, action: {type: Requests.CREATE, request: true}},
             {label: Labels.DELETE, active: false, action: {type: Requests.DELETE, request: true}},

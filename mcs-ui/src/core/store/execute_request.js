@@ -40,7 +40,7 @@ export const executeRequest = async (dispatch, request) => {
 
         case Requests.SAVE: {
             const {state, sessionId} = request.payload;
-            await screenService.saveScreen(state);
+            await screenService.saveScreen(state, sessionId);
 
             navigator.pop();
             const prevScreen = navigator.tail();
@@ -67,18 +67,30 @@ export const executeRequest = async (dispatch, request) => {
             return;
         }
 
+        // открытие страницы с существующим эл-том
         case Requests.OPEN: {
-            // открытие страницы с существующим эл-том
+            const {attribute, sessionId} = request.payload;
+            const screen = attribute.actions.screen;
+            const id = attribute.id;
+            const screenRs = await screenService.getScreen(screen, sessionId, id);
+            dispatch({type: Actions.INIT, payload: screenRs});
             return;
         }
 
+        // удаление выбранного элемента
         case Requests.DELETE: {
-            // удаление выбранного элемента
+            const {attribute, sessionId} = request.payload;
+            console.log(attribute)
             return;
         }
 
+        // создание нового эл-та == переход на страницу
         case Requests.CREATE: {
-            // создание нового эл-та == переход на страницу
+            const {attribute, sessionId} = request.payload;
+            console.log(attribute)
+            const screen = attribute.actions.screen;
+            const screenRs = await screenService.getScreen(screen, sessionId);
+            dispatch({type: Actions.INIT, payload: screenRs});
             return;
         }
     }

@@ -1,4 +1,5 @@
 from service.common.mapper import Mapper
+from service.session.models import Session, Channel
 from service.user.models import User
 from service.user.use_case import RegisterUserRq
 
@@ -78,3 +79,22 @@ def test_mapping_from_dict():
     assert actual.patronymic == patronymic
     assert actual.group == group
     assert actual.password == password
+
+
+def test_mapping_to_dict_recursively():
+    # GIVEN
+    mapper = Mapper()
+
+    channel = Channel()
+    channel.mode = 'MODE'
+
+    session = Session()
+    session.date = '123'
+    session.title = 'title'
+    session.channels = [channel]
+
+    # WHEN
+    actual = mapper.map(session, dict)
+
+    # THEN
+    print(actual)
