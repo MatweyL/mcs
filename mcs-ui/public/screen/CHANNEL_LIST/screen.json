@@ -1,6 +1,6 @@
 {
-  "name": "PPRCH_FREQUENCY_PLAN",
-  "label": "Частотные планы ППРЧ",
+  "name": "CHANNEL_LIST",
+  "label": "Список каналов",
   "attributes": {
     "EMPTY": {
       "type": "CARD_ITEM",

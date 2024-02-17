@@ -1,4 +1,3 @@
-//TODO: для будущего разделения Actions
 export default class Requests {
     // Открыть экран
     static OPEN = "OPEN";
@@ -23,4 +22,10 @@ export default class Requests {
 
     // Получить сессии
     static GET_SESSIONS = "GET_SESSIONS";
+
+    // Создать сессию
+    static CREATE_SESSION = "CREATE_SESSION";
+
+    // Закрыть сессию
+    static CLOSE_SCREEN_SESSION = "CLOSE_SCREEN_SESSION";
 }

@@ -18,7 +18,7 @@ from service.services.screens.phone_storage import InMemoryPhoneStorage
 from service.services.screens.screens_storage import FileSystemScreensStorage
 from service.session.endpoint import SessionEndpoint
 from service.session.impl.repo import InMemorySessionRepo
-from service.session.impl.use_case import GetSessionListUseCaseImpl
+from service.session.impl.use_case import GetSessionListUseCaseImpl, CreateSessionUseCaseImpl
 from service.user.endpoint import UserEndpoint
 from service.user.impl.repo import InMemoryUserRepo
 from service.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl
@@ -75,7 +75,9 @@ user_endpoint = UserEndpoint(
 session_repo = InMemorySessionRepo(db, mapper)
 
 get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
+create_session_use_case = CreateSessionUseCaseImpl(session_repo)
 
 session_endpoint = SessionEndpoint(
-    get_session_list_use_case
+    get_session_list_use_case,
+    create_session_use_case
 )

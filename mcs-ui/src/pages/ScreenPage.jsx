@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from "react-redux";
-import {executeRequest} from "../core/store/request";
 import Requests from "../core/constants/requests";
 import Keyboard from "../components/UI/Keyboard/Keyboard";
 import Screen from "../components/UI/Screen/Screen";
 import ScreenShadow from "../components/UI/Screen/ScreenShadow";
 import TextButton from "../components/UI/TextButton/TextButton";
 import {useNavigate} from "react-router-dom";
+import {useScreenSessionId} from "../hooks/useScreenSessionId";
+import {execute} from "../core/store/executor";
 
 /**
  * Страница экрана телефона
@@ -14,12 +15,14 @@ import {useNavigate} from "react-router-dom";
 const ScreenPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const sessionId = useScreenSessionId();
 
     useEffect(() => {
-        executeRequest(dispatch, {type: Requests.LOAD});
+        execute(dispatch, {meta: {type: Requests.LOAD, request: true}, payload: {sessionId}});
     }, []);
 
     const back = () => {
+        execute(dispatch, {meta: {type: Requests.CLOSE_SCREEN_SESSION, request: true}});
         navigate("/sessions");
     }
 

@@ -8,7 +8,7 @@ export class SaveSelectedActionProcessor extends ActionProcessor {
         this.eventProcessor = eventProcessor;
     }
     process(state, action) {
-        const attribute = action.payload;
+        const {attribute} = action.payload;
         const activeValue = attribute.dictionaryValues
             .find(dictValue => dictValue.active);
 

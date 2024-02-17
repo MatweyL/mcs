@@ -3,9 +3,9 @@ import SessionList from "../components/UI/SessionList/SessionList";
 import {useSessions} from "../hooks/useSessions";
 import SearchBar from "../components/UI/SearchBar/SearchBar";
 import RoundButton from "../components/UI/RoundButton/RoundButton";
-import {executeRequest} from "../core/store/request";
 import {useDispatch} from "react-redux";
 import Requests from "../core/constants/requests";
+import {execute} from "../core/store/executor";
 
 /**
  * Страница списка сессий пользователя
@@ -15,11 +15,11 @@ const SessionListPage = () => {
     const sessions = useSessions();
 
     const createSession = () => {
-
+        execute(dispatch, {meta: {type: Requests.CREATE_SESSION, request: true}});
     }
 
     useEffect(() => {
-        executeRequest(dispatch, {type: Requests.GET_SESSIONS})
+        execute(dispatch, {meta: {type: Requests.GET_SESSIONS, request: true}});
     }, []);
 
     return (
@@ -29,7 +29,7 @@ const SessionListPage = () => {
                 <SearchBar/>
                 <div style={{display: "flex"}}>
                     <RoundButton>⌕</RoundButton>
-                    <RoundButton onClick={createSession} >+</RoundButton>
+                    <RoundButton onClick={createSession}>+</RoundButton>
                 </div>
             </div>
             <SessionList sessions={sessions}/>

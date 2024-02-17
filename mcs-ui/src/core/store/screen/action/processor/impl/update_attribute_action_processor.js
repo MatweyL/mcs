@@ -9,7 +9,7 @@ export class UpdateAttributeActionProcessor extends ActionProcessor {
     }
 
     process(state, action) {
-        const attribute = action.payload;
+        const {attribute} = action.payload;
         console.log("Call update attribute on screen", attribute.name)
         this.eventProcessor.process(attribute, state.attributes);
         state.attributes = {...state.attributes, [attribute.name]: attribute};

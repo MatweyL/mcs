@@ -4,8 +4,8 @@ import {navigator} from "./navigator";
 import {convertState} from "../util";
 
 export class ScreenService {
-    async getScreen  (screenName)  {
-        const response = await API.getScreen(screenName);
+    async getScreen(screenName, sessionId) {
+        const response = await API.getScreen(screenName, sessionId);
         const data = response.data;
 
         const attributes = data.attributes;
@@ -22,7 +22,7 @@ export class ScreenService {
         return data;
     }
 
-    async fillDictionary (emptyDictionary)  {
+    async fillDictionary(emptyDictionary) {
         const response = await API.getDictionary(
             emptyDictionary.dictionaryType,
             emptyDictionary.noCache

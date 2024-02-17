@@ -3,4 +3,4 @@ class Session:
         self.uid = None
         self.title = None
         self.date = None
-        self.screen_uid = None
+        self.user_uid = None

@@ -8,3 +8,7 @@ class SessionRepo:
     @abstractmethod
     def get_sessions(self, user_id: str) -> List[Session]:
         pass
+
+    @abstractmethod
+    def save_session(self, session: Session) -> Session:
+        pass

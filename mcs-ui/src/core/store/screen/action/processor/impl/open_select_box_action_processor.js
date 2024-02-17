@@ -4,7 +4,7 @@ import {ActionProcessor} from "../action_processor";
 
 export class OpenSelectBoxActionProcessor extends ActionProcessor {
     process(state, action) {
-        const attribute = action.payload;
+        const {attribute} = action.payload;
         attribute.open = true;
         attribute.dictionaryValues[0].active = true;
         state.attributes = {...state.attributes, [attribute.name]: attribute};

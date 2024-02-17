@@ -24,6 +24,10 @@ class Navigator {
         return navigator.slice(-1)[0];
     }
 
+    clear() {
+        this._set([]);
+    }
+
     _get() {
         let navigator = JSON.parse(localStorage.getItem(NAVIGATOR));
         if (navigator === null) {

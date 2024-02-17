@@ -7,7 +7,7 @@ from service.common.logs import logger
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter
 from service.schemas.screen import ScreenValues
 from service.screen.use_case import GetScreenRq
-from service.session.use_case import GetSessionListRq
+from service.session.use_case import GetSessionListRq, CreateSessionRq
 from service.user.use_case import RegisterUserRq, AuthUserRq
 
 app = FastAPI(dependencies=[Depends(auth_filter.authenticate)])
@@ -27,7 +27,8 @@ async def get_dictionary(dictionary_name: str):  # TODO: обсудить реа
 
 
 @app.get('/screen')
-async def get_screen(screen_name: str, element_uid: str = None):
+async def get_screen(screen_name: str, session_id: str, element_uid: str = None):
+    logger.info(f'{screen_name}, {session_id}')
     request = GetScreenRq(screen_name=screen_name, uid=element_uid)
     return screen_endpoint.get_screen(request)
 
@@ -54,8 +55,14 @@ async def auth_user(request: AuthUserRq):
 
 @app.get("/sessions")
 async def get_sessions():
-    request = GetSessionListRq(user_id=AuthContext.get_now_user().uid)
+    request = GetSessionListRq(user_uid=AuthContext.get_now_user().uid)
     return session_endpoint.get_sessions(request)
+
+
+@app.post("/session")
+async def create_session():
+    request = CreateSessionRq(user_uid=AuthContext.get_now_user().uid)
+    return session_endpoint.create_session(request)
 
 
 if __name__ == "__main__":

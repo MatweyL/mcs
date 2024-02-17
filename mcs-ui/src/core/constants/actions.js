@@ -1,16 +1,6 @@
 export default class Actions {
-    // TODO: Возможно эти 4 действия - INIT, OPEN, LOAD, SELECT означают одно и то же
     // Инициализация состояния
     static INIT = "INIT";
-
-    // Открыть экран
-    static OPEN = "OPEN";
-
-    // Загрузка экрана
-    static LOAD = "LOAD";
-
-    // Нажатие на кнопку "Выбрать"
-    static SELECT = "SELECT";
 
     // Обновление атрибута
     static UPDATE_ATTRIBUTE = "UPDATE_ATTRIBUTE";
@@ -26,12 +16,6 @@ export default class Actions {
 
     // Изменить значение чекбокса на противоложное
     static EDIT = "EDIT";
-
-    // Нажатие на кнопку "Назад"
-    static BACK = "BACK";
-
-    // Сохранение экрана
-    static SAVE = "SAVE";
 
     // Открыть меню
     static OPEN_MENU = "OPEN_MENU";
@@ -51,15 +35,12 @@ export default class Actions {
     // Выбрать из пунктов
     static MULTISELECT = "MULTISELECT";
 
-    // Добавить / создать новый
-    static CREATE = "CREATE";
-
-    // Удалить
-    static DELETE = "DELETE";
-
     // Ввод символа в текстовое поле
     static PRESS_KEY = "PRESS_KEY"
 
     // Загрузить список сессий
     static LOAD_SESSIONS = "LOAD_SESSIONS";
+
+    // Открыть экран сессии
+    static OPEN_SCREEN_SESSION = "OPEN_SCREEN_SESSION"
 }
