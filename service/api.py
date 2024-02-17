@@ -1,15 +1,17 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from starlette.middleware.cors import CORSMiddleware
 
+from service.auth.auth_context import AuthContext
 from service.common.logs import logger
-from service.di import screen_endpoint, user_endpoint
+from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter
 from service.schemas.screen import ScreenValues
 from service.screen.use_case import GetScreenRq
 from service.session.use_case import GetSessionListRq
 from service.user.use_case import RegisterUserRq, AuthUserRq
 
-app = FastAPI()
+app = FastAPI(dependencies=[Depends(auth_filter.authenticate)])
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -40,6 +42,11 @@ async def register_user(request: RegisterUserRq):
     return user_endpoint.register_user(request)
 
 
+@app.post("/test")
+async def test():
+    print('Test endpoint called')
+
+
 @app.post("/auth")
 async def auth_user(request: AuthUserRq):
     return user_endpoint.authenticate_user(request)
@@ -47,7 +54,7 @@ async def auth_user(request: AuthUserRq):
 
 @app.get("/sessions")
 async def get_sessions():
-    request = GetSessionListRq()
+    request = GetSessionListRq(user_id=AuthContext.get_now_user().uid)
     return session_endpoint.get_sessions(request)
 
 

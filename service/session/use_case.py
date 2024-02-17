@@ -10,7 +10,8 @@ class GetSessionListRq(Request):
 
 
 class SessionListRs(Response):
-    sessions: List[Session]
+    def __init__(self, sessions: List[Session]):
+        self.sessions = sessions
 
 
 class GetSessionListUseCase(UseCase):

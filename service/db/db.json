@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "name": "John",
+      "surname": "Don",
+      "patronymic": "Smith",
+      "group": "102",
+      "password": "123",
+      "uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790"
+    },
+    {
+      "name": "Ivan",
+      "surname": "Ivanov",
+      "patronymic": "Ivanovich",
+      "group": "102",
+      "password": "123",
+      "uid": "1668b4b4-6fee-4369-9108-b49403fb516e"
+    }
+  ],
+  "sessions": [
+    {
+      "uid": "11",
+      "title": "УТК-1",
+      "user_uid": "1668b4b4-6fee-4369-9108-b49403fb516e",
+      "time": "17/02/2024"
+    }
+  ],
+  "screens": []
+}

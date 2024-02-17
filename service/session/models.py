@@ -1,5 +1,5 @@
 class Session:
-    id: str
-    title: str
-    user_id: str
-    screen_id: str
+    def __init__(self):
+        self.uid = None
+        self.title = None
+        self.screen_uid = None

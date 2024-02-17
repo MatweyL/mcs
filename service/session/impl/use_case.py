@@ -8,4 +8,4 @@ class GetSessionListUseCaseImpl(GetSessionListUseCase):
 
     def apply(self, request: GetSessionListRq) -> SessionListRs:
         sessions = self.session_repo.get_sessions(request.user_id)
-        return SessionListRs(sessions)
+        return SessionListRs(sessions=sessions)

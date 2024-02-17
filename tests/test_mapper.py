@@ -31,3 +31,50 @@ def test_mapping():
     assert actual.patronymic == patronymic
     assert actual.group == group
     assert actual.password == password
+
+
+def test_mapping_to_dict():
+    # GIVEN
+    mapper = Mapper()
+
+    user = User()
+    user.name = name
+    user.surname = surname
+    user.patronymic = patronymic
+    user.group = group
+    user.password = password
+
+    # WHEN
+    actual = mapper.map(user, dict)
+
+    # THEN
+    assert isinstance(actual, dict)
+    assert actual['name'] == name
+    assert actual['surname'] == surname
+    assert actual['patronymic'] == patronymic
+    assert actual['group'] == group
+    assert actual['password'] == password
+
+
+def test_mapping_from_dict():
+    # GIVEN
+    mapper = Mapper()
+
+    user_dict = {
+        'name': name,
+        'surname': surname,
+        'patronymic': patronymic,
+        'group': group,
+        'password': password
+    }
+
+    # WHEN
+    actual = mapper.map(user_dict, User)
+
+    # THEN
+    assert isinstance(actual, User)
+    assert actual.name == name
+    assert actual.surname == surname
+    assert actual.patronymic == patronymic
+    assert actual.group == group
+    assert actual.password == password

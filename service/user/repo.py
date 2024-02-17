@@ -10,5 +10,9 @@ class UserRepo:
         pass
 
     @abstractmethod
-    def save_user(self, user: User):
+    def get_user_by_uid(self, uid: str) -> Optional[User]:
+        pass
+
+    @abstractmethod
+    def save_user(self, user: User) -> User:
         pass

@@ -1,7 +1,9 @@
+from service.auth.filter import AuthFilter
 from service.common.mapper import Mapper
 from service.common.utils import get_root_path
 from service.core.processor.default_processor import DefaultProcessor
 from service.core.registry import ScreenProcessorRegistry
+from service.db.db import JsonDb
 from service.domain.phone import Phone
 from service.screen.impl.use_case import SaveScreenUseCaseImpl, GetScreenUseCaseImpl
 from service.screen.screen_endpoint import ScreenEndpoint
@@ -17,9 +19,9 @@ from service.services.screens.screens_storage import FileSystemScreensStorage
 from service.session.endpoint import SessionEndpoint
 from service.session.impl.repo import InMemorySessionRepo
 from service.session.impl.use_case import GetSessionListUseCaseImpl
-from service.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl
-from service.user.impl.repo import InMemoryUserRepo
 from service.user.endpoint import UserEndpoint
+from service.user.impl.repo import InMemoryUserRepo
+from service.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl
 
 phone = Phone([])
 screen_filler = ScreenFiller()
@@ -54,8 +56,13 @@ screen_endpoint = ScreenEndpoint(
     get_screen_use_case
 )
 
-user_repo = InMemoryUserRepo()
+db_json_path = get_root_path().joinpath('service/db/db.json')
+db = JsonDb(db_json_path)
 mapper = Mapper()
+
+user_repo = InMemoryUserRepo(db, mapper)
+
+auth_filter = AuthFilter(user_repo)
 
 register_user_use_case = RegisterUserUseCaseImpl(user_repo, mapper)
 authenticate_user_use_case = AuthenticateUserUseCaseImpl(user_repo)
@@ -65,7 +72,7 @@ user_endpoint = UserEndpoint(
     authenticate_user_use_case
 )
 
-session_repo = InMemorySessionRepo()
+session_repo = InMemorySessionRepo(db, mapper)
 
 get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
 
