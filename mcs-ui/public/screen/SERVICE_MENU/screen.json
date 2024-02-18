@@ -26,16 +26,11 @@
       "type": "MENU_ITEM",
       "label": "Редактор каналов.",
       "value": "CHANNEL_EDITOR"
-    }
-  },
-  "buttons": {
-    "leftButton": {
-      "name": "SELECT",
-      "label": "Выбрать"
     },
-    "rightButton": {
-      "name": "SELECT",
-      "label": "Выбрать"
+    "DATA_EDITOR_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "Редактор данных.",
+      "value": "CHANNEL_LIST"
     }
   }
 }

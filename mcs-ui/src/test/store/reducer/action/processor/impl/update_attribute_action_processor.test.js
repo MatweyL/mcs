@@ -27,7 +27,7 @@ describe('UpdateAttributeActionProcessor', () => {
         }
 
         // WHEN
-        const actualState = processor.process(state, {payload: NEW_ATTRIBUTE});
+        const actualState = processor.process(state, {payload: {attribute: NEW_ATTRIBUTE}});
 
         // THEN
         expect(actualState).not.toBe(state);

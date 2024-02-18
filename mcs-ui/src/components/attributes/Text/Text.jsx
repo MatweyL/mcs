@@ -11,7 +11,7 @@ const Text = ({attribute}) => {
 
     const updateAttribute = (e) => {
         let updatedAttribute = {...attribute, value: e.target.value};
-        dispatch({type: Actions.UPDATE_ATTRIBUTE, payload: updatedAttribute})
+        dispatch({type: Actions.UPDATE_ATTRIBUTE, payload: {attribute: updatedAttribute}})
     }
 
     useEffect(() => {

@@ -1,7 +1,7 @@
 from typing import Dict, Any
 
 from service.common.logs import logger
-from service.core.processor.interfaces import SaveScreenProcessorInterface, GetScreenProcessorInterface
+from service.core.processor.interfaces import GetScreenProcessorInterface, SaveScreenProcessorInterface
 from service.domain.phone import Phone
 from service.schemas.screen import ScreenValues
 

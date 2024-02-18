@@ -1,32 +1,37 @@
 import React from 'react';
 import {clone} from "../../../core/store/helper/clone_util";
-import {executeAction} from "../../../core/store/action";
 import Actions from "../../../core/constants/actions";
 import {useDispatch} from "react-redux";
 import {useScreen} from "../../../hooks/useScreen";
 import Key from "../Key";
 import classes from "./Keyboard.module.css";
+import {execute} from "../../../core/store/execute";
+import {useScreenSessionId} from "../../../hooks/useScreenSessionId";
 
 const ControlKeyboard = () => {
     const dispatch = useDispatch();
     const screen = useScreen();
+    const sessionId = useScreenSessionId();
 
     const left = () => {
-        const nowAttribute = clone(screen.attributes[screen.selectedAttribute]);
-        executeAction(dispatch, screen.buttons.leftButton, nowAttribute, screen);
+        execute(dispatch, {meta: screen.buttons.leftButton, payload: getPayload()})
     }
 
     const right = () => {
+        execute(dispatch, {meta: screen.buttons.rightButton, payload: getPayload()})
+    }
+
+    const getPayload = () => {
         const nowAttribute = clone(screen.attributes[screen.selectedAttribute]);
-        executeAction(dispatch, screen.buttons.rightButton, nowAttribute, screen);
+        return {attribute: nowAttribute, state: screen, sessionId: sessionId}
     }
 
     const up = () => {
-        dispatch({type: Actions.UP, payload: screen.selectedAttribute});
+        dispatch({type: Actions.UP, payload: {name: screen.selectedAttribute}});
     }
 
     const down = () => {
-        dispatch({type: Actions.DOWN, payload: screen.selectedAttribute});
+        dispatch({type: Actions.DOWN, payload: {name: screen.selectedAttribute}});
     }
 
 

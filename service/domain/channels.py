@@ -37,7 +37,7 @@ class ChannelCHM25(Channel):
                                  validation_alias=AliasChoices('forbidden_send', 'FORBIDDEN_SEND'),
                                  serialization_alias='FORBIDDEN_SEND')
     double_frequency: bool = Field(default=False,
-                                   validation_alias=AliasChoices('double_frequency', 'DOUBLE_FREQUENCY',),
+                                   validation_alias=AliasChoices('double_frequency', 'DOUBLE_FREQUENCY', ),
                                    serialization_alias='DOUBLE_FREQUENCY')
     frequency: float = Field(default=0, validation_alias=AliasChoices('frequency', 'FREQUENCY'),
                              serialization_alias='FREQUENCY')

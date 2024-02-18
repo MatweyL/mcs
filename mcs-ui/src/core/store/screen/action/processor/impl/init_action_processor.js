@@ -17,6 +17,7 @@ export class InitActionProcessor extends ActionProcessor {
         console.log(action);
         const data = action.payload;
         this.initState(state, data);
+        console.log(state);
         return {...state}
     }
 

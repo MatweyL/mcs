@@ -1,0 +1,13 @@
+{
+  "name": "CHANNEL_LIST",
+  "label": "Список каналов",
+  "attributes": {
+    "EMPTY": {
+      "type": "CARD_ITEM",
+      "label": "Пустой список",
+      "actions": {
+        "screen": "CHANNEL_EDITOR"
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@ import {ActionProcessor} from "../action_processor";
 
 export class CloseSelectBoxActionProcessor extends ActionProcessor {
     process(state, action) {
-        const attribute = action.payload;
+        const {attribute} = action.payload;
         attribute.open = false;
         Object.values(attribute.dictionaryValues)
             .forEach(value => value.active = false);

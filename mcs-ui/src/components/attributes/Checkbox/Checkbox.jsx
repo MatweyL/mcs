@@ -11,7 +11,7 @@ const Checkbox = ({attribute}) => {
 
     const updateAttribute = (e) => {
         let updatedAttribute = {...attribute, value: e.target.checked};
-        dispatch({type: Actions.UPDATE_ATTRIBUTE, payload: updatedAttribute})
+        dispatch({type: Actions.UPDATE_ATTRIBUTE, payload: {attribute: updatedAttribute}})
     }
 
     return (

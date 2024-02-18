@@ -2,7 +2,7 @@
   "name": "PPRCH_FREQUENCY_PLAN",
   "label": "Частотные планы ППРЧ",
   "attributes": {
-    "CHANNEL_EDITOR_EMPTY": {
+    "EMPTY": {
       "type": "CARD_ITEM",
       "label": "Пустой список"
     }

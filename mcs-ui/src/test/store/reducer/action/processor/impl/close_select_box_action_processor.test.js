@@ -24,7 +24,7 @@ describe('CloseSelectBoxActionProcessor', () => {
         }
 
         // WHEN
-        const actualState = processor.process(state, {payload: selectBox});
+        const actualState = processor.process(state, {payload: {attribute: selectBox}});
 
         // THEN
         expect(actualState).not.toBe(state);
