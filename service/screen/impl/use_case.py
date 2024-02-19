@@ -41,6 +41,7 @@ class GetScreenUseCaseImpl(GetScreenUseCase):
         uid = request.uid
         return self.screens_manager.get(screen_name, {"id": uid})
 
+
 class GetScreenUseCaseImplV2(GetScreenUseCase):
     def __init__(self,
                  session_repo: SessionRepo,
