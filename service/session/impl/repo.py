@@ -23,6 +23,14 @@ class InMemorySessionRepo(SessionRepo):
         return list(map(lambda s: self.mapper.map(s, Session), user_sessions))
 
     def save_session(self, session: Session) -> Session:
+        """
+        доменный объект на вход
+        в методе получаем entity из хранилища
+        работаем в методе с entity
+        на выходе - доменный объект
+        :param session:
+        :return:
+        """
         logger.info(session)
         if not session.uid:
             session.uid = generate_uid()
