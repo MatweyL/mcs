@@ -5,6 +5,7 @@ from service.core.processor.default_processor import DefaultProcessor
 from service.core.registry import ScreenProcessorRegistry
 from service.db.db import JsonDb
 from service.domain.phone import Phone
+from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper
 from service.screen.impl.use_case import SaveScreenUseCaseImpl, GetScreenUseCaseImpl, GetScreenUseCaseImplV2
 from service.screen.processor.get.channel_list_get_screen_processor import ChannelListGetScreenProcessor
 from service.screen.processor.get.get_screen_processor import DefaultGetScreenProcessor
@@ -59,14 +60,22 @@ db_json_path = get_root_path().joinpath('service/db/db.json')
 db = JsonDb(db_json_path)
 mapper = Mapper()
 
-session_repo = InMemorySessionRepo(db, mapper)
-user_repo = InMemoryUserRepo(db, mapper)
+channel_mapper = ChannelMapper()
+direction_mapper = DirectionMapper()
+phone_mapper = PhoneMapper(channel_mapper, direction_mapper)
+session_mapper = SessionMapper(phone_mapper)
+
+session_repo = InMemorySessionRepo(db, session_mapper)
+
+user_mapper = UserMapper()
+user_repo = InMemoryUserRepo(db, user_mapper)
 
 save_screen_use_case = SaveScreenUseCaseImpl(screens_manager_v2, session_repo, save_screen_processor_registry)
 
 get_screen_use_case = GetScreenUseCaseImpl(screens_manager_v2)
 
-get_screen_processor_registry = GetScreenProcessorRegistry([ChannelListGetScreenProcessor()], DefaultGetScreenProcessor())
+get_screen_processor_registry = GetScreenProcessorRegistry([ChannelListGetScreenProcessor()],
+                                                           DefaultGetScreenProcessor())
 get_screen_use_case_v2 = GetScreenUseCaseImplV2(session_repo, get_screen_processor_registry, screens_storage)
 
 screen_endpoint = ScreenEndpoint(

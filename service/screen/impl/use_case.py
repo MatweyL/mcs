@@ -59,6 +59,4 @@ class GetScreenUseCaseImplV2(GetScreenUseCase):
         session = self.session_repo.get_session(request.session_id)
         processor = self.registry.get_processor(screen_name)
 
-        processor.process(session, screen_template)
-
-        return processor.process(session, screen_template)
+        return processor.process(session, screen_template, request.uid)

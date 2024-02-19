@@ -26,8 +26,8 @@ async def get_dictionary(dictionary_name: str):  # TODO: обсудить реа
 
 
 @app.get('/screen')
-async def get_screen(screen_name: str, session_id: str, element_uid: str = None):
-    request = GetScreenRq(screen_name=screen_name, session_id=session_id, uid=element_uid)
+async def get_screen(screen_name: str, session_id: str, element_id: str = None):
+    request = GetScreenRq(screen_name=screen_name, session_id=session_id, uid=element_id)
     return screen_endpoint.get_screen(request)
 
 

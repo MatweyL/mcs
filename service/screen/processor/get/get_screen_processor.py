@@ -1,12 +1,15 @@
 from abc import abstractmethod
 from typing import Dict, Any
 
-from service.session.models import Session
+from service.domain_v2.session import Session
 
 
 class GetScreenProcessor:
     @abstractmethod
-    def process(self, session: Session, screen_template: Dict[str, Any]):
+    def process(self,
+                session: Session,
+                screen_template: Dict[str, Any],
+                uid: str):
         pass
 
     @abstractmethod
@@ -15,5 +18,8 @@ class GetScreenProcessor:
 
 
 class DefaultGetScreenProcessor:
-    def process(self, session: Session, screen_template: Dict[str, Any]):
+    def process(self,
+                session: Session,
+                screen_template: Dict[str, Any],
+                uid: str):
         return screen_template
