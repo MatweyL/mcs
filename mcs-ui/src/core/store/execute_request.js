@@ -70,8 +70,8 @@ export const executeRequest = async (dispatch, request) => {
         // открытие страницы с существующим эл-том
         case Requests.OPEN: {
             const {attribute, sessionId} = request.payload;
-            const screen = attribute.actions.screen;
-            const id = attribute.id;
+            const screen = attribute.openOnEdit;
+            const id = attribute[attribute.fieldName];
             const screenRs = await screenService.getScreen(screen, sessionId, id);
             dispatch({type: Actions.INIT, payload: screenRs});
             return;
@@ -88,7 +88,7 @@ export const executeRequest = async (dispatch, request) => {
         case Requests.CREATE: {
             const {attribute, sessionId} = request.payload;
             console.log(attribute)
-            const screen = attribute.actions.screen;
+            const screen = attribute.openOnCreate;
             const screenRs = await screenService.getScreen(screen, sessionId);
             dispatch({type: Actions.INIT, payload: screenRs});
             return;

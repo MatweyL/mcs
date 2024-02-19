@@ -5,9 +5,10 @@
     "EMPTY": {
       "type": "CARD_ITEM",
       "label": "Пустой список",
-      "actions": {
-        "screen": "CHANNEL_EDITOR"
-      }
+      "default": true,
+      "openOnCreate": "CHANNEL_EDITOR",
+      "openOnEdit": "CHANNEL_EDITOR",
+      "fieldName": "uid"
     }
   }
 }

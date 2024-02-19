@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from typing import List
 
-from service.session.models import Session
+from service.domain_v2.session import Session
 
 
 class SessionRepo:

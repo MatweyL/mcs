@@ -1,6 +1,6 @@
 from typing import Optional
 
-from service.user.models import User
+from service.domain_v2.user import User
 
 
 class AuthContext:

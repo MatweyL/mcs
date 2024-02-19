@@ -1,5 +1,6 @@
 from service.common.utils import now
-from service.session.models import Session
+from service.domain_v2.phone import Phone
+from service.domain_v2.session import Session
 from service.session.repo import SessionRepo
 from service.session.use_case import GetSessionListUseCase, GetSessionListRq, SessionListRs, CreateSessionUseCase, \
     CreateSessionRq, CreatedSessionRs
@@ -23,6 +24,7 @@ class CreateSessionUseCaseImpl(CreateSessionUseCase):
         session.user_uid = request.user_uid
         session.title = 'УТК-X'
         session.date = now()
+        session.phone = Phone()
 
         self.session_repo.save_session(session)
 

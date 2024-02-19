@@ -1,20 +1,20 @@
 from typing import Dict, Any
 
 from service.common.logs import logger
+from service.domain_v2.session import Session
 from service.screen.processor.get.get_screen_processor import GetScreenProcessor
-from service.session.models import Session
 
 
 class ChannelListGetScreenProcessor(GetScreenProcessor):
-    def process(self, session: Session, screen_template: Dict[str, Any]):
+    def process(self, session: Session, screen_template: Dict[str, Any], uid: str):
         logger.info(screen_template)
         attributes = screen_template['attributes']
-        for channel in session.channels:
-            # FIXME: Должно быть взаимодействие через доменку
-            attributes[channel['uid']] = {
+        channels = session.phone.channels
+        for channel in channels:
+            attributes[channel.uid] = {
                 'type': 'CARD_ITEM',
-                'label': 'Канал Х',
-                'uid': channel['uid']
+                'label': channel.name,
+                'uid': channel.uid
             }
 
         return screen_template
