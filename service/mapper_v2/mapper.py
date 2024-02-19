@@ -5,6 +5,7 @@ from service.domain_v2.channel import Channel
 from service.domain_v2.direction import Direction
 from service.domain_v2.phone import Phone
 from service.domain_v2.session import Session
+from service.domain_v2.user import User
 
 D = TypeVar('D')
 E = TypeVar('E')
@@ -24,16 +25,16 @@ class SessionMapper(Mapper):
     def __init__(self, phone_mapper: 'PhoneMapper'):
         self.phone_mapper = phone_mapper
 
-    def map_to_domain(self, entity: E) -> Phone:
-        phone = Phone()
+    def map_to_domain(self, entity: E) -> Session:
+        session = Session()
 
-        phone.uid = entity['uid']
-        phone.title = entity['title']
-        phone.date = entity['date']
-        phone.user_uid = entity['user_uid']
-        phone.phone = self.phone_mapper.map_to_domain(entity['channel'])
+        session.uid = entity['uid']
+        session.title = entity['title']
+        session.date = entity['date']
+        session.user_uid = entity['user_uid']
+        session.phone = self.phone_mapper.map_to_domain(entity['phone'])
 
-        return phone
+        return session
 
     def map_to_entity(self, session: Session) -> E:
         entity = dict()
@@ -45,9 +46,6 @@ class SessionMapper(Mapper):
         entity['phone'] = self.phone_mapper.map_to_entity(session.phone)
 
         return entity
-
-
-
 
 
 class PhoneMapper(Mapper):
@@ -83,7 +81,7 @@ class DirectionMapper(Mapper):
         return direction
 
     def map_to_entity(self, direction: Direction) -> E:
-        entity = {}
+        entity = dict()
 
         entity['uid'] = direction.uid
         entity['name'] = direction.name
@@ -107,5 +105,31 @@ class ChannelMapper(Mapper):
         entity['uid'] = channel.uid
         entity['mode'] = channel.mode
         entity['name'] = channel.name
+
+        return entity
+
+
+class UserMapper(Mapper):
+    def map_to_domain(self, entity: dict) -> User:
+        user = User()
+
+        user.uid = entity['uid']
+        user.name = entity['name']
+        user.group = entity['group']
+        user.surname = entity['surname']
+        user.password = entity['password']
+        user.patronymic = entity['patronymic']
+
+        return user
+
+    def map_to_entity(self, user: User) -> dict:
+        entity = dict()
+
+        entity['uid'] = user.uid
+        entity['name'] = user.name
+        entity['group'] = user.group
+        entity['surname'] = user.surname
+        entity['password'] = user.password
+        entity['patronymic'] = user.patronymic
 
         return entity

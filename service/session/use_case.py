@@ -2,7 +2,7 @@ from abc import abstractmethod
 from typing import List
 
 from service.core.use_case import UseCase, Request, Response
-from service.session.models import Session
+from service.domain_v2.session import Session
 
 
 class GetSessionListRq(Request):

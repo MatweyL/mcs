@@ -1,9 +1,9 @@
 from service.common.mapper import Mapper
 from service.common.utils import generate_uid
-from service.user.models import User
+from service.domain_v2.user import User
+from service.user.repo import UserRepo
 from service.user.use_case import RegisterUserUseCase, RegisterUserRq, RegisteredUserRs, AuthenticateUserUseCase, \
     AuthUserRq, AuthTokenRs
-from service.user.repo import UserRepo
 
 
 class RegisterUserUseCaseImpl(RegisterUserUseCase):

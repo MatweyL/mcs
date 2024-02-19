@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from service.domain.phone import Phone
+from service.domain_v2.phone import Phone
 
 
 @dataclass
