@@ -21,10 +21,14 @@ class ChannelEditorGetScreenProcessor(GetScreenProcessor):
                 found_channel = channel
                 break
         if not found_channel:
-            raise Exception(f'no channel with uid={uid}')
+            return screen_template
         attributes['CHANNEL_ID']['value'] = found_channel.uid
         attributes['NAME']['value'] = found_channel.name
         attributes['CHANNEL_MODE']['value'] = found_channel.mode
+        attributes['DOUBLE_FREQUENCY']['value'] = found_channel.double_frequency
+        attributes['FREQUENCY']['value'] = found_channel.frequency
+        attributes['FORBIDDEN_SEND']['value'] = found_channel.forbidden_send
+        attributes['CTCSS']['value'] = found_channel.ctcss
         return screen_template
 
     def get_screen_name(self) -> str:

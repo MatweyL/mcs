@@ -8,7 +8,7 @@ from service.screen.processor.save.save_screen_processor import SaveScreenProces
 
 class ChannelEditorSaveScreenProcessor(SaveScreenProcessor):
     def process(self, session: Session, attributes: Dict[str, Any]):
-        channel_id = attributes.get('CHANNEL_ID', None)
+        channel_id = attributes.get('CHANNEL_ID')
         phone = session.phone
         if channel_id:
             index = next((i for i, ch in enumerate(phone.channels) if ch.uid == channel_id), None)
@@ -22,8 +22,12 @@ class ChannelEditorSaveScreenProcessor(SaveScreenProcessor):
             phone.channels.append(channel)
 
     def _fill_channel(self, channel: Channel, attributes: Dict[str, Any]):
-        channel.mode = attributes.get('CHANNEL_MODE', None)
-        channel.name = attributes.get('NAME', None)
+        channel.mode = attributes.get('CHANNEL_MODE')
+        channel.name = attributes.get('NAME')
+        channel.double_frequency = attributes.get('DOUBLE_FREQUENCY')
+        channel.frequency = attributes.get('FREQUENCY')
+        channel.ctcss = attributes.get('CTCSS')
+        channel.forbidden_send = attributes.get('FORBIDDEN_SEND')
 
     def get_screen_name(self) -> str:
         return "CHANNEL_EDITOR"
