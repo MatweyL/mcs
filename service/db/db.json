@@ -28,47 +28,128 @@
           {
             "uid": "c4e3be1d-daba-4bb6-b411-ede2b319049c",
             "mode": "CHM25",
-            "name": "2345"
+            "name": "2345",
+            "forbidden_send": true,
+            "ctcss": "NO",
+            "frequency": "",
+            "double_frequency": null
           },
           {
             "uid": "6e2c81f7-9d79-4fcb-a207-772e1c9fbc39",
             "mode": "VPD",
-            "name": "КАНАЛ"
+            "name": "КАНАЛ",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
           },
           {
             "uid": "f35711ed-622a-42bb-bd62-52f9cb6888f4",
             "mode": "CHM25",
-            "name": ""
+            "name": "",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
           },
           {
             "uid": "b88339e2-4c37-44a2-a681-5ed4e8e26a70",
             "mode": "CHM25",
-            "name": "ТЕСТ"
+            "name": "ТЕСТ",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
           },
           {
             "uid": "7632707b-8d24-4401-96d4-45b66c1a3eb6",
             "mode": "NOT_DEFINED",
-            "name": ""
+            "name": "",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
           },
           {
             "uid": "181fa5a9-0667-4d88-aeb6-5ce06dc342c2",
             "mode": "NOT_DEFINED",
-            "name": ""
+            "name": "",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
           },
           {
             "uid": "d722922d-86ca-48a2-8eb5-087ac82617db",
             "mode": "NOT_DEFINED",
-            "name": ""
+            "name": "",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
           },
           {
             "uid": "d8c81501-4ae3-4aac-8361-e17265260602",
             "mode": "NOT_DEFINED",
-            "name": ""
+            "name": "",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
           },
           {
             "uid": "46f01a3e-9ac8-4051-96bf-1a788049f475",
             "mode": "CHM25",
-            "name": "АБВ1"
+            "name": "АБВ1",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "7297d882-3df1-435c-babe-ef4f22a43035",
+            "mode": "TETRA_TMO",
+            "name": "",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "cf8383e7-b4e0-489d-999d-63a53922f202",
+            "mode": "CHM50",
+            "name": "НОВЫЙ",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "8ca7c959-7214-44c1-9125-829f712262ea",
+            "mode": "NOT_DEFINED",
+            "name": "",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "7a9eb634-d24a-41a5-995a-676fe3fc2772",
+            "mode": "NOT_DEFINED",
+            "name": null,
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "b951d919-8dc3-407a-990f-048c73b21738",
+            "mode": "NOT_DEFINED",
+            "name": "",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": "",
+            "double_frequency": null
           }
         ],
         "directions": []

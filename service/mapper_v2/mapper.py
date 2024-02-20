@@ -96,6 +96,10 @@ class ChannelMapper(Mapper):
         channel.uid = entity['uid']
         channel.mode = entity['mode']
         channel.name = entity['name']
+        channel.double_frequency = entity.get('double_frequency')
+        channel.frequency = entity.get('frequency')
+        channel.ctcss = entity.get('ctcss')
+        channel.double_frequency = entity.get('forbidden_send')
 
         return channel
 
@@ -105,6 +109,10 @@ class ChannelMapper(Mapper):
         entity['uid'] = channel.uid
         entity['mode'] = channel.mode
         entity['name'] = channel.name
+        entity['forbidden_send'] = channel.forbidden_send
+        entity['ctcss'] = channel.ctcss
+        entity['frequency'] = channel.frequency
+        entity['double_frequency'] = channel.double_frequency
 
         return entity
 
