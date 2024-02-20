@@ -7,6 +7,7 @@ from service.db.db import JsonDb
 from service.domain.phone import Phone
 from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper
 from service.screen.impl.use_case import SaveScreenUseCaseImpl, GetScreenUseCaseImpl, GetScreenUseCaseImplV2
+from service.screen.processor.get.channel_editor_get_screen_processor import ChannelEditorGetScreenProcessor
 from service.screen.processor.get.channel_list_get_screen_processor import ChannelListGetScreenProcessor
 from service.screen.processor.get.get_screen_processor import DefaultGetScreenProcessor
 from service.screen.processor.get.get_screen_processor_registry import GetScreenProcessorRegistry
@@ -74,7 +75,8 @@ save_screen_use_case = SaveScreenUseCaseImpl(screens_manager_v2, session_repo, s
 
 get_screen_use_case = GetScreenUseCaseImpl(screens_manager_v2)
 
-get_screen_processor_registry = GetScreenProcessorRegistry([ChannelListGetScreenProcessor()],
+get_screen_processor_registry = GetScreenProcessorRegistry([ChannelListGetScreenProcessor(),
+                                                            ChannelEditorGetScreenProcessor()],
                                                            DefaultGetScreenProcessor())
 get_screen_use_case_v2 = GetScreenUseCaseImplV2(session_repo, get_screen_processor_registry, screens_storage)
 
