@@ -1,5 +1,6 @@
 from typing import Dict, Any
 
+from service.common.logs import logger
 from service.domain_v2.channel import Channel
 from service.domain_v2.session import Session
 from service.screen.processor.get.get_screen_processor import GetScreenProcessor
@@ -8,6 +9,9 @@ from service.screen.processor.get.get_screen_processor import GetScreenProcessor
 class ChannelEditorGetScreenProcessor(GetScreenProcessor):
 
     def process(self, session: Session, screen_template: Dict[str, Any], uid: str):
+        logger.info('CHANNEL EDITOR PROCESSOR CALLED')
+        if not uid:
+            return screen_template
         attributes = screen_template['attributes']
 
         channels = session.phone.channels
@@ -20,7 +24,7 @@ class ChannelEditorGetScreenProcessor(GetScreenProcessor):
             raise Exception(f'no channel with uid={uid}')
         attributes['CHANNEL_ID']['value'] = found_channel.uid
         attributes['NAME']['value'] = found_channel.name
-        attributes['MODE']['value'] = found_channel.mode
+        attributes['CHANNEL_MODE']['value'] = found_channel.mode
         return screen_template
 
     def get_screen_name(self) -> str:

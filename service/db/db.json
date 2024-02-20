@@ -34,6 +34,41 @@
             "uid": "6e2c81f7-9d79-4fcb-a207-772e1c9fbc39",
             "mode": "VPD",
             "name": "КАНАЛ"
+          },
+          {
+            "uid": "f35711ed-622a-42bb-bd62-52f9cb6888f4",
+            "mode": "CHM25",
+            "name": ""
+          },
+          {
+            "uid": "b88339e2-4c37-44a2-a681-5ed4e8e26a70",
+            "mode": "CHM25",
+            "name": "ТЕСТ"
+          },
+          {
+            "uid": "7632707b-8d24-4401-96d4-45b66c1a3eb6",
+            "mode": "NOT_DEFINED",
+            "name": ""
+          },
+          {
+            "uid": "181fa5a9-0667-4d88-aeb6-5ce06dc342c2",
+            "mode": "NOT_DEFINED",
+            "name": ""
+          },
+          {
+            "uid": "d722922d-86ca-48a2-8eb5-087ac82617db",
+            "mode": "NOT_DEFINED",
+            "name": ""
+          },
+          {
+            "uid": "d8c81501-4ae3-4aac-8361-e17265260602",
+            "mode": "NOT_DEFINED",
+            "name": ""
+          },
+          {
+            "uid": "46f01a3e-9ac8-4051-96bf-1a788049f475",
+            "mode": "CHM25",
+            "name": "АБВ1"
           }
         ],
         "directions": []

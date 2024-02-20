@@ -43,7 +43,7 @@ async def register_user(request: RegisterUserRq):
 
 
 @app.post("/test")
-async def test():
+async def endpoint_test():
     print('Test endpoint called')
 
 
