@@ -1,5 +1,4 @@
 .checkbox {
-    width: 70px;
     height: 23px;
 }
 
@@ -11,7 +10,6 @@
 
 .checkboxActive {
     height: 23px;
-    width: 70px;
     outline: 2px solid black;
     pointer-events: fill;
 }

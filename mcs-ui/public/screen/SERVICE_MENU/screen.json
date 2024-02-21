@@ -27,6 +27,11 @@
       "label": "Редактор каналов.",
       "value": "CHANNEL_EDITOR"
     },
+    "DIRECTION_EDITOR_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "Редактор направлений.",
+      "value": "DIRECTION_EDITOR"
+    },
     "DATA_EDITOR_MENU_ITEM": {
       "type": "MENU_ITEM",
       "label": "Редактор данных.",

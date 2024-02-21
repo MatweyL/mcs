@@ -10,8 +10,6 @@ export default class Instructions {
     // Показать атрибут
     static SHOW = (attribute) => {
         attribute.visible = true;
-        if (attribute.type === Attributes.SELECT_BOX) {
-            attribute.value = attribute.value ? attribute.value : attribute.defaultValue;
-        }
+        attribute.value = attribute.value ? attribute.value : attribute.defaultValue;
     }
 }

@@ -1,5 +1,4 @@
 .text {
-    width: 120px;
     height: 18px;
 }
 
@@ -11,7 +10,6 @@
 
 .textActive {
     height: 18px;
-    width: 120px;
     outline: 2px solid black;
     pointer-events: fill;
 }

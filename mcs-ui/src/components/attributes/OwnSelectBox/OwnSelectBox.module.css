@@ -1,6 +1,11 @@
 .ownSelectBox {
-    width: 120px;
-    height: 23px;
+    height: 21px;
+}
+
+.ownSelectBoxActive {
+    height: 21px;
+    outline: 2px solid black;
+    pointer-events: fill;
 }
 
 .ownSelectBoxWrapper {
@@ -9,9 +14,7 @@
     height: 25px;
 }
 
-.ownSelectBoxActive {
-    height: 20px;
-    width: 120px;
-    outline: 2px solid black;
-    pointer-events: fill;
+.ownSelectBoxWrapperFull {
+    display: flex;
+    flex-direction: column;
 }
