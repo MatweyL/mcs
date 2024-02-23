@@ -1,6 +1,8 @@
 import {Selector} from "./selector";
 import AttributeHelper from "../../helper/attribute_helper";
 
+const SCREEN_HEIGHT = 200;
+
 /**
  * Селектор атрибутов. Выделяет текущий атрибут
  */
@@ -12,7 +14,7 @@ export class AttributeSelector extends Selector {
         this.clipper = clipper;
     }
 
-    select(state, name, direction, pageSize = 7) {
+    select(state, name, direction) {
         let names = Object.keys(state.attributes);
         let index = names.indexOf(name);
 
@@ -24,7 +26,7 @@ export class AttributeSelector extends Selector {
         }
 
         this._select(state, nextAttribute.name);
-        this.clipper.clip(state.attributes, 200);
+        this.clipper.clip(state.attributes, SCREEN_HEIGHT);
     }
 
     _select(state, name) {
