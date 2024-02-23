@@ -5,7 +5,7 @@
     "CHANNEL_ID": {
       "label": "Скрытый атрибут с идентификатором канала",
       "visible": false,
-      "type": "UUID"
+      "type": "TEXT"
     },
     "CHANNEL_MODE": {
       "label": "Режим",

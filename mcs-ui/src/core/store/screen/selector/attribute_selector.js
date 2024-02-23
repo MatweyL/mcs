@@ -1,14 +1,18 @@
 import {Selector} from "./selector";
 import AttributeHelper from "../../helper/attribute_helper";
 
+/**
+ * Селектор атрибутов. Выделяет текущий атрибут
+ */
 export class AttributeSelector extends Selector {
-    constructor(buttonsFactory, calculator) {
+    constructor(buttonsFactory, calculator, clipper) {
         super();
         this.buttonsFactory = buttonsFactory;
         this.calculator = calculator;
+        this.clipper = clipper;
     }
 
-    select(state, name, direction) {
+    select(state, name, direction, pageSize = 7) {
         let names = Object.keys(state.attributes);
         let index = names.indexOf(name);
 
@@ -18,7 +22,9 @@ export class AttributeSelector extends Selector {
             nextIndex = this.calculator.calculateNextByDirection(direction, nextIndex, names.length);
             nextAttribute = Object.values(state.attributes).at(nextIndex);
         }
+
         this._select(state, nextAttribute.name);
+        this.clipper.clip(state.attributes, 200);
     }
 
     _select(state, name) {

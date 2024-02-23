@@ -1,5 +1,7 @@
 import Actions from "../../../../../../core/constants/actions";
-import {CloseSelectBoxActionProcessor} from "../../../../../../core/store/screen/action/processor/impl/close_select_box_action_processor";
+import {
+    CloseSelectBoxActionProcessor
+} from "../../../../../../core/store/screen/action/processor/impl/close_select_box_action_processor";
 import Buttons from "../../../../../../core/constants/buttons";
 
 describe('CloseSelectBoxActionProcessor', () => {

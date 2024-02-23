@@ -25,13 +25,14 @@ describe('InitActionProcessor', () => {
             name: "SCREEN_NAME",
             attributes: {
                 'FIRST_NOT_VISIBLE': {
-                    visible: false
+                    visible: false,
+                    type: "TEXT"
                 },
                 'SECOND_VISIBLE': {
-
+                    type: "TEXT",
                 },
                 'THIRD_VISIBLE': {
-
+                    type: "TEXT"
                 }
             }
         }

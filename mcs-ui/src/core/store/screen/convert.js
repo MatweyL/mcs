@@ -7,7 +7,7 @@ import OwnSelectBox from "../../../components/attributes/OwnSelectBox/OwnSelectB
 import Attributes from "../../constants/attributes";
 
 export function convert(attribute) {
-    return attribute.visible
+    return attribute.visible && !attribute.clipped
         ? TYPE_TO_CREATE_ELEMENT[attribute.type](attribute)
         : null
 }

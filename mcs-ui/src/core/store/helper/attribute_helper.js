@@ -24,8 +24,8 @@ export default class AttributeHelper {
     }
 
     static _isEventTriggeredByAttributeValue(event, value) {
-         return EventHelper.isTriggeredByFiringValues(event, value)
-             || EventHelper.isTriggeredByExcludeFiringValues(event, value);
+        return EventHelper.isTriggeredByFiringValues(event, value)
+            || EventHelper.isTriggeredByExcludeFiringValues(event, value);
     }
 
     static getTextValueOrEmpty(attribute) {
@@ -41,6 +41,23 @@ export default class AttributeHelper {
         return Object.values(attributes)
             .filter(attribute => attribute.type === type)
             .length;
+    }
+
+    static isVisibleAndNotClipped(attribute) {
+        return this.isVisible(attribute) && !this.isClipped(attribute);
+    }
+
+    static clipAttribute(attribute) {
+        attribute.clipped = true;
+    }
+
+    static unClipAttribute(attribute) {
+        attribute.clipped = false;
+    }
+
+    static isClipped(attribute) {
+        return attribute.clipped !== undefined
+            && attribute.clipped;
     }
 
     static isDisabled(attribute) {

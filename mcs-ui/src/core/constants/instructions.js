@@ -1,7 +1,5 @@
-import Attributes from "./attributes";
-
 export default class Instructions {
-    // Скрыть атрибут
+    // Скрыть атрибут и сбросить значение
     static HIDE = (attribute) => {
         attribute.visible = false;
         attribute.value = null;

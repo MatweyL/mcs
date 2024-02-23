@@ -41,6 +41,7 @@ export class InitActionProcessor extends ActionProcessor {
             const attribute = processedAttributes[attributeName];
             attribute.name = attributeName;
             attribute.active = false;
+            attribute.height = Attributes.heightOf(attribute.type);
 
             if (AttributeHelper.isDefaultCardItem(attribute)) {
                 const defaultCardItem = attribute;
@@ -68,7 +69,6 @@ export class InitActionProcessor extends ActionProcessor {
             if (attribute.type === Attributes.TEXT) {
                 attribute.value = attribute.value ? attribute.value : EMPTY;
             }
-
 
             this.eventProcessor.process(attribute, processedAttributes)
         }

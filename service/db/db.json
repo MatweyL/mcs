@@ -28,7 +28,7 @@
           {
             "uid": "c4e3be1d-daba-4bb6-b411-ede2b319049c",
             "mode": "CHM25",
-            "name": "2345",
+            "name": "1",
             "forbidden_send": null,
             "ctcss": "NO",
             "frequency": "",
@@ -37,7 +37,7 @@
           {
             "uid": "6e2c81f7-9d79-4fcb-a207-772e1c9fbc39",
             "mode": "CHM25",
-            "name": "КАНАЛ",
+            "name": "2",
             "forbidden_send": null,
             "ctcss": "YES",
             "frequency": "23456",
@@ -46,9 +46,63 @@
           {
             "uid": "f35711ed-622a-42bb-bd62-52f9cb6888f4",
             "mode": "CHM25",
-            "name": "",
+            "name": "3",
             "forbidden_send": null,
             "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "f35711ed-622a-42bb-bd62-52f9cb6888f5",
+            "mode": "CHM25",
+            "name": "4",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "f35711ed-622a-42bb-bd62-52f9cb6888f6",
+            "mode": "CHM25",
+            "name": "5",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "f35711ed-622a-42bb-bd62-52f9cb6888f7",
+            "mode": "CHM25",
+            "name": "6",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "f35711ed-622a-42bb-bd62-52f9cb6888f8",
+            "mode": "CHM25",
+            "name": "7",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "f35711ed-622a-42bb-bd62-52f9cb6888f9",
+            "mode": "CHM25",
+            "name": "8",
+            "forbidden_send": null,
+            "ctcss": null,
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "ecd9cdce-1e5a-4914-82dd-bfb1cc087a64",
+            "mode": "TETRA_DMO",
+            "name": "23",
+            "forbidden_send": null,
+            "ctcss": "NO",
             "frequency": null,
             "double_frequency": null
           }

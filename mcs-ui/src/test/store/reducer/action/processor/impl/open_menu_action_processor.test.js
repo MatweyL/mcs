@@ -1,4 +1,6 @@
-import {OpenMenuActionProcessor} from "../../../../../../core/store/screen/action/processor/impl/open_menu_action_processor";
+import {
+    OpenMenuActionProcessor
+} from "../../../../../../core/store/screen/action/processor/impl/open_menu_action_processor";
 import Buttons from "../../../../../../core/constants/buttons";
 import Actions from "../../../../../../core/constants/actions";
 
