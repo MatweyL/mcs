@@ -10,6 +10,7 @@
     font-size: 14px;
     width: 200px;
     height: 230px;
+    overflow: clip;
     background: lightblue;
     border: 5px solid black;
     position: relative;

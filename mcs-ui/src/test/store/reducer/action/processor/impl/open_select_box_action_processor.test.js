@@ -1,5 +1,7 @@
 import Actions from "../../../../../../core/constants/actions";
-import {OpenSelectBoxActionProcessor} from "../../../../../../core/store/screen/action/processor/impl/open_select_box_action_processor.js";
+import {
+    OpenSelectBoxActionProcessor
+} from "../../../../../../core/store/screen/action/processor/impl/open_select_box_action_processor.js";
 import Buttons from "../../../../../../core/constants/buttons";
 
 describe('OpenSelectBoxActionProcessor', () => {

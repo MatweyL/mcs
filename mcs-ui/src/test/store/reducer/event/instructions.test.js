@@ -17,11 +17,12 @@ describe('Instructions', () => {
         expect(attribute.value).toBeNull();
     });
 
-    test('SHOW показывает атрибут', () => {
+    test('SHOW показывает атрибут и ставит дефолтное, если value == null', () => {
         // GIVEN
         const attribute = {
             visible: false,
-            value: null
+            value: null,
+            defaultValue: '5'
         }
 
         // WHEN
@@ -29,7 +30,23 @@ describe('Instructions', () => {
 
         // THEN
         expect(attribute.visible).toBeTruthy();
-        expect(attribute.value).toBeNull();
+        expect(attribute.value).toBe('5');
+    })
+
+    test('SHOW показывает атрибут и ставит value != null', () => {
+        // GIVEN
+        const attribute = {
+            visible: false,
+            value: '11',
+            defaultValue: '5'
+        }
+
+        // WHEN
+        Instructions['SHOW'](attribute);
+
+        // THEN
+        expect(attribute.visible).toBeTruthy();
+        expect(attribute.value).toBe('11');
     })
 
     test(`SHOW показывает атрибут и устанавливает 

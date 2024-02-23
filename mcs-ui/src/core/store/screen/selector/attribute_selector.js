@@ -1,11 +1,17 @@
 import {Selector} from "./selector";
 import AttributeHelper from "../../helper/attribute_helper";
 
+const SCREEN_HEIGHT = 200;
+
+/**
+ * Селектор атрибутов. Выделяет текущий атрибут
+ */
 export class AttributeSelector extends Selector {
-    constructor(buttonsFactory, calculator) {
+    constructor(buttonsFactory, calculator, clipper) {
         super();
         this.buttonsFactory = buttonsFactory;
         this.calculator = calculator;
+        this.clipper = clipper;
     }
 
     select(state, name, direction) {
@@ -18,7 +24,9 @@ export class AttributeSelector extends Selector {
             nextIndex = this.calculator.calculateNextByDirection(direction, nextIndex, names.length);
             nextAttribute = Object.values(state.attributes).at(nextIndex);
         }
+
         this._select(state, nextAttribute.name);
+        this.clipper.clip(state.attributes, SCREEN_HEIGHT);
     }
 
     _select(state, name) {

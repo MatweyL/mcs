@@ -90,4 +90,24 @@ describe('AttributeHelper', () => {
             expect(AttributeHelper.isEventTriggeredByAttribute(event, attribute)).toBeFalsy();
         });
     });
+
+    test.each`
+        attribute           | expected
+        ${{clipped: true}}   ${true}
+        ${{clipped: false}}  ${false}
+        ${{}}                ${false}
+        `
+    ("isClipped", ({attribute, expected}) => {
+        expect(AttributeHelper.isClipped(attribute)).toBe(expected)
+    })
+
+    test.each`
+        attribute           | expected
+        ${{visible: true}}   ${true}
+        ${{visible: false}}  ${false}
+        ${{}}                ${true}
+        `
+    ("isVisible", ({attribute, expected}) => {
+        expect(AttributeHelper.isVisible(attribute)).toBe(expected)
+    })
 })

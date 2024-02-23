@@ -21,19 +21,21 @@ import {ActionProcessorRegistry} from "./store/screen/action/processor/action_pr
 import {
     OpenScreenSessionActionProcessor
 } from "./store/screen/action/processor/impl/open_screen_session_action_processor";
+import {AttributeClipper} from "./store/screen/selector/attribute_clipper";
 
 export const screenService = new ScreenService();
 
 const calculator = new NextCalculator();
 const buttonsFactory = new ButtonsFactory();
 const eventProcessor = new EventProcessor();
+const clipper = new AttributeClipper();
 
 //FIXME: На данный момент порядок селектор в  массиве имеет значение
 // последним всегда должен быть AttributeSelector
 const selectors = [
     new SelectBoxOptionSelector(calculator),
     new MultiButtonOptionSelector(calculator),
-    new AttributeSelector(buttonsFactory, calculator),
+    new AttributeSelector(buttonsFactory, calculator, clipper),
 ];
 
 export const processors = [
