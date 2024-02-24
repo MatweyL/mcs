@@ -19,7 +19,7 @@ export const executeRequest = async (dispatch, request) => {
 
         case Requests.SELECT: {
             const {attribute, sessionId} = request.payload;
-            if (attribute.type !== Attributes.MENU_ITEM) {
+            if (attribute.type !== Attributes.MENU_ITEM || !attribute.value) {
                 return;
             }
             const screenRs = await screenService.getScreen(attribute.value, sessionId);
@@ -32,7 +32,7 @@ export const executeRequest = async (dispatch, request) => {
             const nowScreen = navigator.tail();
 
             // FIXME: для отладки возвращается константа, когда навигатор пустой
-            const screen = nowScreen === undefined ? "SERVICE_MENU" : nowScreen;
+            const screen = nowScreen === undefined ? "MAIN_MENU" : nowScreen;
             const screenRs = await screenService.getScreen(screen, sessionId);
             dispatch({type: Actions.INIT, payload: screenRs});
             return;

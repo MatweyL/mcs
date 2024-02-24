@@ -105,6 +105,24 @@
             "ctcss": "NO",
             "frequency": null,
             "double_frequency": null
+          },
+          {
+            "uid": "0ecbe06b-8d79-4557-8e91-d5f7117d39d1",
+            "mode": "TETRA_DMO",
+            "name": "23456",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "49325c67-1502-4f96-b759-981b70464e71",
+            "mode": "CHM50",
+            "name": "1",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": null,
+            "double_frequency": null
           }
         ],
         "directions": []

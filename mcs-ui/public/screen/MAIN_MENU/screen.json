@@ -1,0 +1,42 @@
+{
+  "name": "MAIN_MENU",
+  "label": "Главное меню",
+  "attributes": {
+    "NOISE_SUPPRESSOR": {
+      "type": "MENU_ITEM",
+      "label": "Шумоподавитель",
+      "icon": "GEAR"
+    },
+    "VOLUME": {
+      "type": "MENU_ITEM",
+      "label": "Громкость",
+      "icon": "GEAR"
+    },
+    "NAVIGATION": {
+      "type": "MENU_ITEM",
+      "label": "Навигация",
+      "icon": "MAP"
+    },
+    "RECEIVED_MESSAGES": {
+      "type": "MENU_ITEM",
+      "label": "Принятые сообще...",
+      "icon": "MESSAGES"
+    },
+    "SETTINGS": {
+      "type": "MENU_ITEM",
+      "label": "Настройки",
+      "icon": "GEAR"
+    },
+    "SERVICE_MENU": {
+      "type": "MENU_ITEM",
+      "label": "Сервисное меню",
+      "value": "SERVICE_MENU",
+      "icon": "GEAR"
+    },
+    "BATTERY": {
+      "type": "MENU_ITEM",
+      "label": "Батарея",
+      "icon": "BATTERY"
+    }
+  }
+}
