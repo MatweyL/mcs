@@ -14,13 +14,11 @@
     },
     "USB_ACCEPT_MENU_ITEM": {
       "type": "MENU_ITEM",
-      "label": "USB. Прием.",
-      "value": "USB_ACCEPT"
+      "label": "USB. Прием."
     },
     "RS_485_TRANSFER_MENU_ITEM": {
       "type": "MENU_ITEM",
-      "label": "RS-485. Передача.",
-      "value": "RS_485_TRANSFER"
+      "label": "RS-485. Передача."
     },
     "CHANNEL_EDITOR_MENU_ITEM": {
       "type": "MENU_ITEM",
@@ -32,24 +30,9 @@
       "label": "Редактор направлений.",
       "value": "DIRECTION_EDITOR"
     },
-    "DATA_EDITOR_MENU_ITEM_1": {
+    "DATA_CHANNEL_MENU_ITEM": {
       "type": "MENU_ITEM",
-      "label": "1 Редактор данных.",
-      "value": "CHANNEL_LIST"
-    },
-    "DATA_EDITOR_MENU_ITEM_2": {
-      "type": "MENU_ITEM",
-      "label": "2 Редактор данных.",
-      "value": "CHANNEL_LIST"
-    },
-    "DATA_EDITOR_MENU_ITEM_3": {
-      "type": "MENU_ITEM",
-      "label": "3 Редактор данных.",
-      "value": "CHANNEL_LIST"
-    },
-    "DATA_EDITOR_MENU_ITEM_4": {
-      "type": "MENU_ITEM",
-      "label": "4 Редактор данных.",
+      "label": "Редактор данных.",
       "value": "CHANNEL_LIST"
     }
   }
