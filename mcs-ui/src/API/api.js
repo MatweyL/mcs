@@ -21,8 +21,12 @@ const WARNING = "Отсутствует заглушка"
 
 const endpoints = {
     getDictionary: {
-        [LOCAL_PY_MODE]: dictionaryType => axios.get(`${LOCAL_PY_URL}/dictionary/${dictionaryType}`, config),
-        [MOCK_LOCAL_MODE]: dictionaryType => axios.get(`${MOCK_LOCAL_URL}/dictionary/${dictionaryType}/dictionary.json`, config)
+        [LOCAL_PY_MODE]: (dictionaryType, sessionId) => {
+            return axios.get(`${LOCAL_PY_URL}/dictionary?dictionary_type=${dictionaryType}&session_id=${sessionId}`, config)
+        },
+        [MOCK_LOCAL_MODE]: (dictionaryType, sessionId) => {
+            return axios.get(`${MOCK_LOCAL_URL}/dictionary/${dictionaryType}/dictionary.json`, config)
+        }
     },
     getScreen: {
         [LOCAL_PY_MODE]: (screenName, sessionId, id) => {
@@ -70,13 +74,13 @@ export default class API {
     }
 
 
-    static async getDictionary(dictionaryType, noCache) {
+    static async getDictionary(dictionaryType, noCache, sessionId) {
         if (noCache === true) {
-            const rs = await endpoints.getDictionary[MOCK_LOCAL_MODE](dictionaryType);
+            const rs = await endpoints.getDictionary[MOCK_LOCAL_MODE](dictionaryType, sessionId);
             console.log(rs);
             return rs;
         } else if (!dictionaryCache.contains(dictionaryType)) {
-            const rs = await endpoints.getDictionary[MOCK_LOCAL_MODE](dictionaryType);
+            const rs = await endpoints.getDictionary[MOCK_LOCAL_MODE](dictionaryType, sessionId);
             console.log("Кладем", dictionaryType, " в кеш");
             dictionaryCache.put(dictionaryType, rs.data);
             console.log(rs);
