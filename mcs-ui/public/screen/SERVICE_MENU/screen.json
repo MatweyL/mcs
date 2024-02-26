@@ -2,38 +2,38 @@
   "name": "SERVICE_MENU",
   "label": "Сервисное меню",
   "attributes": {
-    "DIRECTIONS_MENU_ITEM": {
+    "RS_485_TRANSFER_MENU_ITEM": {
       "type": "MENU_ITEM",
-      "label": "Направления",
-      "value": "DIRECTIONS"
-    },
-    "PPRCH_FREQUENCY_PLAN_MENU_ITEM": {
-      "type": "MENU_ITEM",
-      "label": "Частотные планы ППРЧ",
-      "value": "PPRCH_FREQUENCY_PLAN"
+      "label": "RS-485. Передача."
     },
     "USB_ACCEPT_MENU_ITEM": {
       "type": "MENU_ITEM",
       "label": "USB. Прием."
     },
-    "RS_485_TRANSFER_MENU_ITEM": {
+    "BLUETOOTH_ACCEPT_MENU_ITEM": {
       "type": "MENU_ITEM",
-      "label": "RS-485. Передача."
+      "label": "Блютус. Прием."
     },
-    "CHANNEL_EDITOR_MENU_ITEM": {
+    "BLUETOOTH_TRANSFER_MENU_ITEM": {
       "type": "MENU_ITEM",
-      "label": "Редактор каналов.",
-      "value": "CHANNEL_EDITOR"
+      "label": "Блютус. Передача."
     },
-    "DIRECTION_EDITOR_MENU_ITEM": {
+    "IK_ACCEPT_MENU_ITEM": {
       "type": "MENU_ITEM",
-      "label": "Редактор направлений.",
-      "value": "DIRECTION_EDITOR"
+      "label": "ИК. Прием."
+    },
+    "IK_TRANSFER_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "ИК. Передача."
     },
     "DATA_CHANNEL_MENU_ITEM": {
       "type": "MENU_ITEM",
-      "label": "Редактор данных.",
-      "value": "CHANNEL_LIST"
+      "label": "Редактор данных",
+      "value": "DATA_EDITOR"
+    },
+    "VERSION_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "Версия ПО"
     }
   }
 }

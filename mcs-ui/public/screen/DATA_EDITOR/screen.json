@@ -1,0 +1,41 @@
+{
+  "name": "DATA_EDITOR",
+  "label": "Редактор данных",
+  "attributes": {
+    "COMMON_PARAMS": {
+      "type": "MENU_ITEM",
+      "label": "Общие параметры"
+    },
+    "DIRECTIONS_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "Направления",
+      "value": "DIRECTIONS"
+    },
+    "CHANNEL_LIST": {
+      "type": "MENU_ITEM",
+      "label": "Каналы",
+      "value": "CHANNEL_LIST"
+    },
+    "SCAN_LIST": {
+      "type": "MENU_ITEM",
+      "label": "Списки сканирования"
+    },
+    "PPRCH_FREQUENCY_PLAN_MENU_ITEM": {
+      "type": "MENU_ITEM",
+      "label": "Частотные планы ППРЧ",
+      "value": "PPRCH_FREQUENCY_PLAN"
+    },
+    "KEYS": {
+      "type": "MENU_ITEM",
+      "label": "Ключи"
+    },
+    "WORK_MODE": {
+      "type": "MENU_ITEM",
+      "label": "Режимы работы"
+    },
+    "PASSWORD_CHANGE": {
+      "type": "MENU_ITEM",
+      "label": "Изменение пароля"
+    }
+  }
+}
