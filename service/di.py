@@ -10,6 +10,7 @@ from service.dictionary.endpoint import DictionaryEndpoint
 from service.dictionary.impl.use_case import GetDictionaryUseCaseImpl
 from service.dictionary.provider.get.get_dictionary_provider import DefaultDictionaryProvider
 from service.dictionary.provider.get.get_dictionary_provider_registry import GetDictionaryProviderRegistry
+from service.dictionary.provider.get.stateful_channel_dictionary_provider import StatefulChannelDictionaryProvider
 from service.dictionary.use_case import GetDictionaryUseCase
 from service.domain.phone import Phone
 from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper
@@ -110,7 +111,7 @@ session_endpoint = SessionEndpoint(
     create_session_use_case
 )
 
-get_dictionary_provider_registry = GetDictionaryProviderRegistry([],
+get_dictionary_provider_registry = GetDictionaryProviderRegistry([StatefulChannelDictionaryProvider()],
                                                                  DefaultDictionaryProvider(
                                                                      os.path.join(get_root_path(),
                                                                                   'mcs-ui/public/dictionary')
