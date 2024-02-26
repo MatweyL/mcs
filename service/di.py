@@ -1,9 +1,16 @@
+import os.path
+
 from service.auth.filter import AuthFilter
 from service.common.mapper import Mapper
 from service.common.utils import get_root_path
 from service.core.processor.default_processor import DefaultProcessor
 from service.core.registry import ScreenProcessorRegistry
 from service.db.db import JsonDb
+from service.dictionary.endpoint import DictionaryEndpoint
+from service.dictionary.impl.use_case import GetDictionaryUseCaseImpl
+from service.dictionary.provider.get.get_dictionary_provider import DefaultDictionaryProvider
+from service.dictionary.provider.get.get_dictionary_provider_registry import GetDictionaryProviderRegistry
+from service.dictionary.use_case import GetDictionaryUseCase
 from service.domain.phone import Phone
 from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper
 from service.screen.impl.use_case import SaveScreenUseCaseImpl, GetScreenUseCaseImpl, GetScreenUseCaseImplV2
@@ -102,3 +109,13 @@ session_endpoint = SessionEndpoint(
     get_session_list_use_case,
     create_session_use_case
 )
+
+get_dictionary_provider_registry = GetDictionaryProviderRegistry([],
+                                                                 DefaultDictionaryProvider(
+                                                                     os.path.join(get_root_path(),
+                                                                                  'mcs-ui/public/dictionary')
+                                                                 ))
+
+get_dictionary_use_case = GetDictionaryUseCaseImpl(session_repo,
+                                                   get_dictionary_provider_registry)
+dictionary_endpoint = DictionaryEndpoint(get_dictionary_use_case)
