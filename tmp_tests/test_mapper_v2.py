@@ -1,8 +1,8 @@
-from service.domain_v2.channel import Channel
-from service.domain_v2.direction import Direction
-from service.domain_v2.phone import Phone
-from service.domain_v2.session import Session
-from service.domain_v2.user import User
+from service.domain.channel import Channel
+from service.domain.direction import Direction
+from service.domain.phone import Phone
+from service.domain.session import Session
+from service.domain.user import User
 from service.mapper_v2.mapper import SessionMapper, PhoneMapper, DirectionMapper, ChannelMapper, UserMapper
 
 channel_mapper = ChannelMapper()

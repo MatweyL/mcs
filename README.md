@@ -29,6 +29,8 @@
 25. **MCS-26** - (FE) Добавить API для вызова Requests.DELETE
 25. **MCS-27** - (BE) Продумать и добавить реализацию API для удаления
 25. **MCS-28** - (BE) Отредактировать шаблон CHANNEL_EDITOR для режима ППРЧ
+26. **MCS-29** - (BE) Реализация DirectionEditorGetScreenProcessor
+26. **MCS-30** - (BE) Реализация DirectionEditorSaveScreenProcessor
 
 
 ### Шаблон веб-формы

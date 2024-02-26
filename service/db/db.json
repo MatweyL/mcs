@@ -123,6 +123,15 @@
             "ctcss": "NO",
             "frequency": null,
             "double_frequency": null
+          },
+          {
+            "uid": "594ef096-0ef7-49f8-b3d3-ab6e4900754c",
+            "mode": "TETRA_DMO",
+            "name": "П6",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": null,
+            "double_frequency": null
           }
         ],
         "directions": []
