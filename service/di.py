@@ -4,6 +4,8 @@ from service.common.utils import get_root_path
 from service.core.processor.default_processor import DefaultProcessor
 from service.core.registry import ScreenProcessorRegistry
 from service.db.db import JsonDb
+from service.dictionary.endpoint import DictionaryEndpoint
+from service.dictionary.use_case import GetDictionaryUseCase
 from service.domain.phone import Phone
 from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper
 from service.screen.impl.use_case import SaveScreenUseCaseImpl, GetScreenUseCaseImpl, GetScreenUseCaseImplV2
@@ -102,3 +104,6 @@ session_endpoint = SessionEndpoint(
     get_session_list_use_case,
     create_session_use_case
 )
+
+get_dictionary_use_case = GetDictionaryUseCase()
+dictionary_endpoint = DictionaryEndpoint(get_dictionary_use_case)

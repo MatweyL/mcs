@@ -4,7 +4,8 @@ from starlette.middleware.cors import CORSMiddleware
 
 from service.auth.auth_context import AuthContext
 from service.common.logs import logger
-from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter
+from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint
+from service.dictionary.use_case import GetDictionaryRq
 from service.screen.use_case import GetScreenRq, SaveScreenRq, Screen
 from service.session.use_case import GetSessionListRq, CreateSessionRq
 from service.user.use_case import RegisterUserRq, AuthUserRq
@@ -20,9 +21,10 @@ app.add_middleware(
 )
 
 
-@app.get('/dictionary/{dictionary_name}')
-async def get_dictionary(dictionary_name: str):  # TODO: обсудить реализацию
-    pass
+@app.get('/dictionary')
+async def get_dictionary(dictionary_type: str, session_id: str):
+    request = GetDictionaryRq(dictionary_type=dictionary_type, session_id=session_id)
+    return dictionary_endpoint.get_dictionary(request)
 
 
 @app.get('/screen')
@@ -62,6 +64,7 @@ async def get_sessions():
 async def create_session():
     request = CreateSessionRq(user_uid=AuthContext.get_now_user().uid)
     return session_endpoint.create_session(request)
+
 
 
 if __name__ == "__main__":
