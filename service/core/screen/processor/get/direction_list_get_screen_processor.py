@@ -1,22 +1,21 @@
 from typing import Dict, Any
 
-from service.common.logs import logger
-from service.domain.session import Session
 from service.core.screen.processor.get.get_screen_processor import GetScreenProcessor
+from service.domain.session import Session
 
 
-class ChannelListGetScreenProcessor(GetScreenProcessor):
+class DirectionListGetScreenProcessor(GetScreenProcessor):
     def process(self, session: Session, screen_template: Dict[str, Any], uid: str):
         attributes = screen_template['attributes']
-        channels = session.phone.channels
-        for channel in channels:
-            attributes[channel.uid] = {
+        directions = session.phone.directions
+        for direction in directions:
+            attributes[direction.uid] = {
                 'type': 'CARD_ITEM',
-                'label': channel.name,
-                'uid': channel.uid
+                'label': direction.name,
+                'uid': direction.uid
             }
 
         return screen_template
 
     def get_screen_name(self) -> str:
-        return "CHANNEL_LIST"
+        return 'DIRECTION_LIST'

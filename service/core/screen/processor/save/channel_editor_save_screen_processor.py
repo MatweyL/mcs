@@ -11,13 +11,10 @@ class ChannelEditorSaveScreenProcessor(SaveScreenProcessor):
         channel_id = attributes.get('CHANNEL_ID')
         phone = session.phone
         if channel_id:
-            index = next((i for i, ch in enumerate(phone.channels) if ch.uid == channel_id), None)
-            channel = phone.channels[index]
+            channel = phone.find_channel(channel_id)
             self._fill_channel(channel, attributes)
-            phone.channels[index] = channel
         else:
-            channel = Channel()
-            channel.uid = generate_uid()
+            channel = Channel(uid=generate_uid())
             self._fill_channel(channel, attributes)
             phone.channels.append(channel)
 

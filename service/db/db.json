@@ -181,8 +181,46 @@
       "date": "26/02/24 10:03",
       "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
       "phone": {
-        "channels": [],
-        "directions": []
+        "channels": [
+          {
+            "uid": "d645b7e0-43ac-48a9-ba23-3cbcbd720e3e",
+            "mode": "CHM25",
+            "name": "КАНАЛ2",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": "",
+            "double_frequency": null
+          },
+          {
+            "uid": "40ec4dda-17b5-4e79-be17-255e88dd1aee",
+            "mode": "TETRA_DMO",
+            "name": "КАНАЛ1",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": null,
+            "double_frequency": null
+          }
+        ],
+        "directions": [
+          {
+            "uid": "a7fb89c2-bbb4-4314-ad57-6342c63dc1f7",
+            "name": "Направление 3",
+            "channel_uid": "d645b7e0-43ac-48a9-ba23-3cbcbd720e3e",
+            "forbidden_send": true,
+            "tone_call": null,
+            "scan_list": "NO",
+            "economizer": "33"
+          },
+          {
+            "uid": "d2d8bf7c-ce22-4942-9bf1-78c30ae4de5d",
+            "name": "Ком.бригады",
+            "channel_uid": "40ec4dda-17b5-4e79-be17-255e88dd1aee",
+            "forbidden_send": true,
+            "tone_call": null,
+            "scan_list": "NO",
+            "economizer": "3"
+          }
+        ]
       }
     }
   ],

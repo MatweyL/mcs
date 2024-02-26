@@ -19,10 +19,19 @@ def test_session_map_to_entity():
     channel.mode = 'CHM25'
     channel.uid = '1'
     channel.name = 'channel'
+    channel.forbidden_send = True
+    channel.frequency = True
+    channel.ctcss = 'CTCSS'
+    channel.double_frequency = 'double'
 
     direction = Direction()
     direction.name = 'direction'
     direction.uid = '2'
+    direction.channel = 'channel_uid'
+    direction.forbidden_send = True
+    direction.tone_call = True
+    direction.scan_list = '4567'
+    direction.economizer = 'economizer'
 
     phone = Phone()
     phone.channels = [channel]
@@ -47,12 +56,20 @@ def test_session_map_to_entity():
     phone_entity = entity['phone']
     direction_entity = phone_entity['directions'][0]
     assert direction_entity['name'] == 'direction'
-    assert direction_entity['uid'] == '2'
+    assert direction_entity['channel_uid'] == 'channel_uid'
+    assert direction_entity['forbidden_send']
+    assert direction_entity['tone_call']
+    assert direction_entity['economizer'] == 'economizer'
+    assert direction_entity['scan_list'] == '4567'
 
     channel = phone_entity['channels'][0]
     assert channel['mode'] == 'CHM25'
     assert channel['uid'] == '1'
     assert channel['name'] == 'channel'
+    assert channel['forbidden_send']
+    assert channel['double_frequency'] == 'double'
+    assert channel['frequency']
+    assert channel['ctcss'] == 'CTCSS'
 
 
 def test_user_map_to_entity():
