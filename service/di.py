@@ -16,6 +16,7 @@ from service.core.screen.processor.get.channel_list_get_screen_processor import 
 from service.core.screen.processor.get.get_screen_processor import DefaultGetScreenProcessor
 from service.core.screen.processor.get.get_screen_processor_registry import GetScreenProcessorRegistry
 from service.core.screen.processor.save import ChannelEditorSaveScreenProcessor
+from service.core.screen.processor.save.direction_editor_save_screen_processor import DirectionEditorSaveScreenProcessor
 from service.core.screen.processor.save.save_screen_processor_registry import SaveScreenProcessorRegistry
 from service.core.session import SessionEndpoint
 from service.core.session.impl.repo import InMemorySessionRepo
@@ -26,7 +27,8 @@ from service.core.user.impl.use_case import RegisterUserUseCaseImpl, Authenticat
 from service.db.db import JsonDb
 from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper
 
-save_screen_processor_registry = SaveScreenProcessorRegistry([ChannelEditorSaveScreenProcessor()])
+save_screen_processor_registry = SaveScreenProcessorRegistry([ChannelEditorSaveScreenProcessor(),
+                                                              DirectionEditorSaveScreenProcessor()])
 
 db_json_path = get_root_path().joinpath('service/db/db.json')
 db = JsonDb(db_json_path)
