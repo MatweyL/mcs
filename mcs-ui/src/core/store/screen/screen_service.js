@@ -15,17 +15,18 @@ export class ScreenService {
         console.log(dictionaries);
         for (let dictionaryName of dictionaries) {
             console.log(dictionaryName);
-            await this.fillDictionary(attributes[dictionaryName]);
+            await this.fillDictionary(attributes[dictionaryName], sessionId);
         }
         navigator.push(data.name);
 
         return data;
     }
 
-    async fillDictionary(emptyDictionary) {
+    async fillDictionary(emptyDictionary, sessionId) {
         const response = await API.getDictionary(
             emptyDictionary.dictionaryType,
-            emptyDictionary.noCache
+            emptyDictionary.noCache,
+            sessionId
         );
         emptyDictionary.dictionaryValues = response.data.dictionaryValues;
     }

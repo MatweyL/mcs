@@ -1,0 +1,14 @@
+{
+  "name": "DIRECTIONS",
+  "label": "Список направлений",
+  "attributes": {
+    "EMPTY": {
+      "type": "CARD_ITEM",
+      "label": "Пустой список",
+      "default": true,
+      "openOnCreate": "DIRECTION_EDITOR",
+      "openOnEdit": "DIRECTION_EDITOR",
+      "fieldName": "uid"
+    }
+  }
+}

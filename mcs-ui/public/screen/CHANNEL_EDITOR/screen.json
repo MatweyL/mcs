@@ -13,6 +13,113 @@
       "dictionaryType": "MODE",
       "defaultValue": "NOT_DEFINED"
     },
+    "PPRCH": {
+      "name": "PPRCH",
+      "label": "ППРЧ",
+      "type": "BOOLEAN",
+      "width": "THIRD",
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "SHOW"
+          ],
+          "firingValues": ["TETRA_DMO"]
+        },
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": ["NOT_DEFINED"]
+        }
+      ]
+    },
+    "RETRANSLATOR": {
+      "name": "RETRANSLATOR",
+      "label": "Ретранслятор",
+      "type": "BOOLEAN",
+      "width": "THIRD",
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "SHOW"
+          ],
+          "firingValues": ["TETRA_DMO"]
+        },
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": ["NOT_DEFINED"]
+        }
+      ]
+    },
+    "MCC": {
+      "name": "MCC",
+      "label": "MCC",
+      "type": "TEXT",
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "SHOW"
+          ],
+          "firingValues": ["TETRA_DMO"]
+        },
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": ["NOT_DEFINED"]
+        }
+      ]
+    },
+    "MNC": {
+      "name": "MNC",
+      "label": "MNC",
+      "type": "TEXT",
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "SHOW"
+          ],
+          "firingValues": ["TETRA_DMO"]
+        },
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": ["NOT_DEFINED"]
+        }
+      ]
+    },
+    "GSSI": {
+      "name": "GSSI",
+      "label": "GSSI",
+      "type": "TEXT",
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "SHOW"
+          ],
+          "firingValues": ["TETRA_DMO"]
+        },
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": ["NOT_DEFINED"]
+        }
+      ]
+    },
     "FORBIDDEN_SEND": {
       "name": "FORBIDDEN_SEND",
       "label": "Запрет ПРД",

@@ -1,0 +1,132 @@
+{
+  "name": "DIRECTION_EDITOR",
+  "label": "Редактор направления",
+  "attributes": {
+    "DIRECTION_ID": {
+      "label": "Скрытый атрибут с идентификатором направления",
+      "visible": false,
+      "type": "TEXT"
+    },
+    "CHANNEL": {
+      "label": "Канал:",
+      "type": "DICTIONARY",
+      "dictionaryType": "CHANNEL",
+      "defaultValue": "IDLE",
+      "width": "FULL",
+      "noCache": true
+    },
+    "FORBIDDEN_SEND": {
+      "name": "FORBIDDEN_SEND",
+      "label": "Запрет ПРД",
+      "type": "BOOLEAN",
+      "width": "THIRD",
+      "events": [
+        {
+          "attribute": "CHANNEL",
+          "instructions": [
+            "SHOW"
+          ],
+          "excludeFiringValues": ["IDLE"]
+        },
+        {
+          "attribute": "CHANNEL",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": ["IDLE"]
+        }
+      ]
+    },
+    "TONE_CALL": {
+      "name": "TONE_CALL",
+      "label": "Тон. вызов",
+      "type": "BOOLEAN",
+      "width": "THIRD",
+      "events": [
+        {
+          "attribute": "CHANNEL",
+          "instructions": [
+            "SHOW"
+          ],
+          "excludeFiringValues": ["IDLE"]
+        },
+        {
+          "attribute": "CHANNEL",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": ["IDLE"]
+        }
+      ]
+    },
+    "SCAN_LIST": {
+      "name": "SCAN_LIST",
+      "label": "Список скан-я",
+      "type": "DICTIONARY",
+      "defaultValue": "NO",
+      "dictionaryType": "SCAN_LIST",
+      "width": "THIRD",
+      "events": [
+        {
+          "attribute": "CHANNEL",
+          "instructions": [
+            "SHOW"
+          ],
+          "excludeFiringValues": ["IDLE"]
+        },
+        {
+          "attribute": "CHANNEL",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": ["IDLE"]
+        }
+      ]
+    },
+    "ECONOMIZER": {
+      "name": "ECONOMIZER",
+      "label": "Экономайзер",
+      "type": "TEXT",
+      "width": "THIRD",
+      "defaultValue": "3",
+      "events": [
+        {
+          "attribute": "CHANNEL",
+          "instructions": [
+            "SHOW"
+          ],
+          "excludeFiringValues": ["IDLE"]
+        },
+        {
+          "attribute": "CHANNEL",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": ["IDLE"]
+        }
+      ]
+    },
+    "NAME": {
+      "name": "NAME",
+      "label": "Имя",
+      "type": "TEXT",
+      "defaultValue": "Направление 2",
+      "events": [
+        {
+          "attribute": "CHANNEL",
+          "instructions": [
+            "SHOW"
+          ],
+          "excludeFiringValues": ["IDLE"]
+        },
+        {
+          "attribute": "CHANNEL",
+          "instructions": [
+            "HIDE"
+          ],
+          "firingValues": ["IDLE"]
+        }
+      ]
+    }
+  }
+}

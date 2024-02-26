@@ -27,11 +27,11 @@
         "channels": [
           {
             "uid": "c4e3be1d-daba-4bb6-b411-ede2b319049c",
-            "mode": "CHM25",
+            "mode": "VPD",
             "name": "1",
             "forbidden_send": null,
             "ctcss": "NO",
-            "frequency": "",
+            "frequency": null,
             "double_frequency": null
           },
           {
@@ -102,8 +102,8 @@
             "mode": "TETRA_DMO",
             "name": "23",
             "forbidden_send": null,
-            "ctcss": "NO",
-            "frequency": null,
+            "ctcss": "YES",
+            "frequency": "",
             "double_frequency": null
           },
           {
@@ -125,6 +125,54 @@
             "double_frequency": null
           }
         ],
+        "directions": []
+      }
+    },
+    {
+      "uid": "fafd45e5-476e-4ebe-9929-ebd96f7044db",
+      "title": "УТК-X",
+      "date": "26/02/24 09:04",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "channels": [
+          {
+            "uid": "fbe5258f-1548-4cb7-85e9-40e23a47d819",
+            "mode": "TETRA_TMO",
+            "name": "КАНАЛ1",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": "",
+            "double_frequency": null
+          },
+          {
+            "uid": "da629580-023a-40a1-9794-137530667650",
+            "mode": "TETRA_DMO",
+            "name": "К2",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "fdfea772-672d-4fc4-880c-4a47f444e85c",
+            "mode": "CHM25",
+            "name": "23",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": null,
+            "double_frequency": null
+          }
+        ],
+        "directions": []
+      }
+    },
+    {
+      "uid": "52b8f995-ef19-4474-9315-6669f56a1078",
+      "title": "УТК-X",
+      "date": "26/02/24 10:03",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "channels": [],
         "directions": []
       }
     }
