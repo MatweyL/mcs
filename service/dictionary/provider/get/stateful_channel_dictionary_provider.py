@@ -11,6 +11,10 @@ class StatefulChannelDictionaryProvider(DictionaryProviderInterface):
                           dictionaryValues=dictionary_values)
         for channel in phone.channels:
             dictionary_values.append(dict(name=channel.name, value=channel.uid, ))
+        dictionary_values.append({
+                "value": "IDLE",
+                "name": "Idle (не задано)"
+            }, )
         return dictionary
 
     def get_dictionary_type(self) -> str:
