@@ -75,12 +75,15 @@ export default class API {
 
 
     static async getDictionary(dictionaryType, noCache, sessionId) {
+        console.log('getDictionary');
+        console.log(dictionaryType);
+        console.log(sessionId);
         if (noCache === true) {
-            const rs = await endpoints.getDictionary[MOCK_LOCAL_MODE](dictionaryType, sessionId);
+            const rs = await endpoints.getDictionary[NOW_MODE](dictionaryType, sessionId);
             console.log(rs);
             return rs;
         } else if (!dictionaryCache.contains(dictionaryType)) {
-            const rs = await endpoints.getDictionary[MOCK_LOCAL_MODE](dictionaryType, sessionId);
+            const rs = await endpoints.getDictionary[NOW_MODE](dictionaryType, sessionId);
             console.log("Кладем", dictionaryType, " в кеш");
             dictionaryCache.put(dictionaryType, rs.data);
             console.log(rs);
