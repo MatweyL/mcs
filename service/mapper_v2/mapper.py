@@ -72,11 +72,17 @@ class PhoneMapper(Mapper):
 
 class DirectionMapper(Mapper):
 
+
     def map_to_domain(self, entity: E) -> Direction:
         direction = Direction()
 
         direction.uid = entity['uid']
         direction.name = entity['name']
+        direction.channel = entity.get('channel_uid')
+        direction.forbidden_send = entity.get('forbidden_send')
+        direction.tone_call = entity.get('tone_call')
+        direction.scan_list = entity.get('scan_list')
+        direction.economizer = entity.get('economizer')
 
         return direction
 
@@ -85,6 +91,11 @@ class DirectionMapper(Mapper):
 
         entity['uid'] = direction.uid
         entity['name'] = direction.name
+        entity['channel_uid'] = direction.channel
+        entity['forbidden_send'] = direction.forbidden_send
+        entity['tone_call'] = direction.tone_call
+        entity['scan_list'] = direction.scan_list
+        entity['economizer'] = direction.economizer
 
         return entity
 

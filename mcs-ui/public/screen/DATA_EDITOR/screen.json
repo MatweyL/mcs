@@ -6,10 +6,10 @@
       "type": "MENU_ITEM",
       "label": "Общие параметры"
     },
-    "DIRECTIONS_MENU_ITEM": {
+    "DIRECTION_LIST": {
       "type": "MENU_ITEM",
       "label": "Направления",
-      "value": "DIRECTIONS"
+      "value": "DIRECTION_LIST"
     },
     "CHANNEL_LIST": {
       "type": "MENU_ITEM",
@@ -20,7 +20,7 @@
       "type": "MENU_ITEM",
       "label": "Списки сканирования"
     },
-    "PPRCH_FREQUENCY_PLAN_MENU_ITEM": {
+    "PPRCH_FREQUENCY_PLAN": {
       "type": "MENU_ITEM",
       "label": "Частотные планы ППРЧ",
       "value": "PPRCH_FREQUENCY_PLAN"

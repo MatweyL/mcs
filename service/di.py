@@ -13,6 +13,8 @@ from service.core.screen import ScreenEndpoint
 from service.core.screen.impl import SaveScreenUseCaseImpl, GetScreenUseCaseImplV2
 from service.core.screen.processor.get.channel_editor_get_screen_processor import ChannelEditorGetScreenProcessor
 from service.core.screen.processor.get.channel_list_get_screen_processor import ChannelListGetScreenProcessor
+from service.core.screen.processor.get.direction_editor_get_screen_processor import DirectionEditorGetScreenProcessor
+from service.core.screen.processor.get.direction_list_get_screen_processor import DirectionListGetScreenProcessor
 from service.core.screen.processor.get.get_screen_processor import DefaultGetScreenProcessor
 from service.core.screen.processor.get.get_screen_processor_registry import GetScreenProcessorRegistry
 from service.core.screen.processor.save import ChannelEditorSaveScreenProcessor
@@ -47,7 +49,9 @@ user_repo = InMemoryUserRepo(db, user_mapper)
 save_screen_use_case = SaveScreenUseCaseImpl(session_repo, save_screen_processor_registry)
 
 get_screen_processor_registry = GetScreenProcessorRegistry([ChannelListGetScreenProcessor(),
-                                                            ChannelEditorGetScreenProcessor()],
+                                                            ChannelEditorGetScreenProcessor(),
+                                                            DirectionListGetScreenProcessor(),
+                                                            DirectionEditorGetScreenProcessor()],
                                                            DefaultGetScreenProcessor())
 
 screens_dir_path = get_root_path().joinpath('mcs-ui/public/screen')  # TODO: migrate to storage (mongo, redis, pg)

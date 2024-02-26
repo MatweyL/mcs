@@ -22,7 +22,7 @@ class DirectionEditorSaveScreenProcessor(SaveScreenProcessor):
 
     def _fill_direction(self, direction: Direction, attributes: Dict[str, Any], phone: Phone):
         direction.name = attributes.get('NAME')
-        direction.channel = attributes.get('CHANNEL_ID')
+        direction.channel = attributes.get('CHANNEL')
         direction.forbidden_send = attributes.get('FORBIDDEN_SEND')
         direction.tone_call = attributes.get('TONE_CALL')
         direction.scan_list = attributes.get('SCAN_LIST')
