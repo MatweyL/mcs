@@ -2,13 +2,13 @@ import uvicorn
 from fastapi import FastAPI, Depends
 from starlette.middleware.cors import CORSMiddleware
 
-from service.auth.auth_context import AuthContext
 from service.common.logs import logger
+from service.core.auth.auth_context import AuthContext
+from service.core.dictionary.use_case import GetDictionaryRq
+from service.core.screen import GetScreenRq, SaveScreenRq, Screen
+from service.core.session import GetSessionListRq, CreateSessionRq
+from service.core.user.use_case import AuthUserRq, RegisterUserRq
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint
-from service.dictionary.use_case import GetDictionaryRq
-from service.screen.use_case import GetScreenRq, SaveScreenRq, Screen
-from service.session.use_case import GetSessionListRq, CreateSessionRq
-from service.user.use_case import RegisterUserRq, AuthUserRq
 
 app = FastAPI(dependencies=[Depends(auth_filter.authenticate)])
 

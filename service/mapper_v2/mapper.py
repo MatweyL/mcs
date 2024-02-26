@@ -1,11 +1,11 @@
 from abc import abstractmethod
 from typing import TypeVar
 
-from service.domain_v2.channel import Channel
-from service.domain_v2.direction import Direction
-from service.domain_v2.phone import Phone
-from service.domain_v2.session import Session
-from service.domain_v2.user import User
+from service.domain.channel import Channel
+from service.domain.direction import Direction
+from service.domain.phone import Phone
+from service.domain.session import Session
+from service.domain.user import User
 
 D = TypeVar('D')
 E = TypeVar('E')
@@ -99,7 +99,7 @@ class ChannelMapper(Mapper):
         channel.double_frequency = entity.get('double_frequency')
         channel.frequency = entity.get('frequency')
         channel.ctcss = entity.get('ctcss')
-        channel.double_frequency = entity.get('forbidden_send')
+        channel.forbidden_send = entity.get('forbidden_send')
 
         return channel
 
