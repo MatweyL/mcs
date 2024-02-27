@@ -15,6 +15,10 @@ class VoidResponse(Response):
     pass
 
 
+class EmptyRequest(Request):
+    pass
+
+
 class UseCase:
     @abstractmethod
     def apply(self, request: Request) -> Response:

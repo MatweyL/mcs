@@ -1,7 +1,5 @@
 from dataclasses import dataclass
 
-from service.domain.channel import Channel
-
 
 @dataclass
 class Direction:

@@ -29,7 +29,7 @@ class SaveScreenUseCaseImpl(SaveScreenUseCase):
         return VoidResponse()
 
 
-class GetScreenUseCaseImplV2(GetScreenUseCase):
+class GetScreenUseCaseImpl(GetScreenUseCase):
     def __init__(self,
                  session_repo: SessionRepo,
                  registry: GetScreenProcessorRegistry,

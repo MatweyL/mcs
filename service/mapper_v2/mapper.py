@@ -3,6 +3,7 @@ from typing import TypeVar
 
 from service.domain.channel import Channel
 from service.domain.direction import Direction
+from service.domain.group import Group
 from service.domain.phone import Phone
 from service.domain.session import Session
 from service.domain.user import User
@@ -71,7 +72,6 @@ class PhoneMapper(Mapper):
 
 
 class DirectionMapper(Mapper):
-
 
     def map_to_domain(self, entity: E) -> Direction:
         direction = Direction()
@@ -150,5 +150,23 @@ class UserMapper(Mapper):
         entity['surname'] = user.surname
         entity['password'] = user.password
         entity['patronymic'] = user.patronymic
+
+        return entity
+
+
+class GroupMapper(Mapper):
+    def map_to_domain(self, entity: dict) -> Group:
+        group = Group()
+
+        group.uid = entity['uid']
+        group.name = entity['name']
+
+        return group
+
+    def map_to_entity(self, group: Group) -> dict:
+        entity = dict()
+
+        entity['uid'] = group.uid
+        entity['name'] = group.name
 
         return entity
