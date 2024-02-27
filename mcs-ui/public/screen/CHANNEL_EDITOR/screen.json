@@ -229,19 +229,5 @@
         }
       ]
     }
-  },
-  "buttons": {
-    "BUTTON_SELECT": {
-      "label": "Выбрать",
-      "onPress": {
-        "path": "/select"
-      }
-    },
-    "BUTTON_ERASE": {
-      "label": "Стереть",
-      "onPress": {
-        "path": "/erase"
-      }
-    }
   }
 }
