@@ -1,4 +1,5 @@
-from service.core.session.use_case import GetSessionListUseCase, GetSessionListRq, CreateSessionUseCase, CreateSessionRq, \
+from service.core.session.use_case import GetSessionListUseCase, GetSessionListRq, CreateSessionUseCase, \
+    CreateSessionRq, \
     CreatedSessionRs, SessionListRs
 
 
@@ -14,4 +15,3 @@ class SessionEndpoint:
 
     def create_session(self, request: CreateSessionRq) -> CreatedSessionRs:
         return self.create_session_use_case.apply(request)
-

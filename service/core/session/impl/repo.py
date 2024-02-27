@@ -2,10 +2,10 @@ from typing import List
 
 from service.common.logs import logger
 from service.common.utils import generate_uid
+from service.core.session.repo import SessionRepo
 from service.db.db import JsonDb
 from service.domain.session import Session
 from service.mapper_v2.mapper import SessionMapper
-from service.core.session.repo import SessionRepo
 
 
 class InMemorySessionRepo(SessionRepo):

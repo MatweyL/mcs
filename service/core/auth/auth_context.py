@@ -11,5 +11,5 @@ class AuthContext:
         AuthContext.user = user
 
     @staticmethod
-    def get_now_user() -> Optional[User] :
+    def get_now_user() -> Optional[User]:
         return AuthContext.user

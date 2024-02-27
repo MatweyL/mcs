@@ -2,7 +2,6 @@ from typing import Dict, Any
 
 from service.common.utils import generate_uid
 from service.core.screen.processor.save import SaveScreenProcessor
-from service.domain.channel import Channel
 from service.domain.direction import Direction
 from service.domain.phone import Phone
 from service.domain.session import Session

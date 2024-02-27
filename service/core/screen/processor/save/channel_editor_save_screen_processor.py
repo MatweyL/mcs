@@ -1,9 +1,9 @@
 from typing import Dict, Any
 
 from service.common.utils import generate_uid
+from service.core.screen.processor.save.save_screen_processor import SaveScreenProcessor
 from service.domain.channel import Channel
 from service.domain.session import Session
-from service.core.screen.processor.save.save_screen_processor import SaveScreenProcessor
 
 
 class ChannelEditorSaveScreenProcessor(SaveScreenProcessor):

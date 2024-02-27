@@ -4,6 +4,7 @@ from pathlib import Path
 
 from service.common.logs import logger
 
+
 class ScreenRepo(ABC):
     @abstractmethod
     def get(self, screen_name: str) -> dict:

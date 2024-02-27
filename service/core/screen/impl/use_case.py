@@ -1,11 +1,10 @@
-
 from service.common.logs import logger
 from service.core.screen import ScreenRepo
-from service.core.use_case import VoidResponse
 from service.core.screen.processor.get.get_screen_processor_registry import GetScreenProcessorRegistry
 from service.core.screen.processor.save.save_screen_processor_registry import SaveScreenProcessorRegistry
 from service.core.screen.use_case import SaveScreenUseCase, GetScreenUseCase, GetScreenRq, SaveScreenRq
 from service.core.session.repo import SessionRepo
+from service.core.use_case import VoidResponse
 
 
 class SaveScreenUseCaseImpl(SaveScreenUseCase):
@@ -28,6 +27,7 @@ class SaveScreenUseCaseImpl(SaveScreenUseCase):
 
         self.session_repo.save_session(session)
         return VoidResponse()
+
 
 class GetScreenUseCaseImplV2(GetScreenUseCase):
     def __init__(self,

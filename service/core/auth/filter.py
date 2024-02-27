@@ -3,8 +3,8 @@ from typing import Annotated
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 
-from service.core.auth.auth_context import AuthContext
 from service.common.logs import logger
+from service.core.auth.auth_context import AuthContext
 from service.core.user.repo import UserRepo
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth")

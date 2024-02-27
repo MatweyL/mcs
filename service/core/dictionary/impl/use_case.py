@@ -6,7 +6,7 @@ from service.core.session.repo import SessionRepo
 class GetDictionaryUseCaseImpl(GetDictionaryUseCase):
 
     def __init__(self, session_repo: SessionRepo,
-                 registry: GetDictionaryProviderRegistry,):
+                 registry: GetDictionaryProviderRegistry, ):
         self._session_repo = session_repo
         self._registry = registry
 
