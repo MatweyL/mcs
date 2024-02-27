@@ -43,4 +43,7 @@ export default class Actions {
 
     // Открыть экран сессии
     static OPEN_SCREEN_SESSION = "OPEN_SCREEN_SESSION"
+
+    // Аутентифицировать пользователя
+    static AUTHENTICATE = "AUTHENTICATE"
 }

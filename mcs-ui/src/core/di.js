@@ -22,8 +22,11 @@ import {
     OpenScreenSessionActionProcessor
 } from "./store/screen/action/processor/impl/open_screen_session_action_processor";
 import {AttributeClipper} from "./store/screen/selector/attribute_clipper";
+import {UserService} from "./store/user/user_service";
 
 export const screenService = new ScreenService();
+
+export const userService = new UserService();
 
 const calculator = new NextCalculator();
 const buttonsFactory = new ButtonsFactory();

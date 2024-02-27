@@ -1,0 +1,21 @@
+.fieldSelectbox {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fieldSelectbox select {
+    border-radius: 5px;
+    height: 40px;
+    border: 1px solid grey;
+}
+
+.fieldSelectbox p {
+    font-size: 12px;
+    margin: 0 0 5px;
+}
+
+.fieldSelectbox select option {
+    height: 40px;
+}
