@@ -1,6 +1,8 @@
 const DICTIONARY_CACHE = "dictionaryCache";
 
-/// Кеширование словарей
+/**
+ * Кеширование словарей
+ */
 class DictionaryCache {
     contains(dictionaryType) {
         let cached = this.get(dictionaryType);

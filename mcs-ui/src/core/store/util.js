@@ -1,6 +1,9 @@
-/// Конвертирует состояние в виде
-/// {name: SCREEN_NAME, attributes: {ATTRIBUTE_NAME: value}}
-
+/**
+ * Конвертирует состояние в виде
+ * <pre>
+ * {name: SCREEN_NAME, attributes: {ATTRIBUTE_NAME: value}}
+ * </pre>
+ */
 export const convertState = (state) => {
     const attributesState = {};
     Object.keys(state.attributes)
