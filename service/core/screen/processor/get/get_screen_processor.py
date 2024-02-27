@@ -22,4 +22,4 @@ class DefaultGetScreenProcessor:
                 session: Session,
                 screen_template: Dict[str, Any],
                 uid: str):
-        return screen_template
+        pass

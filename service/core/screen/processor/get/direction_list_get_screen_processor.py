@@ -15,7 +15,5 @@ class DirectionListGetScreenProcessor(GetScreenProcessor):
                 'uid': direction.uid
             }
 
-        return screen_template
-
     def get_screen_name(self) -> str:
         return 'DIRECTION_LIST'

@@ -134,7 +134,17 @@
             "double_frequency": null
           }
         ],
-        "directions": []
+        "directions": [
+          {
+            "uid": "a0d74f08-8985-413b-ad56-79d212b3d181",
+            "name": "Направление",
+            "channel_uid": "c4e3be1d-daba-4bb6-b411-ede2b319049c",
+            "forbidden_send": null,
+            "tone_call": true,
+            "scan_list": "NO",
+            "economizer": "3"
+          }
+        ]
       }
     },
     {

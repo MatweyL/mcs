@@ -9,14 +9,14 @@ class DirectionEditorGetScreenProcessor(GetScreenProcessor):
     def process(self, session: Session, screen_template: Dict[str, Any], uid: str):
         logger.info('DIRECTION EDITOR PROCESSOR CALLED')
         if not uid:
-            return screen_template
-        attributes = screen_template['attributes']
+            return
 
         found_direction = session.phone.find_direction(uid)
 
         if not found_direction:
-            return screen_template
+            return
 
+        attributes = screen_template['attributes']
         attributes['DIRECTION_ID']['value'] = found_direction.uid
         attributes['CHANNEL']['value'] = found_direction.channel
         attributes['NAME']['value'] = found_direction.name
@@ -24,8 +24,6 @@ class DirectionEditorGetScreenProcessor(GetScreenProcessor):
         attributes['SCAN_LIST']['value'] = found_direction.scan_list
         attributes['ECONOMIZER']['value'] = found_direction.economizer
         attributes['TONE_CALL']['value'] = found_direction.tone_call
-
-        return screen_template
 
     def get_screen_name(self) -> str:
         return 'DIRECTION_EDITOR'

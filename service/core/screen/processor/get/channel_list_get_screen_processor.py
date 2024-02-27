@@ -1,8 +1,7 @@
 from typing import Dict, Any
 
-from service.common.logs import logger
-from service.domain.session import Session
 from service.core.screen.processor.get.get_screen_processor import GetScreenProcessor
+from service.domain.session import Session
 
 
 class ChannelListGetScreenProcessor(GetScreenProcessor):
@@ -15,8 +14,6 @@ class ChannelListGetScreenProcessor(GetScreenProcessor):
                 'label': channel.name,
                 'uid': channel.uid
             }
-
-        return screen_template
 
     def get_screen_name(self) -> str:
         return "CHANNEL_LIST"

@@ -12,40 +12,20 @@ export function convert(attribute) {
         : null
 }
 
-const createCardItem = (attribute) => {
-    return (
-        <CardItem attribute={attribute} key={attribute.name}/>
-    );
-}
+const cardItem = (attribute) => <CardItem attribute={attribute} key={attribute.name}/>
 
-const createOwnSelectBox = (attribute) => {
-    return (
-        <OwnSelectBox attribute={attribute} key={attribute.name}/>
-    );
-}
+const ownSelectBox = (attribute) => <OwnSelectBox attribute={attribute} key={attribute.name}/>
 
-const createText = (attribute) => {
-    return (
-        <Text attribute={attribute} key={attribute.name}/>
-    );
-}
+const text = (attribute) => <Text attribute={attribute} key={attribute.name}/>
 
-const createCheckbox = (attribute) => {
-    return (
-        <Checkbox attribute={attribute} key={attribute.name}/>
-    );
-}
+const checkbox = (attribute) => <Checkbox attribute={attribute} key={attribute.name}/>
 
-const createMenuItem = (attribute) => {
-    return (
-        <MenuItem attribute={attribute} key={attribute.name}/>
-    );
-}
+const menuItem = (attribute) => <MenuItem attribute={attribute} key={attribute.name}/>
 
 const TYPE_TO_CREATE_ELEMENT = {
-    [Attributes.TEXT]: createText,
-    [Attributes.BOOLEAN]: createCheckbox,
-    [Attributes.DICTIONARY]: createOwnSelectBox,
-    [Attributes.MENU_ITEM]: createMenuItem,
-    [Attributes.CARD_ITEM]: createCardItem,
+    [Attributes.TEXT]: text,
+    [Attributes.BOOLEAN]: checkbox,
+    [Attributes.DICTIONARY]: ownSelectBox,
+    [Attributes.MENU_ITEM]: menuItem,
+    [Attributes.CARD_ITEM]: cardItem,
 }
