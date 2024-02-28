@@ -1,4 +1,5 @@
 from abc import abstractmethod
+from enum import Enum
 
 from service.core.use_case import UseCase, Request, Response
 
@@ -26,15 +27,24 @@ class RegisterUserUseCase(UseCase):
 
 
 class AuthUserRq(Request):
-    username: str
+    uid: str
     password: str
 
 
-class AuthTokenRs(Response):
-    token: str
+class AuthStatus(Enum):
+    AUTHENTICATED = 'AUTHENTICATED'
+    NON_AUTHENTICATED = 'NON_AUTHENTICATED'
+
+
+class AuthResultRs(Response):
+    def __init__(self,
+                 status: AuthStatus,
+                 token: str | None = None) -> None:
+        self.status = status
+        self.token = token
 
 
 class AuthenticateUserUseCase(UseCase):
     @abstractmethod
-    def apply(self, request: AuthUserRq) -> AuthTokenRs:
+    def apply(self, request: AuthUserRq) -> AuthResultRs:
         pass

@@ -28,4 +28,7 @@ export default class Requests {
 
     // Закрыть сессию
     static CLOSE_SCREEN_SESSION = "CLOSE_SCREEN_SESSION";
+
+    // Аутентифицировать пользователя
+    static AUTHENTICATE = "AUTHENTICATE";
 }

@@ -1,8 +1,9 @@
+import hashlib
+
 from service.common.mapper import Mapper
-from service.common.utils import generate_uid
 from service.core.user.repo import UserRepo
 from service.core.user.use_case import RegisterUserUseCase, RegisterUserRq, RegisteredUserRs, AuthenticateUserUseCase, \
-    AuthUserRq, AuthTokenRs
+    AuthUserRq, AuthResultRs, AuthStatus
 from service.domain.user import User
 
 
@@ -22,9 +23,13 @@ class AuthenticateUserUseCaseImpl(AuthenticateUserUseCase):
     def __init__(self, user_repo: UserRepo):
         self.user_repo = user_repo
 
-    def apply(self, request: AuthUserRq) -> AuthTokenRs:
-        user = self.user_repo.get_user(request.username)
+    def apply(self, request: AuthUserRq) -> AuthResultRs:
+        user = self.user_repo.get_user_by_uid(request.uid)
         if not user:
-            raise Exception()
+            return AuthResultRs(status=AuthStatus.NON_AUTHENTICATED)
 
-        return AuthTokenRs(token=generate_uid())
+        encrypted_password = hashlib.md5(request.password.encode()).hexdigest()
+        if encrypted_password != user.password:
+            return AuthResultRs(status=AuthStatus.NON_AUTHENTICATED)
+
+        return AuthResultRs(status=AuthStatus.AUTHENTICATED, token=user.uid)

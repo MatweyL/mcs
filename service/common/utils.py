@@ -1,7 +1,7 @@
 import os.path
+from datetime import datetime
 from pathlib import Path
 from uuid import uuid4
-from datetime import datetime
 
 
 def get_root_path() -> Path:

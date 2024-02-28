@@ -1,20 +1,46 @@
 {
+  "groups": [
+    {
+      "uid": "a89fbc08-844f-46e7-b9f1-ebd3f59e17989",
+      "name": "102 взвод"
+    },
+    {
+      "uid": "b88fbc08-844f-46e7-b9f1-ebd3f59e1788",
+      "name": "112 взвод"
+    }
+  ],
   "users": [
     {
-      "name": "John",
-      "surname": "Don",
-      "patronymic": "Smith",
-      "group": "102",
-      "password": "123",
+      "name": "Иван",
+      "surname": "Иванов",
+      "patronymic": "Иванович",
+      "password": "202cb962ac59075b964b07152d234b70",
+      "group": "a89fbc08-844f-46e7-b9f1-ebd3f59e17989",
       "uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790"
     },
     {
-      "name": "Ivan",
-      "surname": "Ivanov",
-      "patronymic": "Ivanovich",
-      "group": "102",
-      "password": "123",
+      "name": "Михаил",
+      "surname": "Михаилов",
+      "patronymic": "Михайлович",
+      "password": "202cb962ac59075b964b07152d234b70",
+      "group": "a89fbc08-844f-46e7-b9f1-ebd3f59e17989",
+      "uid": "e88fbc08-844f-46e7-a7f1-ebd3f59e1790"
+    },
+    {
+      "name": "Александр",
+      "surname": "Александров",
+      "patronymic": "Александрович",
+      "password": "202cb962ac59075b964b07152d234b70",
+      "group": "b88fbc08-844f-46e7-b9f1-ebd3f59e1788",
       "uid": "1668b4b4-6fee-4369-9108-b49403fb516e"
+    },
+    {
+      "name": "Егор",
+      "surname": "Егоров",
+      "patronymic": "Егорович",
+      "password": "202cb962ac59075b964b07152d234b70",
+      "group": "b88fbc08-844f-46e7-b9f1-ebd3f59e1788",
+      "uid": "e66fbc08-833f-46e7-a7f1-ebd3f59e1790"
     }
   ],
   "sessions": [
@@ -143,6 +169,15 @@
             "tone_call": true,
             "scan_list": "NO",
             "economizer": "3"
+          },
+          {
+            "uid": "2b0468f6-2f44-46f5-9a2b-8cd2a05efdfb",
+            "name": "Направление 2",
+            "channel_uid": "c4e3be1d-daba-4bb6-b411-ede2b319049c",
+            "forbidden_send": null,
+            "tone_call": null,
+            "scan_list": "NO",
+            "economizer": "3"
           }
         ]
       }
@@ -231,6 +266,16 @@
             "economizer": "3"
           }
         ]
+      }
+    },
+    {
+      "uid": "a2a538b4-a49d-4ad1-b9aa-4db1a2628b2e",
+      "title": "УТК-X",
+      "date": "28/02/24 01:12",
+      "user_uid": "1668b4b4-6fee-4369-9108-b49403fb516e",
+      "phone": {
+        "channels": [],
+        "directions": []
       }
     }
   ],

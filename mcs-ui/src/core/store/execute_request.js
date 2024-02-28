@@ -1,9 +1,10 @@
 import Requests from "../constants/requests";
-import {screenService} from "../di";
+import {screenService, userService} from "../di";
 import Actions from "../constants/actions";
 import Attributes from "../constants/attributes";
 import {navigator} from "./screen/navigator";
 import API from "../../API/api";
+import {AuthStatus} from "../constants/auth_statuses";
 
 export const executeRequest = async (dispatch, request) => {
     console.log(`Execute request - ${request.type}`);
@@ -91,6 +92,17 @@ export const executeRequest = async (dispatch, request) => {
             const screen = attribute.openOnCreate;
             const screenRs = await screenService.getScreen(screen, sessionId);
             dispatch({type: Actions.INIT, payload: screenRs});
+            return;
+        }
+
+        // аутентификация пользователя
+        case Requests.AUTHENTICATE: {
+            const {value, password} = request.payload;
+            const result = await API.authenticate({uid: value, password})
+            if (result.status === AuthStatus.AUTHENTICATED) {
+                await userService.saveToken(result.token);
+            }
+            dispatch({type: Actions.AUTHENTICATE, payload: result});
             return;
         }
     }

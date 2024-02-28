@@ -1,5 +1,6 @@
 import axios from "axios";
 import {dictionaryCache} from "../core/store/dictionary_cache";
+import {userService} from "../core/di";
 
 const MOCK_REMOTE_URL = "https://056f0a88-8d8e-4a2b-b6a5-8f196f1bee39.mock.pstmn.io";
 const LOCAL_PY_URL = "http://localhost:8080";
@@ -11,34 +12,34 @@ const LOCAL_PY_MODE = "LOCAL_PY";
 
 const NOW_MODE = LOCAL_PY_MODE
 
-const token = "e88fbc08-844f-46e7-b9f1-ebd3f59e1790"
+const token = () => userService.getToken();
 
-const config = {
-    headers: {Authorization: `Bearer ${token}`}
+const config = async () => {
+    return {headers: {Authorization: `Bearer ${await token()}`}}
 }
 
 const WARNING = "Отсутствует заглушка"
 
 const endpoints = {
     getDictionary: {
-        [LOCAL_PY_MODE]: (dictionaryType, sessionId) => {
-            return axios.get(`${LOCAL_PY_URL}/dictionary?dictionary_type=${dictionaryType}&session_id=${sessionId}`, config)
+        [LOCAL_PY_MODE]: async (dictionaryType, sessionId) => {
+            return axios.get(`${LOCAL_PY_URL}/dictionary?dictionary_type=${dictionaryType}&session_id=${sessionId}`, await config())
         },
         [MOCK_LOCAL_MODE]: (dictionaryType, sessionId) => {
             return axios.get(`${MOCK_LOCAL_URL}/dictionary/${dictionaryType}/dictionary.json`, config)
         }
     },
     getScreen: {
-        [LOCAL_PY_MODE]: (screenName, sessionId, id) => {
-            return axios.get(`${LOCAL_PY_URL}/screen?screen_name=${screenName}&session_id=${sessionId}&element_id=${id}`, config)
+        [LOCAL_PY_MODE]: async (screenName, sessionId, id) => {
+            return axios.get(`${LOCAL_PY_URL}/screen?screen_name=${screenName}&session_id=${sessionId}&element_id=${id}`, await config())
         },
         [MOCK_LOCAL_MODE]: (screenName, sessionId, id) => {
             return axios.get(`${MOCK_LOCAL_URL}/screen/${screenName}/screen.json`, config)
         }
     },
     saveScreen: {
-        [LOCAL_PY_MODE]: (body, sessionId) => {
-            return axios.post(`${LOCAL_PY_URL}/screen?session_id=${sessionId}`, body, config)
+        [LOCAL_PY_MODE]: async (body, sessionId) => {
+            return axios.post(`${LOCAL_PY_URL}/screen?session_id=${sessionId}`, body, await config())
         },
         [MOCK_LOCAL_MODE]: (body, sessionId) => {
             console.log(body)
@@ -46,15 +47,27 @@ const endpoints = {
         }
     },
     getExistedScreen: {
-        [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/${endpoint}`, config),
+        [LOCAL_PY_MODE]: async endpoint => axios.get(`${LOCAL_PY_URL}/${endpoint}`, await config()),
         [MOCK_LOCAL_MODE]: endpoint => console.log(endpoint)
     },
     getSessions: {
-        [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/sessions`, config),
+        [LOCAL_PY_MODE]: async endpoint => axios.get(`${LOCAL_PY_URL}/sessions`, await config()),
         [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING)
     },
     createSession: {
-        [LOCAL_PY_MODE]: endpoint => axios.post(`${LOCAL_PY_URL}/session`, {}, config),
+        [LOCAL_PY_MODE]: async endpoint => axios.post(`${LOCAL_PY_URL}/session`, {}, await config()),
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    getGroups: {
+        [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/groups`),
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    getUsersByGroupId: {
+        [LOCAL_PY_MODE]: groupId => axios.get(`${LOCAL_PY_URL}/users?group_uid=${groupId}`),
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    authenticate: {
+        [LOCAL_PY_MODE]: user => axios.post(`${LOCAL_PY_URL}/auth`, user),
         [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
     }
 }
@@ -112,6 +125,26 @@ export default class API {
         console.log(screen);
         const rs = await endpoints.saveScreen[NOW_MODE](screen, sessionId);
         console.log(rs);
+    }
+
+    static async getGroups() {
+        const rs = await endpoints.getGroups[NOW_MODE]();
+        console.log(rs);
+        return rs.data.groups;
+    }
+
+    static async getUsersByGroup(groupId) {
+        console.log(groupId);
+        const rs = await endpoints.getUsersByGroupId[NOW_MODE](groupId);
+        console.log(rs);
+        return rs.data.users;
+    }
+
+    static async authenticate(user) {
+        console.log(user);
+        const rs = await endpoints.authenticate[NOW_MODE](user);
+        console.log(rs);
+        return rs.data;
     }
 }
 
