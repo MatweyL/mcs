@@ -14,11 +14,14 @@
 
 Добавить:
 1. Ручки для запросов:
+
    2. POST `/session/start?session_uid=...`
    3. POST `/session/finish?session_uid=...`
 2. Добавить соответствующие UseCase'ы в session_endpoint:
+
    3. `StartSessionUseCase`
    4. `FinishSessionUseCase`
+   
 3. Расширить доменный объект Session добавить:
    - Поле `status` - текущий статус сессии. Возможные значения:
      - `READY` - можно начать выполнение УТК
@@ -52,4 +55,4 @@ class TrainingResultCalculatorService:
 5. Реализовать `DumbTrainingResultCalculatorStrategy` (логика метода `calculate` на усмотрение)
 4. Реализовать созданные UseCase:
    - `StartSessionUseCase`: проверяет, можно ли перевести текущую сессию в статус `STARTED`. Переводит если это возможно, добавляет поле в массив `attempts`. Сохраняет сессию. В качестве результата возвращает **статус сессии**
-   - `FinishSessionUseCase`: проверяет, можно ли перевести текущую сессию в статус `READY`. Переводит если это возможно, добавляет поле в массив `attempts`. Сохраняет сессию. Передает объект `Phone`, `attempts[index]`, `training` в  `TrainingResultChecker`. Возвращает **расчитанный чекером результат**
+   - `FinishSessionUseCase`: проверяет, можно ли перевести текущую сессию в статус `READY`. Переводит если это возможно, добавляет поле в массив `attempts`. Сохраняет сессию. Передает объект `session` в  `TrainingResultCalculatorService`. Возвращает **расчитанный калькулятором результат**
