@@ -97,12 +97,28 @@ export const executeRequest = async (dispatch, request) => {
 
         // аутентификация пользователя
         case Requests.AUTHENTICATE: {
+            const {value} = request.payload;
+            const result = await API.authenticate({uid: value})
+
+            dispatch({type: Actions.LOAD_USER_INFO, payload: result});
+            return;
+        }
+
+        // вход
+        case Requests.LOGIN: {
             const {value, password} = request.payload;
-            const result = await API.authenticate({uid: value, password})
+            const result = await API.login({uid: value, password})
             if (result.status === AuthStatus.AUTHENTICATED) {
-                await userService.saveToken(result.token);
+                userService.saveToken(result.token);
             }
-            dispatch({type: Actions.AUTHENTICATE, payload: result});
+            dispatch({type: Actions.LOAD_USER_INFO, payload: result});
+            return;
+        }
+
+        // выход из профиля
+        case Requests.LOGOUT: {
+            userService.clearToken();
+            dispatch({type: Actions.LOGOUT});
             return;
         }
     }

@@ -8,7 +8,7 @@ from service.core.dictionary.use_case import GetDictionaryRq
 from service.core.group.use_case import GetUserListByGroupRq
 from service.core.screen import GetScreenRq, SaveScreenRq, Screen
 from service.core.session import GetSessionListRq, CreateSessionRq
-from service.core.user.use_case import AuthUserRq, RegisterUserRq
+from service.core.user.use_case import AuthUserRq, RegisterUserRq, LoginUserRq
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint, \
     group_endpoint
 
@@ -72,6 +72,10 @@ async def endpoint_test():
 @not_auth_router.post("/auth")
 async def auth_user(request: AuthUserRq):
     return user_endpoint.authenticate_user(request)
+
+@not_auth_router.post("/login")
+async def auth_user(request: LoginUserRq):
+    return user_endpoint.login_user(request)
 
 
 app = FastAPI()

@@ -8,6 +8,7 @@ import TextButton from "../components/UI/TextButton/TextButton";
 import {useNavigate} from "react-router-dom";
 import {useScreenSessionId} from "../hooks/useScreenSessionId";
 import {execute} from "../core/store/execute";
+import {RoutePaths} from "../router";
 
 /**
  * Страница экрана телефона
@@ -23,7 +24,7 @@ const ScreenPage = () => {
 
     const back = () => {
         execute(dispatch, {meta: {action: {type: Requests.CLOSE_SCREEN_SESSION, request: true}}});
-        navigate("/sessions");
+        navigate(RoutePaths.SESSIONS);
     }
 
     return (

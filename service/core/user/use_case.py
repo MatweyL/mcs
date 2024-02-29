@@ -28,7 +28,6 @@ class RegisterUserUseCase(UseCase):
 
 class AuthUserRq(Request):
     uid: str
-    password: str
 
 
 class AuthStatus(Enum):
@@ -39,12 +38,25 @@ class AuthStatus(Enum):
 class AuthResultRs(Response):
     def __init__(self,
                  status: AuthStatus,
+                 fio: str | None = None,
                  token: str | None = None) -> None:
         self.status = status
         self.token = token
+        self.fio = fio
 
 
 class AuthenticateUserUseCase(UseCase):
     @abstractmethod
     def apply(self, request: AuthUserRq) -> AuthResultRs:
+        pass
+
+
+class LoginUserRq(Request):
+    uid: str
+    password: str
+
+
+class LoginUserUseCase(UseCase):
+    @abstractmethod
+    def apply(self, request: LoginUserRq) -> AuthResultRs:
         pass
