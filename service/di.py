@@ -28,7 +28,7 @@ from service.core.session.impl.repo import InMemorySessionRepo
 from service.core.session.impl.use_case import GetSessionListUseCaseImpl, CreateSessionUseCaseImpl
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo
-from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl
+from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
 from service.db.db import JsonDb
 from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper, GroupMapper
 
@@ -38,7 +38,6 @@ save_screen_processor_registry = SaveScreenProcessorRegistry([ChannelEditorSaveS
 db_json_path = get_root_path().joinpath('service/db/db.json')
 db = JsonDb(db_json_path)
 mapper = Mapper()
-
 
 get_screen_processor_registry = GetScreenProcessorRegistry([ChannelListGetScreenProcessor(),
                                                             ChannelEditorGetScreenProcessor(),
@@ -70,10 +69,12 @@ auth_filter = AuthFilter(user_repo)
 
 register_user_use_case = RegisterUserUseCaseImpl(user_repo, mapper)
 authenticate_user_use_case = AuthenticateUserUseCaseImpl(user_repo)
+login_user_use_case = LoginUserUseCaseImpl(user_repo)
 
 user_endpoint = UserEndpoint(
     register_user_use_case,
-    authenticate_user_use_case
+    authenticate_user_use_case,
+    login_user_use_case
 )
 
 get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)

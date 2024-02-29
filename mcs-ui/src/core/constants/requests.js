@@ -31,4 +31,10 @@ export default class Requests {
 
     // Аутентифицировать пользователя
     static AUTHENTICATE = "AUTHENTICATE";
+
+    // Войти
+    static LOGIN = "LOGIN";
+
+    // Выйти
+    static LOGOUT = "LOGOUT";
 }

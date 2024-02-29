@@ -6,6 +6,7 @@ import RoundButton from "../components/UI/RoundButton/RoundButton";
 import {useDispatch} from "react-redux";
 import Requests from "../core/constants/requests";
 import {execute} from "../core/store/execute";
+import {useAuthenticated} from "../hooks/useAuthenticated";
 
 /**
  * Страница списка сессий пользователя
@@ -13,13 +14,16 @@ import {execute} from "../core/store/execute";
 const SessionListPage = () => {
     const dispatch = useDispatch();
     const sessions = useSessions();
+    const authenticated = useAuthenticated();
 
     const createSession = () => {
         execute(dispatch, {meta: {action: {type: Requests.CREATE_SESSION, request: true}}});
     }
 
     useEffect(() => {
-        execute(dispatch, {meta: {action: {type: Requests.GET_SESSIONS, request: true}}});
+        if (authenticated) {
+            execute(dispatch, {meta: {action: {type: Requests.GET_SESSIONS, request: true}}});
+        }
     }, []);
 
     return (

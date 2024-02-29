@@ -5,7 +5,7 @@ import classes from "./Session.module.css";
 const SessionList = ({sessions}) => {
     return (
         <div className={classes.sessionList}>
-            {sessions.map(session => <Session session={session}/>)}
+            {sessions.map(session => <Session key={session.uid} session={session}/>)}
         </div>
     );
 };
