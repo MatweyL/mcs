@@ -14,8 +14,8 @@ const NOW_MODE = LOCAL_PY_MODE
 
 const token = () => userService.getToken();
 
-const config = async () => {
-    return {headers: {Authorization: `Bearer ${await token()}`}}
+const config = () => {
+    return {headers: {Authorization: `Bearer ${token()}`}}
 }
 
 const WARNING = "Отсутствует заглушка"
@@ -23,23 +23,23 @@ const WARNING = "Отсутствует заглушка"
 const endpoints = {
     getDictionary: {
         [LOCAL_PY_MODE]: async (dictionaryType, sessionId) => {
-            return axios.get(`${LOCAL_PY_URL}/dictionary?dictionary_type=${dictionaryType}&session_id=${sessionId}`, await config())
+            return axios.get(`${LOCAL_PY_URL}/dictionary?dictionary_type=${dictionaryType}&session_id=${sessionId}`, config())
         },
         [MOCK_LOCAL_MODE]: (dictionaryType, sessionId) => {
-            return axios.get(`${MOCK_LOCAL_URL}/dictionary/${dictionaryType}/dictionary.json`, config)
+            return axios.get(`${MOCK_LOCAL_URL}/dictionary/${dictionaryType}/dictionary.json`, config())
         }
     },
     getScreen: {
         [LOCAL_PY_MODE]: async (screenName, sessionId, id) => {
-            return axios.get(`${LOCAL_PY_URL}/screen?screen_name=${screenName}&session_id=${sessionId}&element_id=${id}`, await config())
+            return axios.get(`${LOCAL_PY_URL}/screen?screen_name=${screenName}&session_id=${sessionId}&element_id=${id}`, config())
         },
         [MOCK_LOCAL_MODE]: (screenName, sessionId, id) => {
-            return axios.get(`${MOCK_LOCAL_URL}/screen/${screenName}/screen.json`, config)
+            return axios.get(`${MOCK_LOCAL_URL}/screen/${screenName}/screen.json`, config())
         }
     },
     saveScreen: {
         [LOCAL_PY_MODE]: async (body, sessionId) => {
-            return axios.post(`${LOCAL_PY_URL}/screen?session_id=${sessionId}`, body, await config())
+            return axios.post(`${LOCAL_PY_URL}/screen?session_id=${sessionId}`, body, config())
         },
         [MOCK_LOCAL_MODE]: (body, sessionId) => {
             console.log(body)
@@ -47,15 +47,15 @@ const endpoints = {
         }
     },
     getExistedScreen: {
-        [LOCAL_PY_MODE]: async endpoint => axios.get(`${LOCAL_PY_URL}/${endpoint}`, await config()),
+        [LOCAL_PY_MODE]: async endpoint => axios.get(`${LOCAL_PY_URL}/${endpoint}`, config()),
         [MOCK_LOCAL_MODE]: endpoint => console.log(endpoint)
     },
     getSessions: {
-        [LOCAL_PY_MODE]: async endpoint => axios.get(`${LOCAL_PY_URL}/sessions`, await config()),
+        [LOCAL_PY_MODE]: async endpoint => axios.get(`${LOCAL_PY_URL}/sessions`, config()),
         [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING)
     },
     createSession: {
-        [LOCAL_PY_MODE]: async endpoint => axios.post(`${LOCAL_PY_URL}/session`, {}, await config()),
+        [LOCAL_PY_MODE]: async endpoint => axios.post(`${LOCAL_PY_URL}/session`, {}, config()),
         [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
     },
     getGroups: {
@@ -68,6 +68,10 @@ const endpoints = {
     },
     authenticate: {
         [LOCAL_PY_MODE]: user => axios.post(`${LOCAL_PY_URL}/auth`, user),
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    login: {
+        [LOCAL_PY_MODE]: user => axios.post(`${LOCAL_PY_URL}/login`, user),
         [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
     }
 }
@@ -143,6 +147,13 @@ export default class API {
     static async authenticate(user) {
         console.log(user);
         const rs = await endpoints.authenticate[NOW_MODE](user);
+        console.log(rs);
+        return rs.data;
+    }
+
+    static async login(user) {
+        console.log(user);
+        const rs = await endpoints.login[NOW_MODE](user);
         console.log(rs);
         return rs.data;
     }

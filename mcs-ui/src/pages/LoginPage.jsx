@@ -8,7 +8,6 @@ import API from "../API/api";
 import {useDispatch} from "react-redux";
 import Requests from "../core/constants/requests";
 import {execute} from "../core/store/execute";
-import {useAuthenticated} from "../hooks/useAuthenticated";
 
 const fetchStudents = async (groupId) => (await API.getUsersByGroup(groupId)).map(
     user => {
@@ -37,20 +36,13 @@ const LoginPage = () => {
     const [nowStudent, setNowStudent] = useState('');
 
     const dispatch = useDispatch();
-    const authenticated = useAuthenticated();
 
-    const auth = () => {
+    const login = () => {
         execute(dispatch, {
-            meta: {action: {type: Requests.AUTHENTICATE, request: true}},
+            meta: {action: {type: Requests.LOGIN, request: true}},
             payload: {value: nowStudent, password}
         })
     }
-
-    useEffect(() => {
-        if (authenticated) {
-            navigate("/sessions")
-        }
-    }, [authenticated])
 
     useEffect(() => {
         fetchGroups().then(groups => setGroups([EMPTY_OPTION, ...groups]));
@@ -75,7 +67,7 @@ const LoginPage = () => {
             <Field title={"Пароль"} value={password}
                    type={"password"}
                    onChange={e => setPassword(e.target.value)}/>
-            <LoginButton onClick={auth}/>
+            <LoginButton onClick={login}/>
         </LoginForm>
     );
 };

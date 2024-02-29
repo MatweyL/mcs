@@ -46,4 +46,10 @@ export default class Actions {
 
     // Аутентифицировать пользователя
     static AUTHENTICATE = "AUTHENTICATE"
+
+    // Выйти из профиля
+    static LOGOUT = "LOGOUT";
+
+    // Загрузить информацию по пользователю
+    static LOAD_USER_INFO = "LOAD_USER_INFO";
 }
