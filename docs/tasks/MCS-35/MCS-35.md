@@ -15,12 +15,12 @@
 Добавить:
 1. Ручки для запросов:
 
-   2. POST `/session/start?session_uid=...`
-   3. POST `/session/finish?session_uid=...`
+   - POST `/session/start?session_uid=...`
+   - POST `/session/finish?session_uid=...`
 2. Добавить соответствующие UseCase'ы в session_endpoint:
 
-   3. `StartSessionUseCase`
-   4. `FinishSessionUseCase`
+   - `StartSessionUseCase`
+   - `FinishSessionUseCase`
    
 3. Расширить доменный объект Session добавить:
    - Поле `status` - текущий статус сессии. Возможные значения:
