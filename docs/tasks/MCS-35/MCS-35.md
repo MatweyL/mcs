@@ -25,18 +25,31 @@
      - `STARTED` - пользователь начал выполнение УТК
    - Массив `attempts` - к-й будет хранить парами начало и конец сессии `[[12:34:12, 12:35:11], [12:37:56, None]]`
    - Поле `training` - название текущего УТК
-4. Добавить интерфейс `TrainingResultChecker`:
+4. Добавить интерфейсы:
 ```python
-class TrainingResultChecker:
-    def __init__(self, checkers):
+class TrainingResult:
+    session_uid: str # идентификатор сессии
+    mark: str # оценка
+    attempt: int # номер попытки
+    
+    
+class TrainingResultCalculatorStrategy:
+    def calculate(self, session) -> TrainingResult:
         # implement
         pass
 
-    def check(self, session, attempt, training) -> TrainingResult:
-        # implement
-        pass
+    
+class TrainingResultCalculatorService:
+   def __init__(self, strategies: List[TrainingResultCalculatorStrategy]):
+      # implement
+      pass
+   
+   def calculate(self, session) -> TrainingResult:
+      # implement
+      pass
+
 ```
-5. Реализовать `DumbTrainingResultChecker` (логика метода `check` на усмотрение)
+5. Реализовать `DumbTrainingResultCalculatorStrategy` (логика метода `calculate` на усмотрение)
 4. Реализовать созданные UseCase:
    - `StartSessionUseCase`: проверяет, можно ли перевести текущую сессию в статус `STARTED`. Переводит если это возможно, добавляет поле в массив `attempts`. Сохраняет сессию. В качестве результата возвращает **статус сессии**
    - `FinishSessionUseCase`: проверяет, можно ли перевести текущую сессию в статус `READY`. Переводит если это возможно, добавляет поле в массив `attempts`. Сохраняет сессию. Передает объект `Phone`, `attempts[index]`, `training` в  `TrainingResultChecker`. Возвращает **расчитанный чекером результат**
