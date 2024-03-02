@@ -9,6 +9,7 @@ from service.domain.phone import Phone
 class SessionStatus(str, enum.Enum):
     READY = 'READY'
     STARTED = 'STARTED'
+    IN_WORK = 'IN_WORK'
 
 
 @dataclass

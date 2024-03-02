@@ -1,6 +1,7 @@
 from service.core.session.use_case import GetSessionListUseCase, GetSessionListRq, CreateSessionUseCase, \
     CreateSessionRq, \
-    CreatedSessionRs, SessionListRs, StartSessionRq, FinishSessionRq, StartSessionUseCase, FinishSessionUseCase
+    CreatedSessionRs, SessionListRs, StartSessionRq, FinishSessionRq, StartSessionUseCase, FinishSessionUseCase, \
+    StartedSessionRs, FinishedSessionRs
 
 
 class SessionEndpoint:
@@ -20,8 +21,8 @@ class SessionEndpoint:
     def create_session(self, request: CreateSessionRq) -> CreatedSessionRs:
         return self.create_session_use_case.apply(request)
 
-    def start_session(self, request: StartSessionRq) -> None:
+    def start_session(self, request: StartSessionRq) -> StartedSessionRs:
         return self.start_session_use_case.apply(request)
 
-    def finish_session(self, request: FinishSessionRq) -> None:
+    def finish_session(self, request: FinishSessionRq) -> FinishedSessionRs:
         return self.finish_session_use_case.apply(request)

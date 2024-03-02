@@ -31,7 +31,8 @@ from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
 from service.db.db import JsonDb
-from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper, GroupMapper
+from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper, \
+    GroupMapper, SessionAttemptMapper
 
 save_screen_processor_registry = SaveScreenProcessorRegistry([ChannelEditorSaveScreenProcessor(),
                                                               DirectionEditorSaveScreenProcessor()])
@@ -49,10 +50,11 @@ get_screen_processor_registry = GetScreenProcessorRegistry([ChannelListGetScreen
 screens_dir_path = get_root_path().joinpath('mcs-ui/public/screen')  # TODO: migrate to storage (mongo, redis, pg)
 screens_storage = FileSystemScreenRepo(screens_dir_path)
 
+session_attempt_mapper = SessionAttemptMapper()
 channel_mapper = ChannelMapper()
 direction_mapper = DirectionMapper()
 phone_mapper = PhoneMapper(channel_mapper, direction_mapper)
-session_mapper = SessionMapper(phone_mapper)
+session_mapper = SessionMapper(phone_mapper, session_attempt_mapper)
 
 session_repo = InMemorySessionRepo(db, session_mapper)
 

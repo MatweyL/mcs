@@ -1,8 +1,9 @@
 from abc import abstractmethod
 from typing import List
 
+from service.core.session.training import TrainingResult
 from service.core.use_case import UseCase, Request, Response
-from service.domain.session import Session
+from service.domain.session import Session, SessionStatus
 
 
 class GetSessionListRq(Request):
@@ -37,6 +38,16 @@ class CreatedSessionRs(Response):
         self.session = session
 
 
+class StartedSessionRs(Response):
+    def __init__(self, session_status: SessionStatus):
+        self.session_status = session_status
+
+
+class FinishedSessionRs(Response):
+    def __init__(self, training_result: TrainingResult):
+        self.training_result = training_result
+
+
 class CreateSessionUseCase(UseCase):
     @abstractmethod
     def apply(self, request: CreateSessionRq) -> CreatedSessionRs:
@@ -45,11 +56,11 @@ class CreateSessionUseCase(UseCase):
 
 class StartSessionUseCase(UseCase):
     @abstractmethod
-    def apply(self, request: StartSessionRq) -> Response:
+    def apply(self, request: StartSessionRq) -> StartedSessionRs:
         pass
 
 
 class FinishSessionUseCase(UseCase):
     @abstractmethod
-    def apply(self, request: FinishSessionRq) -> Response:
+    def apply(self, request: FinishSessionRq) -> FinishedSessionRs:
         pass
