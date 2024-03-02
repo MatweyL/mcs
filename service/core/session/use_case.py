@@ -14,6 +14,14 @@ class SessionListRs(Response):
         self.sessions = sessions
 
 
+class StartSessionRq(Request):
+    session_uid: str
+
+
+class FinishSessionRq(Request):
+    session_uid: str
+
+
 class GetSessionListUseCase(UseCase):
     @abstractmethod
     def apply(self, request: GetSessionListRq) -> SessionListRs:
@@ -32,4 +40,16 @@ class CreatedSessionRs(Response):
 class CreateSessionUseCase(UseCase):
     @abstractmethod
     def apply(self, request: CreateSessionRq) -> CreatedSessionRs:
+        pass
+
+
+class StartSessionUseCase(UseCase):
+    @abstractmethod
+    def apply(self, request: StartSessionRq) -> Response:
+        pass
+
+
+class FinishSessionUseCase(UseCase):
+    @abstractmethod
+    def apply(self, request: FinishSessionRq) -> Response:
         pass

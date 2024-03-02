@@ -5,11 +5,11 @@ from service.domain.channel import Channel
 from service.domain.direction import Direction
 from service.domain.group import Group
 from service.domain.phone import Phone
-from service.domain.session import Session
+from service.domain.session import Session, SessionAttempt
 from service.domain.user import User
 
 D = TypeVar('D')
-E = TypeVar('E')
+E = TypeVar('E', bound=dict)
 
 
 class Mapper:
@@ -23,8 +23,9 @@ class Mapper:
 
 
 class SessionMapper(Mapper):
-    def __init__(self, phone_mapper: 'PhoneMapper'):
+    def __init__(self, phone_mapper: 'PhoneMapper', session_attempt_mapper: 'SessionAttemptMapper'):
         self.phone_mapper = phone_mapper
+        self.session_attempt_mapper = session_attempt_mapper
 
     def map_to_domain(self, entity: E) -> Session:
         session = Session()
@@ -34,6 +35,10 @@ class SessionMapper(Mapper):
         session.date = entity['date']
         session.user_uid = entity['user_uid']
         session.phone = self.phone_mapper.map_to_domain(entity['phone'])
+        session.status = entity.get('status')
+        if entity.get('attempts'):
+            session.attempts = [self.session_attempt_mapper.map_to_domain(attempt) for attempt in entity['attempts']]
+        session.training = entity.get('training')
 
         return session
 
@@ -45,7 +50,10 @@ class SessionMapper(Mapper):
         entity['date'] = session.date
         entity['user_uid'] = session.user_uid
         entity['phone'] = self.phone_mapper.map_to_entity(session.phone)
+        entity['status'] = session.status
+        entity['attempts'] = [self.session_attempt_mapper.map_to_entity(attempt) for attempt in session.attempts]
 
+        entity['training'] = session.training
         return entity
 
 
@@ -169,4 +177,18 @@ class GroupMapper(Mapper):
         entity['uid'] = group.uid
         entity['name'] = group.name
 
+        return entity
+
+
+class SessionAttemptMapper(Mapper):
+
+    def map_to_domain(self, entity: E) -> D:
+        session_attempt = SessionAttempt()
+        session_attempt.started = entity.get('started')
+        session_attempt.finished = entity.get('finished')
+        return session_attempt
+
+    def map_to_entity(self, domain: SessionAttempt) -> E:
+        entity = dict(started=domain.started,
+                      finished=domain.finished)
         return entity
