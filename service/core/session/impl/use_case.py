@@ -5,7 +5,7 @@ from service.core.session import StartSessionRq, StartedSessionRs
 from service.core.session.repo import SessionRepo
 from service.core.session.training import TrainingResultCalculatorService
 from service.core.session.use_case import GetSessionListUseCase, GetSessionListRq, SessionListRs, CreateSessionUseCase, \
-    CreateSessionRq, CreatedSessionRs, StartSessionUseCase, FinishSessionUseCase, FinishedSessionRs
+    CreateSessionRq, CreatedSessionRs, StartSessionUseCase, FinishSessionUseCase, FinishedSessionRs, FinishSessionRq
 from service.domain.phone import Phone
 from service.domain.session import Session, SessionStatus, SessionAttempt
 
@@ -58,11 +58,12 @@ class FinishSessionUseCaseImpl(FinishSessionUseCase):
         self.session_repo = session_repo
         self.training_result_calculator = training_result_calculator
 
-    def apply(self, request: StartSessionRq) -> FinishedSessionRs:
+    def apply(self, request: FinishSessionRq) -> FinishedSessionRs:
         session = self.session_repo.get_session(request.session_uid)
-        session.status = SessionStatus.READY
-        current_attempt = session.attempts[-1]
-        current_attempt.finished = datetime.now()
-        self.session_repo.save_session(session)
+        if session.status == SessionStatus.STARTED:
+            session.status = SessionStatus.READY
+            current_attempt = session.attempts[-1]
+            current_attempt.finished = datetime.now()
+            self.session_repo.save_session(session)
         training_result = self.training_result_calculator.calculate(session)
         return FinishedSessionRs(training_result=training_result)

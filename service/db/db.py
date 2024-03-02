@@ -15,4 +15,4 @@ class JsonDb:
 
     def save_json(self, data):
         with open(self.path, 'w', encoding='utf-8') as json_file:
-            json.dump(data, json_file, ensure_ascii=False, indent=2)
+            json.dump(data, json_file, ensure_ascii=False, indent=2, default=str)

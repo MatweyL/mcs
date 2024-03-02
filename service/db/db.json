@@ -180,7 +180,15 @@
             "economizer": "3"
           }
         ]
-      }
+      },
+      "status": "READY",
+      "attempts": [
+        {
+          "started": "2024-03-02 20:00:40.955004",
+          "finished": "2024-03-02 20:03:16.116957"
+        }
+      ],
+      "training": null
     },
     {
       "uid": "fafd45e5-476e-4ebe-9929-ebd96f7044db",

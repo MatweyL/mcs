@@ -1,11 +1,12 @@
 from abc import abstractmethod
+from datetime import datetime
 from typing import TypeVar
 
 from service.domain.channel import Channel
 from service.domain.direction import Direction
 from service.domain.group import Group
 from service.domain.phone import Phone
-from service.domain.session import Session, SessionAttempt
+from service.domain.session import Session, SessionAttempt, SessionStatus
 from service.domain.user import User
 
 D = TypeVar('D')
@@ -35,7 +36,7 @@ class SessionMapper(Mapper):
         session.date = entity['date']
         session.user_uid = entity['user_uid']
         session.phone = self.phone_mapper.map_to_domain(entity['phone'])
-        session.status = entity.get('status')
+        session.status = entity.get('status', SessionStatus.READY)
         if entity.get('attempts'):
             session.attempts = [self.session_attempt_mapper.map_to_domain(attempt) for attempt in entity['attempts']]
         session.training = entity.get('training')
@@ -184,8 +185,9 @@ class SessionAttemptMapper(Mapper):
 
     def map_to_domain(self, entity: E) -> D:
         session_attempt = SessionAttempt()
-        session_attempt.started = entity.get('started')
-        session_attempt.finished = entity.get('finished')
+        session_attempt.started = datetime.fromisoformat(entity['started'])
+        if session_attempt.finished:
+            session_attempt.finished = datetime.fromisoformat(entity['finished'])
         return session_attempt
 
     def map_to_entity(self, domain: SessionAttempt) -> E:
