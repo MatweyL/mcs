@@ -20,19 +20,31 @@ class GetSessionListUseCaseImpl(GetSessionListUseCase):
 
 
 class CreateSessionUseCaseImpl(CreateSessionUseCase):
+
     def __init__(self, session_repo: SessionRepo):
         self.session_repo = session_repo
+        self.conversions = {
+            "UTK1": "УТК-1",
+            "UTK2": "УТК-2",
+            "UTK3": "УТК-3",
+            "UTK4": "УТК-4",
+        }
 
     def apply(self, request: CreateSessionRq) -> CreatedSessionRs:
+        dto = request.session
+
         session = Session()
         session.user_uid = request.user_uid
-        session.title = 'УТК-X'
         session.date = now()
+        # FIXME: оставить только training, подумать о вынесении в отдельную сущность
+        session.title = self.conversions.get(dto.training, "Не определено")
+        session.training = dto.training
         session.phone = Phone()
+        session.status = SessionStatus.READY
 
-        self.session_repo.save_session(session)
+        saved_session = self.session_repo.save_session(session)
 
-        return CreatedSessionRs(session=session)
+        return CreatedSessionRs(session=saved_session)
 
 
 class StartSessionUseCaseImpl(StartSessionUseCase):

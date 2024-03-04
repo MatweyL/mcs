@@ -9,6 +9,8 @@ import {useNavigate} from "react-router-dom";
 import {useScreenSessionId} from "../hooks/useScreenSessionId";
 import {execute} from "../core/store/execute";
 import {RoutePaths} from "../router";
+import FormButton from "../components/UI/FormButton/FormButton";
+import ScreenSessionControl from "../components/UI/ScreenSessionControl/ScreenSessionControl";
 
 /**
  * Страница экрана телефона
@@ -29,10 +31,10 @@ const ScreenPage = () => {
 
     return (
         <div style={{display: "flex", justifyContent: "space-between", width: "100%"}}>
-            <div style={{width: "20%", justifyContent: "center", display: "flex"}}>
+            <div style={{width: "30%", justifyContent: "center", display: "flex"}}>
                 <TextButton onClick={back}>← Назад</TextButton>
             </div>
-            <div style={{width: "50%", justifyContent: "center", display: "flex"}}>
+            <div style={{width: "30%", justifyContent: "center", display: "flex"}}>
                 <div className="body">
                     <div className="phone-header"/>
                     <Screen/>
@@ -40,7 +42,8 @@ const ScreenPage = () => {
                     <ScreenShadow/>
                 </div>
             </div>
-            <div style={{width: "20%"}}>
+            <div style={{width: "30%", justifyContent: "end", display: "flex", flexDirection: "column"}}>
+                <ScreenSessionControl/>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import Field from "../components/UI/Field/Field";
-import LoginButton from "../components/UI/LoginButton/LoginButton";
+import FormButton from "../components/UI/FormButton/FormButton";
 import LoginForm from "../components/UI/LoginForm/LoginForm";
 import FieldSelectbox from "../components/UI/FieldSelectbox/FieldSelectbox";
 import API from "../API/api";
@@ -67,7 +67,7 @@ const LoginPage = () => {
             <Field title={"Пароль"} value={password}
                    type={"password"}
                    onChange={e => setPassword(e.target.value)}/>
-            <LoginButton onClick={login}/>
+            <FormButton onClick={login} label={"ВОЙТИ"}/>
         </LoginForm>
     );
 };
