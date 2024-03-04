@@ -6,13 +6,14 @@ import {execute} from "../../../core/store/execute";
 import {useDispatch, useSelector} from "react-redux";
 import Requests from "../../../core/constants/requests";
 import {useUserInfo} from "../../../hooks/useUserInfo";
+import {useTrainingResult} from "../../../hooks/useTrainingResult";
 
 const ScreenSessionControl = () => {
     const sessionId = useScreenSessionId();
     const {fio} = useUserInfo();
     const dispatch = useDispatch();
     const [resultVisible, setResultVisible] = useState(false);
-    const trainingResult = useSelector(state => state.session.trainingResult);
+    const trainingResult = useTrainingResult();
 
     const start = () => {
         console.log("CLICK START");
@@ -28,7 +29,6 @@ const ScreenSessionControl = () => {
             meta: {action: {type: Requests.FINISH_SESSION, request: true}},
             payload: {sessionId}
         })
-        // setResultVisible(true);
     }
 
     useEffect(() => {
