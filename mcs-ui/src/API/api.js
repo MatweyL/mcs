@@ -55,7 +55,15 @@ const endpoints = {
         [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING)
     },
     createSession: {
-        [LOCAL_PY_MODE]: async endpoint => axios.post(`${LOCAL_PY_URL}/session`, {}, config()),
+        [LOCAL_PY_MODE]: async session => axios.post(`${LOCAL_PY_URL}/session`, session, config()),
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    startSession: {
+        [LOCAL_PY_MODE]: async sessionId => axios.post(`${LOCAL_PY_URL}/session/start?session_uid=${sessionId}`, {}, config()),
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    finishSession: {
+        [LOCAL_PY_MODE]: async sessionId => axios.post(`${LOCAL_PY_URL}/session/finish?session_uid=${sessionId}`, {}, config()),
         [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
     },
     getGroups: {
@@ -119,8 +127,20 @@ export default class API {
         return rs.data;
     }
 
-    static async createSession() {
-        const rs = await endpoints.createSession[LOCAL_PY_MODE]();
+    static async createSession(session) {
+        const rs = await endpoints.createSession[LOCAL_PY_MODE](session);
+        console.log(rs);
+        return rs.data;
+    }
+
+    static async startSession(sessionId) {
+        const rs = await endpoints.startSession[LOCAL_PY_MODE](sessionId);
+        console.log(rs);
+        return rs.data;
+    }
+
+    static async finishSession(sessionId) {
+        const rs = await endpoints.finishSession[LOCAL_PY_MODE](sessionId);
         console.log(rs);
         return rs.data;
     }

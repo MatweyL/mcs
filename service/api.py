@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI, Depends, APIRouter
+from fastapi import FastAPI, Depends, APIRouter, HTTPException
 from starlette.middleware.cors import CORSMiddleware
 
 from service.common.logs import logger
@@ -7,7 +7,7 @@ from service.core.auth.auth_context import AuthContext
 from service.core.dictionary.use_case import GetDictionaryRq
 from service.core.group.use_case import GetUserListByGroupRq
 from service.core.screen import GetScreenRq, SaveScreenRq, Screen
-from service.core.session import GetSessionListRq, CreateSessionRq
+from service.core.session import GetSessionListRq, CreateSessionRq, StartSessionRq, FinishSessionRq, SessionRq
 from service.core.user.use_case import AuthUserRq, RegisterUserRq, LoginUserRq
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint, \
     group_endpoint
@@ -45,9 +45,25 @@ async def get_sessions():
 
 
 @auth_router.post("/session")
-async def create_session():
-    request = CreateSessionRq(user_uid=AuthContext.get_now_user().uid)
+async def create_session(session: SessionRq):
+    request = CreateSessionRq(user_uid=AuthContext.get_now_user().uid, session=session)
     return session_endpoint.create_session(request)
+
+
+@auth_router.post("/session/start")
+async def start_session(session_uid: str):
+    request = StartSessionRq(session_uid=session_uid)
+    response = session_endpoint.start_session(request)
+    if not response.already_started:
+        return response
+    else:
+        raise HTTPException(status_code=400)
+
+
+@auth_router.post("/session/finish")
+async def start_session(session_uid: str):
+    request = FinishSessionRq(session_uid=session_uid)
+    return session_endpoint.finish_session(request)
 
 
 not_auth_router = APIRouter()
@@ -72,6 +88,7 @@ async def endpoint_test():
 @not_auth_router.post("/auth")
 async def auth_user(request: AuthUserRq):
     return user_endpoint.authenticate_user(request)
+
 
 @not_auth_router.post("/login")
 async def auth_user(request: LoginUserRq):

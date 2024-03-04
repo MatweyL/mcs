@@ -25,12 +25,16 @@ from service.core.screen.processor.save.direction_editor_save_screen_processor i
 from service.core.screen.processor.save.save_screen_processor_registry import SaveScreenProcessorRegistry
 from service.core.session import SessionEndpoint
 from service.core.session.impl.repo import InMemorySessionRepo
-from service.core.session.impl.use_case import GetSessionListUseCaseImpl, CreateSessionUseCaseImpl
+from service.core.session.impl.training import DumbTrainingResultCalculatorStrategy, TrainingResultCalculatorServiceImpl
+from service.core.session.impl.use_case import GetSessionListUseCaseImpl, CreateSessionUseCaseImpl,\
+    StartSessionUseCaseImpl, FinishSessionUseCaseImpl
+from service.core.session.training import TrainingResultCalculatorService
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
 from service.db.db import JsonDb
-from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper, GroupMapper
+from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper, \
+    GroupMapper, SessionAttemptMapper
 
 save_screen_processor_registry = SaveScreenProcessorRegistry([ChannelEditorSaveScreenProcessor(),
                                                               DirectionEditorSaveScreenProcessor()])
@@ -48,10 +52,11 @@ get_screen_processor_registry = GetScreenProcessorRegistry([ChannelListGetScreen
 screens_dir_path = get_root_path().joinpath('mcs-ui/public/screen')  # TODO: migrate to storage (mongo, redis, pg)
 screens_storage = FileSystemScreenRepo(screens_dir_path)
 
+session_attempt_mapper = SessionAttemptMapper()
 channel_mapper = ChannelMapper()
 direction_mapper = DirectionMapper()
 phone_mapper = PhoneMapper(channel_mapper, direction_mapper)
-session_mapper = SessionMapper(phone_mapper)
+session_mapper = SessionMapper(phone_mapper, session_attempt_mapper)
 
 session_repo = InMemorySessionRepo(db, session_mapper)
 
@@ -77,12 +82,18 @@ user_endpoint = UserEndpoint(
     login_user_use_case
 )
 
+training_result_calculator = TrainingResultCalculatorServiceImpl([], DumbTrainingResultCalculatorStrategy())
+
 get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
 create_session_use_case = CreateSessionUseCaseImpl(session_repo)
+start_session_use_case = StartSessionUseCaseImpl(session_repo)
+finish_session_use_case = FinishSessionUseCaseImpl(session_repo, training_result_calculator)
 
 session_endpoint = SessionEndpoint(
     get_session_list_use_case,
-    create_session_use_case
+    create_session_use_case,
+    start_session_use_case,
+    finish_session_use_case
 )
 
 default_dictionary_provider = DefaultDictionaryProvider(os.path.join(get_root_path(), 'mcs-ui/public/dictionary'))
