@@ -407,6 +407,44 @@
         }
       ],
       "training": "UTK4"
+    },
+    {
+      "uid": "c247f1a8-e0aa-4f72-a42f-c1afa8bd3f9e",
+      "title": "УТК-2",
+      "date": "04/03/24 11:24",
+      "user_uid": "e88fbc08-844f-46e7-a7f1-ebd3f59e1790",
+      "phone": {
+        "channels": [
+          {
+            "uid": "051d300f-2b5f-4d45-99eb-4eabc2c810d7",
+            "mode": "CHM25",
+            "name": "КР1",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": "045775000",
+            "double_frequency": null
+          }
+        ],
+        "directions": [
+          {
+            "uid": "bff2e9fa-4d5c-49d4-8d9b-ded3b62e22b5",
+            "name": "Направление 1",
+            "channel_uid": "051d300f-2b5f-4d45-99eb-4eabc2c810d7",
+            "forbidden_send": null,
+            "tone_call": null,
+            "scan_list": "NO",
+            "economizer": "3"
+          }
+        ]
+      },
+      "status": "READY",
+      "attempts": [
+        {
+          "started": "2024-03-04 11:30:23.720446",
+          "finished": "2024-03-04 11:33:14.565562"
+        }
+      ],
+      "training": "UTK2"
     }
   ],
   "screens": [],
