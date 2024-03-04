@@ -185,7 +185,39 @@
       "attempts": [
         {
           "started": "2024-03-02 20:00:40.955004",
-          "finished": "2024-03-02 20:03:16.116957"
+          "finished": null
+        },
+        {
+          "started": "2024-03-03 23:02:45.533892",
+          "finished": null
+        },
+        {
+          "started": "2024-03-04 10:16:23.411665",
+          "finished": null
+        },
+        {
+          "started": "2024-03-04 10:17:15.612045",
+          "finished": null
+        },
+        {
+          "started": "2024-03-04 10:24:50.646346",
+          "finished": null
+        },
+        {
+          "started": "2024-03-04 10:31:52.549487",
+          "finished": null
+        },
+        {
+          "started": "2024-03-04 10:40:43.488158",
+          "finished": null
+        },
+        {
+          "started": "2024-03-04 10:40:52.732503",
+          "finished": null
+        },
+        {
+          "started": "2024-03-04 10:41:07.501142",
+          "finished": "2024-03-04 10:41:10.572212"
         }
       ],
       "training": null
@@ -285,6 +317,96 @@
         "channels": [],
         "directions": []
       }
+    },
+    {
+      "uid": "2343794a-c01f-49a3-b739-b2afcc9a7f53",
+      "title": "УТК-1",
+      "date": "04/03/24 09:55",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "channels": [],
+        "directions": []
+      },
+      "status": null,
+      "attempts": [],
+      "training": "UTK1"
+    },
+    {
+      "uid": "072fdd30-476e-4567-97ba-14d2d13d47f4",
+      "title": "УТК-3",
+      "date": "04/03/24 09:55",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "channels": [],
+        "directions": []
+      },
+      "status": null,
+      "attempts": [],
+      "training": "UTK3"
+    },
+    {
+      "uid": "2b436098-8ce0-42a0-92f9-9f099d2e6d5c",
+      "title": "УТК-1",
+      "date": "04/03/24 10:42",
+      "user_uid": "e88fbc08-844f-46e7-a7f1-ebd3f59e1790",
+      "phone": {
+        "channels": [],
+        "directions": []
+      },
+      "status": null,
+      "attempts": [],
+      "training": "UTK1"
+    },
+    {
+      "uid": "e2866467-5695-4c58-98ef-5fbc9fe1f997",
+      "title": "УТК-2",
+      "date": "04/03/24 10:43",
+      "user_uid": "e88fbc08-844f-46e7-a7f1-ebd3f59e1790",
+      "phone": {
+        "channels": [],
+        "directions": []
+      },
+      "status": null,
+      "attempts": [],
+      "training": "UTK2"
+    },
+    {
+      "uid": "21b7cc92-7a2c-464d-b91a-cb1507d160b7",
+      "title": "УТК-4",
+      "date": "04/03/24 10:45",
+      "user_uid": "e88fbc08-844f-46e7-a7f1-ebd3f59e1790",
+      "phone": {
+        "channels": [
+          {
+            "uid": "a231e2e3-3539-4e9b-89e9-1942a9c18382",
+            "mode": "CHM25",
+            "name": "234",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": null,
+            "double_frequency": true
+          }
+        ],
+        "directions": [
+          {
+            "uid": "7670a441-b927-4abd-a8e8-8a9f3a5a716e",
+            "name": "Направление 32",
+            "channel_uid": "a231e2e3-3539-4e9b-89e9-1942a9c18382",
+            "forbidden_send": null,
+            "tone_call": null,
+            "scan_list": "NO",
+            "economizer": "3"
+          }
+        ]
+      },
+      "status": "READY",
+      "attempts": [
+        {
+          "started": "2024-03-04 10:45:39.667705",
+          "finished": "2024-03-04 10:46:46.989041"
+        }
+      ],
+      "training": "UTK4"
     }
   ],
   "screens": [],

@@ -18,6 +18,19 @@ class SessionAttempt:
     finished: datetime = None
 
 
+class TrainingValue:
+    def __init__(self, value, label):
+        self.value = value
+        self.label = label
+
+
+class Training(enum.Enum):
+    UTK1 = TrainingValue("UTK1", "УТК-1")
+    UTK2 = TrainingValue("UTK2", "УТК-2")
+    UTK3 = TrainingValue("UTK3", "УТК-3")
+    UTK4 = TrainingValue("UTK4", "УТК-4")
+
+
 @dataclass
 class Session:
     uid: str = None

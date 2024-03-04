@@ -44,6 +44,12 @@ export default class Actions {
     // Открыть экран сессии
     static OPEN_SCREEN_SESSION = "OPEN_SCREEN_SESSION"
 
+    // Начать сессию
+    static START_SESSION = "START_SESSION"
+
+    // Завершить сессию
+    static FINISH_SESSION = "FINISH_SESSION"
+
     // Аутентифицировать пользователя
     static AUTHENTICATE = "AUTHENTICATE"
 

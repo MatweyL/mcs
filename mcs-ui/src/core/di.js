@@ -18,9 +18,6 @@ import {EraseActionProcessor} from "./store/screen/action/processor/impl/erase_a
 import {PressKeyActionProcessor} from "./store/screen/action/processor/impl/press_key_action_processor";
 import {ScreenService} from "./store/screen/screen_service";
 import {ActionProcessorRegistry} from "./store/screen/action/processor/action_processor_registry";
-import {
-    OpenScreenSessionActionProcessor
-} from "./store/screen/action/processor/impl/open_screen_session_action_processor";
 import {AttributeClipper} from "./store/screen/selector/attribute_clipper";
 import {UserService} from "./store/user/user_service";
 
@@ -60,8 +57,6 @@ export const processors = [
     new EraseActionProcessor(),
 
     new PressKeyActionProcessor(calculator),
-
-    new OpenScreenSessionActionProcessor()
 ]
 
 export const actionProcessorRegistry = new ActionProcessorRegistry(processors);

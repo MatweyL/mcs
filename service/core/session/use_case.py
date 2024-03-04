@@ -21,8 +21,13 @@ class GetSessionListUseCase(UseCase):
         pass
 
 
+class SessionRq(Request):
+    training: str
+
+
 class CreateSessionRq(Request):
     user_uid: str
+    session: SessionRq
 
 
 class CreatedSessionRs(Response):

@@ -57,7 +57,8 @@ export const executeRequest = async (dispatch, request) => {
         }
 
         case Requests.CREATE_SESSION: {
-            const createdSession = await API.createSession();
+            const {session} = request.payload;
+            const createdSession = await API.createSession(session);
             const sessionListRs = await API.getSessions();
             dispatch({type: Actions.LOAD_SESSIONS, payload: sessionListRs});
             return;
@@ -65,6 +66,20 @@ export const executeRequest = async (dispatch, request) => {
 
         case Requests.CLOSE_SCREEN_SESSION: {
             navigator.clear();
+            return;
+        }
+
+        case Requests.START_SESSION: {
+            const {sessionId} = request.payload;
+            const result = await API.startSession(sessionId);
+            dispatch({type: Actions.START_SESSION, payload: result});
+            return;
+        }
+
+        case Requests.FINISH_SESSION: {
+            const {sessionId} = request.payload;
+            const result = await API.finishSession(sessionId);
+            dispatch({type: Actions.FINISH_SESSION, payload: result});
             return;
         }
 
