@@ -15,14 +15,6 @@ class SessionListRs(Response):
         self.sessions = sessions
 
 
-class StartSessionRq(Request):
-    session_uid: str
-
-
-class FinishSessionRq(Request):
-    session_uid: str
-
-
 class GetSessionListUseCase(UseCase):
     @abstractmethod
     def apply(self, request: GetSessionListRq) -> SessionListRs:
@@ -38,26 +30,35 @@ class CreatedSessionRs(Response):
         self.session = session
 
 
-class StartedSessionRs(Response):
-    def __init__(self, session_status: SessionStatus):
-        self.session_status = session_status
-
-
-class FinishedSessionRs(Response):
-    def __init__(self, training_result: TrainingResult):
-        self.training_result = training_result
-
-
 class CreateSessionUseCase(UseCase):
     @abstractmethod
     def apply(self, request: CreateSessionRq) -> CreatedSessionRs:
         pass
 
 
+class StartSessionRq(Request):
+    session_uid: str
+
+
+class StartedSessionRs(Response):
+    def __init__(self, session_status: SessionStatus, already_started: bool = False):
+        self.session_status = session_status
+        self.already_started = already_started
+
+
 class StartSessionUseCase(UseCase):
     @abstractmethod
     def apply(self, request: StartSessionRq) -> StartedSessionRs:
         pass
+
+
+class FinishSessionRq(Request):
+    session_uid: str
+
+
+class FinishedSessionRs(Response):
+    def __init__(self, training_result: TrainingResult):
+        self.training_result = training_result
 
 
 class FinishSessionUseCase(UseCase):

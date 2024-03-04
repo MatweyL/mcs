@@ -53,7 +53,11 @@ async def create_session():
 @auth_router.post("/session/start")
 async def start_session(session_uid: str):
     request = StartSessionRq(session_uid=session_uid)
-    return session_endpoint.start_session(request)
+    response = session_endpoint.start_session(request)
+    if not response.already_started:
+        return response
+    else:
+        raise 400
 
 
 @auth_router.post("/session/finish")

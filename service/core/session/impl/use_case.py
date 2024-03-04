@@ -48,9 +48,11 @@ class StartSessionUseCaseImpl(StartSessionUseCase):
             session.attempts.append(session_attempt)
             status = session.status
             self.session_repo.save_session(session)
+            already_started = False
         else:
-            status = SessionStatus.IN_WORK
-        return StartedSessionRs(session_status=status)
+            status = SessionStatus.STARTED
+            already_started = True
+        return StartedSessionRs(session_status=status, already_started=already_started)
 
 
 class FinishSessionUseCaseImpl(FinishSessionUseCase):
