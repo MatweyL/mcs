@@ -29,10 +29,16 @@ class TrainingResultCalculatorStrategy(ABC):
     def calculate(self, session: Session) -> TrainingResult:
         pass
 
+    @abstractmethod
+    def get_name(self):
+        pass
+
 
 class TrainingResultCalculatorService(ABC):
-    def __init__(self, strategies: List[TrainingResultCalculatorStrategy]):
+    def __init__(self, strategies: List[TrainingResultCalculatorStrategy],
+                 default_strategy: TrainingResultCalculatorStrategy):
         self.strategies = strategies
+        self.default_strategy = default_strategy
 
     @abstractmethod
     def calculate(self, session: Session) -> TrainingResult:

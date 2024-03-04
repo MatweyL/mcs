@@ -82,7 +82,7 @@ user_endpoint = UserEndpoint(
     login_user_use_case
 )
 
-training_result_calculator = TrainingResultCalculatorServiceImpl([DumbTrainingResultCalculatorStrategy()])
+training_result_calculator = TrainingResultCalculatorServiceImpl([], DumbTrainingResultCalculatorStrategy())
 
 get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
 create_session_use_case = CreateSessionUseCaseImpl(session_repo)

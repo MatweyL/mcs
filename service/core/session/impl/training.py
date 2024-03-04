@@ -2,7 +2,6 @@ import datetime
 from datetime import timedelta
 from typing import Dict
 
-from service.common.logs import logger
 from service.core.session import TrainingResult
 from service.core.session.training import TrainingResultCalculatorStrategy, Mark, TrainingResultCalculatorService
 from service.domain.session import Session
@@ -40,9 +39,13 @@ class DumbTrainingResultCalculatorStrategy(TrainingResultCalculatorStrategy):
                               mark=mark,
                               duration=attempt_duration.seconds)
 
+    def get_name(self):
+        return 'default'
+
 
 class TrainingResultCalculatorServiceImpl(TrainingResultCalculatorService):
     def calculate(self, session: Session) -> TrainingResult:
         for strategy in self.strategies:
-            if isinstance(strategy, DumbTrainingResultCalculatorStrategy):
+            if strategy.get_name() == session.training:
                 return strategy.calculate(session)
+        return self.default_strategy.calculate(session)
