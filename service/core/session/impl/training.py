@@ -1,3 +1,4 @@
+import datetime
 from datetime import timedelta
 from typing import Dict
 
@@ -23,6 +24,7 @@ class DumbTrainingResultCalculatorStrategy(TrainingResultCalculatorStrategy):
         last_attempt = session.attempts[-1]
         if not last_attempt.finished:
             mark = Mark.NOT_DEFINED
+            attempt_duration = datetime.datetime.now() - last_attempt.started
         else:
             attempt_duration = last_attempt.finished - last_attempt.started
             nearest_timelimit = None
@@ -35,7 +37,8 @@ class DumbTrainingResultCalculatorStrategy(TrainingResultCalculatorStrategy):
 
         return TrainingResult(session_uid=session.uid,
                               attempt=attempt,
-                              mark=mark)
+                              mark=mark,
+                              duration=attempt_duration.seconds)
 
 
 class TrainingResultCalculatorServiceImpl(TrainingResultCalculatorService):

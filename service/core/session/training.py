@@ -17,6 +17,7 @@ class Mark(str, Enum):
 
 @dataclass
 class TrainingResult:
+    duration: float  # длительность выполнения комплекса, секунд
     session_uid: str  # идентификатор сессии
     mark: Mark  # оценка
     attempt: int  # номер попытки
