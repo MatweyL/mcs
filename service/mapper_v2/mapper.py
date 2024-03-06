@@ -39,7 +39,7 @@ class SessionMapper(Mapper):
         session.status = entity.get('status', SessionStatus.READY)
         if entity.get('attempts'):
             session.attempts = [self.session_attempt_mapper.map_to_domain(attempt) for attempt in entity['attempts']]
-        session.training = entity.get('training')
+        session.training = entity.get('trainingvalidator')
 
         return session
 
@@ -54,7 +54,7 @@ class SessionMapper(Mapper):
         entity['status'] = session.status
         entity['attempts'] = [self.session_attempt_mapper.map_to_entity(attempt) for attempt in session.attempts]
 
-        entity['training'] = session.training
+        entity['trainingvalidator'] = session.training
         return entity
 
 

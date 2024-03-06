@@ -26,9 +26,8 @@ from service.core.screen.processor.save.save_screen_processor_registry import Sa
 from service.core.session import SessionEndpoint
 from service.core.session.impl.repo import InMemorySessionRepo
 from service.core.session.impl.training import DumbTrainingResultCalculatorStrategy, TrainingResultCalculatorServiceImpl
-from service.core.session.impl.use_case import GetSessionListUseCaseImpl, CreateSessionUseCaseImpl,\
+from service.core.session.impl.use_case import GetSessionListUseCaseImpl, CreateSessionUseCaseImpl, \
     StartSessionUseCaseImpl, FinishSessionUseCaseImpl
-from service.core.session.training import TrainingResultCalculatorService
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
