@@ -7,6 +7,7 @@
 ![img.png](img.png)
 
 При этом в зависимости от выбранного УТК пользователю будут отрисовываться подсказки для прохождения тренировочного комплекса
+
 ![img_2.png](img_2.png)
 
 ### Постановка задачи
@@ -27,7 +28,7 @@
 5. Ознакомиться с классом в файле `common/screen_navigator`
 4. Ознакомиться с классом в файле `core/session/training/validator/training_validator`
 4. Ознакомиться со структурой классов в файле `core/session/training/validator/step_validator`
-   5. Чтобы понять логику работы `BaseStepValidator`, ознакомиться с тестами `test_base_step_validator`
+   - Чтобы понять логику работы `BaseStepValidator`, ознакомиться с тестами `test_base_step_validator`
 ---
 6. Реализовать `MessageSourceImpl`, ориентируясь на контракт в комментарии к методу `get_message()`
 7. Реализовать `ScreenNavigatorImpl`, ориентируясь на контракт и на тесты `test_screen_navigator`. После реализации, все тесты должны проходить
