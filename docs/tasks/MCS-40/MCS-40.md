@@ -19,7 +19,7 @@
        - `FREE` (свободный)
 
 2. Добавить api
-   - GET `/session/training/validate?session_uid=...`
+   - GET `/session/training/validate?session_uid=...&screen_code=...`
 3. Добавить реализацию api
    - Создать use-case `ValidateTrainingSessionUseCase`
    - Поместить вызов use-case в `session_endpoint`
@@ -37,4 +37,4 @@
 
 ---
 10. Создать реализацию `ValidateTrainingSessionUseCaseImpl`. Пока достаточно просто вызывать `TrainingValidator`.
-11. Протестировать API через вызов `/session/training/validate?session_uid=...`
+11. Протестировать API через вызов `/session/training/validate?session_uid=...&screen_code=...`
