@@ -57,16 +57,16 @@
             "name": "1",
             "forbidden_send": null,
             "ctcss": "NO",
-            "frequency": "23",
+            "frequency": "222",
             "double_frequency": null
           },
           {
             "uid": "6e2c81f7-9d79-4fcb-a207-772e1c9fbc39",
             "mode": "CHM25",
-            "name": "2",
+            "name": null,
             "forbidden_send": null,
-            "ctcss": "YES",
-            "frequency": "23456",
+            "ctcss": "NO",
+            "frequency": null,
             "double_frequency": null
           },
           {
