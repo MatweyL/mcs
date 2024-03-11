@@ -7,7 +7,7 @@ import FieldSelectbox from "../components/UI/FieldSelectbox/FieldSelectbox";
 import API from "../API/api";
 import {useDispatch} from "react-redux";
 import Requests from "../core/constants/requests";
-import {execute} from "../core/store/execute";
+import {request} from "../hooks/request";
 
 const fetchStudents = async (groupId) => (await API.getUsersByGroup(groupId)).map(
     user => {
@@ -38,10 +38,7 @@ const LoginPage = () => {
     const dispatch = useDispatch();
 
     const login = () => {
-        execute(dispatch, {
-            meta: {action: {type: Requests.LOGIN, request: true}},
-            payload: {value: nowStudent, password}
-        })
+        request(Requests.LOGIN, {value: nowStudent, password}, dispatch);
     }
 
     useEffect(() => {
@@ -67,7 +64,9 @@ const LoginPage = () => {
             <Field title={"Пароль"} value={password}
                    type={"password"}
                    onChange={e => setPassword(e.target.value)}/>
-            <FormButton onClick={login} label={"ВОЙТИ"}/>
+            <div style={{marginTop: "20px"}}>
+                <FormButton onClick={login} label={"ВОЙТИ"}/>
+            </div>
         </LoginForm>
     );
 };

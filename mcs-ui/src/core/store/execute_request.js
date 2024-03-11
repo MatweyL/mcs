@@ -136,5 +136,12 @@ export const executeRequest = async (dispatch, request) => {
             dispatch({type: Actions.LOGOUT});
             return;
         }
+
+        case Requests.REQUEST_HINT: {
+            const {sessionId, screenName} = request.payload;
+            const hint = await API.validateTrainingSession(sessionId, screenName);
+            dispatch({type: Actions.UPDATE_HINT, payload: hint});
+            return;
+        }
     }
 }

@@ -1,7 +1,7 @@
 import {useLocation} from "react-router-dom";
 import {defaultRoutes, routes} from "../router";
 import {useEffect} from "react";
-import {useAuthenticated} from "./useAuthenticated";
+import {useAuthenticated} from "./useUserInfo";
 
 export const useNavbarRoutes = (setNavbarRoutes) => {
     const location = useLocation();

@@ -6,7 +6,7 @@ import {useScreen} from "../../../hooks/useScreen";
 import Key from "../Key";
 import classes from "./Keyboard.module.css";
 import {execute} from "../../../core/store/execute";
-import {useScreenSessionId} from "../../../hooks/useScreenSessionId";
+import {useScreenSessionId} from "../../../hooks/useSession";
 
 const ControlKeyboard = () => {
     const dispatch = useDispatch();

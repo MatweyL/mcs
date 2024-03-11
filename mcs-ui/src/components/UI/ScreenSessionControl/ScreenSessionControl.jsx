@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import FormButton from "../FormButton/FormButton";
-import {useScreenSessionId} from "../../../hooks/useScreenSessionId";
 import Modal from "../Modal/Modal";
-import {execute} from "../../../core/store/execute";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import Requests from "../../../core/constants/requests";
 import {useUserInfo} from "../../../hooks/useUserInfo";
-import {useTrainingResult} from "../../../hooks/useTrainingResult";
+import {useScreenSessionId, useTrainingResult} from "../../../hooks/useSession";
+import {request} from "../../../hooks/request";
 
 const ScreenSessionControl = () => {
     const sessionId = useScreenSessionId();
@@ -17,18 +16,12 @@ const ScreenSessionControl = () => {
 
     const start = () => {
         console.log("CLICK START");
-        execute(dispatch, {
-            meta: {action: {type: Requests.START_SESSION, request: true}},
-            payload: {sessionId}
-        })
+        request(Requests.START_SESSION, {sessionId}, dispatch)
     }
 
     const finish = () => {
         console.log("CLICK FINISH");
-        execute(dispatch, {
-            meta: {action: {type: Requests.FINISH_SESSION, request: true}},
-            payload: {sessionId}
-        })
+        request(Requests.FINISH_SESSION, {sessionId}, dispatch)
     }
 
     useEffect(() => {

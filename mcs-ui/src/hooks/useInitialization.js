@@ -1,8 +1,8 @@
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {userService} from "../core/di";
-import {execute} from "../core/store/execute";
 import Actions from "../core/constants/actions";
+import {action} from "./action";
 
 export const useInitialization = () => {
     const dispatch = useDispatch();
@@ -10,7 +10,7 @@ export const useInitialization = () => {
     return useEffect(() => {
         const token = userService.getToken();
         if (token) {
-            execute(dispatch, {meta: {action: {type: Actions.AUTHENTICATE}}, payload: {token}})
+            action(Actions.AUTHENTICATE, {token}, dispatch);
         }
     }, [])
 }

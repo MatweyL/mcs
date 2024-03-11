@@ -43,4 +43,7 @@ export default class Requests {
 
     // Выйти
     static LOGOUT = "LOGOUT";
+
+    // Запросить подсказку для пользователя
+    static REQUEST_HINT = "REQUEST_HINT";
 }
