@@ -9,7 +9,7 @@ import {useSession} from "../../../hooks/useSession";
 import {useScreenName} from "../../../hooks/useScreen";
 
 const TrainingHintBox = () => {
-    const {sessionType, sessionId} = useSession();
+    const {type, sessionId} = useSession();
 
     const screenName = useScreenName();
     const dispatch = useDispatch();
@@ -22,15 +22,15 @@ const TrainingHintBox = () => {
         }
     }, [screenName]);
 
-    const isTraining = () => sessionType === SessionTypes.TRAINING;
+    const isTraining = () => type === SessionTypes.TRAINING;
 
     return (
         isTraining()
-            ? null
-            : <div className={classes.trainingHintBox}>
+            ? <div className={classes.trainingHintBox}>
                 <div>Шаг {hint.order}</div>
                 <div>{hint.message}</div>
             </div>
+            : null
     );
 };
 
