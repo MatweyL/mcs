@@ -168,6 +168,7 @@
       "name": "FREQUENCY",
       "label": "Частота",
       "type": "TEXT",
+      "numeric": true,
       "events": [
         {
           "attribute": "CHANNEL_MODE",
