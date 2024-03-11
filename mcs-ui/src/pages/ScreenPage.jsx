@@ -40,7 +40,7 @@ const ScreenPage = () => {
             }}>
                 <TextButton onClick={back}>← Назад</TextButton>
                 <div style={{height: "100%", display: "flex", flexDirection: "column", justifyContent: "end"}}>
-                    <div style={{marginBottom: "100px"}}>
+                    <div style={{marginBottom: "100px", width: "250px"}}>
                         <TrainingHintBox/>
                     </div>
                 </div>

@@ -2,15 +2,16 @@ import React from 'react';
 import classes from "./Session.module.css";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import Actions from "../../../core/constants/actions";
 import {RoutePaths} from "../../../router";
+import {request} from "../../../hooks/request";
+import Requests from "../../../core/constants/requests";
 
 const Session = ({session}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const openScreenSession = () => {
-        dispatch({type: Actions.OPEN_SCREEN_SESSION, payload: {sessionId: session.uid}})
+        request(Requests.OPEN_SCREEN_SESSION, {sessionId: session.uid}, dispatch);
         navigate(RoutePaths.SCREEN);
     }
 

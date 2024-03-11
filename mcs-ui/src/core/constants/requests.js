@@ -29,6 +29,9 @@ export default class Requests {
     // Закрыть сессию
     static CLOSE_SCREEN_SESSION = "CLOSE_SCREEN_SESSION";
 
+    // Открыть сессию
+    static OPEN_SCREEN_SESSION = "OPEN_SCREEN_SESSION";
+
     // Начать сессию
     static START_SESSION = "START_SESSION"
 

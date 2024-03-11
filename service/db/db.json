@@ -57,7 +57,7 @@
             "name": "1",
             "forbidden_send": null,
             "ctcss": "NO",
-            "frequency": null,
+            "frequency": "23",
             "double_frequency": null
           },
           {
@@ -110,8 +110,8 @@
             "mode": "CHM25",
             "name": "7",
             "forbidden_send": null,
-            "ctcss": null,
-            "frequency": null,
+            "ctcss": "NO",
+            "frequency": "",
             "double_frequency": null
           },
           {
@@ -359,7 +359,17 @@
       "date": "04/03/24 10:42",
       "user_uid": "e88fbc08-844f-46e7-a7f1-ebd3f59e1790",
       "phone": {
-        "channels": [],
+        "channels": [
+          {
+            "uid": "a187274f-3856-48f1-a9fa-addcbb866466",
+            "mode": "CHM25",
+            "name": "ИМЯ",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": "23",
+            "double_frequency": null
+          }
+        ],
         "directions": []
       },
       "status": null,

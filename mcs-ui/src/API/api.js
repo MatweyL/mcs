@@ -1,7 +1,8 @@
 import axios from "axios";
 import {dictionaryCache} from "../core/store/dictionary_cache";
-import {userService} from "../core/di";
+import {cacheService} from "../core/di";
 import {HINT} from "./api_helper";
+import {CacheKeys} from "../core/store/cache_service";
 
 const MOCK_REMOTE_URL = "https://056f0a88-8d8e-4a2b-b6a5-8f196f1bee39.mock.pstmn.io";
 const LOCAL_PY_URL = "http://localhost:8080";
@@ -13,7 +14,7 @@ const LOCAL_PY_MODE = "LOCAL_PY";
 
 const NOW_MODE = LOCAL_PY_MODE
 
-const token = () => userService.getToken();
+const token = () => cacheService.get(CacheKeys.TOKEN_KEY);
 
 const config = () => {
     return {headers: {Authorization: `Bearer ${token()}`}}
