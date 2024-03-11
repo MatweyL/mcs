@@ -1,7 +1,6 @@
 import axios from "axios";
 import {dictionaryCache} from "../core/store/dictionary_cache";
 import {userService} from "../core/di";
-import session from "../components/UI/SessionList/Session";
 import {HINT} from "./api_helper";
 
 const MOCK_REMOTE_URL = "https://056f0a88-8d8e-4a2b-b6a5-8f196f1bee39.mock.pstmn.io";
