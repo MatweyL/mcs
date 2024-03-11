@@ -1,4 +1,3 @@
-
 export class CacheKeys {
     static SESSION_ID_KEY = "SESSION_ID";
     static ELEMENT_ID_KEY = "ELEMENT_ID";
@@ -6,7 +5,6 @@ export class CacheKeys {
 
 }
 
-// TODO: подумать о том, чтобы объединить с UserService
 /**
  * Сервис для кэширования данных при перезагрузке страницы
  */

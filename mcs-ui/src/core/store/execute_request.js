@@ -67,8 +67,7 @@ export const executeRequest = async (dispatch, request) => {
 
         case Requests.CLOSE_SCREEN_SESSION: {
             navigator.clear();
-            cacheService.remove(CacheKeys.SESSION_ID_KEY);
-            cacheService.remove(CacheKeys.ELEMENT_ID_KEY);
+            cacheService.removeAll([CacheKeys.SESSION_ID_KEY, CacheKeys.ELEMENT_ID_KEY])
             return;
         }
 

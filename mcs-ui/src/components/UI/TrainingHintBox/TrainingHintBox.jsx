@@ -17,13 +17,15 @@ const TrainingHintBox = () => {
     const hint = useHint();
 
     useEffect(() => {
-        if (screenName) {
+        if (screenName && isTraining()) {
             request(Requests.REQUEST_HINT, {sessionId, screenName}, dispatch)
         }
     }, [screenName]);
 
+    const isTraining = () => sessionType === SessionTypes.TRAINING;
+
     return (
-        sessionType === SessionTypes.TRAINING
+        isTraining()
             ? null
             : <div className={classes.trainingHintBox}>
                 <div>Шаг {hint.order}</div>
