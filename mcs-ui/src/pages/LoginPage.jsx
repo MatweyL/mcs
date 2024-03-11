@@ -26,14 +26,14 @@ const EMPTY_OPTION = {value: '', label: ''};
  * Страница входа
  */
 const LoginPage = () => {
-    const navigate = useNavigate();
-
     const [password, setPassword] = useState("")
     const [students, setStudents] = useState([]);
     const [groups, setGroups] = useState([]);
 
     const [nowGroup, setNowGroup] = useState('');
     const [nowStudent, setNowStudent] = useState('');
+
+    const [enabled, enable] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -56,6 +56,14 @@ const LoginPage = () => {
         setPassword('')
     }, [nowStudent]);
 
+    useEffect(() => {
+        if (nowGroup && nowStudent && password) {
+            enable(true);
+        } else {
+            enable(false);
+        }
+    }, [nowGroup, nowStudent, password]);
+
     return (
         <LoginForm>
             <h1>Вход</h1>
@@ -65,7 +73,7 @@ const LoginPage = () => {
                    type={"password"}
                    onChange={e => setPassword(e.target.value)}/>
             <div style={{marginTop: "20px"}}>
-                <FormButton onClick={login} label={"ВОЙТИ"}/>
+                <FormButton onClick={login} label={"ВОЙТИ"} enabled={enabled}/>
             </div>
         </LoginForm>
     );
