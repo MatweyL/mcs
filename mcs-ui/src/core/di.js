@@ -19,11 +19,9 @@ import {PressKeyActionProcessor} from "./store/screen/action/processor/impl/pres
 import {ScreenService} from "./store/screen/screen_service";
 import {ActionProcessorRegistry} from "./store/screen/action/processor/action_processor_registry";
 import {AttributeClipper} from "./store/screen/selector/attribute_clipper";
-import {UserService} from "./store/user/user_service";
+import {CacheService} from "./store/cache_service";
 
 export const screenService = new ScreenService();
-
-export const userService = new UserService();
 
 const calculator = new NextCalculator();
 const buttonsFactory = new ButtonsFactory();
@@ -58,5 +56,7 @@ export const processors = [
 
     new PressKeyActionProcessor(calculator),
 ]
+
+export const cacheService = new CacheService();
 
 export const actionProcessorRegistry = new ActionProcessorRegistry(processors);

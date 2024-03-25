@@ -6,11 +6,11 @@ import Screen from "../components/UI/Screen/Screen";
 import ScreenShadow from "../components/UI/Screen/ScreenShadow";
 import TextButton from "../components/UI/TextButton/TextButton";
 import {useNavigate} from "react-router-dom";
-import {useScreenSessionId} from "../hooks/useScreenSessionId";
-import {execute} from "../core/store/execute";
 import {RoutePaths} from "../router";
-import FormButton from "../components/UI/FormButton/FormButton";
 import ScreenSessionControl from "../components/UI/ScreenSessionControl/ScreenSessionControl";
+import TrainingHintBox from "../components/UI/TrainingHintBox/TrainingHintBox";
+import {useScreenSessionId} from "../hooks/useSession";
+import {request} from "../hooks/request";
 
 /**
  * Страница экрана телефона
@@ -21,18 +21,29 @@ const ScreenPage = () => {
     const sessionId = useScreenSessionId();
 
     useEffect(() => {
-        execute(dispatch, {meta: {action: {type: Requests.LOAD, request: true}}, payload: {sessionId}});
+        request(Requests.LOAD, {sessionId}, dispatch);
     }, []);
 
     const back = () => {
-        execute(dispatch, {meta: {action: {type: Requests.CLOSE_SCREEN_SESSION, request: true}}});
+        request(Requests.CLOSE_SCREEN_SESSION, {}, dispatch);
         navigate(RoutePaths.SESSIONS);
     }
 
     return (
         <div style={{display: "flex", justifyContent: "space-between", width: "100%"}}>
-            <div style={{width: "30%", justifyContent: "center", display: "flex"}}>
+            <div style={{
+                width: "30%",
+                justifyContent: "start",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center"
+            }}>
                 <TextButton onClick={back}>← Назад</TextButton>
+                <div style={{height: "100%", display: "flex", flexDirection: "column", justifyContent: "end"}}>
+                    <div style={{marginBottom: "100px", width: "250px"}}>
+                        <TrainingHintBox/>
+                    </div>
+                </div>
             </div>
             <div style={{width: "30%", justifyContent: "center", display: "flex"}}>
                 <div className="body">

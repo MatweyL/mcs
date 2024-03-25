@@ -30,6 +30,9 @@ const Text = ({attribute}) => {
     return (
         <div className={wrapperClass}>
             {attribute.label}
+            <div style={{position: "absolute", right: "5px"}}>
+                {attribute.postfix}
+            </div>
             <input value={attribute.value}
                    key={attribute.name}
                    id={attribute.name}

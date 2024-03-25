@@ -5,6 +5,7 @@ import AttributeHelper from "../../../../helper/attribute_helper";
 
 // Величина задержки, после которой добавляется новый символ, в мс
 const DIFF_TIME = 1000;
+const NUM_KEYS = "0123456789";
 
 export class PressKeyActionProcessor extends ActionProcessor {
     constructor(calculator) {
@@ -19,8 +20,12 @@ export class PressKeyActionProcessor extends ActionProcessor {
             return state;
         }
 
-        const keys = action.payload;
         const {lastPressedKey, lastTimePressed} = state;
+
+        let keys = action.payload;
+        if (nowAttribute.numeric) {
+            keys = this._filterNumeric(keys);
+        }
 
         if (!keys.includes(lastPressedKey)) {
             nowAttribute.value = AttributeHelper.getTextValueOrEmpty(nowAttribute) + keys[0];
@@ -31,12 +36,20 @@ export class PressKeyActionProcessor extends ActionProcessor {
         } else {
             const nowIndex = keys.findIndex(key => lastPressedKey === key);
             const nextIndex = this.calculator.calculateNextByDirection(Actions.DOWN, nowIndex, keys.length);
-            nowAttribute.value = AttributeHelper.getTextValueOrEmpty(nowAttribute).slice(0, -1) + keys[nextIndex];
+            if (nowIndex !== nextIndex) {
+                nowAttribute.value = AttributeHelper.getTextValueOrEmpty(nowAttribute).slice(0, -1) + keys[nextIndex];
+            } else {
+                nowAttribute.value = AttributeHelper.getTextValueOrEmpty(nowAttribute) + keys[nextIndex];
+            }
             state.lastPressedKey = keys[nextIndex];
         }
 
         state.lastTimePressed = Date.now();
         return {...state};
+    }
+
+    _filterNumeric(keys) {
+        return keys.filter(key => NUM_KEYS.includes(key))
     }
 
     getType() {

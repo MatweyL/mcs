@@ -1,7 +1,8 @@
 import {actionProcessorRegistry} from "../../di";
 
 const defaultState = {
-    attributes: {}
+    attributes: {},
+    name: null
 };
 
 export const screenReducer = (state = defaultState, action) => {

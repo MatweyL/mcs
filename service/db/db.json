@@ -57,16 +57,16 @@
             "name": "1",
             "forbidden_send": null,
             "ctcss": "NO",
-            "frequency": null,
+            "frequency": "222",
             "double_frequency": null
           },
           {
             "uid": "6e2c81f7-9d79-4fcb-a207-772e1c9fbc39",
             "mode": "CHM25",
-            "name": "2",
+            "name": null,
             "forbidden_send": null,
-            "ctcss": "YES",
-            "frequency": "23456",
+            "ctcss": "NO",
+            "frequency": null,
             "double_frequency": null
           },
           {
@@ -110,8 +110,8 @@
             "mode": "CHM25",
             "name": "7",
             "forbidden_send": null,
-            "ctcss": null,
-            "frequency": null,
+            "ctcss": "NO",
+            "frequency": "",
             "double_frequency": null
           },
           {
@@ -154,6 +154,15 @@
             "uid": "594ef096-0ef7-49f8-b3d3-ab6e4900754c",
             "mode": "TETRA_DMO",
             "name": "П6",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "7bddd344-c0f2-4ef2-8422-6e9570752007",
+            "mode": "CHM25",
+            "name": null,
             "forbidden_send": null,
             "ctcss": "NO",
             "frequency": null,
@@ -217,7 +226,7 @@
         },
         {
           "started": "2024-03-04 10:41:07.501142",
-          "finished": "2024-03-04 10:41:10.572212"
+          "finished": null
         }
       ],
       "training": null
@@ -350,7 +359,17 @@
       "date": "04/03/24 10:42",
       "user_uid": "e88fbc08-844f-46e7-a7f1-ebd3f59e1790",
       "phone": {
-        "channels": [],
+        "channels": [
+          {
+            "uid": "a187274f-3856-48f1-a9fa-addcbb866466",
+            "mode": "CHM25",
+            "name": "ИМЯ",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": "23",
+            "double_frequency": null
+          }
+        ],
         "directions": []
       },
       "status": null,
@@ -445,6 +464,19 @@
         }
       ],
       "training": "UTK2"
+    },
+    {
+      "uid": "c60bac28-a616-469c-907f-f72a72befd64",
+      "title": "УТК-1",
+      "date": "11/03/24 09:11",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "channels": [],
+        "directions": []
+      },
+      "status": "READY",
+      "attempts": [],
+      "training": "UTK1"
     }
   ],
   "screens": [],

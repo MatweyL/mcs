@@ -1,10 +1,14 @@
 .formButton {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
     border-radius: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
     border: 1px solid grey;
     cursor: pointer;
+}
+
+.formButtonDisabled {
+    opacity: 0.5;
+    cursor: default;
 }

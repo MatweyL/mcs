@@ -58,4 +58,7 @@ export default class Actions {
 
     // Загрузить информацию по пользователю
     static LOAD_USER_INFO = "LOAD_USER_INFO";
+
+    // Обновить подсказку для пользователя
+    static UPDATE_HINT = "UPDATE_HINT";
 }

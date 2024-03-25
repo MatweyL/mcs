@@ -1,6 +1,8 @@
 import axios from "axios";
 import {dictionaryCache} from "../core/store/dictionary_cache";
-import {userService} from "../core/di";
+import {cacheService} from "../core/di";
+import {HINT} from "./api_helper";
+import {CacheKeys} from "../core/store/cache_service";
 
 const MOCK_REMOTE_URL = "https://056f0a88-8d8e-4a2b-b6a5-8f196f1bee39.mock.pstmn.io";
 const LOCAL_PY_URL = "http://localhost:8080";
@@ -12,7 +14,7 @@ const LOCAL_PY_MODE = "LOCAL_PY";
 
 const NOW_MODE = LOCAL_PY_MODE
 
-const token = () => userService.getToken();
+const token = () => cacheService.get(CacheKeys.TOKEN_KEY);
 
 const config = () => {
     return {headers: {Authorization: `Bearer ${token()}`}}
@@ -81,8 +83,18 @@ const endpoints = {
     login: {
         [LOCAL_PY_MODE]: user => axios.post(`${LOCAL_PY_URL}/login`, user),
         [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    validateTrainingSession: {
+        [LOCAL_PY_MODE]: (sessionId, screenName) => {
+            return axios.get(`${LOCAL_PY_URL}/session/training/validate?session_uid=${sessionId}&screen_code=${screenName}`, config())
+        },
+        [MOCK_LOCAL_MODE]: (sessionId, screenName) => {
+            const hintName = HINT[screenName];
+            return axios.get(`${MOCK_LOCAL_URL}/hints/${hintName}`, config())
+        }
     }
 }
+
 
 export default class API {
 
@@ -174,6 +186,13 @@ export default class API {
     static async login(user) {
         console.log(user);
         const rs = await endpoints.login[NOW_MODE](user);
+        console.log(rs);
+        return rs.data;
+    }
+
+    static async validateTrainingSession(sessionId, screenName) {
+        console.log(sessionId, screenName);
+        const rs = await endpoints.validateTrainingSession[MOCK_LOCAL_MODE](sessionId, screenName);
         console.log(rs);
         return rs.data;
     }
