@@ -5,9 +5,9 @@ import SearchBar from "../components/UI/SearchBar/SearchBar";
 import RoundButton from "../components/UI/RoundButton/RoundButton";
 import {useDispatch} from "react-redux";
 import Requests from "../core/constants/requests";
-import {execute} from "../core/store/execute";
-import {useAuthenticated} from "../hooks/useAuthenticated";
 import CreateSessionForm from "../components/UI/CreateSessionForm/CreateSessionForm";
+import {useAuthenticated} from "../hooks/useUserInfo";
+import {request} from "../hooks/request";
 
 /**
  * Страница списка сессий пользователя
@@ -20,7 +20,7 @@ const SessionListPage = () => {
 
     useEffect(() => {
         if (authenticated) {
-            execute(dispatch, {meta: {action: {type: Requests.GET_SESSIONS, request: true}}});
+            request(Requests.GET_SESSIONS, {}, dispatch);
         }
     }, []);
 

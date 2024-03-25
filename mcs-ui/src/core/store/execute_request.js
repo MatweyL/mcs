@@ -1,10 +1,11 @@
 import Requests from "../constants/requests";
-import {screenService, userService} from "../di";
+import {cacheService, screenService} from "../di";
 import Actions from "../constants/actions";
 import Attributes from "../constants/attributes";
 import {navigator} from "./screen/navigator";
 import API from "../../API/api";
 import {AuthStatus} from "../constants/auth_statuses";
+import {CacheKeys} from "./cache_service";
 
 export const executeRequest = async (dispatch, request) => {
     console.log(`Execute request - ${request.type}`);
@@ -29,7 +30,7 @@ export const executeRequest = async (dispatch, request) => {
         }
 
         case Requests.LOAD: {
-            const {sessionId} = request.payload
+            let {sessionId} = request.payload
             const nowScreen = navigator.tail();
 
             // FIXME: для отладки возвращается константа, когда навигатор пустой
@@ -66,6 +67,14 @@ export const executeRequest = async (dispatch, request) => {
 
         case Requests.CLOSE_SCREEN_SESSION: {
             navigator.clear();
+            cacheService.removeAll([CacheKeys.SESSION_ID_KEY, CacheKeys.ELEMENT_ID_KEY])
+            return;
+        }
+
+        case Requests.OPEN_SCREEN_SESSION: {
+            const {sessionId} = request.payload;
+            cacheService.put(CacheKeys.SESSION_ID_KEY, sessionId);
+            dispatch({type: Actions.OPEN_SCREEN_SESSION, payload: {sessionId}})
             return;
         }
 
@@ -88,6 +97,8 @@ export const executeRequest = async (dispatch, request) => {
             const {attribute, sessionId} = request.payload;
             const screen = attribute.openOnEdit;
             const id = attribute[attribute.fieldName];
+            cacheService.put(CacheKeys.ELEMENT_ID_KEY, id);
+
             const screenRs = await screenService.getScreen(screen, sessionId, id);
             dispatch({type: Actions.INIT, payload: screenRs});
             return;
@@ -124,7 +135,7 @@ export const executeRequest = async (dispatch, request) => {
             const {value, password} = request.payload;
             const result = await API.login({uid: value, password})
             if (result.status === AuthStatus.AUTHENTICATED) {
-                userService.saveToken(result.token);
+                cacheService.put(CacheKeys.TOKEN_KEY, result.token);
             }
             dispatch({type: Actions.LOAD_USER_INFO, payload: result});
             return;
@@ -132,8 +143,21 @@ export const executeRequest = async (dispatch, request) => {
 
         // выход из профиля
         case Requests.LOGOUT: {
-            userService.clearToken();
+            cacheService.removeAll([CacheKeys.TOKEN_KEY, CacheKeys.ELEMENT_ID_KEY, CacheKeys.SESSION_ID_KEY])
+            navigator.clear();
             dispatch({type: Actions.LOGOUT});
+            return;
+        }
+
+        // загрузить подсказки
+        case Requests.REQUEST_HINT: {
+            let {sessionId, screenName} = request.payload;
+            if (!sessionId) {
+                sessionId = cacheService.get(CacheKeys.SESSION_ID_KEY);
+            }
+
+            const hint = await API.validateTrainingSession(sessionId, screenName);
+            dispatch({type: Actions.UPDATE_HINT, payload: hint});
             return;
         }
     }

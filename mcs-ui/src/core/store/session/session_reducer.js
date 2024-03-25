@@ -1,8 +1,10 @@
 import Actions from "../../constants/actions";
+import {SessionTypes} from "../../constants/session_types";
 
 const defaultSessionState = {
     sessionId: null,
-    trainingResult: null
+    trainingResult: null,
+    type: SessionTypes.TRAINING
 }
 
 export const sessionReducer = (state = defaultSessionState, action) => {

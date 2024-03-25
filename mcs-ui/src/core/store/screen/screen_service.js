@@ -2,9 +2,19 @@ import API from "../../../API/api";
 import Attributes from "../../constants/attributes";
 import {navigator} from "./navigator";
 import {convertState} from "../util";
+import {cacheService} from "../../di";
+import {CacheKeys} from "../cache_service";
 
 export class ScreenService {
     async getScreen(screenName, sessionId, id) {
+        if (!sessionId) {
+            sessionId = cacheService.get(CacheKeys.SESSION_ID_KEY);
+        }
+
+        if (!id) {
+            id = cacheService.get(CacheKeys.ELEMENT_ID_KEY);
+        }
+
         const response = await API.getScreen(screenName, sessionId, id);
         const data = response.data;
 
@@ -32,6 +42,10 @@ export class ScreenService {
     }
 
     async saveScreen(state, sessionId) {
+        if (!sessionId) {
+            sessionId = cacheService.get(CacheKeys.SESSION_ID_KEY);
+        }
+
         await API.saveScreen(convertState(state), sessionId);
     }
 }

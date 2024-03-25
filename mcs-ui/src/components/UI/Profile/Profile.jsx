@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import classes from "./Profile.module.css";
 import {useDispatch} from "react-redux";
 import {useUserInfo} from "../../../hooks/useUserInfo";
-import {execute} from "../../../core/store/execute";
 import Requests from "../../../core/constants/requests";
 import {useNavigate} from "react-router-dom";
 import {RoutePaths} from "../../../router";
+import {request} from "../../../hooks/request";
 
 const Profile = () => {
     const {fio, token, authenticated} = useUserInfo()
@@ -19,15 +19,12 @@ const Profile = () => {
 
     useEffect(() => {
         if (token) {
-            execute(dispatch, {
-                meta: {action: {type: Requests.AUTHENTICATE, request: true}},
-                payload: {value: token}
-            })
+            request(Requests.AUTHENTICATE, {value: token}, dispatch);
         }
     }, [token]);
 
     const logout = () => {
-        execute(dispatch, {meta: {action: {type: Requests.LOGOUT, request: true}}});
+        request(Requests.LOGOUT, {}, dispatch);
         navigate(RoutePaths.LOGIN);
     }
 
