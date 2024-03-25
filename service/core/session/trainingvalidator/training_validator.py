@@ -15,7 +15,8 @@ class TrainingValidator:
         :param step_validator: валидаторы отдельных шагов тренировки
         :param training: название тренировки (например, UTK1)
         """
-        pass
+        self.step_validator = step_validator
+        self.training = training
 
     def validate(self, screen_name: str, session: Session) -> ValidationResult:
         """

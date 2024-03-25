@@ -27,7 +27,7 @@ from service.core.session import SessionEndpoint
 from service.core.session.impl.repo import InMemorySessionRepo
 from service.core.session.impl.training import DumbTrainingResultCalculatorStrategy, TrainingResultCalculatorServiceImpl
 from service.core.session.impl.use_case import GetSessionListUseCaseImpl, CreateSessionUseCaseImpl, \
-    StartSessionUseCaseImpl, FinishSessionUseCaseImpl
+    StartSessionUseCaseImpl, FinishSessionUseCaseImpl, ValidateTrainingSessionUseCaseImpl
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
@@ -87,12 +87,14 @@ get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
 create_session_use_case = CreateSessionUseCaseImpl(session_repo)
 start_session_use_case = StartSessionUseCaseImpl(session_repo)
 finish_session_use_case = FinishSessionUseCaseImpl(session_repo, training_result_calculator)
+validate_training_session_use_case = ValidateTrainingSessionUseCaseImpl(session_repo)
 
 session_endpoint = SessionEndpoint(
     get_session_list_use_case,
     create_session_use_case,
     start_session_use_case,
-    finish_session_use_case
+    finish_session_use_case,
+    validate_training_session_use_case,
 )
 
 default_dictionary_provider = DefaultDictionaryProvider(os.path.join(get_root_path(), 'mcs-ui/public/dictionary'))

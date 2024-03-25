@@ -70,3 +70,18 @@ class FinishSessionUseCase(UseCase):
     @abstractmethod
     def apply(self, request: FinishSessionRq) -> FinishedSessionRs:
         pass
+
+
+class ValidateTrainingSessionRq(Request):
+    session_uid: str
+    screen_code: str
+
+
+class ValidateTrainingSessionRs(Response):
+    hint: str
+
+
+class ValidateTrainingSessionUseCase(UseCase):
+    @abstractmethod
+    def apply(self, request: ValidateTrainingSessionRq) -> ValidateTrainingSessionRs:
+        pass

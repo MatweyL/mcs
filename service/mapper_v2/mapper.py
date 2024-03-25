@@ -6,7 +6,7 @@ from service.domain.channel import Channel
 from service.domain.direction import Direction
 from service.domain.group import Group
 from service.domain.phone import Phone
-from service.domain.session import Session, SessionAttempt, SessionStatus
+from service.domain.session import Session, SessionAttempt, SessionStatus, SessionType
 from service.domain.user import User
 
 D = TypeVar('D')
@@ -39,7 +39,8 @@ class SessionMapper(Mapper):
         session.status = entity.get('status', SessionStatus.READY)
         if entity.get('attempts'):
             session.attempts = [self.session_attempt_mapper.map_to_domain(attempt) for attempt in entity['attempts']]
-        session.training = entity.get('trainingvalidator')
+        session.training = entity.get('training')
+        session.type = entity.get('type', SessionType.FREE)
 
         return session
 
@@ -53,8 +54,8 @@ class SessionMapper(Mapper):
         entity['phone'] = self.phone_mapper.map_to_entity(session.phone)
         entity['status'] = session.status
         entity['attempts'] = [self.session_attempt_mapper.map_to_entity(attempt) for attempt in session.attempts]
-
-        entity['trainingvalidator'] = session.training
+        entity['training'] = session.training
+        entity['type'] = session.type
         return entity
 
 
