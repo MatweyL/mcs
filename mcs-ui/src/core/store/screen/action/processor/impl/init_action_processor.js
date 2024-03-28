@@ -29,6 +29,9 @@ export class InitActionProcessor extends ActionProcessor {
         state.attributes = this._processAttributes(attributes);
 
         const firstVisibleAttribute = this._findFirstVisibleAttribute(state.attributes);
+        if (!firstVisibleAttribute) {
+            return state;
+        }
         firstVisibleAttribute.active = true;
 
         state.selectedAttribute = firstVisibleAttribute.name;

@@ -7,6 +7,8 @@ import API from "../../API/api";
 import {AuthStatus} from "../constants/auth_statuses";
 import {CacheKeys} from "./cache_service";
 
+const FIRST_SCREEN = "MAIN_SCREEN";
+
 export const executeRequest = async (dispatch, request) => {
     console.log(`Execute request - ${request.type}`);
     switch (request.type) {
@@ -34,7 +36,7 @@ export const executeRequest = async (dispatch, request) => {
             const nowScreen = navigator.tail();
 
             // FIXME: для отладки возвращается константа, когда навигатор пустой
-            const screen = nowScreen === undefined ? "MAIN_MENU" : nowScreen;
+            const screen = nowScreen === undefined ? FIRST_SCREEN : nowScreen;
             const screenRs = await screenService.getScreen(screen, sessionId);
             dispatch({type: Actions.INIT, payload: screenRs});
             return;
@@ -73,20 +75,31 @@ export const executeRequest = async (dispatch, request) => {
 
         case Requests.OPEN_SCREEN_SESSION: {
             const {sessionId} = request.payload;
+            // FIXME: вызывать getSessionById -> реализовать
+            const sessionListRs = await API.getSessions();
+            const nowSession = sessionListRs.sessions.find(session => session.uid === sessionId);
+            console.log(nowSession);
+
             cacheService.put(CacheKeys.SESSION_ID_KEY, sessionId);
-            dispatch({type: Actions.OPEN_SCREEN_SESSION, payload: {sessionId}})
+            dispatch({type: Actions.OPEN_SCREEN_SESSION, payload: {sessionId, ...nowSession}})
             return;
         }
 
         case Requests.START_SESSION: {
-            const {sessionId} = request.payload;
+            let {sessionId} = request.payload;
+            if (!sessionId) {
+                sessionId = cacheService.get(CacheKeys.SESSION_ID_KEY);
+            }
             const result = await API.startSession(sessionId);
             dispatch({type: Actions.START_SESSION, payload: result});
             return;
         }
 
         case Requests.FINISH_SESSION: {
-            const {sessionId} = request.payload;
+            let {sessionId} = request.payload;
+            if (!sessionId) {
+                sessionId = cacheService.get(CacheKeys.SESSION_ID_KEY);
+            }
             const result = await API.finishSession(sessionId);
             dispatch({type: Actions.FINISH_SESSION, payload: result});
             return;

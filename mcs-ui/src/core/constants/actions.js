@@ -50,6 +50,9 @@ export default class Actions {
     // Завершить сессию
     static FINISH_SESSION = "FINISH_SESSION"
 
+    // Сбросить результат тренировки
+    static RESET_TRAINING_RESULT = "RESET_TRAINING_RESULT"
+
     // Аутентифицировать пользователя
     static AUTHENTICATE = "AUTHENTICATE"
 

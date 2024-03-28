@@ -4,9 +4,18 @@ import Buttons from "../../../constants/buttons";
 
 export class ButtonsFactory {
     create(attributeType) {
+
+
+        const leftButton = BUTTONS_STATE[ButtonsLayout.LEFT][attributeType];
+        const rightButton = BUTTONS_STATE[ButtonsLayout.RIGHT][attributeType];
+
+        if (!leftButton && !rightButton) {
+            return null;
+        }
+
         return {
-            leftButton: BUTTONS_STATE[ButtonsLayout.LEFT][attributeType],
-            rightButton: BUTTONS_STATE[ButtonsLayout.RIGHT][attributeType],
+            leftButton,
+            rightButton,
         }
     }
 }
@@ -18,6 +27,7 @@ const BUTTONS_STATE = {
         [Attributes.CHECKBOX]: Buttons.SAVE_BUTTON,
         [Attributes.MENU_ITEM]: Buttons.SELECT_BUTTON_PARAMS,
         [Attributes.CARD_ITEM]: Buttons.OPEN_MENU_BUTTON,
+        [Attributes.MAIN_SCREEN]: Buttons.OPEN_MENU_BUTTON,
     },
     [ButtonsLayout.RIGHT]: {
         [Attributes.SELECT_BOX]: Buttons.OPEN_SELECT_BOX_BUTTON,
@@ -25,5 +35,6 @@ const BUTTONS_STATE = {
         [Attributes.CHECKBOX]: Buttons.EDIT_BUTTON_PARAMS,
         [Attributes.MENU_ITEM]: Buttons.RETURN_BACK_BUTTON,
         [Attributes.CARD_ITEM]: Buttons.RETURN_BACK_BUTTON,
+        [Attributes.MAIN_SCREEN]: Buttons.OPEN_MENU_BUTTON,
     }
 }
