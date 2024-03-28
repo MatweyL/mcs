@@ -1,11 +1,12 @@
 from datetime import datetime
 
 from service.common.utils import now
-from service.core.session import StartSessionRq, StartedSessionRs
+from service.core.session import StartSessionRq, StartedSessionRs, ValidateTrainingSessionRq, ValidateTrainingSessionRs
 from service.core.session.repo import SessionRepo
 from service.core.session.training import TrainingResultCalculatorService
 from service.core.session.use_case import GetSessionListUseCase, GetSessionListRq, SessionListRs, CreateSessionUseCase, \
-    CreateSessionRq, CreatedSessionRs, StartSessionUseCase, FinishSessionUseCase, FinishedSessionRs, FinishSessionRq
+    CreateSessionRq, CreatedSessionRs, StartSessionUseCase, FinishSessionUseCase, FinishedSessionRs, FinishSessionRq, \
+    ValidateTrainingSessionUseCase
 from service.domain.phone import Phone
 from service.domain.session import Session, SessionStatus, SessionAttempt
 
@@ -81,3 +82,11 @@ class FinishSessionUseCaseImpl(FinishSessionUseCase):
             self.session_repo.save_session(session)
         training_result = self.training_result_calculator.calculate(session)
         return FinishedSessionRs(training_result=training_result)
+
+
+class ValidateTrainingSessionUseCaseImpl(ValidateTrainingSessionUseCase):
+    def __init__(self, session_repo: SessionRepo,):
+        self.session_repo = session_repo
+
+    def apply(self, request: ValidateTrainingSessionRq) -> ValidateTrainingSessionRs:
+        pass

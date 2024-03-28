@@ -7,7 +7,8 @@ from service.core.auth.auth_context import AuthContext
 from service.core.dictionary.use_case import GetDictionaryRq
 from service.core.group.use_case import GetUserListByGroupRq
 from service.core.screen import GetScreenRq, SaveScreenRq, Screen
-from service.core.session import GetSessionListRq, CreateSessionRq, StartSessionRq, FinishSessionRq, SessionRq
+from service.core.session import GetSessionListRq, CreateSessionRq, StartSessionRq, FinishSessionRq, SessionRq, \
+    ValidateTrainingSessionRq
 from service.core.user.use_case import AuthUserRq, RegisterUserRq, LoginUserRq
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint, \
     group_endpoint
@@ -65,6 +66,11 @@ async def start_session(session_uid: str):
     request = FinishSessionRq(session_uid=session_uid)
     return session_endpoint.finish_session(request)
 
+
+@auth_router.get('/session/training/validate')
+async def validate_training_session(session_uid: str, screen_code: str):
+    request = ValidateTrainingSessionRq(session_uid=session_uid, screen_code=screen_code)
+    return session_endpoint.validate_training_session(request)
 
 not_auth_router = APIRouter()
 
