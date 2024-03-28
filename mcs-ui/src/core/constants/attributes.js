@@ -16,13 +16,15 @@ export default class Attributes {
     /// Карточка объекта
     static CARD_ITEM = "CARD_ITEM";
 
+    static MAIN_SCREEN = "MAIN_SCREEN";
+
     static _height = {
         [this.TEXT]: 25,
         [this.BOOLEAN]: 25,
         [this.DICTIONARY]: 25,
         [this.MENU_ITEM]: 26.4,
         [this.CARD_ITEM]: 25,
-        [this.UUID]: 0,
+        [this.MAIN_SCREEN]: 25,
     }
 
     static heightOf(type) {

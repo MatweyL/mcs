@@ -1,5 +1,5 @@
 import {NextCalculator} from "./store/screen/calculator/next_calculator";
-import {ButtonsFactory} from "./store/screen/button/buttons_updater";
+import {ButtonsFactory} from "./store/screen/button/buttons_factory";
 import {EventProcessor} from "./store/screen/event/event_processor";
 import {SelectBoxOptionSelector} from "./store/screen/selector/select_box_option_selector";
 import {MultiButtonOptionSelector} from "./store/screen/selector/multi_button_option_selector";

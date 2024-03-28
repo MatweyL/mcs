@@ -1,0 +1,64 @@
+.mainScreenAttribute img {
+    /*max-height: 100%;*/
+    /*max-width: 100%;*/
+    object-fit: contain;
+    scale: 150%;
+    margin-top: 20%;
+}
+
+.canvas {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    position: absolute;
+    color: whitesmoke;
+    flex-direction: column;
+    display: flex;
+}
+
+.mainScreenAttribute {
+    width: 100%;
+    height: 100%;
+    text-shadow: 1px 0px 2px black;
+}
+
+.time {
+    display: flex;
+    font-size: 20px;
+}
+
+.time div:last-child {
+    font-size: 14px;
+}
+
+.direction {
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+    align-items: center;
+    height: 100%
+}
+
+.buttons {
+    display: flex;
+    background: linear-gradient(grey, black 60%);
+}
+
+.buttons div {
+    height: 20px;
+    width: 50%;
+    display: flex;
+}
+
+.buttons div:first-child {
+    justify-content: start;
+}
+
+.buttons div:last-child {
+    justify-content: end;
+}
+
+
+.header {
+    background: linear-gradient(black 60%, darkgrey);
+}

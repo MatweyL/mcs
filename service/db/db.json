@@ -63,10 +63,10 @@
           {
             "uid": "6e2c81f7-9d79-4fcb-a207-772e1c9fbc39",
             "mode": "CHM25",
-            "name": null,
+            "name": "ГО",
             "forbidden_send": null,
             "ctcss": "NO",
-            "frequency": null,
+            "frequency": "",
             "double_frequency": null
           },
           {
@@ -83,8 +83,8 @@
             "mode": "CHM25",
             "name": "4",
             "forbidden_send": null,
-            "ctcss": null,
-            "frequency": null,
+            "ctcss": "NO",
+            "frequency": "",
             "double_frequency": null
           },
           {
@@ -99,10 +99,10 @@
           {
             "uid": "f35711ed-622a-42bb-bd62-52f9cb6888f7",
             "mode": "CHM25",
-            "name": "6",
+            "name": "КЛОН",
             "forbidden_send": null,
-            "ctcss": null,
-            "frequency": null,
+            "ctcss": "NO",
+            "frequency": "",
             "double_frequency": null
           },
           {
@@ -227,6 +227,58 @@
         {
           "started": "2024-03-04 10:41:07.501142",
           "finished": null
+        },
+        {
+          "started": "2024-03-25 09:56:32.294694",
+          "finished": null
+        },
+        {
+          "started": "2024-03-25 09:56:45.478386",
+          "finished": null
+        },
+        {
+          "started": "2024-03-25 10:36:07.200801",
+          "finished": null
+        },
+        {
+          "started": "2024-03-25 11:24:18.382465",
+          "finished": null
+        },
+        {
+          "started": "2024-03-25 11:25:25.992346",
+          "finished": null
+        },
+        {
+          "started": "2024-03-25 11:33:57.239757",
+          "finished": null
+        },
+        {
+          "started": "2024-03-25 11:34:57.463118",
+          "finished": null
+        },
+        {
+          "started": "2024-03-25 11:44:06.766366",
+          "finished": null
+        },
+        {
+          "started": "2024-03-25 11:45:53.036869",
+          "finished": null
+        },
+        {
+          "started": "2024-03-25 11:46:50.047883",
+          "finished": null
+        },
+        {
+          "started": "2024-03-25 11:52:55.593666",
+          "finished": null
+        },
+        {
+          "started": "2024-03-25 11:54:39.704188",
+          "finished": null
+        },
+        {
+          "started": "2024-03-25 11:54:54.526435",
+          "finished": "2024-03-25 11:55:42.080444"
         }
       ],
       "training": null
@@ -267,7 +319,15 @@
           }
         ],
         "directions": []
-      }
+      },
+      "status": "STARTED",
+      "attempts": [
+        {
+          "started": "2024-03-25 10:52:55.624919",
+          "finished": null
+        }
+      ],
+      "training": null
     },
     {
       "uid": "52b8f995-ef19-4474-9315-6669f56a1078",
@@ -315,7 +375,15 @@
             "economizer": "3"
           }
         ]
-      }
+      },
+      "status": "READY",
+      "attempts": [
+        {
+          "started": "2024-03-25 10:52:27.110705",
+          "finished": "2024-03-25 10:52:38.461622"
+        }
+      ],
+      "training": null
     },
     {
       "uid": "a2a538b4-a49d-4ad1-b9aa-4db1a2628b2e",
@@ -323,9 +391,39 @@
       "date": "28/02/24 01:12",
       "user_uid": "1668b4b4-6fee-4369-9108-b49403fb516e",
       "phone": {
-        "channels": [],
+        "channels": [
+          {
+            "uid": "deddfb2e-8b82-41c0-bfeb-e97be3f3cc13",
+            "mode": "CHM25",
+            "name": "НОВЫЙ",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": "234000",
+            "double_frequency": true
+          }
+        ],
         "directions": []
-      }
+      },
+      "status": "READY",
+      "attempts": [
+        {
+          "started": "2024-03-25 11:56:13.009585",
+          "finished": null
+        },
+        {
+          "started": "2024-03-25 11:57:17.941743",
+          "finished": null
+        },
+        {
+          "started": "2024-03-27 21:04:58.801811",
+          "finished": null
+        },
+        {
+          "started": "2024-03-27 22:37:16.816572",
+          "finished": "2024-03-27 22:40:47.326255"
+        }
+      ],
+      "training": null
     },
     {
       "uid": "2343794a-c01f-49a3-b739-b2afcc9a7f53",
@@ -367,6 +465,24 @@
             "forbidden_send": null,
             "ctcss": "NO",
             "frequency": "23",
+            "double_frequency": null
+          },
+          {
+            "uid": "37eb6b9a-c460-4fac-be87-0931a3da8b52",
+            "mode": "CHM25",
+            "name": null,
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": null,
+            "double_frequency": null
+          },
+          {
+            "uid": "754292b2-f5f2-455f-b017-efe044ef5aeb",
+            "mode": "CHM25",
+            "name": null,
+            "forbidden_send": false,
+            "ctcss": "NO",
+            "frequency": "2345",
             "double_frequency": null
           }
         ],
@@ -476,6 +592,47 @@
       },
       "status": "READY",
       "attempts": [],
+      "training": "UTK1"
+    },
+    {
+      "uid": "9d38ffe1-2203-44f6-acaa-dc7d5c05c88c",
+      "title": "УТК-1",
+      "date": "25/03/24 10:01",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "channels": [],
+        "directions": []
+      },
+      "status": "READY",
+      "attempts": [],
+      "training": "UTK1"
+    },
+    {
+      "uid": "3c4ff1b8-f5ba-4f20-85c3-747eab088e5b",
+      "title": "УТК-1",
+      "date": "25/03/24 20:31",
+      "user_uid": "1668b4b4-6fee-4369-9108-b49403fb516e",
+      "phone": {
+        "channels": [
+          {
+            "uid": "709e03f7-6b3a-4f43-856c-9344c24342b6",
+            "mode": "CHM25",
+            "name": "23",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": null,
+            "double_frequency": null
+          }
+        ],
+        "directions": []
+      },
+      "status": "READY",
+      "attempts": [
+        {
+          "started": "2024-03-25 20:31:55.746341",
+          "finished": "2024-03-25 20:32:24.902052"
+        }
+      ],
       "training": "UTK1"
     }
   ],

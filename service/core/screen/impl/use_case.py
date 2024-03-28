@@ -48,5 +48,6 @@ class GetScreenUseCaseImpl(GetScreenUseCase):
         processor = self.registry.get_processor(screen_name)
 
         processor.process(session, screen_template, request.uid)
+        screen_template['status'] = session.status
 
         return screen_template

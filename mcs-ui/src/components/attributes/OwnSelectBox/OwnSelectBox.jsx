@@ -3,8 +3,9 @@ import OwnSelectBoxList from "../../UI/OwnSelectboxList/OwnSelectBoxList";
 import classes from "./OwnSelectBox.module.css";
 import Width from "../../../core/constants/width";
 
-/// Атрибут - Собственный селектбокс (множественный выбор)
-/// замена SelectBox
+/**
+ * Атрибут - Собственный селектбокс (множественный выбор)
+ */
 const OwnSelectBox = ({attribute}) => {
 
     const width = Width.of(attribute.width);
