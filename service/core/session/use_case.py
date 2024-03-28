@@ -78,7 +78,8 @@ class ValidateTrainingSessionRq(Request):
 
 
 class ValidateTrainingSessionRs(Response):
-    hint: str
+    order: int
+    message: str
 
 
 class ValidateTrainingSessionUseCase(UseCase):

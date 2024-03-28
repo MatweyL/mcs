@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
 class Movement(ABC):
@@ -32,9 +32,10 @@ class BackMovement(Movement):
 
 
 class ScreenNavigator:
-    def __init__(self, screen_graph):
+    def __init__(self, screen_graph: dict):
         self.screen_graph = screen_graph
 
+    @abstractmethod
     def navigate(self, now_screen_code: str, target_screen_code: str) -> Movement:
         """
         Осуществляет навигацию к указанном коду экрана

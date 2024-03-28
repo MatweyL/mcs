@@ -1,5 +1,6 @@
 import pytest
 
+from service.common.impl.screen_navigator import ScreenNavigatorImpl
 from service.common.screen_navigator import ScreenNavigator, ForwardMovement, BackMovement, NoMovement
 
 GRAPH = {
@@ -18,7 +19,7 @@ GRAPH = {
     ]
 }
 
-navigator = ScreenNavigator(GRAPH)
+navigator = ScreenNavigatorImpl(GRAPH)
 
 FORWARD_PARAMS = [
     ["MAIN_SCREEN", "SERVICE_MENU", "SERVICE_MENU"],
@@ -80,7 +81,7 @@ def no_move_args(request):
 
 def test_navigate_no_movement(no_move_args):
     # GIVEN | WHEN
-    actual = navigator.navigate(back_args["now"], back_args["target"])
+    actual = navigator.navigate(no_move_args["now"], no_move_args["target"])
 
     # THEN
     assert isinstance(actual, NoMovement)
