@@ -4,7 +4,7 @@ import Modal from "../Modal/Modal";
 import {useDispatch} from "react-redux";
 import Requests from "../../../core/constants/requests";
 import {useUserInfo} from "../../../hooks/useUserInfo";
-import {useScreenSessionId, useSession, useTrainingResult} from "../../../hooks/useSession";
+import {useSession} from "../../../hooks/useSession";
 import {request} from "../../../hooks/request";
 import {SessionStatus} from "../../../core/constants/session_status";
 import {action} from "../../../hooks/action";
@@ -20,13 +20,17 @@ const ScreenSessionControl = () => {
     const [enabledStartButton, enableStart] = useState(false);
 
     const start = () => {
-        console.log("CLICK START");
-        request(Requests.START_SESSION, {sessionId}, dispatch)
+        if (enabledStartButton) {
+            console.log("CLICK START");
+            request(Requests.START_SESSION, {sessionId}, dispatch)
+        }
     }
 
     const finish = () => {
-        console.log("CLICK FINISH");
-        request(Requests.FINISH_SESSION, {sessionId}, dispatch)
+        if (!enabledStartButton) {
+            console.log("CLICK FINISH");
+            request(Requests.FINISH_SESSION, {sessionId}, dispatch)
+        }
     }
 
     const close = () => {

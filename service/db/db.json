@@ -526,12 +526,12 @@
         "channels": [
           {
             "uid": "a231e2e3-3539-4e9b-89e9-1942a9c18382",
-            "mode": "CHM25",
-            "name": "234",
+            "mode": "NOT_DEFINED",
+            "name": null,
             "forbidden_send": null,
-            "ctcss": "NO",
+            "ctcss": null,
             "frequency": null,
-            "double_frequency": true
+            "double_frequency": null
           }
         ],
         "directions": [
@@ -546,11 +546,19 @@
           }
         ]
       },
-      "status": "READY",
+      "status": "STARTED",
       "attempts": [
         {
           "started": "2024-03-04 10:45:39.667705",
-          "finished": "2024-03-04 10:46:46.989041"
+          "finished": null
+        },
+        {
+          "started": "2024-03-30 13:38:00.016438",
+          "finished": null
+        },
+        {
+          "started": "2024-03-30 13:38:08.047629",
+          "finished": null
         }
       ],
       "training": "UTK4"
