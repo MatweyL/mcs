@@ -27,7 +27,7 @@ const BUTTONS_STATE = {
         [Attributes.CHECKBOX]: Buttons.SAVE_BUTTON,
         [Attributes.MENU_ITEM]: Buttons.SELECT_BUTTON_PARAMS,
         [Attributes.CARD_ITEM]: Buttons.OPEN_MENU_BUTTON,
-        [Attributes.MAIN_SCREEN]: Buttons.OPEN_MENU_BUTTON,
+        [Attributes.MAIN_SCREEN]: Buttons.OPEN_SPECIFIC_SCREEN("MAIN_MENU"),
     },
     [ButtonsLayout.RIGHT]: {
         [Attributes.SELECT_BOX]: Buttons.OPEN_SELECT_BOX_BUTTON,
@@ -35,6 +35,6 @@ const BUTTONS_STATE = {
         [Attributes.CHECKBOX]: Buttons.EDIT_BUTTON_PARAMS,
         [Attributes.MENU_ITEM]: Buttons.RETURN_BACK_BUTTON,
         [Attributes.CARD_ITEM]: Buttons.RETURN_BACK_BUTTON,
-        [Attributes.MAIN_SCREEN]: Buttons.OPEN_MENU_BUTTON,
+        [Attributes.MAIN_SCREEN]: Buttons.OPEN_SPECIFIC_SCREEN("DIRECTION_LIST"),
     }
 }

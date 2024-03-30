@@ -2,6 +2,9 @@ export default class Requests {
     // Открыть экран
     static OPEN = "OPEN";
 
+    // Открыть конкретный экран
+    static OPEN_SPECIFIC_SCREEN = "OPEN_SPECIFIC_SCREEN";
+
     // Загрузка экрана
     static LOAD = "LOAD";
 

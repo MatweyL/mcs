@@ -190,7 +190,7 @@
           }
         ]
       },
-      "status": "READY",
+      "status": "STARTED",
       "attempts": [
         {
           "started": "2024-03-02 20:00:40.955004",
@@ -278,7 +278,11 @@
         },
         {
           "started": "2024-03-25 11:54:54.526435",
-          "finished": "2024-03-25 11:55:42.080444"
+          "finished": null
+        },
+        {
+          "started": "2024-03-30 13:16:35.675078",
+          "finished": null
         }
       ],
       "training": null
@@ -324,6 +328,14 @@
       "attempts": [
         {
           "started": "2024-03-25 10:52:55.624919",
+          "finished": null
+        },
+        {
+          "started": "2024-03-30 13:16:05.001849",
+          "finished": null
+        },
+        {
+          "started": "2024-03-30 13:16:08.959701",
           "finished": null
         }
       ],

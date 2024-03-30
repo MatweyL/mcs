@@ -31,6 +31,17 @@ export const executeRequest = async (dispatch, request) => {
             return;
         }
 
+        case Requests.OPEN_SPECIFIC_SCREEN: {
+            console.log('OPEN_SPECIFIC_SCREEN');
+            const {buttonPayload, sessionId} = request.payload;
+
+            console.log(request.payload);
+
+            const screenRs = await screenService.getScreen(buttonPayload, sessionId);
+            dispatch({type: Actions.INIT, payload: screenRs});
+            return;
+        }
+
         case Requests.LOAD: {
             let {sessionId} = request.payload
             const nowScreen = navigator.tail();
