@@ -70,3 +70,22 @@ class FinishSessionUseCase(UseCase):
     @abstractmethod
     def apply(self, request: FinishSessionRq) -> FinishedSessionRs:
         pass
+
+
+class ValidateTrainingSessionRq(Request):
+    session_uid: str
+    screen_code: str
+
+
+class ValidateTrainingSessionRs(Response):
+
+    def __init__(self, order: int, message: str, success: bool):
+        self.order = order
+        self.message = message
+        self.success = success
+
+
+class ValidateTrainingSessionUseCase(UseCase):
+    @abstractmethod
+    def apply(self, request: ValidateTrainingSessionRq) -> ValidateTrainingSessionRs:
+        pass

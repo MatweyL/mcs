@@ -1,5 +1,8 @@
+import json
 import os.path
 
+from service.common.impl.message_source import MessageSourceImpl
+from service.common.impl.screen_navigator import ScreenNavigatorImpl
 from service.common.mapper import Mapper
 from service.common.utils import get_root_path
 from service.core.auth.filter import AuthFilter
@@ -26,9 +29,10 @@ from service.core.screen.processor.save.save_screen_processor_registry import Sa
 from service.core.session import SessionEndpoint
 from service.core.session.impl.repo import InMemorySessionRepo
 from service.core.session.impl.training import DumbTrainingResultCalculatorStrategy, TrainingResultCalculatorServiceImpl
-from service.core.session.impl.use_case import GetSessionListUseCaseImpl, CreateSessionUseCaseImpl,\
-    StartSessionUseCaseImpl, FinishSessionUseCaseImpl
-from service.core.session.training import TrainingResultCalculatorService
+from service.core.session.impl.use_case import GetSessionListUseCaseImpl, CreateSessionUseCaseImpl, \
+    StartSessionUseCaseImpl, FinishSessionUseCaseImpl, ValidateTrainingSessionUseCaseImpl
+from service.core.session.training_validator.step_validator import UTK2Step1Validator, UTK2Step2Validator
+from service.core.session.training_validator.training_validator import TrainingValidatorImpl
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
@@ -84,16 +88,41 @@ user_endpoint = UserEndpoint(
 
 training_result_calculator = TrainingResultCalculatorServiceImpl([], DumbTrainingResultCalculatorStrategy())
 
+screen_graph = {
+    "MAIN_SCREEN": [
+        "SERVICE_MENU",
+    ],
+    "SERVICE_MENU": [
+        "CHANNEL_LIST",
+        "DIRECTION_LIST",
+    ],
+    "CHANNEL_LIST": [
+        "CHANNEL_EDITOR"
+    ],
+    "DIRECTION_LIST": [
+        "DIRECTION_EDITOR"
+    ]
+}
+message_by_code_path = get_root_path().joinpath('service/db/message_by_code.json')
+message_by_code = json.loads(message_by_code_path.read_text('utf-8'))
+navigator = ScreenNavigatorImpl(screen_graph)
+message_source = MessageSourceImpl(message_by_code)
+training_validator_utk_2 = TrainingValidatorImpl([UTK2Step1Validator(navigator, message_source),
+                                                  UTK2Step2Validator(navigator, message_source)],
+                                                 'UTK2')
+
 get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
 create_session_use_case = CreateSessionUseCaseImpl(session_repo)
 start_session_use_case = StartSessionUseCaseImpl(session_repo)
 finish_session_use_case = FinishSessionUseCaseImpl(session_repo, training_result_calculator)
+validate_training_session_use_case = ValidateTrainingSessionUseCaseImpl(session_repo, training_validator_utk_2)
 
 session_endpoint = SessionEndpoint(
     get_session_list_use_case,
     create_session_use_case,
     start_session_use_case,
-    finish_session_use_case
+    finish_session_use_case,
+    validate_training_session_use_case,
 )
 
 default_dictionary_provider = DefaultDictionaryProvider(os.path.join(get_root_path(), 'mcs-ui/public/dictionary'))

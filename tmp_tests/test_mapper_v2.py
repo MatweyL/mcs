@@ -8,7 +8,7 @@ from service.mapper_v2.mapper import SessionMapper, PhoneMapper, DirectionMapper
 channel_mapper = ChannelMapper()
 direction_mapper = DirectionMapper()
 phone_mapper = PhoneMapper(channel_mapper, direction_mapper)
-session_mapper = SessionMapper(phone_mapper)
+session_mapper = SessionMapper(phone_mapper, None)
 
 user_mapper = UserMapper()
 

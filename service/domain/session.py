@@ -12,6 +12,12 @@ class SessionStatus(str, enum.Enum):
     IN_WORK = 'IN_WORK'
 
 
+class SessionType(str, enum.Enum):
+    TRAINING = 'TRAINING'
+    EXAM = 'EXAM'
+    FREE = 'FREE'
+
+
 @dataclass
 class SessionAttempt:
     started: datetime = None
@@ -41,3 +47,4 @@ class Session:
     status: SessionStatus = None
     attempts: List[SessionAttempt] = field(default_factory=list)
     training: str = None
+    type: SessionType = None
