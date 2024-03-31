@@ -14,7 +14,7 @@ class ScreenNavigatorImpl(ScreenNavigator):
 
         next_screen_code = paths[now_screen_code]
         now_screen_child = get_node_child(self.screen_graph, now_screen_code)
-        if next_screen_code == target_screen_code and target_screen_code not in now_screen_child:
+        if next_screen_code not in now_screen_child:
             return BackMovement()
         return ForwardMovement(next_screen_code)
 
