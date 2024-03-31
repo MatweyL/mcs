@@ -13,17 +13,17 @@ const ControlKeyboard = () => {
     const screen = useScreen();
     const sessionId = useScreenSessionId();
 
-    const left = () => {
-        execute(dispatch, {meta: screen.buttons.leftButton, payload: getPayload()})
+    const left = () => executeButton(screen.buttons.leftButton);
+
+    const right = () => executeButton(screen.buttons.rightButton);
+
+    const executeButton = (buttonMeta) => {
+        execute(dispatch, {meta: buttonMeta, payload: getPayload(buttonMeta.payload)})
     }
 
-    const right = () => {
-        execute(dispatch, {meta: screen.buttons.rightButton, payload: getPayload()})
-    }
-
-    const getPayload = () => {
+    const getPayload = (buttonPayload) => {
         const nowAttribute = clone(screen.attributes[screen.selectedAttribute]);
-        return {attribute: nowAttribute, state: screen, sessionId: sessionId}
+        return {attribute: nowAttribute, state: screen, sessionId: sessionId, buttonPayload}
     }
 
     const up = () => {

@@ -11,7 +11,7 @@ const Session = ({session}) => {
     const dispatch = useDispatch();
 
     const openScreenSession = () => {
-        request(Requests.OPEN_SCREEN_SESSION, {sessionId: session.uid}, dispatch);
+        request(Requests.OPEN_SCREEN_SESSION, {sessionId: session.uid, status: session.status}, dispatch);
         navigate(RoutePaths.SCREEN);
     }
 

@@ -21,17 +21,13 @@
       "events": [
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "SHOW"
-          ],
+          "instructions": ["SHOW"],
           "firingValues": ["TETRA_DMO"]
         },
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "HIDE"
-          ],
-          "firingValues": ["NOT_DEFINED"]
+          "instructions": ["HIDE"],
+          "excludeFiringValues": ["TETRA_DMO"]
         }
       ]
     },
@@ -43,83 +39,13 @@
       "events": [
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "SHOW"
-          ],
+          "instructions": ["SHOW"],
           "firingValues": ["TETRA_DMO"]
         },
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "HIDE"
-          ],
-          "firingValues": ["NOT_DEFINED"]
-        }
-      ]
-    },
-    "MCC": {
-      "name": "MCC",
-      "label": "MCC",
-      "type": "TEXT",
-      "numeric": true,
-      "events": [
-        {
-          "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "SHOW"
-          ],
-          "firingValues": ["TETRA_DMO"]
-        },
-        {
-          "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "HIDE"
-          ],
-          "firingValues": ["NOT_DEFINED"]
-        }
-      ]
-    },
-    "MNC": {
-      "name": "MNC",
-      "label": "MNC",
-      "type": "TEXT",
-      "numeric": true,
-      "events": [
-        {
-          "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "SHOW"
-          ],
-          "firingValues": ["TETRA_DMO"]
-        },
-        {
-          "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "HIDE"
-          ],
-          "firingValues": ["NOT_DEFINED"]
-        }
-      ]
-    },
-    "GSSI": {
-      "name": "GSSI",
-      "label": "GSSI",
-      "type": "TEXT",
-      "numeric": true,
-      "events": [
-        {
-          "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "SHOW"
-          ],
-          "firingValues": ["TETRA_DMO"]
-        },
-        {
-          "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "HIDE"
-          ],
-          "firingValues": ["NOT_DEFINED"]
+          "instructions": ["HIDE"],
+          "excludeFiringValues": ["TETRA_DMO"]
         }
       ]
     },
@@ -131,39 +57,102 @@
       "events": [
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "SHOW"
-          ],
-          "excludeFiringValues": ["NOT_DEFINED"]
+          "instructions": ["SHOW"],
+          "firingValues": ["CHM25"]
         },
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "HIDE"
-          ],
-          "firingValues": ["NOT_DEFINED"]
+          "instructions": ["HIDE"],
+          "excludeFiringValues": ["CHM25"]
         }
       ]
     },
     "DOUBLE_FREQUENCY": {
       "name": "DOUBLE_FREQUENCY",
-      "label": "Двойная частота",
+      "label": "Двухчастотный",
       "type": "BOOLEAN",
       "width": "THIRD",
       "events": [
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "SHOW"
-          ],
+          "instructions": ["SHOW"],
           "excludeFiringValues": ["NOT_DEFINED"]
         },
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "HIDE"
-          ],
+          "instructions": ["HIDE"],
           "firingValues": ["NOT_DEFINED"]
+        }
+      ]
+    },
+        "MCC": {
+      "name": "MCC",
+      "label": "MCC",
+      "type": "TEXT",
+      "numeric": true,
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": ["SHOW"],
+          "firingValues": ["TETRA_DMO"]
+        },
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": ["HIDE"],
+          "excludeFiringValues": ["TETRA_DMO"]
+        }
+      ]
+    },
+    "MNC": {
+      "name": "MNC",
+      "label": "MNC",
+      "type": "TEXT",
+      "numeric": true,
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": ["SHOW"],
+          "firingValues": ["TETRA_DMO"]
+        },
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": ["HIDE"],
+          "excludeFiringValues": ["TETRA_DMO"]
+        }
+      ]
+    },
+    "GSSI": {
+      "name": "GSSI",
+      "label": "GSSI",
+      "type": "TEXT",
+      "numeric": true,
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": ["SHOW"],
+          "firingValues": ["TETRA_DMO"]
+        },
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": ["HIDE"],
+          "excludeFiringValues": ["TETRA_DMO"]
+        }
+      ]
+    },
+    "EMERGENCY_CALL": {
+      "name": "EMERGENCY_CALL",
+      "label": "Экстр.вызов",
+      "type": "TEXT",
+      "events": [
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": ["SHOW"],
+          "firingValues": ["TETRA_DMO"]
+        },
+        {
+          "attribute": "CHANNEL_MODE",
+          "instructions": ["HIDE"],
+          "excludeFiringValues": ["TETRA_DMO"]
         }
       ]
     },
@@ -176,16 +165,12 @@
       "events": [
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "SHOW"
-          ],
+          "instructions": ["SHOW"],
           "excludeFiringValues": ["NOT_DEFINED"]
         },
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "HIDE"
-          ],
+          "instructions": ["HIDE"],
           "firingValues": ["NOT_DEFINED"]
         }
       ]
@@ -199,16 +184,12 @@
       "events": [
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "SHOW"
-          ],
+          "instructions": ["SHOW"],
           "excludeFiringValues": ["NOT_DEFINED"]
         },
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "HIDE"
-          ],
+          "instructions": ["HIDE"],
           "firingValues": ["NOT_DEFINED"]
         }
       ]
@@ -220,16 +201,12 @@
       "events": [
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "SHOW"
-          ],
+          "instructions": ["SHOW"],
           "excludeFiringValues": ["NOT_DEFINED"]
         },
         {
           "attribute": "CHANNEL_MODE",
-          "instructions": [
-            "HIDE"
-          ],
+          "instructions": ["HIDE"],
           "firingValues": ["NOT_DEFINED"]
         }
       ]

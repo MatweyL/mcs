@@ -9,8 +9,10 @@ import {useNavigate} from "react-router-dom";
 import {RoutePaths} from "../router";
 import ScreenSessionControl from "../components/UI/ScreenSessionControl/ScreenSessionControl";
 import TrainingHintBox from "../components/UI/TrainingHintBox/TrainingHintBox";
-import {useScreenSessionId} from "../hooks/useSession";
+import {useSession} from "../hooks/useSession";
 import {request} from "../hooks/request";
+import {SessionStatus} from "../core/constants/session_status";
+import ScreenBlock from "../components/UI/ScreenBlock/ScreenBlock";
 
 /**
  * Страница экрана телефона
@@ -18,7 +20,8 @@ import {request} from "../hooks/request";
 const ScreenPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const sessionId = useScreenSessionId();
+
+    const {sessionId} = useSession();
 
     useEffect(() => {
         request(Requests.LOAD, {sessionId}, dispatch);
@@ -28,6 +31,8 @@ const ScreenPage = () => {
         request(Requests.CLOSE_SCREEN_SESSION, {}, dispatch);
         navigate(RoutePaths.SESSIONS);
     }
+
+
 
     return (
         <div style={{display: "flex", justifyContent: "space-between", width: "100%"}}>
@@ -47,6 +52,7 @@ const ScreenPage = () => {
             </div>
             <div style={{width: "30%", justifyContent: "center", display: "flex"}}>
                 <div className="body">
+                    <ScreenBlock/>
                     <div className="phone-header"/>
                     <Screen/>
                     <Keyboard/>

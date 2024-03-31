@@ -15,6 +15,10 @@ export default class Buttons {
 
     static OPEN_MENU_BUTTON = {action: {type: Actions.OPEN_MENU}, label: Labels.MENU}
 
+    static OPEN_SPECIFIC_SCREEN = (screen) => {
+        return {action: {type: Requests.OPEN_SPECIFIC_SCREEN, request: true}, label: null, payload: screen}
+    }
+
     static OPEN_SELECT_BOX_BUTTON = {action: {type: Actions.OPEN_SELECT_BOX}, label: Labels.SELECT}
     static MULTISELECT_BUTTON = {
         action: {type: Actions.MULTISELECT},

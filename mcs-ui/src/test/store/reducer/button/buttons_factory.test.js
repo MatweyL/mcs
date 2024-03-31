@@ -1,4 +1,4 @@
-import {ButtonsFactory} from "../../../../core/store/screen/button/buttons_updater";
+import {ButtonsFactory} from "../../../../core/store/screen/button/buttons_factory";
 import Attributes from "../../../../core/constants/attributes";
 import Buttons from "../../../../core/constants/buttons";
 

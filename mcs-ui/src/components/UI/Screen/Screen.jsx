@@ -3,6 +3,8 @@ import {convert} from "../../../core/store/screen/convert";
 import Button from "../../attributes/Button";
 import {useScreen} from "../../../hooks/useScreen";
 import classes from "./Screen.module.css";
+import ScreenLabel from "./ScreenLabel";
+import ScreenButtons from "./ScreenButtons";
 
 const Screen = () => {
     const screen = useScreen();
@@ -10,18 +12,13 @@ const Screen = () => {
     return (
         <div className={classes.screenWrapper}>
             <div className={classes.screen}>
-                <div className={classes.screenLabel}>
-                    {screen?.label}
-                </div>
+                <ScreenLabel label={screen?.label}/>
                 {screen.attributes !== undefined ?
                     Object.keys(screen?.attributes)
                         .map(name => convert(screen.attributes[name]))
                     : null
                 }
-                <div className={classes.buttons}>
-                    <Button button={screen?.buttons?.leftButton}/>
-                    <Button button={screen?.buttons?.rightButton}/>
-                </div>
+                <ScreenButtons buttons={screen?.buttons}/>
             </div>
         </div>
     );
