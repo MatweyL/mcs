@@ -4,6 +4,7 @@ from service.common.utils import now
 from service.core.session import StartSessionRq, StartedSessionRs, ValidateTrainingSessionRq, ValidateTrainingSessionRs
 from service.core.session.repo import SessionRepo
 from service.core.session.training import TrainingResultCalculatorService
+from service.core.session.training_validator.training_validator import TrainingValidator
 from service.core.session.use_case import GetSessionListUseCase, GetSessionListRq, SessionListRs, CreateSessionUseCase, \
     CreateSessionRq, CreatedSessionRs, StartSessionUseCase, FinishSessionUseCase, FinishedSessionRs, FinishSessionRq, \
     ValidateTrainingSessionUseCase
@@ -85,8 +86,13 @@ class FinishSessionUseCaseImpl(FinishSessionUseCase):
 
 
 class ValidateTrainingSessionUseCaseImpl(ValidateTrainingSessionUseCase):
-    def __init__(self, session_repo: SessionRepo,):
+    def __init__(self, session_repo: SessionRepo, training_validator: TrainingValidator):
         self.session_repo = session_repo
+        self.training_validator = training_validator
 
     def apply(self, request: ValidateTrainingSessionRq) -> ValidateTrainingSessionRs:
-        pass
+        session = self.session_repo.get_session(request.session_uid)
+        validation_result = self.training_validator.validate(request.screen_code, session)
+        return ValidateTrainingSessionRs(order=validation_result.order,
+                                         message=validation_result.message,
+                                         success=validation_result.is_success)

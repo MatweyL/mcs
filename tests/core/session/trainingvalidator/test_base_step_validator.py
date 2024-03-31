@@ -3,7 +3,7 @@ from unittest.mock import Mock
 import pytest
 
 from service.common.screen_navigator import BackMovement, ForwardMovement
-from service.core.session.trainingvalidator.step_validator import BaseStepValidator
+from service.core.session.training_validator.step_validator import BaseStepValidator
 from service.domain.session import Session
 
 CODES = ["CHANNEL_EDITOR", "DIRECTION_EDITOR"]

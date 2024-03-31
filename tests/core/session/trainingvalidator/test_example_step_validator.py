@@ -1,6 +1,6 @@
 import pytest
 
-from service.core.session.trainingvalidator.step_validator import ExampleStepValidator
+from service.core.session.training_validator.step_validator import ExampleStepValidator
 from service.domain.session import Session, SessionStatus
 
 validator = ExampleStepValidator(None, None)

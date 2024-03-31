@@ -18,6 +18,7 @@ class ScreenNavigatorImpl(ScreenNavigator):
             return BackMovement()
         return ForwardMovement(next_screen_code)
 
+
 def get_node_parents(graph: dict, node: str) -> Set[str]:
     node_parents = set()
     for parent, child in graph.items():

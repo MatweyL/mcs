@@ -1,7 +1,8 @@
 from service.core.session.use_case import GetSessionListUseCase, GetSessionListRq, CreateSessionUseCase, \
     CreateSessionRq, \
     CreatedSessionRs, SessionListRs, StartSessionRq, FinishSessionRq, StartSessionUseCase, FinishSessionUseCase, \
-    StartedSessionRs, FinishedSessionRs, ValidateTrainingSessionRq, ValidateTrainingSessionRs
+    StartedSessionRs, FinishedSessionRs, ValidateTrainingSessionRq, ValidateTrainingSessionRs, \
+    ValidateTrainingSessionUseCase
 
 
 class SessionEndpoint:

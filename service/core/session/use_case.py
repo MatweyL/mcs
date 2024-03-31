@@ -78,8 +78,11 @@ class ValidateTrainingSessionRq(Request):
 
 
 class ValidateTrainingSessionRs(Response):
-    order: int
-    message: str
+
+    def __init__(self, order: int, message: str, success: bool):
+        self.order = order
+        self.message = message
+        self.success = success
 
 
 class ValidateTrainingSessionUseCase(UseCase):
