@@ -90,11 +90,18 @@ training_result_calculator = TrainingResultCalculatorServiceImpl([], DumbTrainin
 
 screen_graph = {
     "MAIN_SCREEN": [
-        "SERVICE_MENU",
+        "MAIN_MENU",
+    ],
+    "MAIN_MENU": [
+        "SERVICE_MENU"
     ],
     "SERVICE_MENU": [
+        "DATA_EDITOR",
+    ],
+    "DATA_EDITOR": [
         "CHANNEL_LIST",
         "DIRECTION_LIST",
+        "PPRCH_FREQUENCY_PLAN"
     ],
     "CHANNEL_LIST": [
         "CHANNEL_EDITOR"

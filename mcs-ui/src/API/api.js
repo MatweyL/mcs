@@ -86,6 +86,7 @@ const endpoints = {
     },
     validateTrainingSession: {
         [LOCAL_PY_MODE]: (sessionId, screenName) => {
+            console.log("VALIDATE")
             return axios.get(`${LOCAL_PY_URL}/session/training/validate?session_uid=${sessionId}&screen_code=${screenName}`, config())
         },
         [MOCK_LOCAL_MODE]: (sessionId, screenName) => {
@@ -192,7 +193,7 @@ export default class API {
 
     static async validateTrainingSession(sessionId, screenName) {
         console.log(sessionId, screenName);
-        const rs = await endpoints.validateTrainingSession[MOCK_LOCAL_MODE](sessionId, screenName);
+        const rs = await endpoints.validateTrainingSession[NOW_MODE](sessionId, screenName);
         console.log(rs);
         return rs.data;
     }

@@ -9,13 +9,14 @@ import {request} from "../../../hooks/request";
 import {SessionStatus} from "../../../core/constants/session_status";
 import {action} from "../../../hooks/action";
 import Actions from "../../../core/constants/actions";
+import {SessionTypes} from "../../../core/constants/session_types";
 
 const ScreenSessionControl = () => {
     const {fio} = useUserInfo();
     const dispatch = useDispatch();
     const [resultVisible, setResultVisible] = useState(false);
 
-    const {trainingResult, sessionId, status} = useSession();
+    const {trainingResult, sessionId, status, type} = useSession();
 
     const [enabledStartButton, enableStart] = useState(false);
 
@@ -38,6 +39,10 @@ const ScreenSessionControl = () => {
         action(Actions.RESET_TRAINING_RESULT, {}, dispatch);
     }
 
+    const isFree = () => {
+        return type === SessionTypes.FREE;
+    }
+
     useEffect(() => {
         if (trainingResult) {
             setResultVisible(true);
@@ -53,6 +58,7 @@ const ScreenSessionControl = () => {
     }, [status]);
 
     return (
+        isFree() ? null :
         <div>
             <Modal visible={resultVisible} close={close}>
                 Выполнение УТК завершено

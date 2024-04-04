@@ -1,13 +1,14 @@
 import React from 'react';
 import {SessionStatus} from "../../../core/constants/session_status";
 import {useSession} from "../../../hooks/useSession";
+import {SessionTypes} from "../../../core/constants/session_types";
 
 const ScreenBlock = () => {
-    const {status} = useSession();
+    const {status, type} = useSession();
 
     const isBlocked = () => {
-        console.log(status);
-        return status !== SessionStatus.STARTED;
+        return status !== SessionStatus.STARTED
+            && type !== SessionTypes.FREE;
     }
 
     return (

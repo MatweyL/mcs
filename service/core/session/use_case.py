@@ -23,6 +23,7 @@ class GetSessionListUseCase(UseCase):
 
 class SessionRq(Request):
     training: str
+    type: str
 
 
 class CreateSessionRq(Request):

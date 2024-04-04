@@ -5,7 +5,7 @@ import {SessionStatus} from "../../constants/session_status";
 const defaultSessionState = {
     sessionId: null,
     trainingResult: null,
-    type: SessionTypes.TRAINING,
+    type: null,
     status: null
 }
 
@@ -14,9 +14,9 @@ export const sessionReducer = (state = defaultSessionState, action) => {
     switch (action.type) {
         case Actions.OPEN_SCREEN_SESSION: {
             console.log("OPEN SCREEN SESSION");
-            const {sessionId, status} = action.payload;
+            const {sessionId, status, type} = action.payload;
             console.log(action.payload);
-            return {...state, status, sessionId};
+            return {...state, status, sessionId, type};
         }
 
         case Actions.FINISH_SESSION: {

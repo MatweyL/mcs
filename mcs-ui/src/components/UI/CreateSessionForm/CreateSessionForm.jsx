@@ -32,6 +32,7 @@ const CreateSessionForm = ({visible, setVisible}) => {
 
     const createSession = () => {
         if (session && enabled) {
+            console.log(session)
             request(Requests.CREATE_SESSION, {session}, dispatch);
             setVisible(false);
         }

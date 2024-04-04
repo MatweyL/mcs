@@ -138,7 +138,7 @@ class UTK2Step1Validator(BaseStepValidator):
         if not phone.channels:
             return False
         for channel in phone.channels:
-            if channel.name == 'КР1' and channel.mode == 'CHM25' and channel.frequency == 45775000:
+            if channel.name == 'КР1' and channel.mode == 'CHM25' and channel.frequency == '45775000':
                 return True
         return False
 

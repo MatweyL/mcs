@@ -18,7 +18,7 @@ const TrainingHintBox = () => {
 
     useEffect(() => {
         if (screenName && isTraining()) {
-            // request(Requests.REQUEST_HINT, {sessionId, screenName}, dispatch)
+            request(Requests.REQUEST_HINT, {sessionId, screenName}, dispatch)
         }
     }, [screenName]);
 

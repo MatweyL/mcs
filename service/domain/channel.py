@@ -7,6 +7,6 @@ class Channel:
     mode: str = None
     name: str = None
     forbidden_send: bool = None
-    double_frequency: str = None
-    frequency: bool = None
+    double_frequency: bool = None
+    frequency: str = None
     ctcss: str = None

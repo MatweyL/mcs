@@ -41,6 +41,7 @@ class CreateSessionUseCaseImpl(CreateSessionUseCase):
         # FIXME: оставить только training, подумать о вынесении в отдельную сущность
         session.title = self.conversions.get(dto.training, "Не определено")
         session.training = dto.training
+        session.type = dto.type
         session.phone = Phone()
         session.status = SessionStatus.READY
 
