@@ -4,7 +4,7 @@ import os.path
 from service.common.impl.message_source import MessageSourceImpl
 from service.common.impl.screen_navigator import ScreenNavigatorImpl
 from service.common.mapper import Mapper
-from service.common.utils import get_root_path
+from service.common.utils import get_root_path, update_screen_by_alias
 from service.core.auth.filter import AuthFilter
 from service.core.dictionary.endpoint import DictionaryEndpoint
 from service.core.dictionary.impl import GetDictionaryUseCaseImpl
@@ -31,7 +31,8 @@ from service.core.session.impl.repo import InMemorySessionRepo
 from service.core.session.impl.training import DumbTrainingResultCalculatorStrategy, TrainingResultCalculatorServiceImpl
 from service.core.session.impl.use_case import GetSessionListUseCaseImpl, CreateSessionUseCaseImpl, \
     StartSessionUseCaseImpl, FinishSessionUseCaseImpl, ValidateTrainingSessionUseCaseImpl
-from service.core.session.training_validator.step_validator import UTK2Step1Validator, UTK2Step2Validator
+from service.core.session.training_validator.step_validator import UTK2Step1Validator, UTK2Step2Validator, \
+    UTK2Step3Validator
 from service.core.session.training_validator.training_validator import TrainingValidatorImpl
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo
@@ -39,6 +40,8 @@ from service.core.user.impl.use_case import RegisterUserUseCaseImpl, Authenticat
 from service.db.db import JsonDb
 from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper, \
     GroupMapper, SessionAttemptMapper
+
+update_screen_by_alias()
 
 save_screen_processor_registry = SaveScreenProcessorRegistry([ChannelEditorSaveScreenProcessor(),
                                                               DirectionEditorSaveScreenProcessor()])
@@ -112,10 +115,13 @@ screen_graph = {
 }
 message_by_code_path = get_root_path().joinpath('service/db/message_by_code.json')
 message_by_code = json.loads(message_by_code_path.read_text('utf-8'))
-navigator = ScreenNavigatorImpl(screen_graph)
+screen_by_alias_path = get_root_path().joinpath('service/db/screen_by_alias.json')
+screen_by_alias = json.loads(screen_by_alias_path.read_text('utf-8'))
+navigator = ScreenNavigatorImpl(screen_graph, screen_by_alias)
 message_source = MessageSourceImpl(message_by_code)
 training_validator_utk_2 = TrainingValidatorImpl([UTK2Step1Validator(navigator, message_source),
-                                                  UTK2Step2Validator(navigator, message_source)],
+                                                  UTK2Step2Validator(navigator, message_source),
+                                                  UTK2Step3Validator(navigator, message_source)],
                                                  'UTK2')
 
 get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)

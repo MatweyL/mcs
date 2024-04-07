@@ -23,15 +23,17 @@ DATA = [
                                            name='КР2')
                                    ],
                          directions=[Direction(channel='КР2')])), False],
-    [Session(phone=Phone(channels=[Channel(mode='CHM25',
+    [Session(phone=Phone(channels=[Channel(uid='842ef8f0-7c91-4c1f-888b-42d3de3c8824',
+                                           mode='CHM25',
                                            frequency=45775000,
                                            name='КР1')],
-                         directions=[Direction(channel='КР1')])), True],
+                         directions=[Direction(channel='842ef8f0-7c91-4c1f-888b-42d3de3c8824')])), True],
     [Session(phone=Phone(channels=[Channel(mode='CHM50'),
-                                   Channel(mode='CHM25',
+                                   Channel(uid='842ef8f0-7c91-4c1f-888b-42d3de3c8824',
+                                           mode='CHM25',
                                            frequency=45775000,
                                            name='КР1')],
-                         directions=[Direction(channel='КР1')])), True],
+                         directions=[Direction(channel='842ef8f0-7c91-4c1f-888b-42d3de3c8824')])), True],
 ]
 
 

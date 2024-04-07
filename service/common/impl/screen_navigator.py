@@ -16,7 +16,10 @@ class ScreenNavigatorImpl(ScreenNavigator):
         now_screen_child = get_node_child(self.screen_graph, now_screen_code)
         if next_screen_code not in now_screen_child:
             return BackMovement()
-        return ForwardMovement(next_screen_code)
+        screen_display_name = self.screen_by_alias.get(next_screen_code)
+        if not screen_display_name:
+            screen_display_name = next_screen_code
+        return ForwardMovement(screen_display_name)
 
 
 def get_node_parents(graph: dict, node: str) -> Set[str]:
@@ -72,15 +75,3 @@ def bfs(graph: dict, start: str, ) -> dict:
                 to_visit_nodes.put(neighbor_node)
                 paths[neighbor_node] = node
     return paths
-
-
-if __name__ == '__main__':
-    g = {'a': ['b', 'c'], 'b': [], 'c': ['d', 'g'], 'd': [], 'g': ['v'], 'v': []}
-    start = 'b'
-    target = 'g'
-    paths = bfs(g, target)
-    pprint.pprint(paths)
-    if paths[start] in get_node_child(g, start):
-        ...  # вперед
-    else:
-        ...  # назад

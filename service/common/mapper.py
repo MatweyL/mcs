@@ -1,7 +1,7 @@
 import json
 from typing import TypeVar, Type
 
-from service.common.json import handler
+from service.common.json_utils import handler
 
 T = TypeVar("T")
 

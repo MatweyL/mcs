@@ -32,8 +32,9 @@ class BackMovement(Movement):
 
 
 class ScreenNavigator:
-    def __init__(self, screen_graph: dict):
+    def __init__(self, screen_graph: dict, screen_by_alias: dict = None):
         self.screen_graph = screen_graph
+        self.screen_by_alias = screen_by_alias if screen_by_alias is not None else {}
 
     @abstractmethod
     def navigate(self, now_screen_code: str, target_screen_code: str) -> Movement:

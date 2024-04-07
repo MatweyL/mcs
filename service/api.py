@@ -72,6 +72,7 @@ async def validate_training_session(session_uid: str, screen_code: str):
     request = ValidateTrainingSessionRq(session_uid=session_uid, screen_code=screen_code)
     return session_endpoint.validate_training_session(request)
 
+
 not_auth_router = APIRouter()
 
 

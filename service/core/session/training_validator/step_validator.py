@@ -174,9 +174,11 @@ class UTK2Step2Validator(BaseStepValidator):
         phone = session.phone
         if not phone.directions:
             return False
+
         for direction in phone.directions:
-            if direction.channel == 'КР1':
-                return True
+            for channel in phone.channels:
+                if direction.channel == channel.uid:
+                    return True
         return False
 
     def get_order(self) -> int:
@@ -192,3 +194,32 @@ class UTK2Step2Validator(BaseStepValidator):
         return "DIRECTION_EDITOR"
 
 
+class UTK2Step3Validator(BaseStepValidator):
+    def __init__(self,
+                 navigator: ScreenNavigator,
+                 message_source: MessageSource):
+        super().__init__(navigator, message_source)
+
+    def get_step_message_code(self) -> str:
+        """
+        Получить код сообщения для валидатора
+        """
+        return "UTK_2_STEP_3_CODE"
+
+    def is_valid(self, session: Session) -> bool:
+        """
+        Проверить валидность тренировки в сессии
+        """
+        return False
+
+    def get_order(self) -> int:
+        """
+        Получить номер шага
+        """
+        return 3
+
+    def get_target_screen_code(self) -> str:
+        """
+        Получить код экрана, на к-м нужно отобразить сообщение
+        """
+        return "MAIN_SCREEN"
