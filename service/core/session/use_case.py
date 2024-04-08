@@ -90,3 +90,18 @@ class ValidateTrainingSessionUseCase(UseCase):
     @abstractmethod
     def apply(self, request: ValidateTrainingSessionRq) -> ValidateTrainingSessionRs:
         pass
+
+
+class FindSessionListWithSameActiveFrequencyRq(Request):
+    session_uid: str
+
+
+class FindSessionListWithSameActiveFrequencyRs(Response):
+    sessions: List[Session]
+
+
+class FindSessionListWithSameActiveFrequencyUseCase(UseCase):
+
+    @abstractmethod
+    def apply(self, request: FindSessionListWithSameActiveFrequencyRq) -> FindSessionListWithSameActiveFrequencyRs:
+        pass
