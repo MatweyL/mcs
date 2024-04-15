@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from service.common.utils import now
+from service.common.utils import now, from_str_to_datetime
 from service.core.session import StartSessionRq, StartedSessionRs, ValidateTrainingSessionRq, ValidateTrainingSessionRs
 from service.core.session.repo import SessionRepo
 from service.core.session.training import TrainingResultCalculatorService
@@ -18,6 +18,7 @@ class GetSessionListUseCaseImpl(GetSessionListUseCase):
 
     def apply(self, request: GetSessionListRq) -> SessionListRs:
         sessions = self.session_repo.get_sessions(request.user_uid)
+        sessions.sort(key=lambda s: from_str_to_datetime(s.date), reverse=True)
         return SessionListRs(sessions=sessions)
 
 

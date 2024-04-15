@@ -909,6 +909,52 @@
       ],
       "training": "UTK4",
       "type": "TRAINING"
+    },
+    {
+      "uid": "605c12fc-f7eb-43f9-932c-99d308f903b7",
+      "title": "УТК-1",
+      "date": "15/04/24 14:46",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "channels": [],
+        "directions": []
+      },
+      "status": "READY",
+      "attempts": [
+        {
+          "started": "2024-04-15 14:46:14.661203",
+          "finished": null
+        },
+        {
+          "started": "2024-04-15 14:46:26.750287",
+          "finished": "2024-04-15 14:46:28.012571"
+        }
+      ],
+      "training": "UTK1",
+      "type": "EXAM"
+    },
+    {
+      "uid": "b06dd69e-70a4-4edf-98bb-ee9ff21b3bc5",
+      "title": "УТК-3",
+      "date": "15/04/24 14:46",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "channels": [],
+        "directions": []
+      },
+      "status": "STARTED",
+      "attempts": [
+        {
+          "started": "2024-04-15 14:46:45.340090",
+          "finished": null
+        },
+        {
+          "started": "2024-04-15 14:46:50.383993",
+          "finished": null
+        }
+      ],
+      "training": "UTK3",
+      "type": "TRAINING"
     }
   ],
   "screens": [],
