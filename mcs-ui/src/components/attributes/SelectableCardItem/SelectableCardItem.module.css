@@ -1,0 +1,36 @@
+.cardItem {
+    display: flex;
+    background-color: whitesmoke;
+
+}
+
+.cardItemActive {
+    display: flex;
+    background-color: black;
+    color: whitesmoke;
+    outline: 2px solid black;
+    pointer-events: fill;
+
+}
+
+.icon {
+    color: whitesmoke;
+    display: flex;
+    background-color: whitesmoke;
+    width: 20px;
+    font-size: 18px;
+    justify-content: center;
+}
+
+.iconActive {
+    color: brown;
+    display: flex;
+    background-color: whitesmoke;
+    width: 20px;
+    font-size: 18px;
+    justify-content: center;
+}
+
+.label {
+    padding-left: 5px;
+}

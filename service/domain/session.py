@@ -39,7 +39,6 @@ class Training(enum.Enum):
 
 @dataclass
 class Session:
-    active_direction: str = None
     uid: str = None
     title: str = None
     date: str = None
