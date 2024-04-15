@@ -114,7 +114,7 @@ app.include_router(auth_router)
 app.include_router(not_auth_router)
 
 if __name__ == "__main__":
-    host = 'localhost'  # TODO: put to config
+    host = '0.0.0.0'  # TODO: put to config
     port = 8080  # TODO: put to config
     logger.info(f'started http://{host}:{port}/docs')
     uvicorn.run(app, host=host, port=port)
