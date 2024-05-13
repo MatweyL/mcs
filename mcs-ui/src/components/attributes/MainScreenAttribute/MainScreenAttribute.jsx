@@ -49,8 +49,8 @@ const MainScreenAttribute = ({attribute}) => {
                 </div>
 
                 <div className={classes.direction}>
-                    <div>КР 1</div>
-                    <div>НАПРАВЛЕНИЕ 1</div>
+                    <div>{attribute.activeChannelName}</div>
+                    <div>{attribute.activeDirectionName}</div>
                     <div>{date}</div>
                 </div>
                 <div style={{height: "30px"}}/>

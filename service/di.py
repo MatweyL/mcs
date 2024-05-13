@@ -23,9 +23,14 @@ from service.core.screen.processor.get.direction_editor_get_screen_processor imp
 from service.core.screen.processor.get.direction_list_get_screen_processor import DirectionListGetScreenProcessor
 from service.core.screen.processor.get.get_screen_processor import DefaultGetScreenProcessor
 from service.core.screen.processor.get.get_screen_processor_registry import GetScreenProcessorRegistry
+from service.core.screen.processor.get.main_screen_get_screen_processor import MainScreenGetScreenProcessor
+from service.core.screen.processor.get.select_active_direction_get_screen_processor import \
+    SelectActiveDirectionGetScreenProcessor
 from service.core.screen.processor.save import ChannelEditorSaveScreenProcessor
 from service.core.screen.processor.save.direction_editor_save_screen_processor import DirectionEditorSaveScreenProcessor
 from service.core.screen.processor.save.save_screen_processor_registry import SaveScreenProcessorRegistry
+from service.core.screen.processor.save.select_active_direction_save_screen_processor import \
+    SelectActiveDirectionSaveScreenProcessor
 from service.core.session import SessionEndpoint
 from service.core.session.impl.repo import InMemorySessionRepo
 from service.core.session.impl.training import DumbTrainingResultCalculatorStrategy, TrainingResultCalculatorServiceImpl
@@ -44,7 +49,8 @@ from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper
 update_screen_by_alias()
 
 save_screen_processor_registry = SaveScreenProcessorRegistry([ChannelEditorSaveScreenProcessor(),
-                                                              DirectionEditorSaveScreenProcessor()])
+                                                              DirectionEditorSaveScreenProcessor(),
+                                                              SelectActiveDirectionSaveScreenProcessor()])
 
 db_json_path = get_root_path().joinpath('service/db/db.json')
 db = JsonDb(db_json_path)
@@ -53,7 +59,9 @@ mapper = Mapper()
 get_screen_processor_registry = GetScreenProcessorRegistry([ChannelListGetScreenProcessor(),
                                                             ChannelEditorGetScreenProcessor(),
                                                             DirectionListGetScreenProcessor(),
-                                                            DirectionEditorGetScreenProcessor()],
+                                                            DirectionEditorGetScreenProcessor(),
+                                                            SelectActiveDirectionGetScreenProcessor(),
+                                                            MainScreenGetScreenProcessor()],
                                                            DefaultGetScreenProcessor())
 
 screens_dir_path = get_root_path().joinpath('mcs-ui/public/screen')  # TODO: migrate to storage (mongo, redis, pg)

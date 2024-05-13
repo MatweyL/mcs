@@ -16,6 +16,9 @@ export default class Attributes {
     /// Карточка объекта
     static CARD_ITEM = "CARD_ITEM";
 
+    /// Карточка объекта, которую можно выбрать
+    static SELECTABLE_CARD_ITEM = "SELECTABLE_CARD_ITEM";
+
     static MAIN_SCREEN = "MAIN_SCREEN";
 
     static _height = {
@@ -24,6 +27,7 @@ export default class Attributes {
         [this.DICTIONARY]: 25,
         [this.MENU_ITEM]: 26.4,
         [this.CARD_ITEM]: 25,
+        [this.SELECTABLE_CARD_ITEM]: 25,
         [this.MAIN_SCREEN]: 25,
     }
 

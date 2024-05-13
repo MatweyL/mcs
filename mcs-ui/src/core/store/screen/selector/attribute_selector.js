@@ -1,5 +1,6 @@
 import {Selector} from "./selector";
 import AttributeHelper from "../../helper/attribute_helper";
+import Attributes from "../../../constants/attributes";
 
 const SCREEN_HEIGHT = 200;
 
@@ -31,8 +32,17 @@ export class AttributeSelector extends Selector {
 
     _select(state, name) {
         const prevName = state.selectedAttribute;
-        state.attributes[prevName].active = false;
-        state.attributes[name].active = true;
+        const prevAttribute = state.attributes[prevName];
+        prevAttribute.active = false;
+        const nowAttribute = state.attributes[name];
+        nowAttribute.active = true;
+
+        // FIXME: Здесь не должно быть логики, связанной с типом конкретного атрибута
+        if (prevAttribute.type === Attributes.SELECTABLE_CARD_ITEM) {
+            prevAttribute.value = false;
+            nowAttribute.value = true;
+        }
+
         state.buttons = this.buttonsFactory.create(state.attributes[name].type);
         state.selectedAttribute = name;
     }

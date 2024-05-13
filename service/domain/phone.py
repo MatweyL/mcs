@@ -7,6 +7,7 @@ from service.domain.direction import Direction
 
 @dataclass
 class Phone:
+    active_direction: str = None
     directions: List[Direction] = field(default_factory=list)
     channels: List[Channel] = field(default_factory=list)
 

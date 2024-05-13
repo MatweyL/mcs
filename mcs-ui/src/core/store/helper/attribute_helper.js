@@ -33,7 +33,15 @@ export default class AttributeHelper {
     }
 
     static isDefaultCardItem(attribute) {
-        return attribute.type === Attributes.CARD_ITEM
+        return this.isDefault(attribute, Attributes.CARD_ITEM)
+    }
+
+    static isDefaultSelectableCardItem(attribute) {
+        return this.isDefault(attribute, Attributes.SELECTABLE_CARD_ITEM)
+    }
+
+    static isDefault(attribute, type) {
+        return attribute.type === type
             && attribute.default === true;
     }
 

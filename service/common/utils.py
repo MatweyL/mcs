@@ -26,10 +26,10 @@ def update_screen_by_alias():
     screen_by_alias_path = get_root_path().joinpath('service/db/screen_by_alias.json')
     screen_by_alias = json.loads(screen_by_alias_path.read_text('utf-8'))
 
-    screen_names = {screen_name for screen_name in os.listdir(screens_path)}
+    screen_names = {screen_name for screen_name in os.listdir(screens_path) if
+                    screen_by_alias_path.joinpath(str(screen_name)).is_dir()}
 
     not_in_screen_by_alias = screen_names.difference(screen_by_alias)
     for screen_name in not_in_screen_by_alias:
         screen_by_alias[screen_name] = screen_name
     screen_by_alias_path.write_text(json.dumps(screen_by_alias, indent=2))
-

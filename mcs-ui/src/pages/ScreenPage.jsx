@@ -11,7 +11,6 @@ import ScreenSessionControl from "../components/UI/ScreenSessionControl/ScreenSe
 import TrainingHintBox from "../components/UI/TrainingHintBox/TrainingHintBox";
 import {useSession} from "../hooks/useSession";
 import {request} from "../hooks/request";
-import {SessionStatus} from "../core/constants/session_status";
 import ScreenBlock from "../components/UI/ScreenBlock/ScreenBlock";
 
 /**
@@ -31,8 +30,6 @@ const ScreenPage = () => {
         request(Requests.CLOSE_SCREEN_SESSION, {}, dispatch);
         navigate(RoutePaths.SESSIONS);
     }
-
-
 
     return (
         <div style={{display: "flex", justifyContent: "space-between", width: "100%"}}>

@@ -41,7 +41,6 @@ class SessionMapper(Mapper):
             session.attempts = [self.session_attempt_mapper.map_to_domain(attempt) for attempt in entity['attempts']]
         session.training = entity.get('training')
         session.type = entity.get('type', SessionType.FREE)
-        session.active_direction = entity.get('active_direction')
 
         return session
 
@@ -57,7 +56,6 @@ class SessionMapper(Mapper):
         entity['attempts'] = [self.session_attempt_mapper.map_to_entity(attempt) for attempt in session.attempts]
         entity['training'] = session.training
         entity['type'] = session.type
-        entity['active_direction'] = session.active_direction
         return entity
 
 
@@ -70,6 +68,7 @@ class PhoneMapper(Mapper):
 
     def map_to_domain(self, entity: E) -> D:
         phone = Phone()
+        phone.active_direction = entity.get('active_direction')
         phone.channels = [self.channel_mapper.map_to_domain(c) for c in entity['channels']]
         phone.directions = [self.direction_mapper.map_to_domain(d) for d in entity['directions']]
 
@@ -77,6 +76,7 @@ class PhoneMapper(Mapper):
 
     def map_to_entity(self, phone: Phone) -> E:
         entity = dict()
+        entity['active_direction'] = phone.active_direction
         entity['channels'] = [self.channel_mapper.map_to_entity(c) for c in phone.channels]
         entity['directions'] = [self.direction_mapper.map_to_entity(d) for d in phone.directions]
 
