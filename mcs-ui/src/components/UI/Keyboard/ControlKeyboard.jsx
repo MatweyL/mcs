@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {clone} from "../../../core/store/helper/clone_util";
 import Actions from "../../../core/constants/actions";
 import {useDispatch} from "react-redux";
@@ -8,10 +8,13 @@ import classes from "./Keyboard.module.css";
 import {execute} from "../../../core/store/execute";
 import {useScreenSessionId} from "../../../hooks/useSession";
 
+let context, source, globalStream, workletNode;
+
 const ControlKeyboard = () => {
     const dispatch = useDispatch();
     const screen = useScreen();
     const sessionId = useScreenSessionId();
+    const [audio, setAudio] = useState();
 
     const left = () => executeButton(screen.buttons.leftButton);
 
@@ -35,6 +38,41 @@ const ControlKeyboard = () => {
     }
 
 
+    const startCall = () => {
+        dispatch({type: Actions.START_CALL});
+        const handle = async (stream) => {
+            globalStream = stream;
+            context = new AudioContext({latencyHint: 'interactive'});
+
+            await context.audioWorklet.addModule("/audio_processor.js");
+
+            // Create a AudioWorkletNode to process the audio data
+            workletNode = new AudioWorkletNode(context, 'audio-processor');
+
+            // Connect the source to the script processor
+            source = context.createMediaStreamSource(stream)
+            source.connect(workletNode);
+            workletNode.connect(context.destination);
+        }
+
+        navigator.mediaDevices.getUserMedia({audio: true, video: false})
+            .then(handle)
+    }
+
+    const endCall = () => {
+        // Disconnect the source from the script processor
+        source.disconnect(workletNode);
+        workletNode.disconnect(context.destination);
+
+        context.close().then(() => {
+            source = null;
+            workletNode = null;
+            context = null;
+        });
+
+        dispatch({type: Actions.END_CALL});
+    }
+
     return (
         <div className={classes.controlKeyboard}>
             <div className={classes.keysRow}>
@@ -43,9 +81,9 @@ const ControlKeyboard = () => {
                 <Key onClick={right}><img src="/buttons/right.svg" alt="call"/></Key>
             </div>
             <div className={classes.keysRow}>
-                <Key><img src="/buttons/green.svg" alt="call"/></Key>
+                <Key onClick={startCall}><img src="/buttons/green.svg" alt="call"/></Key>
                 <Key onClick={down}><img src="/buttons/down.svg" alt="call"/></Key>
-                <Key><img src="/buttons/red.svg" alt="cancel"/></Key>
+                <Key onClick={endCall}><img src="/buttons/red.svg" alt="cancel"/></Key>
             </div>
         </div>
     );

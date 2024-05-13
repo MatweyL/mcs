@@ -64,4 +64,8 @@ export default class Actions {
 
     // Обновить подсказку для пользователя
     static UPDATE_HINT = "UPDATE_HINT";
+
+    static START_CALL = 'START_CALL';
+
+    static END_CALL = 'END_CALL';
 }

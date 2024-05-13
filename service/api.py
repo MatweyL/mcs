@@ -1,8 +1,12 @@
+import json
+
 import uvicorn
 from fastapi import FastAPI, Depends, APIRouter, HTTPException
 from starlette.middleware.cors import CORSMiddleware
+from starlette.websockets import WebSocket, WebSocketState
 
 from service.common.logs import logger
+from service.common.utils import generate_uid
 from service.core.auth.auth_context import AuthContext
 from service.core.dictionary.use_case import GetDictionaryRq
 from service.core.group.use_case import GetUserListByGroupRq
@@ -102,6 +106,30 @@ async def auth_user(request: LoginUserRq):
     return user_endpoint.login_user(request)
 
 
+ws_router = APIRouter()
+
+sockets = {}
+
+
+@ws_router.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    sockets[generate_uid()] = websocket
+
+    for socket_id in sockets.keys():
+        socket = sockets[socket_id]
+        if socket.client_state != WebSocketState.DISCONNECTED:
+            await socket.send_json(json.dumps({'type': 'SOME_EVENT'}))
+        else:
+            sockets.pop(socket_id)
+
+        # await socket.send_json(json.dumps(dict(type='NEW_USER', payload=list(sockets.keys()))))
+
+    while True:
+        data = await websocket.receive_json()
+        logger.info(data)
+
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -112,6 +140,7 @@ app.add_middleware(
 )
 app.include_router(auth_router)
 app.include_router(not_auth_router)
+app.include_router(ws_router)
 
 if __name__ == "__main__":
     host = '0.0.0.0'  # TODO: put to config
