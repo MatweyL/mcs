@@ -143,7 +143,7 @@ get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
 create_session_use_case = CreateSessionUseCaseImpl(session_repo)
 start_session_use_case = StartSessionUseCaseImpl(session_repo)
 finish_session_use_case = FinishSessionUseCaseImpl(session_repo, training_result_calculator)
-validate_training_session_use_case = ValidateTrainingSessionUseCaseImpl(session_repo, training_validator_utk_2)
+validate_training_session_use_case = ValidateTrainingSessionUseCaseImpl(session_repo, [training_validator_utk_2])
 
 session_endpoint = SessionEndpoint(
     get_session_list_use_case,

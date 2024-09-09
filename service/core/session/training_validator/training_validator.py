@@ -24,6 +24,9 @@ class TrainingValidator:
         """
         pass
 
+    def get_name(self) -> str:
+        pass
+
 
 class TrainingValidatorImpl(TrainingValidator):
     def validate(self, screen_code: str, session: Session) -> ValidationResult:
@@ -36,3 +39,6 @@ class TrainingValidatorImpl(TrainingValidator):
             if not validation_result.is_success:
                 return validation_result
         return validation_result
+
+    def get_name(self) -> str:
+        return 'UTK2'

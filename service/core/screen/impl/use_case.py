@@ -39,7 +39,7 @@ class GetScreenUseCaseImpl(GetScreenUseCase):
         self.screen_repo = screen_repo
 
     def apply(self, request: GetScreenRq):
-        logger.info('GET SCREEN USE CASE')
+        logger.info(f'GET SCREEN USE CASE {request}')
 
         screen_name = request.screen_name
         screen_template = self.screen_repo.get(screen_name)
