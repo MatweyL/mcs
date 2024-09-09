@@ -1,0 +1,11 @@
+.call {
+    z-index: 3;
+    display: flex;
+    top: 35%;
+    position: absolute;
+    width: 100%;
+    height: 70px;
+    background-color: whitesmoke;
+    justify-content: center;
+    align-items: center;
+}

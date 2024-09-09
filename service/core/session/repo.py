@@ -16,3 +16,7 @@ class SessionRepo:
     @abstractmethod
     def get_session(self, session_id: str) -> Session:
         pass
+
+    @abstractmethod
+    def get_all_sessions(self) -> List[Session]:
+        pass

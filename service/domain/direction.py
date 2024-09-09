@@ -10,4 +10,3 @@ class Direction:
     tone_call: bool = None
     scan_list: str = None
     economizer: str = None
-

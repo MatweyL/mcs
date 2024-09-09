@@ -1,13 +1,14 @@
 from datetime import datetime
 
 from service.common.utils import now, from_str_to_datetime
-from service.core.session import StartSessionRq, StartedSessionRs, ValidateTrainingSessionRq, ValidateTrainingSessionRs
+from service.core.session import StartSessionRq, StartedSessionRs, ValidateTrainingSessionRq, ValidateTrainingSessionRs, \
+    FindSessionListWithSameActiveFrequencyRq, FindSessionListWithSameActiveFrequencyRs
 from service.core.session.repo import SessionRepo
 from service.core.session.training import TrainingResultCalculatorService
 from service.core.session.training_validator.training_validator import TrainingValidator
 from service.core.session.use_case import GetSessionListUseCase, GetSessionListRq, SessionListRs, CreateSessionUseCase, \
     CreateSessionRq, CreatedSessionRs, StartSessionUseCase, FinishSessionUseCase, FinishedSessionRs, FinishSessionRq, \
-    ValidateTrainingSessionUseCase
+    ValidateTrainingSessionUseCase, FindSessionListWithSameActiveFrequencyUseCase
 from service.domain.phone import Phone
 from service.domain.session import Session, SessionStatus, SessionAttempt
 
@@ -98,3 +99,19 @@ class ValidateTrainingSessionUseCaseImpl(ValidateTrainingSessionUseCase):
         return ValidateTrainingSessionRs(order=validation_result.order,
                                          message=validation_result.message,
                                          success=validation_result.is_success)
+
+
+class FindSessionListWithSameActiveFrequencyUseCaseImpl(FindSessionListWithSameActiveFrequencyUseCase):
+    def __init__(self, session_repo: SessionRepo):
+        self.session_repo = session_repo
+
+    def apply(self, request: FindSessionListWithSameActiveFrequencyRq) -> FindSessionListWithSameActiveFrequencyRs:
+        request_session = self.session_repo.get_session(request.session_uid)
+        if not request_session.active_direction:
+            return []
+        sessions = self.session_repo.get_all_sessions()
+        found_sessions = []
+        for session in sessions:
+            if request_session.active_direction == session.active_direction:
+                found_sessions.append(session)
+        return found_sessions

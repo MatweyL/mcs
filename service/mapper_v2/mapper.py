@@ -68,6 +68,7 @@ class PhoneMapper(Mapper):
 
     def map_to_domain(self, entity: E) -> D:
         phone = Phone()
+        phone.active_direction = entity.get('active_direction')
         phone.channels = [self.channel_mapper.map_to_domain(c) for c in entity['channels']]
         phone.directions = [self.direction_mapper.map_to_domain(d) for d in entity['directions']]
 
@@ -75,6 +76,7 @@ class PhoneMapper(Mapper):
 
     def map_to_entity(self, phone: Phone) -> E:
         entity = dict()
+        entity['active_direction'] = phone.active_direction
         entity['channels'] = [self.channel_mapper.map_to_entity(c) for c in phone.channels]
         entity['directions'] = [self.direction_mapper.map_to_entity(d) for d in phone.directions]
 

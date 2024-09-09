@@ -33,6 +33,9 @@ export class InitActionProcessor extends ActionProcessor {
             return state;
         }
         firstVisibleAttribute.active = true;
+        if (firstVisibleAttribute.type === Attributes.SELECTABLE_CARD_ITEM) {
+            firstVisibleAttribute.value = firstVisibleAttribute.active;
+        }
 
         state.selectedAttribute = firstVisibleAttribute.name;
         state.buttons = this.buttonsFactory.create(firstVisibleAttribute.type);
@@ -44,15 +47,19 @@ export class InitActionProcessor extends ActionProcessor {
             const attribute = processedAttributes[attributeName];
             attribute.name = attributeName;
             attribute.active = false;
+            if (attribute.type === Attributes.SELECTABLE_CARD_ITEM) {
+                attribute.value = attribute.active;
+            }
             attribute.height = Attributes.heightOf(attribute.type);
 
+            // TODO: Вынести логику по допобработке для конкретного типа атрибута [1]
             if (AttributeHelper.isDefaultCardItem(attribute)) {
                 const defaultCardItem = attribute;
 
                 const menuItemsAmount = AttributeHelper.countOfType(attributes, Attributes.CARD_ITEM);
                 // Скрытие дефолтного cardItem, когда в списке уже есть новые элементы
                 if (menuItemsAmount > 1) {
-                    Instructions.HIDE(attribute);
+                    Instructions.HIDE(defaultCardItem);
                 }
 
                 // Перенос свойств дефолтного cardItem на новые элементы
@@ -63,6 +70,17 @@ export class InitActionProcessor extends ActionProcessor {
                         attr.fieldName = defaultCardItem.fieldName;
                         attr.openOnEdit = defaultCardItem.openOnEdit;
                     })
+            }
+
+            // TODO: Вынести логику по допобработке для конкретного типа атрибута [2]
+            if (AttributeHelper.isDefaultSelectableCardItem(attribute)) {
+                const defaultCardItem = attribute;
+
+                const menuItemsAmount = AttributeHelper.countOfType(attributes, Attributes.SELECTABLE_CARD_ITEM);
+                // Скрытие дефолтного selectableCardItem, когда в списке уже есть новые элементы
+                if (menuItemsAmount > 1) {
+                    Instructions.HIDE(defaultCardItem);
+                }
             }
 
             if (AttributeHelper.isVisible(attribute)) {

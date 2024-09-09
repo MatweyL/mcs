@@ -1,0 +1,12 @@
+{
+  "name": "SELECT_ACTIVE_DIRECTION",
+  "label": "Выбор направления",
+  "attributes": {
+    "EMPTY": {
+      "type": "SELECTABLE_CARD_ITEM",
+      "label": "Пустой список",
+      "default": true,
+      "fieldName": "uid"
+    }
+  }
+}

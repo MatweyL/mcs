@@ -12,10 +12,10 @@ const devices = [
 ]
 const trainings = [
     {value: "", label: ""},
-    {value: "UTK1", label: "УТК-1"},
-    {value: "UTK2", label: "УТК-2"},
-    {value: "UTK3", label: "УТК-3"},
-    {value: "UTK4", label: "УТК-4"},
+    {value: "UTK1", label: "УТК-1. Включение питания"},
+    {value: "UTK2", label: "УТК-2. Настройка частоты в режиме ЧМ25"},
+    {value: "UTK3", label: "УТК-3. Настройка частоты в режиме ЧМ50"},
+    {value: "UTK4", label: "УТК-4. Настройка частоты в режиме ППРЧ"},
 ]
 
 const types = [

@@ -6,7 +6,8 @@ const defaultSessionState = {
     sessionId: null,
     trainingResult: null,
     type: null,
-    status: null
+    status: null,
+    call: null
 }
 
 export const sessionReducer = (state = defaultSessionState, action) => {
@@ -33,6 +34,14 @@ export const sessionReducer = (state = defaultSessionState, action) => {
 
         case Actions.RESET_TRAINING_RESULT: {
             return {...state, trainingResult: null}
+        }
+
+        case Actions.START_CALL: {
+            return {...state, call: true}
+        }
+
+        case Actions.END_CALL: {
+            return {...state, call: false}
         }
     }
 

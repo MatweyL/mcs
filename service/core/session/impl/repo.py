@@ -56,3 +56,8 @@ class InMemorySessionRepo(SessionRepo):
         session = next(filter(lambda s: s['uid'] == session_id, sessions), None)
 
         return self.mapper.map_to_domain(session)
+
+    def get_all_sessions(self) -> List[Session]:
+        json = self.db.get_json()
+        sessions = json['sessions']
+        return [self.mapper.map_to_domain(session) for session in sessions]

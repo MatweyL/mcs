@@ -15,6 +15,8 @@ export default class Buttons {
 
     static OPEN_MENU_BUTTON = {action: {type: Actions.OPEN_MENU}, label: Labels.MENU}
 
+    static SELECT_CARD_ITEM = {action: {type: Requests.SAVE, request: true}, label: Labels.SELECT}
+
     static OPEN_SPECIFIC_SCREEN = (screen) => {
         return {action: {type: Requests.OPEN_SPECIFIC_SCREEN, request: true}, label: null, payload: screen}
     }
