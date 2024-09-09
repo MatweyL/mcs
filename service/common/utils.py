@@ -21,6 +21,10 @@ def now() -> str:
     return datetime.now().strftime('%d/%m/%y %H:%M')
 
 
+def from_str_datetime_to_obj(str_datetime: str) -> datetime:
+    return datetime.strptime(str_datetime, '%d/%m/%y %H:%M')
+
+
 def update_screen_by_alias():
     screens_path = get_root_path().joinpath('mcs-ui/public/screen')
     screen_by_alias_path = get_root_path().joinpath('service/db/screen_by_alias.json')

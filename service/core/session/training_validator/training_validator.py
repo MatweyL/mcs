@@ -36,4 +36,3 @@ class TrainingValidatorImpl(TrainingValidator):
             if not validation_result.is_success:
                 return validation_result
         return validation_result
-

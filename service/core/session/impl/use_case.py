@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from service.common.utils import now
+from service.common.utils import now, from_str_datetime_to_obj
 from service.core.session import StartSessionRq, StartedSessionRs, ValidateTrainingSessionRq, ValidateTrainingSessionRs, \
     FindSessionListWithSameActiveFrequencyRq, FindSessionListWithSameActiveFrequencyRs
 from service.core.session.repo import SessionRepo
@@ -19,6 +19,7 @@ class GetSessionListUseCaseImpl(GetSessionListUseCase):
 
     def apply(self, request: GetSessionListRq) -> SessionListRs:
         sessions = self.session_repo.get_sessions(request.user_uid)
+        sessions.sort(key=lambda s: -from_str_datetime_to_obj(s.date).timestamp())
         return SessionListRs(sessions=sessions)
 
 
@@ -106,11 +107,11 @@ class FindSessionListWithSameActiveFrequencyUseCaseImpl(FindSessionListWithSameA
 
     def apply(self, request: FindSessionListWithSameActiveFrequencyRq) -> FindSessionListWithSameActiveFrequencyRs:
         request_session = self.session_repo.get_session(request.session_uid)
-        if not request_session.active_direction:
+        if not request_session.phone.active_direction:
             return []
         sessions = self.session_repo.get_all_sessions()
         found_sessions = []
         for session in sessions:
-            if request_session.active_direction == session.active_direction:
+            if request_session.phone.active_direction == session.phone.active_direction:
                 found_sessions.append(session)
         return found_sessions
