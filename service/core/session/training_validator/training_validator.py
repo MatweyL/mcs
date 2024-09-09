@@ -1,13 +1,25 @@
+from abc import ABC, abstractmethod
 from typing import List
 
 from service.core.session.training_validator.step_validator import StepValidator, ValidationResult
 from service.domain.session import Session
 
 
-class TrainingValidator:
+class TrainingValidator(ABC):
+
+    @abstractmethod
+    def validate(self, screen_code: str, session: Session) -> ValidationResult:
+        """
+        возвращает результат валидации тренировки
+        """
+        pass
+
+
+class AbstractTrainingValidator(TrainingValidator):
     """
     Валидатор тренировки
     """
+
     def __init__(self,
                  step_validator: List[StepValidator],
                  training: str):
@@ -18,14 +30,8 @@ class TrainingValidator:
         self.step_validator = step_validator
         self.training = training
 
-    def validate(self, screen_code: str, session: Session) -> ValidationResult:
-        """
-        возвращает результат валидации тренировки
-        """
-        pass
 
-
-class TrainingValidatorImpl(TrainingValidator):
+class TrainingValidatorImpl(AbstractTrainingValidator):
     def validate(self, screen_code: str, session: Session) -> ValidationResult:
         """
         возвращает результат валидации тренировки
@@ -37,3 +43,17 @@ class TrainingValidatorImpl(TrainingValidator):
                 return validation_result
         return validation_result
 
+
+class TrainingValidatorRegistry(TrainingValidator):
+    """
+        по переданному коду тренировки берет нужный TrainingValidator и вызывает у него метод validate
+    """
+
+    def __init__(self, training_validators: List[AbstractTrainingValidator]):
+        self.training_validators = training_validators
+
+    def validate(self, screen_code: str, session: Session) -> ValidationResult:
+        for training_validator in self.training_validators:
+            if training_validator.training == session.training:
+                return training_validator.validate(screen_code, session)
+        return ValidationResult.failure("Не проверено")

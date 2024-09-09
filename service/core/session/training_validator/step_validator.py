@@ -41,16 +41,23 @@ class StepValidator(ABC):
         pass
 
 
-class BaseStepValidator(StepValidator):
+class BaseStepValidator(StepValidator, ABC):
     """
     Базовый валидатор шага тренировки
     """
 
     def __init__(self,
                  navigator: ScreenNavigator,
-                 message_source: MessageSource):
+                 message_source: MessageSource,
+                 step_message_code: str = None,
+                 order: int = None,
+                 target_screen_code: str = None
+                 ):
         self.navigator = navigator
         self.message_source = message_source
+        self.step_message_code = step_message_code
+        self.order = order
+        self.target_screen_code = target_screen_code
 
     def validate(self, screen_code: str, session: Session) -> ValidationResult:
         valid = self.is_valid(session)
@@ -74,8 +81,9 @@ class BaseStepValidator(StepValidator):
         """
         Получить код сообщения для валидатора
         """
-        pass
+        return self.step_message_code
 
+    @abstractmethod
     def is_valid(self, session) -> bool:
         """
         Проверить валидность тренировки в сессии
@@ -86,13 +94,13 @@ class BaseStepValidator(StepValidator):
         """
         Получить номер шага
         """
-        pass
+        return self.order
 
     def get_target_screen_code(self) -> str:
         """
         Получить код экрана, на к-м нужно отобразить сообщение
         """
-        pass
+        return self.target_screen_code
 
 
 class ExampleStepValidator(BaseStepValidator):

@@ -17,8 +17,15 @@ def generate_uid() -> str:
     return str(uuid4())
 
 
+date_pattern = '%d/%m/%y %H:%M'
+
+
 def now() -> str:
-    return datetime.now().strftime('%d/%m/%y %H:%M')
+    return datetime.now().strftime(date_pattern)
+
+
+def from_str_to_datetime(dt_str: str) -> datetime:
+    return datetime.strptime(dt_str, date_pattern)
 
 
 def update_screen_by_alias():
