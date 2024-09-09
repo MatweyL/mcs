@@ -1,3 +1,4 @@
+from service.common.logs import logger
 from service.core.session.use_case import GetSessionListUseCase, GetSessionListRq, CreateSessionUseCase, \
     CreateSessionRq, \
     CreatedSessionRs, SessionListRs, StartSessionRq, FinishSessionRq, StartSessionUseCase, FinishSessionUseCase, \
@@ -19,8 +20,11 @@ class SessionEndpoint:
         self.validate_training_session_use_case = validate_training_session_use_case
 
     def get_sessions(self, request: GetSessionListRq) -> SessionListRs:
-        return self.get_session_list_use_case.apply(request)
-
+        try:
+            return self.get_session_list_use_case.apply(request)
+        except BaseException as e:
+            logger.exception(e)
+            raise e
     def create_session(self, request: CreateSessionRq) -> CreatedSessionRs:
         return self.create_session_use_case.apply(request)
 
