@@ -23,7 +23,8 @@
     "supertest": "^6.3.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start:http": "react-scripts start",
+    "start:https": "set HTTPS=true&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts src/test",
     "eject": "react-scripts eject"

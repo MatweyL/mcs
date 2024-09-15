@@ -231,10 +231,14 @@ async def on_relay_ice(sid, *args):
     raw_data = {'peerID': sid, 'iceCandidate': ice_candidate}
     await app.sio.emit('ice-candidate', raw_data, peer_id)
 
+WITH_HTTPS = True
 
 if __name__ == "__main__":
     host = '0.0.0.0'  # TODO: put to config
     port = 8080  # TODO: put to config
-    logger.info(f'started http://{host}:{port}/docs')
-
-    uvicorn.run("api:app", host=host, port=port, reload=True)
+    if WITH_HTTPS:
+        logger.info(f'started https://{host}:{port}/docs')
+        uvicorn.run("api:app", host=host, port=port, reload=True, ssl_keyfile='key.pem', ssl_certfile='cert.pem')
+    else:
+        logger.info(f'started http://{host}:{port}/docs')
+        uvicorn.run("api:app", host=host, port=port, reload=True)
