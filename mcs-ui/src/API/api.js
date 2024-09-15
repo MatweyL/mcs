@@ -15,7 +15,7 @@ const LOCAL_PY_MODE = "LOCAL_PY";
 
 const NOW_MODE = LOCAL_PY_MODE
 
-const token = () => cacheService.get(CacheKeys.TOKEN_KEY);
+export const token = () => cacheService.get(CacheKeys.TOKEN_KEY);
 
 const config = () => {
     return {headers: {Authorization: `Bearer ${token()}`}}

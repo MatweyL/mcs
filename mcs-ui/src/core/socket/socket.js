@@ -1,10 +1,11 @@
 import {io} from 'socket.io-client';
 import {SOCKET_URL} from "../../config/config";
+import {token} from "../../API/api";
 
 const options = {
-    "force new connection": true,
-    reconnectionAttempts: "Infinity", // avoid having user reconnect manually in order to prevent dead clients after a server restart
-    timeout: 10000, // before connect_error and connect_timeout are emitted.
+    forceNew: true,
+    query: 'token=' + token(),
+    timeout: 10000,
     transports: ["websocket"]
 }
 
