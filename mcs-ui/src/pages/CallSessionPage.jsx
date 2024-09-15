@@ -27,8 +27,8 @@ const CallSessionPage = () => {
             <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
                 <h1>Текущие сеансы</h1>
 
-                {rooms.map(roomID => (
-                    <div key={roomID} style={{
+                {rooms.map(room => (
+                    <div key={room.id} style={{
                         display: "flex",
                         flexDirection: "column",
                         border: "1px solid grey",
@@ -38,13 +38,15 @@ const CallSessionPage = () => {
                         fontSize: "12px",
                         cursor: "pointer",
                     }}>
-                        <div style={{marginBottom: "20px", marginTop: "10px"}}>
-                            ID сеанса: {roomID}
+                        <div style={{marginBottom: "20px", marginTop: "10px", display: "flex", flexDirection: "column"}}>
+                            <div>ID сеанса: {room.id}</div>
+                            <div>Создатель: {room.author}</div>
+                            <div>Кол-во участников: {room.clients.length}</div>
                         </div>
                         <button style={{
                             marginBottom: "10px"
                         }}
-                            onClick={() => joinRoom(roomID)}>
+                            onClick={() => joinRoom(room.id)}>
                             Присоединиться
                         </button>
                     </div>

@@ -1,4 +1,5 @@
-from typing import List
+import json
+from typing import List, Dict
 
 import socketio
 import uvicorn
@@ -15,6 +16,7 @@ from service.core.session import GetSessionListRq, CreateSessionRq, StartSession
 from service.core.user.use_case import AuthUserRq, RegisterUserRq, LoginUserRq
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint, \
     group_endpoint
+from service.domain.room import Room
 
 auth_router = APIRouter(dependencies=[Depends(auth_filter.authenticate)])
 
@@ -121,11 +123,13 @@ socketio_app = socketio.ASGIApp(socketio_server=sio, socketio_path='/')
 app.mount('/', socketio_app)
 app.sio = sio
 
-joined_rooms = {}
+joined_rooms: Dict[str, Room] = {}
 
 
 @app.sio.event
 async def connect(sid, environ, auth):
+    logger.info(environ)
+    logger.info(auth)
     logger.info(f'connect {sid}')
     await share_rooms_info()
 
@@ -135,7 +139,11 @@ async def share_rooms_info():
 
 
 def get_client_rooms():
-    return list(joined_rooms.keys())
+    rooms = []
+    for room_id, room in joined_rooms.items():
+        rooms.append({"id": room_id, "author": room.author_name, "clients": room.clients})
+
+    return rooms
 
 
 @app.sio.event
@@ -146,25 +154,28 @@ async def disconnect(sid):
 
 @app.sio.on("join")
 async def on_join(sid, *args):
-    args: List
     logger.info(f"{sid} joined")
     logger.info(args)
+
     room_id = args[0]['room']
     rooms = app.sio.rooms(sid)
 
     logger.info(joined_rooms)
     logger.info(rooms)
 
-    clients = joined_rooms.get(room_id, [])
-    if sid in clients:
+    room: Room = joined_rooms.get(room_id, None)
+    if room is None:
+        room = Room(sid, sid, [])
+
+    if sid in room.clients:
         return f'Already joined includes {room_id}'
 
-    for client_id in clients:
+    for client_id in room.clients:
         await app.sio.emit('add-peer', {'peerID': sid, 'createOffer': False}, client_id)
         await app.sio.emit('add-peer', {'peerID': client_id, 'createOffer': True}, sid)
 
-    clients.append(sid)
-    joined_rooms[room_id] = clients
+    room.clients.append(sid)
+    joined_rooms[room_id] = room
 
     await app.sio.enter_room(sid, room_id)
     await share_rooms_info()
@@ -180,9 +191,9 @@ async def leave_room(sid):
     target_clients = []
     target_room_id = None
     for room_id in joined_rooms.keys():
-        clients = joined_rooms.get(room_id, [])
-        if sid in clients:
-            target_clients = clients
+        room: Room = joined_rooms[room_id]
+        if sid in room.clients:
+            target_clients = room.clients
             target_room_id = room_id
             break
 
