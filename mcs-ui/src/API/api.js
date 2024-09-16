@@ -6,8 +6,9 @@ import {CacheKeys} from "../core/store/cache_service";
 
 const MOCK_REMOTE_URL = "https://056f0a88-8d8e-4a2b-b6a5-8f196f1bee39.mock.pstmn.io";
 // const LOCAL_PY_URL = "http://192.168.137.1:8080";
-const LOCAL_PY_URL = "https://192.168.0.102:8080";
+const LOCAL_PY_URL = process.env.REACT_APP_LOCAL_PY_URL;
 const MOCK_LOCAL_URL = "http://localhost:3000";
+
 
 const MOCK_LOCAL_MODE = "MOCK_LOCAL";
 const MOCK_REMOTE = "MOCK_REMOTE";

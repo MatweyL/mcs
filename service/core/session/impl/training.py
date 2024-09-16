@@ -96,6 +96,33 @@ class UTK2ResultCalculatorStrategy(TrainingResultCalculatorStrategy):
         return 'UTK2'
 
 
+class UTK3ResultCalculatorStrategy(TrainingResultCalculatorStrategy):
+
+    def __init__(self, mark_by_time_calculator: CalculateMarkByTime):
+        self.mark_by_time_calculator = mark_by_time_calculator
+
+    def calculate(self, session: Session) -> TrainingResult:
+        training_result = self.mark_by_time_calculator.calculate(session)
+
+        target_channel = None
+        for channel in session.phone.channels:
+            if channel.name == 'КВ2' and channel.frequency == 50500000 and channel.mode == 'CHM50':
+                target_channel = channel
+                break
+        if not target_channel:
+            logger.info(f'{session.uid} has not correct channel')
+            training_result.mark = Mark.ONE
+            return training_result
+        has_correct_direction = any(direction.channel == target_channel.uid for direction in session.phone.directions)
+        if not has_correct_direction:
+            logger.info(f'{session.uid} has not correct direction')
+            training_result.mark = Mark.ONE
+            return training_result
+        return training_result
+
+    def get_name(self):
+        return 'UTK3'
+
 class TrainingResultCalculatorServiceImpl(TrainingResultCalculatorService):
     def calculate(self, session: Session) -> TrainingResult:
         for strategy in self.strategies:
