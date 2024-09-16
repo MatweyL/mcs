@@ -1,12 +1,12 @@
 import json
+from typing import List, Dict
 
+import socketio
 import uvicorn
 from fastapi import FastAPI, Depends, APIRouter, HTTPException
 from starlette.middleware.cors import CORSMiddleware
-from starlette.websockets import WebSocket, WebSocketState
 
 from service.common.logs import logger
-from service.common.utils import generate_uid
 from service.core.auth.auth_context import AuthContext
 from service.core.dictionary.use_case import GetDictionaryRq
 from service.core.group.use_case import GetUserListByGroupRq
@@ -16,6 +16,7 @@ from service.core.session import GetSessionListRq, CreateSessionRq, StartSession
 from service.core.user.use_case import AuthUserRq, RegisterUserRq, LoginUserRq
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint, \
     group_endpoint
+from service.domain.room import Room
 
 auth_router = APIRouter(dependencies=[Depends(auth_filter.authenticate)])
 
@@ -107,30 +108,6 @@ async def auth_user(request: LoginUserRq):
     return user_endpoint.login_user(request)
 
 
-ws_router = APIRouter()
-
-sockets = {}
-
-
-@ws_router.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
-    await websocket.accept()
-    sockets[generate_uid()] = websocket
-
-    for socket_id in sockets.keys():
-        socket = sockets[socket_id]
-        if socket.client_state != WebSocketState.DISCONNECTED:
-            await socket.send_json(json.dumps({'type': 'SOME_EVENT'}))
-        else:
-            sockets.pop(socket_id)
-
-        # await socket.send_json(json.dumps(dict(type='NEW_USER', payload=list(sockets.keys()))))
-
-    while True:
-        data = await websocket.receive_json()
-        logger.info(data)
-
-
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -141,10 +118,128 @@ app.add_middleware(
 )
 app.include_router(auth_router)
 app.include_router(not_auth_router)
-app.include_router(ws_router)
+
+sio = socketio.AsyncServer(async_mode='asgi', cors_allowed_origins='*')
+socketio_app = socketio.ASGIApp(socketio_server=sio, socketio_path='/')
+app.mount('/', socketio_app)
+app.sio = sio
+
+joined_rooms: Dict[str, Room] = {}
+
+
+@app.sio.event
+async def connect(sid, environ, auth):
+    logger.info(environ)
+    logger.info(auth)
+    logger.info(f'connect {sid}')
+    await share_rooms_info()
+
+
+async def share_rooms_info():
+    await app.sio.emit('share-rooms', {'rooms': get_client_rooms()})
+
+
+def get_client_rooms():
+    rooms = []
+    for room_id, room in joined_rooms.items():
+        rooms.append({"id": room_id, "author": room.author_name, "clients": room.clients})
+
+    return rooms
+
+
+@app.sio.event
+async def disconnect(sid):
+    logger.info(f'{sid} disconnect')
+    await leave_room(sid)
+
+
+@app.sio.on("join")
+async def on_join(sid, *args):
+    logger.info(f"{sid} joined")
+    logger.info(args)
+
+    room_id = args[0]['room']
+    rooms = app.sio.rooms(sid)
+
+    logger.info(joined_rooms)
+    logger.info(rooms)
+
+    room: Room = joined_rooms.get(room_id, None)
+    if room is None:
+        room = Room(sid, sid, [])
+
+    if sid in room.clients:
+        return f'Already joined includes {room_id}'
+
+    for client_id in room.clients:
+        await app.sio.emit('add-peer', {'peerID': sid, 'createOffer': False}, client_id)
+        await app.sio.emit('add-peer', {'peerID': client_id, 'createOffer': True}, sid)
+
+    room.clients.append(sid)
+    joined_rooms[room_id] = room
+
+    await app.sio.enter_room(sid, room_id)
+    await share_rooms_info()
+
+
+@app.sio.on("leave")
+async def on_leave(sid, *args, **kwargs):
+    logger.info(f"{sid} leave")
+    await leave_room(sid)
+
+
+async def leave_room(sid):
+    target_clients = []
+    target_room_id = None
+    for room_id in joined_rooms.keys():
+        room: Room = joined_rooms[room_id]
+        if sid in room.clients:
+            target_clients = room.clients
+            target_room_id = room_id
+            break
+
+    for client_id in target_clients:
+        await app.sio.emit('remove-peer', {'peerID': sid}, client_id)
+        await app.sio.emit('remove-peer', {'peerID': client_id}, sid)
+
+    await app.sio.leave_room(sid, target_room_id)
+    joined_rooms.pop(target_room_id)
+    logger.info(joined_rooms)
+
+    await share_rooms_info()
+
+
+@app.sio.on("relay-sdp")
+async def on_relay_sdp(sid, *args):
+    logger.info(f"{sid} relay sdp")
+    logger.info(args)
+
+    peer_id = args[0]['peerID']
+    session_description = args[0]['sessionDescription']
+
+    raw_data = {'peerID': sid, 'sessionDescription': session_description}
+    await app.sio.emit('session-description', raw_data, peer_id)
+
+
+@app.sio.on("relay-ice")
+async def on_relay_ice(sid, *args):
+    logger.info(f"{sid} relay ice")
+    logger.info(args)
+
+    peer_id = args[0]['peerID']
+    ice_candidate = args[0]['iceCandidate']
+
+    raw_data = {'peerID': sid, 'iceCandidate': ice_candidate}
+    await app.sio.emit('ice-candidate', raw_data, peer_id)
+
+WITH_HTTPS = True
 
 if __name__ == "__main__":
     host = '0.0.0.0'  # TODO: put to config
     port = 8080  # TODO: put to config
-    logger.info(f'started http://{host}:{port}/docs')
-    uvicorn.run("api:app", host=host, port=port, reload=True)
+    if WITH_HTTPS:
+        logger.info(f'started https://{host}:{port}/docs')
+        uvicorn.run("api:app", host=host, port=port, reload=True, ssl_keyfile='key.pem', ssl_certfile='cert.pem')
+    else:
+        logger.info(f'started http://{host}:{port}/docs')
+        uvicorn.run("api:app", host=host, port=port, reload=True)
