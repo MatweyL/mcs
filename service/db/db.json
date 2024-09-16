@@ -390,6 +390,26 @@
       "attempts": [],
       "training": "UTK2",
       "type": "TRAINING"
+    },
+    {
+      "uid": "099895f4-a907-4d54-8149-64613f17181f",
+      "title": "УТК-4",
+      "date": "16/09/24 14:20",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "active_direction": null,
+        "channels": [],
+        "directions": []
+      },
+      "status": "STARTED",
+      "attempts": [
+        {
+          "started": "2024-09-16 14:20:49.412206",
+          "finished": null
+        }
+      ],
+      "training": "UTK4",
+      "type": "TRAINING"
     }
   ],
   "screens": [],
