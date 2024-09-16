@@ -14,10 +14,6 @@ class TrainingValidator(ABC):
         """
         pass
 
-    @abstractmethod
-    def get_name(self) -> str:
-        pass
-
 
 class AbstractTrainingValidator(TrainingValidator, ABC):
     """
@@ -51,7 +47,6 @@ class TrainingValidatorImpl(AbstractTrainingValidator):
             if not validation_result.is_success:
                 return validation_result
         return validation_result
-
 
 
 class TrainingValidatorRegistry(TrainingValidator):

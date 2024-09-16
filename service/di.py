@@ -138,14 +138,14 @@ training_validator_utk_2 = TrainingValidatorImpl([UTK2Step1Validator(navigator, 
                                                   UTK2Step2Validator(navigator, message_source),
                                                   UTK2Step3Validator(navigator, message_source)],
                                                  'UTK2')
-# training_validator_registry = TrainingValidatorRegistry([training_validator_utk_2])
+training_validator_registry = TrainingValidatorRegistry([training_validator_utk_2])
 
 get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
 create_session_use_case = CreateSessionUseCaseImpl(session_repo)
 start_session_use_case = StartSessionUseCaseImpl(session_repo)
 finish_session_use_case = FinishSessionUseCaseImpl(session_repo, training_result_calculator)
 
-validate_training_session_use_case = ValidateTrainingSessionUseCaseImpl(session_repo, [training_validator_utk_2])
+validate_training_session_use_case = ValidateTrainingSessionUseCaseImpl(session_repo, training_validator_registry)
 
 
 session_endpoint = SessionEndpoint(

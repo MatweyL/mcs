@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import List
 
 from service.common.utils import from_str_datetime_to_obj
 from service.common.utils import now
@@ -7,7 +6,7 @@ from service.core.session import StartSessionRq, StartedSessionRs, ValidateTrain
     FindSessionListWithSameActiveFrequencyRq, FindSessionListWithSameActiveFrequencyRs
 from service.core.session.repo import SessionRepo
 from service.core.session.training import TrainingResultCalculatorService
-from service.core.session.training_validator.training_validator import TrainingValidator
+from service.core.session.training_validator.training_validator import TrainingValidatorRegistry
 from service.core.session.use_case import GetSessionListUseCase, GetSessionListRq, SessionListRs, CreateSessionUseCase, \
     CreateSessionRq, CreatedSessionRs, StartSessionUseCase, FinishSessionUseCase, FinishedSessionRs, FinishSessionRq, \
     ValidateTrainingSessionUseCase, FindSessionListWithSameActiveFrequencyUseCase
@@ -92,21 +91,16 @@ class FinishSessionUseCaseImpl(FinishSessionUseCase):
 
 
 class ValidateTrainingSessionUseCaseImpl(ValidateTrainingSessionUseCase):
-    def __init__(self, session_repo: SessionRepo, training_validators: List[TrainingValidator]):
+    def __init__(self, session_repo: SessionRepo, training_validator_registry: TrainingValidatorRegistry):
         self.session_repo = session_repo
-        self.training_validators = training_validators
+        self.training_validator_registry = training_validator_registry
 
     def apply(self, request: ValidateTrainingSessionRq) -> ValidateTrainingSessionRs:
         session = self.session_repo.get_session(request.session_uid)
-        for training_validator in self.training_validators:
-            if training_validator.get_name() == session.training:
-                validation_result = training_validator.validate(request.screen_code, session)
-                return ValidateTrainingSessionRs(order=validation_result.order,
-                                                 message=validation_result.message,
-                                                 success=validation_result.is_success)
-        return ValidateTrainingSessionRs(order=0,
-                                         message='УТК не найден',
-                                         success=False)
+        validation_result = self.training_validator_registry.validate(request.screen_code, session)
+        return ValidateTrainingSessionRs(order=validation_result.order,
+                                         message=validation_result.message,
+                                         success=validation_result.is_success)
 
 
 class FindSessionListWithSameActiveFrequencyUseCaseImpl(FindSessionListWithSameActiveFrequencyUseCase):
