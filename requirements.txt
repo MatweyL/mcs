@@ -4,3 +4,5 @@ pathlib~=1.0.1
 pydantic~=2.5.2
 uvicorn~=0.20.0
 starlette~=0.27.0
+datetime~=5.4
+socketio~=4.0
