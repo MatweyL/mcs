@@ -10,7 +10,7 @@ export class RoutePaths {
     static SCREEN = '/screen';
     static CALL_SESSION = '/call-session';
     static ROOM = '/room';
-    static ROOM_ANY = '/room/:id';
+    static ROOM_ANY = '/room/:id/:params';
     static ANY = '/*';
 }
 

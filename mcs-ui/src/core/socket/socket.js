@@ -11,4 +11,6 @@ const options = {
 
 const socket = io(SOCKET_URL, options);
 
+export const socketNew = () => io(SOCKET_URL, options);
+
 export default socket;

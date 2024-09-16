@@ -1,5 +1,4 @@
-import json
-from typing import List, Dict
+from typing import Dict
 
 import socketio
 import uvicorn
@@ -7,12 +6,13 @@ from fastapi import FastAPI, Depends, APIRouter, HTTPException
 from starlette.middleware.cors import CORSMiddleware
 
 from service.common.logs import logger
+from service.common.utils import generate_uid
 from service.core.auth.auth_context import AuthContext
 from service.core.dictionary.use_case import GetDictionaryRq
 from service.core.group.use_case import GetUserListByGroupRq
 from service.core.screen import GetScreenRq, SaveScreenRq, Screen
 from service.core.session import GetSessionListRq, CreateSessionRq, StartSessionRq, FinishSessionRq, SessionRq, \
-    ValidateTrainingSessionRq
+    ValidateTrainingSessionRq, GetSessionRq, ActiveDirectionFrequencyRs
 from service.core.user.use_case import AuthUserRq, RegisterUserRq, LoginUserRq
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint, \
     group_endpoint
@@ -129,8 +129,6 @@ joined_rooms: Dict[str, Room] = {}
 
 @app.sio.event
 async def connect(sid, environ, auth):
-    logger.info(environ)
-    logger.info(auth)
     logger.info(f'connect {sid}')
     await share_rooms_info()
 
@@ -142,7 +140,7 @@ async def share_rooms_info():
 def get_client_rooms():
     rooms = []
     for room_id, room in joined_rooms.items():
-        rooms.append({"id": room_id, "author": room.author_name, "clients": room.clients})
+        rooms.append({"id": room_id, "author": room.author_name, "clients": room.clients, "params": room.params})
 
     return rooms
 
@@ -158,15 +156,37 @@ async def on_join(sid, *args):
     logger.info(f"{sid} joined")
     logger.info(args)
 
-    room_id = args[0]['room']
+    room_id = args[0].get('room', None)
+    params = args[0].get('params', None)
+    session_id = args[0].get('sessionId', None)
     rooms = app.sio.rooms(sid)
 
     logger.info(joined_rooms)
     logger.info(rooms)
 
-    room: Room = joined_rooms.get(room_id, None)
+    room: Room = None
+    # Если передан sessionId - ищем params по сессии
+    if session_id:
+        request = GetSessionRq(session_id=session_id)
+        response: ActiveDirectionFrequencyRs = session_endpoint.get_active_direction_by_session_id(request)
+        params = response.frequency
+        logger.info(f'Get active_direction params - {params}')
+    # Если передан room_id - создаем комнату или ищем по id
+    if len(room_id) == 36:
+        room = joined_rooms.get(room_id, None)
+        if room is None:
+            room = Room(sid, sid, [], params)
+    # Иначе - ищем комнату по params
+    else:
+        room_id = generate_uid()
+        for check_room in joined_rooms.values():
+            if check_room.params == params:
+                logger.info(f'Found room by params - {params}')
+                room = check_room
+
     if room is None:
-        room = Room(sid, sid, [])
+        logger.error(f'Not found rooms by params: {args}')
+        room = Room(sid, sid, [], params)
 
     if sid in room.clients:
         return f'Already joined includes {room_id}'
@@ -203,9 +223,14 @@ async def leave_room(sid):
         await app.sio.emit('remove-peer', {'peerID': client_id}, sid)
 
     await app.sio.leave_room(sid, target_room_id)
-    joined_rooms.pop(target_room_id)
-    logger.info(joined_rooms)
+    if target_room_id:
+        room: Room = joined_rooms[target_room_id]
+        if room.author_sid == sid:
+            joined_rooms.pop(target_room_id)
+        else:
+            room.clients.remove(sid)
 
+    logger.info(f'Rooms after leave: {joined_rooms}')
     await share_rooms_info()
 
 

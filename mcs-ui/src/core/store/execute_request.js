@@ -86,12 +86,13 @@ export const executeRequest = async (dispatch, request) => {
 
         case Requests.OPEN_SCREEN_SESSION: {
             const {sessionId} = request.payload;
+            // FIXME: Перенес вызов выше, т.к. при вызове openScreenSession идет переход на страницу
+            cacheService.put(CacheKeys.SESSION_ID_KEY, sessionId);
             // FIXME: вызывать getSessionById -> реализовать
             const sessionListRs = await API.getSessions();
             const nowSession = sessionListRs.sessions.find(session => session.uid === sessionId);
             console.log(nowSession);
 
-            cacheService.put(CacheKeys.SESSION_ID_KEY, sessionId);
             dispatch({type: Actions.OPEN_SCREEN_SESSION, payload: {sessionId, ...nowSession}})
             return;
         }

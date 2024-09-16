@@ -38,8 +38,7 @@ const ControlKeyboard = () => {
     }
 
 
-    const startCall = () => {
-        dispatch({type: Actions.START_CALL});
+    function noiseStart() {
         const handle = async (stream) => {
             globalStream = stream;
             context = new AudioContext({latencyHint: 'interactive'});
@@ -59,7 +58,11 @@ const ControlKeyboard = () => {
             .then(handle)
     }
 
-    const endCall = () => {
+    const startCall = () => {
+        dispatch({type: Actions.START_CALL});
+    }
+
+    function noiseStop() {
         // Disconnect the source from the script processor
         source.disconnect(workletNode);
         workletNode.disconnect(context.destination);
@@ -69,6 +72,9 @@ const ControlKeyboard = () => {
             workletNode = null;
             context = null;
         });
+    }
+
+    const endCall = () => {
 
         dispatch({type: Actions.END_CALL});
     }

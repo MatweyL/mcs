@@ -7,3 +7,4 @@ class Room:
     author_sid: str = None
     author_name: str = None
     clients: List[str] = field(default_factory=list)
+    params: str = None

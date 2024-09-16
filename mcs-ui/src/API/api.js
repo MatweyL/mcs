@@ -4,9 +4,14 @@ import {cacheService} from "../core/di";
 import {HINT} from "./api_helper";
 import {CacheKeys} from "../core/store/cache_service";
 
-const MOCK_REMOTE_URL = "https://056f0a88-8d8e-4a2b-b6a5-8f196f1bee39.mock.pstmn.io";
-// const LOCAL_PY_URL = "http://192.168.137.1:8080";
-const LOCAL_PY_URL = "https://192.168.0.102:8080";
+const PYTHON_URLS = [
+    "https://192.168.0.102:8080",
+    "https://192.168.43.143:8080",
+    "https://localhost:8080",
+    "https://192.168.1.5:8080",
+]
+
+const LOCAL_PY_URL = PYTHON_URLS[3];
 const MOCK_LOCAL_URL = "http://localhost:3000";
 
 const MOCK_LOCAL_MODE = "MOCK_LOCAL";

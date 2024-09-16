@@ -1,13 +1,13 @@
-import {useEffect, useRef, useCallback} from 'react';
+import {useCallback, useEffect, useRef} from 'react';
 import freeice from 'freeice';
 import useStateWithCallback from './useStateWithCallback';
 import ACTIONS from "../core/socket/actions";
 import socket from "../core/socket/socket";
+import {NOW_CONSTRAINT} from "../config/config";
 
 export const LOCAL_VIDEO = 'LOCAL_VIDEO';
 
-
-export default function useWebRTC(roomID) {
+export default function useWebRTC(roomID, params, sessionId) {
   const [clients, updateClients] = useStateWithCallback([]);
 
   const addNewClient = useCallback((newClient, cb) => {
@@ -52,7 +52,7 @@ export default function useWebRTC(roomID) {
       peerConnections.current[peerID].ontrack = ({streams: [remoteStream]}) => {
         tracksNumber++
 
-        if (tracksNumber === 2) { // video & audio tracks received
+        if (tracksNumber === NOW_CONSTRAINT.AMOUNT) { // video & audio tracks received
           tracksNumber = 0;
           addNewClient(peerID, () => {
             if (peerMediaElements.current[peerID]) {
@@ -104,7 +104,7 @@ export default function useWebRTC(roomID) {
       console.log(peerID, remoteDescription)
 
       await peerConnections.current[peerID]?.setRemoteDescription(
-        new RTCSessionDescription(remoteDescription)
+          new RTCSessionDescription(remoteDescription)
       );
 
       if (remoteDescription.type === 'offer') {
@@ -132,7 +132,7 @@ export default function useWebRTC(roomID) {
       console.log(peerID, iceCandidate)
 
       peerConnections.current[peerID]?.addIceCandidate(
-        new RTCIceCandidate(iceCandidate)
+          new RTCIceCandidate(iceCandidate)
       );
     });
 
@@ -162,27 +162,20 @@ export default function useWebRTC(roomID) {
 
   useEffect(() => {
     async function startCapture() {
-      localMediaStream.current = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-        video: {
-          width: 1280,
-          height: 720,
-        }
-      });
+      localMediaStream.current = await navigator.mediaDevices.getUserMedia(NOW_CONSTRAINT.MEDIA);
 
       addNewClient(LOCAL_VIDEO, () => {
         const localVideoElement = peerMediaElements.current[LOCAL_VIDEO];
 
         if (localVideoElement) {
-          localVideoElement.volume = 0;
           localVideoElement.srcObject = localMediaStream.current;
         }
       });
     }
 
     startCapture()
-      .then(() => socket.emit(ACTIONS.JOIN, {room: roomID}))
-      .catch(e => console.error('Error getting userMedia:', e));
+        .then(() => socket.emit(ACTIONS.JOIN, {room: roomID, params, sessionId}))
+        .catch(e => console.error('Error getting userMedia:', e));
 
     return () => {
       localMediaStream.current.getTracks().forEach(track => track.stop());

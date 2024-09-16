@@ -3,7 +3,7 @@ from service.core.session.use_case import GetSessionListUseCase, GetSessionListR
     CreateSessionRq, \
     CreatedSessionRs, SessionListRs, StartSessionRq, FinishSessionRq, StartSessionUseCase, FinishSessionUseCase, \
     StartedSessionRs, FinishedSessionRs, ValidateTrainingSessionRq, ValidateTrainingSessionRs, \
-    ValidateTrainingSessionUseCase
+    ValidateTrainingSessionUseCase, GetSessionRq, ActiveDirectionFrequencyRs, GetActiveDirectionBySessionIdUseCase
 
 
 class SessionEndpoint:
@@ -12,12 +12,14 @@ class SessionEndpoint:
                  create_session_use_case: CreateSessionUseCase,
                  start_session_use_case: StartSessionUseCase,
                  finish_session_use_case: FinishSessionUseCase,
-                 validate_training_session_use_case: ValidateTrainingSessionUseCase):
+                 validate_training_session_use_case: ValidateTrainingSessionUseCase,
+                 get_active_direction_by_session_id_use_case: GetActiveDirectionBySessionIdUseCase):
         self.get_session_list_use_case = get_session_list_use_case
         self.create_session_use_case = create_session_use_case
         self.start_session_use_case = start_session_use_case
         self.finish_session_use_case = finish_session_use_case
         self.validate_training_session_use_case = validate_training_session_use_case
+        self.get_active_direction_by_session_id_use_case = get_active_direction_by_session_id_use_case
 
     def get_sessions(self, request: GetSessionListRq) -> SessionListRs:
         try:
@@ -25,6 +27,7 @@ class SessionEndpoint:
         except BaseException as e:
             logger.exception(e)
             raise e
+
     def create_session(self, request: CreateSessionRq) -> CreatedSessionRs:
         return self.create_session_use_case.apply(request)
 
@@ -36,3 +39,6 @@ class SessionEndpoint:
 
     def validate_training_session(self, request: ValidateTrainingSessionRq) -> ValidateTrainingSessionRs:
         return self.validate_training_session_use_case.apply(request)
+
+    def get_active_direction_by_session_id(self, request: GetSessionRq) -> ActiveDirectionFrequencyRs:
+        return self.get_active_direction_by_session_id_use_case.apply(request)

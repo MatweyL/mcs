@@ -1,8 +1,9 @@
 from abc import abstractmethod
-from typing import List
+from typing import List, Optional
 
 from service.core.session.training import TrainingResult
 from service.core.use_case import UseCase, Request, Response
+from service.domain.direction import Direction, DirectionDto
 from service.domain.session import Session, SessionStatus
 
 
@@ -24,6 +25,21 @@ class GetSessionListUseCase(UseCase):
 class SessionRq(Request):
     training: str
     type: str
+
+
+class GetSessionRq(Request):
+    session_id: str
+
+
+class ActiveDirectionFrequencyRs(Response):
+    def __init__(self, frequency: str):
+        self.frequency = frequency
+
+
+class GetActiveDirectionBySessionIdUseCase(UseCase):
+    @abstractmethod
+    def apply(self, request: GetSessionRq) -> ActiveDirectionFrequencyRs:
+        pass
 
 
 class CreateSessionRq(Request):
