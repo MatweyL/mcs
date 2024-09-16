@@ -15,6 +15,7 @@ import ScreenBlock from "../components/UI/ScreenBlock/ScreenBlock";
 import {cacheService} from "../core/di";
 import {CacheKeys} from "../core/store/cache_service";
 import CallNotification from "../components/UI/Screen/CallNotification";
+import CallMedia from "../components/UI/Screen/CallMedia";
 
 /**
  * Страница экрана телефона
@@ -37,6 +38,9 @@ const ScreenPage = () => {
 
     return (
         <div style={{display: "flex", justifyContent: "space-between", width: "100%"}}>
+            <div style={{position: "absolute", right: "5%", top: "10%"}}>
+                {call ? <CallMedia sessionId={sessionId}/> : null }
+            </div>
             <div style={{
                 width: "30%",
                 justifyContent: "start",
