@@ -32,7 +32,6 @@ function layout(clientsNumber = 1) {
 
 const Call = ({roomId, sessionId, params}) => {
         const {clients, provideMediaRef} = useWebRTC(roomId, params, sessionId);
-        const videoLayout = layout(clients.length);
 
         return (
             <div style={{
@@ -40,13 +39,17 @@ const Call = ({roomId, sessionId, params}) => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexWrap: 'wrap',
+                flexDirection: "column"
             }}>
                 {clients.map((clientID, index) => {
                     return (
-                        <div key={clientID} style={videoLayout[index]} id={clientID}>
+                        <div key={clientID} id={clientID}
+                             style={{
+                                 height: "200px",
+                                 width: "200px"
+                        }}>
                             <video
-                                width='50%'
-                                height='50%'
+                                style={{borderRadius: '50%', objectFit: "cover", height: "100%", width: "100%"}}
                                 ref={instance => {
                                     provideMediaRef(clientID, instance);
                                 }}

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import ACTIONS from "../core/socket/actions";
-import socket from "../core/socket/socket";
+import socket, {socketNew} from "../core/socket/socket";
 import {useNavigate} from "react-router-dom";
 import {v4} from "uuid";
 import {RoutePaths} from "../router";
@@ -86,7 +86,7 @@ const CallSessionPage = () => {
                         <button style={{
                             marginBottom: "10px"
                         }}
-                                onClick={() => joinRoom(room.id)}>
+                                onClick={() => joinRoom(room.id, "")}>
                             Присоединиться к текущей комнате
                         </button>
                     </div>

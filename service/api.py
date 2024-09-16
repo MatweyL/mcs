@@ -6,6 +6,7 @@ from fastapi import FastAPI, Depends, APIRouter, HTTPException
 from starlette.middleware.cors import CORSMiddleware
 
 from service.common.logs import logger
+from service.common.utils import generate_uid
 from service.core.auth.auth_context import AuthContext
 from service.core.dictionary.use_case import GetDictionaryRq
 from service.core.group.use_case import GetUserListByGroupRq
@@ -15,7 +16,6 @@ from service.core.session import GetSessionListRq, CreateSessionRq, StartSession
 from service.core.user.use_case import AuthUserRq, RegisterUserRq, LoginUserRq
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint, \
     group_endpoint
-from service.domain.direction import Direction
 from service.domain.room import Room
 
 auth_router = APIRouter(dependencies=[Depends(auth_filter.authenticate)])
@@ -129,8 +129,6 @@ joined_rooms: Dict[str, Room] = {}
 
 @app.sio.event
 async def connect(sid, environ, auth):
-    logger.info(environ)
-    logger.info(auth)
     logger.info(f'connect {sid}')
     await share_rooms_info()
 
@@ -180,6 +178,7 @@ async def on_join(sid, *args):
             room = Room(sid, sid, [], params)
     # Иначе - ищем комнату по params
     else:
+        room_id = generate_uid()
         for check_room in joined_rooms.values():
             if check_room.params == params:
                 logger.info(f'Found room by params - {params}')
@@ -224,9 +223,14 @@ async def leave_room(sid):
         await app.sio.emit('remove-peer', {'peerID': client_id}, sid)
 
     await app.sio.leave_room(sid, target_room_id)
-    joined_rooms.pop(target_room_id)
-    logger.info(joined_rooms)
+    if target_room_id:
+        room: Room = joined_rooms[target_room_id]
+        if room.author_sid == sid:
+            joined_rooms.pop(target_room_id)
+        else:
+            room.clients.remove(sid)
 
+    logger.info(f'Rooms after leave: {joined_rooms}')
     await share_rooms_info()
 
 
