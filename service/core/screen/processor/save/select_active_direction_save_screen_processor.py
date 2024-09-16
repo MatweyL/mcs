@@ -12,7 +12,7 @@ class SelectActiveDirectionSaveScreenProcessor(SaveScreenProcessor):
     @staticmethod
     def get_active_direction(attributes: Dict[str, Any]):
         for attribute in attributes:
-            if attributes[attribute]:
+            if attributes[attribute] and attribute != 'EMPTY':
                 return attribute
 
     def get_screen_name(self, *args, **kwargs) -> str:

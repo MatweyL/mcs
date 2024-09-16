@@ -41,7 +41,7 @@ from service.core.session.impl.use_case import GetSessionListUseCaseImpl, Create
 from service.core.session.training import Mark
 from service.core.session.training_validator.step_validator import UTK2Step1Validator, UTK2Step2Validator, \
     UTK2Step3Validator
-from service.core.session.training_validator.training_validator import TrainingValidatorImpl
+from service.core.session.training_validator.training_validator import TrainingValidatorImpl, TrainingValidatorRegistry
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
@@ -138,12 +138,15 @@ training_validator_utk_2 = TrainingValidatorImpl([UTK2Step1Validator(navigator, 
                                                   UTK2Step2Validator(navigator, message_source),
                                                   UTK2Step3Validator(navigator, message_source)],
                                                  'UTK2')
+# training_validator_registry = TrainingValidatorRegistry([training_validator_utk_2])
 
 get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
 create_session_use_case = CreateSessionUseCaseImpl(session_repo)
 start_session_use_case = StartSessionUseCaseImpl(session_repo)
 finish_session_use_case = FinishSessionUseCaseImpl(session_repo, training_result_calculator)
+
 validate_training_session_use_case = ValidateTrainingSessionUseCaseImpl(session_repo, [training_validator_utk_2])
+
 
 session_endpoint = SessionEndpoint(
     get_session_list_use_case,

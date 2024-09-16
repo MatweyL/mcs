@@ -1,7 +1,8 @@
 from datetime import datetime
 from typing import List
 
-from service.common.utils import now, from_str_datetime_to_obj
+from service.common.utils import from_str_datetime_to_obj
+from service.common.utils import now
 from service.core.session import StartSessionRq, StartedSessionRs, ValidateTrainingSessionRq, ValidateTrainingSessionRs, \
     FindSessionListWithSameActiveFrequencyRq, FindSessionListWithSameActiveFrequencyRs
 from service.core.session.repo import SessionRepo
@@ -21,6 +22,7 @@ class GetSessionListUseCaseImpl(GetSessionListUseCase):
     def apply(self, request: GetSessionListRq) -> SessionListRs:
         sessions = self.session_repo.get_sessions(request.user_uid)
         sessions.sort(key=lambda s: -from_str_datetime_to_obj(s.date).timestamp())
+
         return SessionListRs(sessions=sessions)
 
 
