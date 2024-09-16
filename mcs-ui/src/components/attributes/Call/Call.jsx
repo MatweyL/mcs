@@ -1,6 +1,5 @@
 import React from 'react';
 import useWebRTC, {LOCAL_VIDEO} from "../../../hooks/useWebRTC";
-import {useNavigate, useParams} from "react-router-dom";
 
 function layout(clientsNumber = 1) {
     const pairs = Array.from({length: clientsNumber})
@@ -20,49 +19,49 @@ function layout(clientsNumber = 1) {
         if (index === arr.length - 1 && row.length === 1) {
             return [{
                 width: '100%',
-                height,
+                height
             }];
         }
 
         return row.map(() => ({
             width: '50%',
-            height,
+            height
         }));
     }).flat();
 }
 
-const Call = () => {
-    const {id: roomID} = useParams();
-    const navigate = useNavigate();
-    const {clients, provideMediaRef} = useWebRTC(roomID);
-    const videoLayout = layout(clients.length);
+const Call = ({roomId, sessionId, params}) => {
+        const {clients, provideMediaRef} = useWebRTC(roomId, params, sessionId);
+        const videoLayout = layout(clients.length);
 
-    return (
-        <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            height: '100vh',
-        }}>
-            {clients.map((clientID, index) => {
-                return (
-                    <div key={clientID} style={videoLayout[index]} id={clientID}>
-                        <video
-                            width='100%'
-                            height='100%'
-                            ref={instance => {
-                                provideMediaRef(clientID, instance);
-                            }}
-                            autoPlay
-                            playsInline
-                            muted={clientID === LOCAL_VIDEO}
-                        />
-                    </div>
-                );
-            })}
-        </div>
-    );
-};
+        return (
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexWrap: 'wrap',
+            }}>
+                {clients.map((clientID, index) => {
+                    return (
+                        <div key={clientID} style={videoLayout[index]} id={clientID}>
+                            <video
+                                width='50%'
+                                height='50%'
+                                ref={instance => {
+                                    provideMediaRef(clientID, instance);
+                                }}
+                                autoPlay
+                                playsInline
+                                muted={clientID === LOCAL_VIDEO}
+                            />
+                        </div>
+                    )
+                        ;
+                })}
+            </div>
+        )
+            ;
+    }
+;
 
 export default Call;

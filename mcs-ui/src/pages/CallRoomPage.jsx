@@ -34,9 +34,9 @@ function layout(clientsNumber = 1) {
 }
 
 const CallRoomPage = () => {
-    const {id: roomID} = useParams();
+    const {id: roomID, params} = useParams();
     const navigate = useNavigate();
-    const {clients, provideMediaRef} = useWebRTC(roomID);
+    const {clients, provideMediaRef} = useWebRTC(roomID, params);
     const videoLayout = layout(clients.length);
 
     const back = () => {
@@ -44,30 +44,33 @@ const CallRoomPage = () => {
     }
 
     return (
-        <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            height: '100vh',
-        }}>
+        <div style={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
+
             <TextButton onClick={back}>← Назад</TextButton>
-            {clients.map((clientID, index) => {
-                return (
-                    <div key={clientID} style={videoLayout[index]} id={clientID}>
-                        <video
-                            width='100%'
-                            height='100%'
-                            ref={instance => {
-                                provideMediaRef(clientID, instance);
-                            }}
-                            autoPlay
-                            playsInline
-                            muted={clientID === LOCAL_VIDEO}
-                        />
-                    </div>
-                );
-            })}
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexWrap: 'wrap',
+                height: '100vh',
+            }}>
+                {clients.map((clientID, index) => {
+                    return (
+                        <div key={clientID} style={videoLayout[index]} id={clientID}>
+                            <video
+                                width='100%'
+                                height='100%'
+                                ref={instance => {
+                                    provideMediaRef(clientID, instance);
+                                }}
+                                autoPlay
+                                playsInline
+                                muted={clientID === LOCAL_VIDEO}
+                            />
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 };
