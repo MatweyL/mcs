@@ -1,7 +1,7 @@
 from typing import List
 
 from service.common.logs import logger
-from service.common.utils import generate_uid
+from service.common.utils import generate_uid, from_str_datetime_to_obj
 from service.core.session.repo import SessionRepo
 from service.db.db import JsonDb
 from service.domain.session import Session
@@ -20,7 +20,8 @@ class InMemorySessionRepo(SessionRepo):
         json = self.db.get_json()
         sessions = json['sessions']
         user_sessions = filter(lambda s: s['user_uid'] == user_uid, sessions)
-        return [self.mapper.map_to_domain(s) for s in user_sessions]
+        sessions_models = [self.mapper.map_to_domain(s) for s in user_sessions]
+        return sessions_models
 
     def save_session(self, session: Session) -> Session:
         """

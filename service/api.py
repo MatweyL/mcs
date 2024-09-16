@@ -29,6 +29,7 @@ async def get_dictionary(dictionary_type: str, session_id: str):
 
 @auth_router.get('/screen')
 async def get_screen(screen_name: str, session_id: str, element_id: str = None):
+    logger.info(f'SESSION ID: {session_id}')
     request = GetScreenRq(screen_name=screen_name, session_id=session_id, uid=element_id)
     return screen_endpoint.get_screen(request)
 

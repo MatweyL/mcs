@@ -1,5 +1,6 @@
 import json
 import os.path
+from datetime import timedelta
 
 from service.common.impl.message_source import MessageSourceImpl
 from service.common.impl.screen_navigator import ScreenNavigatorImpl
@@ -33,9 +34,11 @@ from service.core.screen.processor.save.select_active_direction_save_screen_proc
     SelectActiveDirectionSaveScreenProcessor
 from service.core.session import SessionEndpoint
 from service.core.session.impl.repo import InMemorySessionRepo
-from service.core.session.impl.training import DumbTrainingResultCalculatorStrategy, TrainingResultCalculatorServiceImpl
+from service.core.session.impl.training import DumbTrainingResultCalculatorStrategy, \
+    TrainingResultCalculatorServiceImpl, UTK2ResultCalculatorStrategy, CalculateMarkByTime
 from service.core.session.impl.use_case import GetSessionListUseCaseImpl, CreateSessionUseCaseImpl, \
     StartSessionUseCaseImpl, FinishSessionUseCaseImpl, ValidateTrainingSessionUseCaseImpl
+from service.core.session.training import Mark
 from service.core.session.training_validator.step_validator import UTK2Step1Validator, UTK2Step2Validator, \
     UTK2Step3Validator
 from service.core.session.training_validator.training_validator import TrainingValidatorImpl, TrainingValidatorRegistry
@@ -97,7 +100,11 @@ user_endpoint = UserEndpoint(
     login_user_use_case
 )
 
-training_result_calculator = TrainingResultCalculatorServiceImpl([], DumbTrainingResultCalculatorStrategy())
+training_result_calculator = TrainingResultCalculatorServiceImpl([UTK2ResultCalculatorStrategy(
+    CalculateMarkByTime({timedelta(seconds=120): Mark.FIVE,
+                         timedelta(seconds=150): Mark.FOUR,
+                         timedelta(seconds=180): Mark.THREE,})
+)], DumbTrainingResultCalculatorStrategy())
 
 screen_graph = {
     "MAIN_SCREEN": [
@@ -137,7 +144,9 @@ get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
 create_session_use_case = CreateSessionUseCaseImpl(session_repo)
 start_session_use_case = StartSessionUseCaseImpl(session_repo)
 finish_session_use_case = FinishSessionUseCaseImpl(session_repo, training_result_calculator)
+
 validate_training_session_use_case = ValidateTrainingSessionUseCaseImpl(session_repo, training_validator_registry)
+
 
 session_endpoint = SessionEndpoint(
     get_session_list_use_case,
