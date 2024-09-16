@@ -14,8 +14,12 @@ class TrainingValidator(ABC):
         """
         pass
 
+    @abstractmethod
+    def get_name(self) -> str:
+        pass
 
-class AbstractTrainingValidator(TrainingValidator):
+
+class AbstractTrainingValidator(TrainingValidator, ABC):
     """
     Валидатор тренировки
     """
@@ -30,8 +34,13 @@ class AbstractTrainingValidator(TrainingValidator):
         self.step_validator = step_validator
         self.training = training
 
+    def get_name(self) -> str:
+        return self.training
+
+
 
 class TrainingValidatorImpl(AbstractTrainingValidator):
+
     def validate(self, screen_code: str, session: Session) -> ValidationResult:
         """
         возвращает результат валидации тренировки
@@ -42,6 +51,7 @@ class TrainingValidatorImpl(AbstractTrainingValidator):
             if not validation_result.is_success:
                 return validation_result
         return validation_result
+
 
 
 class TrainingValidatorRegistry(TrainingValidator):

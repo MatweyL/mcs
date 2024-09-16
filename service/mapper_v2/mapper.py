@@ -121,6 +121,7 @@ class ChannelMapper(Mapper):
         channel.name = entity['name']
         channel.double_frequency = entity.get('double_frequency')
         channel.frequency = entity.get('frequency')
+        channel.frequency = int(channel.frequency) if channel.frequency else None
         channel.ctcss = entity.get('ctcss')
         channel.forbidden_send = entity.get('forbidden_send')
 

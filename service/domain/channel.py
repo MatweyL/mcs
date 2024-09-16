@@ -8,5 +8,5 @@ class Channel:
     name: str = None
     forbidden_send: bool = None
     double_frequency: bool = None
-    frequency: str = None
+    frequency: int = None
     ctcss: str = None
