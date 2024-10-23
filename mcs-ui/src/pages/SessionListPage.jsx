@@ -39,7 +39,7 @@ const SessionListPage = () => {
         <div>
             <h1>Список сессий пользователя</h1>
             <div style={{display: "flex", justifyContent: "space-between"}}>
-                <TextButton onClick={openCallSession}>Звонки</TextButton>
+                {/*<TextButton onClick={openCallSession}>Звонки</TextButton>*/}
                 <SearchBar/>
                 <div style={{display: "flex"}}>
                     <RoundButton>⌕</RoundButton>

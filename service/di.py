@@ -37,7 +37,8 @@ from service.core.session.impl.repo import InMemorySessionRepo
 from service.core.session.impl.training import DumbTrainingResultCalculatorStrategy, \
     TrainingResultCalculatorServiceImpl, UTK2ResultCalculatorStrategy, CalculateMarkByTime
 from service.core.session.impl.use_case import GetSessionListUseCaseImpl, CreateSessionUseCaseImpl, \
-    StartSessionUseCaseImpl, FinishSessionUseCaseImpl, ValidateTrainingSessionUseCaseImpl
+    StartSessionUseCaseImpl, FinishSessionUseCaseImpl, ValidateTrainingSessionUseCaseImpl, \
+    GetActiveDirectionBySessionIdUseCaseImpl
 from service.core.session.training import Mark
 from service.core.session.training_validator.step_validator import UTK2Step1Validator, UTK2Step2Validator, \
     UTK2Step3Validator
@@ -144,9 +145,8 @@ get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
 create_session_use_case = CreateSessionUseCaseImpl(session_repo)
 start_session_use_case = StartSessionUseCaseImpl(session_repo)
 finish_session_use_case = FinishSessionUseCaseImpl(session_repo, training_result_calculator)
-
+get_active_direction_by_session_id = GetActiveDirectionBySessionIdUseCaseImpl(session_repo)
 validate_training_session_use_case = ValidateTrainingSessionUseCaseImpl(session_repo, training_validator_registry)
-
 
 session_endpoint = SessionEndpoint(
     get_session_list_use_case,
@@ -154,6 +154,7 @@ session_endpoint = SessionEndpoint(
     start_session_use_case,
     finish_session_use_case,
     validate_training_session_use_case,
+    get_active_direction_by_session_id,
 )
 
 default_dictionary_provider = DefaultDictionaryProvider(os.path.join(get_root_path(), 'mcs-ui/public/dictionary'))
