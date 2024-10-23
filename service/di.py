@@ -35,13 +35,15 @@ from service.core.screen.processor.save.select_active_direction_save_screen_proc
 from service.core.session import SessionEndpoint
 from service.core.session.impl.repo import InMemorySessionRepo
 from service.core.session.impl.training import DumbTrainingResultCalculatorStrategy, \
-    TrainingResultCalculatorServiceImpl, UTK2ResultCalculatorStrategy, CalculateMarkByTime
+    TrainingResultCalculatorServiceImpl, UTK2ResultCalculatorStrategy, CalculateMarkByTime, UTK3ResultCalculatorStrategy
 from service.core.session.impl.use_case import GetSessionListUseCaseImpl, CreateSessionUseCaseImpl, \
     StartSessionUseCaseImpl, FinishSessionUseCaseImpl, ValidateTrainingSessionUseCaseImpl, \
     GetActiveDirectionBySessionIdUseCaseImpl
 from service.core.session.training import Mark
 from service.core.session.training_validator.step_validator import UTK2Step1Validator, UTK2Step2Validator, \
     UTK2Step3Validator
+from service.core.session.training_validator.step_validator_utk3 import UTK3Step1Validator, UTK3Step3Validator, \
+    UTK3Step2Validator
 from service.core.session.training_validator.training_validator import TrainingValidatorImpl, TrainingValidatorRegistry
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo
@@ -101,11 +103,13 @@ user_endpoint = UserEndpoint(
     login_user_use_case
 )
 
-training_result_calculator = TrainingResultCalculatorServiceImpl([UTK2ResultCalculatorStrategy(
-    CalculateMarkByTime({timedelta(seconds=120): Mark.FIVE,
-                         timedelta(seconds=150): Mark.FOUR,
-                         timedelta(seconds=180): Mark.THREE,})
-)], DumbTrainingResultCalculatorStrategy())
+calculate_mark_by_time_120_150_180 = CalculateMarkByTime({timedelta(seconds=120): Mark.FIVE,
+                                                          timedelta(seconds=150): Mark.FOUR,
+                                                          timedelta(seconds=180): Mark.THREE, })
+training_result_calculator = TrainingResultCalculatorServiceImpl(
+    [UTK2ResultCalculatorStrategy(calculate_mark_by_time_120_150_180),
+     UTK3ResultCalculatorStrategy(calculate_mark_by_time_120_150_180), ],
+    DumbTrainingResultCalculatorStrategy())
 
 screen_graph = {
     "MAIN_SCREEN": [
@@ -139,7 +143,12 @@ training_validator_utk_2 = TrainingValidatorImpl([UTK2Step1Validator(navigator, 
                                                   UTK2Step2Validator(navigator, message_source),
                                                   UTK2Step3Validator(navigator, message_source)],
                                                  'UTK2')
-training_validator_registry = TrainingValidatorRegistry([training_validator_utk_2])
+training_validator_utk_3 = TrainingValidatorImpl([UTK3Step1Validator(navigator, message_source),
+                                                  UTK3Step2Validator(navigator, message_source),
+                                                  UTK3Step3Validator(navigator, message_source), ],
+                                                 'UTK3')
+training_validator_registry = TrainingValidatorRegistry([training_validator_utk_2,
+                                                         training_validator_utk_3])
 
 get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
 create_session_use_case = CreateSessionUseCaseImpl(session_repo)
