@@ -6,6 +6,7 @@ from service.domain.channel import Channel
 from service.domain.direction import Direction
 from service.domain.group import Group
 from service.domain.phone import Phone
+from service.domain.pprch import PPRCH
 from service.domain.session import Session, SessionAttempt, SessionStatus, SessionType
 from service.domain.user import User
 
@@ -62,16 +63,19 @@ class SessionMapper(Mapper):
 class PhoneMapper(Mapper):
     def __init__(self,
                  channel_mapper: 'ChannelMapper',
-                 direction_mapper: 'DirectionMapper'):
+                 direction_mapper: 'DirectionMapper',
+                 pprch_mapper: 'PPRCHMapper'):
         self.direction_mapper = direction_mapper
         self.channel_mapper = channel_mapper
+        self.pprch_mapper = pprch_mapper
 
     def map_to_domain(self, entity: E) -> D:
         phone = Phone()
         phone.active_direction = entity.get('active_direction')
         phone.channels = [self.channel_mapper.map_to_domain(c) for c in entity['channels']]
         phone.directions = [self.direction_mapper.map_to_domain(d) for d in entity['directions']]
-
+        # get with default arg for backward compatibility
+        phone.pprchs = [self.pprch_mapper.map_to_domain(p) for p in entity.get('pprchs', [])]
         return phone
 
     def map_to_entity(self, phone: Phone) -> E:
@@ -79,6 +83,7 @@ class PhoneMapper(Mapper):
         entity['active_direction'] = phone.active_direction
         entity['channels'] = [self.channel_mapper.map_to_entity(c) for c in phone.channels]
         entity['directions'] = [self.direction_mapper.map_to_entity(d) for d in phone.directions]
+        entity['pprchs'] = [self.pprch_mapper.map_to_entity(p) for p in phone.pprchs]
 
         return entity
 
@@ -197,4 +202,18 @@ class SessionAttemptMapper(Mapper):
     def map_to_entity(self, domain: SessionAttempt) -> E:
         entity = dict(started=domain.started,
                       finished=domain.finished)
+        return entity
+
+
+class PPRCHMapper(Mapper):
+    def map_to_domain(self, entity: dict) -> PPRCH:
+        pprch = PPRCH(uid=entity['uid'],
+                      lower=entity['lower'],
+                      higher=entity['higher'])
+        return pprch
+
+    def map_to_entity(self, domain: PPRCH) -> dict:
+        entity = dict(uid=domain.uid,
+                      lower=domain.lower,
+                      higher=domain.higher)
         return entity

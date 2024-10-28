@@ -1,13 +1,15 @@
 from service.domain.channel import Channel
 from service.domain.direction import Direction
 from service.domain.phone import Phone
+from service.domain.pprch import PPRCH
 from service.domain.session import Session
 from service.domain.user import User
-from service.mapper_v2.mapper import SessionMapper, PhoneMapper, DirectionMapper, ChannelMapper, UserMapper
+from service.mapper_v2.mapper import SessionMapper, PhoneMapper, DirectionMapper, ChannelMapper, UserMapper, PPRCHMapper
 
 channel_mapper = ChannelMapper()
 direction_mapper = DirectionMapper()
-phone_mapper = PhoneMapper(channel_mapper, direction_mapper)
+pprch_mapper = PPRCHMapper()
+phone_mapper = PhoneMapper(channel_mapper, direction_mapper, pprch_mapper)
 session_mapper = SessionMapper(phone_mapper, None)
 
 user_mapper = UserMapper()
@@ -115,3 +117,31 @@ def test_user_map_to_domain():
     assert user.surname == 'surname'
     assert user.password == 'password'
     assert user.patronymic == 'patronymic'
+
+
+def test_pprch_to_entity():
+    # GIVEN
+    pprch = PPRCH(uid='uid',
+                  lower=100,
+                  higher=2000)
+
+    # WHEN
+    entity = pprch_mapper.map_to_entity(pprch)
+    # THEN
+    assert entity['uid'] == 'uid'
+    assert entity['lower'] == 100
+    assert entity['higher'] == 2000
+
+
+def test_pprch_to_domain():
+    # GIVEN
+    entity = dict(uid='uid',
+                  lower=100,
+                  higher=2000)
+
+    # WHEN
+    pprch = pprch_mapper.map_to_domain(entity)
+    # THEN
+    assert pprch.uid == 'uid'
+    assert pprch.lower == 100
+    assert pprch.higher == 2000
