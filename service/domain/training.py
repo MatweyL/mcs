@@ -21,6 +21,7 @@ class UTKStepCode(str, enum.Enum):
     UTK_3_STEP_2_CODE = "UTK_3_STEP_2_CODE"
     UTK_3_STEP_3_CODE = "UTK_3_STEP_3_CODE"
 
+
 @dataclass
 class Training:
     kind: str = None
