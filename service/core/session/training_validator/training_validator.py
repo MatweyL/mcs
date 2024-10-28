@@ -59,6 +59,6 @@ class TrainingValidatorRegistry(TrainingValidator):
 
     def validate(self, screen_code: str, session: Session) -> ValidationResult:
         for training_validator in self.training_validators:
-            if training_validator.training == session.training:
+            if training_validator.training == session.training.kind:
                 return training_validator.validate(screen_code, session)
         return ValidationResult.failure("Не проверено")

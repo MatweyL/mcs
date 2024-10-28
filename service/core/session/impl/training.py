@@ -5,7 +5,7 @@ from typing import Dict
 from service.common.logs import logger
 from service.core.session import TrainingResult
 from service.core.session.training import TrainingResultCalculatorStrategy, Mark, TrainingResultCalculatorService
-from service.domain.session import Session
+from service.domain.session import Session, TrainingType
 
 
 class CalculateMarkByTime:
@@ -93,7 +93,7 @@ class UTK2ResultCalculatorStrategy(TrainingResultCalculatorStrategy):
         return training_result
 
     def get_name(self):
-        return 'UTK2'
+        return TrainingType.UTK2
 
 
 class UTK3ResultCalculatorStrategy(TrainingResultCalculatorStrategy):
@@ -121,11 +121,12 @@ class UTK3ResultCalculatorStrategy(TrainingResultCalculatorStrategy):
         return training_result
 
     def get_name(self):
-        return 'UTK3'
+        return TrainingType.UTK3
+
 
 class TrainingResultCalculatorServiceImpl(TrainingResultCalculatorService):
     def calculate(self, session: Session) -> TrainingResult:
         for strategy in self.strategies:
-            if strategy.get_name() == session.training:
+            if strategy.get_name() == session.training.kind:
                 return strategy.calculate(session)
         return self.default_strategy.calculate(session)
