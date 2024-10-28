@@ -6,6 +6,7 @@ from service.common.logs import logger
 from service.core.session import TrainingResult
 from service.core.session.training import TrainingResultCalculatorStrategy, Mark, TrainingResultCalculatorService
 from service.domain.session import Session, TrainingType
+from service.domain.training import UTK2Params, UTK3Params
 
 
 class CalculateMarkByTime:
@@ -76,9 +77,12 @@ class UTK2ResultCalculatorStrategy(TrainingResultCalculatorStrategy):
     def calculate(self, session: Session) -> TrainingResult:
         training_result = self.mark_by_time_calculator.calculate(session)
 
+        utk2_params = UTK2Params.from_dict(session.training.params)
         target_channel = None
         for channel in session.phone.channels:
-            if channel.name == 'КР1' and channel.frequency == 45775000 and channel.mode == 'CHM25':
+            if (channel.name == utk2_params.target_channel.name
+                    and channel.frequency == utk2_params.target_channel.frequency
+                    and channel.mode == utk2_params.target_channel.mode):
                 target_channel = channel
                 break
         if not target_channel:
@@ -104,9 +108,12 @@ class UTK3ResultCalculatorStrategy(TrainingResultCalculatorStrategy):
     def calculate(self, session: Session) -> TrainingResult:
         training_result = self.mark_by_time_calculator.calculate(session)
 
+        utk3_params = UTK3Params.from_dict(session.training.params)
         target_channel = None
         for channel in session.phone.channels:
-            if channel.name == 'КВ2' and channel.frequency == 50500000 and channel.mode == 'CHM50':
+            if (channel.name == utk3_params.target_channel.name
+                    and channel.frequency == utk3_params.target_channel.frequency
+                    and channel.mode == utk3_params.target_channel.mode):
                 target_channel = channel
                 break
         if not target_channel:

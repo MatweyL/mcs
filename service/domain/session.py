@@ -1,9 +1,10 @@
 import enum
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import List, Union
+from typing import List
 
 from service.domain.phone import Phone
+from service.domain.training import Training, TrainingType
 
 
 class SessionStatus(str, enum.Enum):
@@ -22,32 +23,6 @@ class SessionType(str, enum.Enum):
 class SessionAttempt:
     started: datetime = None
     finished: datetime = None
-
-
-class TrainingValue:
-    def __init__(self, value, label):
-        self.value = value
-        self.label = label
-
-
-class TrainingValues(enum.Enum):
-    UTK1 = TrainingValue("UTK1", "УТК-1")
-    UTK2 = TrainingValue("UTK2", "УТК-2")
-    UTK3 = TrainingValue("UTK3", "УТК-3")
-    UTK4 = TrainingValue("UTK4", "УТК-4")
-
-
-class TrainingType(str, enum.Enum):
-    UTK1 = "УТК-1"
-    UTK2 = "УТК-2"
-    UTK3 = "УТК-3"
-    UTK4 = "УТК-4"
-
-
-@dataclass
-class Training:
-    kind: str = None
-    params: dict[str, Union[float, int, str]] = field(default_factory=dict)
 
 
 @dataclass
