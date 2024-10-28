@@ -3,6 +3,7 @@ import {AuthStatus} from "../../constants/auth_statuses";
 
 const defaultState = {
     authenticated: false,
+    role: "",
     token: "",
     fio: ""
 }
@@ -12,11 +13,11 @@ export const userReducer = (state = defaultState, action) => {
     switch (action.type) {
         case Actions.LOAD_USER_INFO: {
             console.log(action.payload);
-            const {status, token, fio} = action.payload;
+            const {status, token, fio, role} = action.payload;
             if (status === AuthStatus.NON_AUTHENTICATED) {
                 return {authenticated: false, token: null};
             }
-            return {authenticated: true, token, fio};
+            return {authenticated: true, token, fio, role};
         }
 
         case Actions.AUTHENTICATE: {

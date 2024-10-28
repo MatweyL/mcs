@@ -4,7 +4,7 @@ from service.domain.phone import Phone
 from service.domain.pprch import PPRCH
 from service.domain.session import Session
 from service.domain.user import User
-from service.mapper_v2.mapper import SessionMapper, PhoneMapper, DirectionMapper, ChannelMapper, UserMapper, PPRCHMapper
+from service.mapper_v2.mapper import SessionMapper, PhoneMapper, DirectionMapper, ChannelMapper, StudentMapper, PPRCHMapper
 
 channel_mapper = ChannelMapper()
 direction_mapper = DirectionMapper()
@@ -12,7 +12,7 @@ pprch_mapper = PPRCHMapper()
 phone_mapper = PhoneMapper(channel_mapper, direction_mapper, pprch_mapper)
 session_mapper = SessionMapper(phone_mapper, None)
 
-user_mapper = UserMapper()
+user_mapper = StudentMapper()
 
 
 def test_session_map_to_entity():

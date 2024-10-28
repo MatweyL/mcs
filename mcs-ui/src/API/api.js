@@ -5,9 +5,8 @@ import {HINT} from "./api_helper";
 import {CacheKeys} from "../core/store/cache_service";
 
 const MOCK_REMOTE_URL = "https://056f0a88-8d8e-4a2b-b6a5-8f196f1bee39.mock.pstmn.io";
-// const LOCAL_PY_URL = "http://192.168.137.1:8080";
 const LOCAL_PY_URL = process.env.REACT_APP_LOCAL_PY_URL;
-const MOCK_LOCAL_URL = "http://localhost:3000";
+const MOCK_LOCAL_URL = "https://localhost:3000";
 
 
 const MOCK_LOCAL_MODE = "MOCK_LOCAL";
@@ -73,6 +72,14 @@ const endpoints = {
     getGroups: {
         [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/groups`),
         [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    getGroupTimetable: {
+        [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/groups`, config()),
+        [MOCK_LOCAL_MODE]: groupId => axios.get(`${MOCK_LOCAL_URL}/mock-timetables/data-${groupId}.json`),
+    },
+    getTeachers: {
+        [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/teachers`),
+        [MOCK_LOCAL_MODE]: endpoint => axios.get(`${MOCK_LOCAL_URL}/mock-teachers/data.json`),
     },
     getUsersByGroupId: {
         [LOCAL_PY_MODE]: groupId => axios.get(`${LOCAL_PY_URL}/users?group_uid=${groupId}`),
@@ -170,6 +177,18 @@ export default class API {
         const rs = await endpoints.getGroups[NOW_MODE]();
         console.log(rs);
         return rs.data.groups;
+    }
+
+    static async getGroupTimetable(groupId) {
+        const rs = await endpoints.getGroupTimetable[MOCK_LOCAL_MODE](groupId);
+        console.log(rs);
+        return rs.data.timetable;
+    }
+
+    static async getTeachers() {
+        const rs = await endpoints.getTeachers[MOCK_LOCAL_MODE]();
+        console.log(rs);
+        return rs.data.teachers;
     }
 
     static async getUsersByGroup(groupId) {

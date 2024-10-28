@@ -1,5 +1,6 @@
 import hashlib
 
+from service.common.logs import logger
 from service.common.mapper import Mapper
 from service.core.user.repo import UserRepo
 from service.core.user.use_case import RegisterUserUseCase, RegisterUserRq, RegisteredUserRs, AuthenticateUserUseCase, \
@@ -30,7 +31,7 @@ class AuthenticateUserUseCaseImpl(AuthenticateUserUseCase):
             return AuthResultRs(status=AuthStatus.NON_AUTHENTICATED)
 
         fio = f'{user.surname} {user.name[0]}. {user.patronymic[0]}.'
-        return AuthResultRs(status=AuthStatus.AUTHENTICATED, token=user.uid, fio=fio)
+        return AuthResultRs(status=AuthStatus.AUTHENTICATED, token=user.uid, fio=fio, role=user.role)
 
 
 class LoginUserUseCaseImpl(LoginUserUseCase):
@@ -47,4 +48,4 @@ class LoginUserUseCaseImpl(LoginUserUseCase):
             return AuthResultRs(status=AuthStatus.NON_AUTHENTICATED)
 
         fio = f'{user.surname} {user.name[0]}. {user.patronymic[0]}.'
-        return AuthResultRs(status=AuthStatus.AUTHENTICATED, token=user.uid, fio=fio)
+        return AuthResultRs(status=AuthStatus.AUTHENTICATED, token=user.uid, fio=fio, role=user.role)

@@ -6,9 +6,10 @@ import Requests from "../../../core/constants/requests";
 import {useNavigate} from "react-router-dom";
 import {RoutePaths} from "../../../router";
 import {request} from "../../../hooks/request";
+import Roles from "../../../core/constants/roles";
 
 const Profile = () => {
-    const {fio, token, authenticated} = useUserInfo()
+    const {fio, token, authenticated, role} = useUserInfo()
     const [visible, setVisible] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -25,7 +26,12 @@ const Profile = () => {
 
     const logout = () => {
         request(Requests.LOGOUT, {}, dispatch);
-        navigate(RoutePaths.LOGIN);
+        const targetPath = role === Roles.TEACHER
+            ? RoutePaths.TEACHER_LOGIN
+            : RoutePaths.LOGIN
+        console.log(role);
+        console.log(targetPath);
+        navigate(targetPath);
     }
 
     return (

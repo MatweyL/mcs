@@ -1,10 +1,10 @@
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 from typing import Optional
 
 from service.domain.user import User
 
 
-class UserRepo:
+class UserRepo(ABC):
     @abstractmethod
     def get_user(self, username: str) -> Optional[User]:
         pass

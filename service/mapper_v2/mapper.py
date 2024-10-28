@@ -8,7 +8,7 @@ from service.domain.group import Group
 from service.domain.phone import Phone
 from service.domain.pprch import PPRCH
 from service.domain.session import Session, SessionAttempt, SessionStatus, SessionType
-from service.domain.user import User
+from service.domain.user import User, Role
 
 D = TypeVar('D')
 E = TypeVar('E', bound=dict)
@@ -147,15 +147,52 @@ class ChannelMapper(Mapper):
 
 
 class UserMapper(Mapper):
+    @abstractmethod
+    def map_to_domain(self, entity: dict) -> User:
+        pass
+
+    @abstractmethod
+    def map_to_entity(self, user: User) -> dict:
+        pass
+
+
+class StudentMapper(UserMapper):
     def map_to_domain(self, entity: dict) -> User:
         user = User()
 
         user.uid = entity['uid']
         user.name = entity['name']
-        user.group = entity['group']
+        user.group = entity.get('group', "")
         user.surname = entity['surname']
         user.password = entity['password']
-        user.patronymic = entity['patronymic']
+        user.patronymic = entity.get('patronymic', "")
+        user.role = Role.STUDENT
+
+        return user
+
+    def map_to_entity(self, user: User) -> dict:
+        entity = dict()
+
+        entity['uid'] = user.uid
+        entity['name'] = user.name
+        entity['group'] = user.group
+        entity['surname'] = user.surname
+        entity['password'] = user.password
+        entity['patronymic'] = user.patronymic
+
+        return entity
+
+
+class TeacherMapper(UserMapper):
+    def map_to_domain(self, entity: dict) -> User:
+        user = User()
+
+        user.uid = entity['uid']
+        user.name = entity['name']
+        user.surname = entity['surname']
+        user.password = entity['password']
+        user.patronymic = entity.get('patronymic', "")
+        user.role = Role.TEACHER
 
         return user
 

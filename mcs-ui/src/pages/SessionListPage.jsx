@@ -8,7 +8,6 @@ import Requests from "../core/constants/requests";
 import CreateSessionForm from "../components/UI/CreateSessionForm/CreateSessionForm";
 import {useAuthenticated} from "../hooks/useUserInfo";
 import {request} from "../hooks/request";
-import TextButton from "../components/UI/TextButton/TextButton";
 import {useNavigate} from "react-router-dom";
 import {RoutePaths} from "../router";
 
@@ -39,7 +38,6 @@ const SessionListPage = () => {
         <div>
             <h1>Список сессий пользователя</h1>
             <div style={{display: "flex", justifyContent: "space-between"}}>
-                {/*<TextButton onClick={openCallSession}>Звонки</TextButton>*/}
                 <SearchBar/>
                 <div style={{display: "flex"}}>
                     <RoundButton>⌕</RoundButton>
