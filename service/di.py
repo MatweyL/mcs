@@ -50,7 +50,7 @@ from service.core.user.impl.repo import InMemoryUserRepo
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
 from service.db.db import JsonDb
 from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper, \
-    GroupMapper, SessionAttemptMapper
+    GroupMapper, SessionAttemptMapper, PPRCHMapper
 
 update_screen_by_alias()
 
@@ -76,7 +76,8 @@ screens_storage = FileSystemScreenRepo(screens_dir_path)
 session_attempt_mapper = SessionAttemptMapper()
 channel_mapper = ChannelMapper()
 direction_mapper = DirectionMapper()
-phone_mapper = PhoneMapper(channel_mapper, direction_mapper)
+pprch_mapper = PPRCHMapper()
+phone_mapper = PhoneMapper(channel_mapper, direction_mapper, pprch_mapper)
 session_mapper = SessionMapper(phone_mapper, session_attempt_mapper)
 
 session_repo = InMemorySessionRepo(db, session_mapper)
