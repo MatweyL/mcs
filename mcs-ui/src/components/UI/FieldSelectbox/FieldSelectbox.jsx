@@ -4,7 +4,7 @@ import classes from "./FieldSelectbox.module.css";
 const FieldSelectbox = ({title, options, ...props}) => {
     return (
         <div className={classes.fieldSelectbox}>
-            <p>{title}</p>
+            {title && <p>{title}</p>}
             <select {...props}>
                 {
                     options.map(option =>

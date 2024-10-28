@@ -1,0 +1,17 @@
+{
+  "teachers": [
+    {
+      "uid": "1",
+      "name": "Иван",
+      "surname": "Иванов",
+      "patronymic": "Иванович"
+    },
+    {
+      "name": "Максим",
+      "surname": "Максимов",
+      "patronymic": "Максимович",
+      "password": "202cb962ac59075b964b07152d234b70",
+      "uid": "b77fbc07-754f-46b7-b9f1-bbd3f59b1790"
+    }
+  ]
+}
