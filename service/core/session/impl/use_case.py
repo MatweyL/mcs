@@ -3,13 +3,13 @@ from datetime import datetime
 from service.common.utils import from_str_datetime_to_obj
 from service.common.utils import now
 from service.core.session import StartSessionRq, StartedSessionRs, ValidateTrainingSessionRq, ValidateTrainingSessionRs, \
-    FindSessionListWithSameActiveFrequencyRq, FindSessionListWithSameActiveFrequencyRs
+    FindSessionListWithSameActiveFrequencyRq, FindSessionListWithSameActiveFrequencyRs, GetSessionRq, ActiveDirectionFrequencyRs
 from service.core.session.repo import SessionRepo
 from service.core.session.training import TrainingResultCalculatorService
 from service.core.session.training_validator.training_validator import TrainingValidatorRegistry
 from service.core.session.use_case import GetSessionListUseCase, GetSessionListRq, SessionListRs, CreateSessionUseCase, \
     CreateSessionRq, CreatedSessionRs, StartSessionUseCase, FinishSessionUseCase, FinishedSessionRs, FinishSessionRq, \
-    ValidateTrainingSessionUseCase, FindSessionListWithSameActiveFrequencyUseCase
+    ValidateTrainingSessionUseCase, FindSessionListWithSameActiveFrequencyUseCase, GetActiveDirectionBySessionIdUseCase
 from service.domain.phone import Phone
 from service.domain.session import Session, SessionStatus, SessionAttempt
 
@@ -23,6 +23,19 @@ class GetSessionListUseCaseImpl(GetSessionListUseCase):
         sessions.sort(key=lambda s: -from_str_datetime_to_obj(s.date).timestamp())
 
         return SessionListRs(sessions=sessions)
+
+
+class GetActiveDirectionBySessionIdUseCaseImpl(GetActiveDirectionBySessionIdUseCase):
+    def __init__(self, session_repo: SessionRepo):
+        self.session_repo = session_repo
+
+    def apply(self, request: GetSessionRq) -> ActiveDirectionFrequencyRs:
+        session = self.session_repo.get_session(request.session_id)
+        phone = session.phone
+        active_direction = phone.find_active_direction()
+        channel = phone.find_channel(active_direction.channel)
+
+        return ActiveDirectionFrequencyRs(frequency=str(channel.frequency))
 
 
 class CreateSessionUseCaseImpl(CreateSessionUseCase):

@@ -27,3 +27,9 @@ class Phone:
         for pprch in self.pprchs:
             if pprch.uid == pprch_uid:
                 return pprch
+
+    def find_active_direction(self, ) -> Optional[Direction]:
+        for direction in self.directions:
+            if direction.uid == self.active_direction:
+                return direction
+

@@ -1,8 +1,5 @@
 import React from 'react';
-import useWebRTC, {LOCAL_VIDEO} from "../hooks/useWebRTC";
-import {useNavigate, useParams} from "react-router-dom";
-import {RoutePaths} from "../router";
-import TextButton from "../components/UI/TextButton/TextButton";
+import useWebRTC, {LOCAL_VIDEO} from "../../../hooks/useWebRTC";
 
 function layout(clientsNumber = 1) {
     const pairs = Array.from({length: clientsNumber})
@@ -22,44 +19,37 @@ function layout(clientsNumber = 1) {
         if (index === arr.length - 1 && row.length === 1) {
             return [{
                 width: '100%',
-                height,
+                height
             }];
         }
 
         return row.map(() => ({
             width: '50%',
-            height,
+            height
         }));
     }).flat();
 }
 
-const CallRoomPage = () => {
-    const {id: roomID, params} = useParams();
-    const navigate = useNavigate();
-    const {clients, provideMediaRef} = useWebRTC(roomID, params);
-    const videoLayout = layout(clients.length);
+const Call = ({roomId, sessionId, params}) => {
+        const {clients, provideMediaRef} = useWebRTC(roomId, params, sessionId);
 
-    const back = () => {
-        navigate(RoutePaths.CALL_SESSION);
-    }
-
-    return (
-        <div style={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
-
-            <TextButton onClick={back}>← Назад</TextButton>
+        return (
             <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexWrap: 'wrap',
-                height: '100vh',
+                flexDirection: "column"
             }}>
                 {clients.map((clientID, index) => {
                     return (
-                        <div key={clientID} style={videoLayout[index]} id={clientID}>
+                        <div key={clientID} id={clientID}
+                             style={{
+                                 height: "200px",
+                                 width: "200px"
+                        }}>
                             <video
-                                width='100%'
-                                height='100%'
+                                style={{borderRadius: '50%', objectFit: "cover", height: "100%", width: "100%"}}
                                 ref={instance => {
                                     provideMediaRef(clientID, instance);
                                 }}
@@ -68,11 +58,13 @@ const CallRoomPage = () => {
                                 muted={clientID === LOCAL_VIDEO}
                             />
                         </div>
-                    );
+                    )
+                        ;
                 })}
             </div>
-        </div>
-    );
-};
+        )
+            ;
+    }
+;
 
-export default CallRoomPage;
+export default Call;
