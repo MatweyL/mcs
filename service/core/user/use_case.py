@@ -10,6 +10,7 @@ class RegisterUserRq(Request):
     patronymic: str
     group: str
     password: str
+    role: str
 
 
 class RegisteredUserRs(Response):
@@ -39,10 +40,12 @@ class AuthResultRs(Response):
     def __init__(self,
                  status: AuthStatus,
                  fio: str | None = None,
-                 token: str | None = None) -> None:
+                 token: str | None = None,
+                 role: str | None = None) -> None:
         self.status = status
         self.token = token
         self.fio = fio
+        self.role = role
 
 
 class AuthenticateUserUseCase(UseCase):

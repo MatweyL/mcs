@@ -46,12 +46,14 @@ from service.core.session.training_validator.step_validator_utk3 import UTK3Step
     UTK3Step2Validator
 from service.core.session.training_validator.training_validator import TrainingValidatorImpl, TrainingValidatorRegistry
 from service.core.user.endpoint import UserEndpoint
-from service.core.user.impl.repo import InMemoryUserRepo
+from service.core.user.impl.repo import InMemoryUserRepo, UserRepoDecorator
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
 from service.db.db import JsonDb
 from service.domain.session import TrainingType
 from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper, \
     GroupMapper, SessionAttemptMapper, PPRCHMapper, TrainingMapper
+from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, StudentMapper, \
+    GroupMapper, SessionAttemptMapper, PPRCHMapper, TeacherMapper
 
 update_screen_by_alias()
 
@@ -92,8 +94,12 @@ screen_endpoint = ScreenEndpoint(
     get_screen_use_case
 )
 
-user_mapper = UserMapper()
-user_repo = InMemoryUserRepo(db, user_mapper)
+student_mapper = StudentMapper()
+student_repo = InMemoryUserRepo(db, student_mapper, 'users')
+teacher_mapper = TeacherMapper()
+teacher_repo = InMemoryUserRepo(db, teacher_mapper, 'teachers')
+user_repo = UserRepoDecorator([student_repo, teacher_repo])
+
 auth_filter = AuthFilter(user_repo)
 
 register_user_use_case = RegisterUserUseCaseImpl(user_repo, mapper)
@@ -178,7 +184,7 @@ get_dictionary_use_case = GetDictionaryUseCaseImpl(session_repo,
 dictionary_endpoint = DictionaryEndpoint(get_dictionary_use_case)
 
 group_mapper = GroupMapper()
-group_repo = GroupRepoImpl(db, group_mapper, user_mapper)
+group_repo = GroupRepoImpl(db, group_mapper, student_mapper)
 
 get_group_list_use_case = GetGroupListUseCaseImpl(group_repo)
 get_user_list_by_group_use_case = GetUserListByGroupUseCaseImpl(group_repo)

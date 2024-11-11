@@ -1,0 +1,10 @@
+.mark {
+    margin: 0 20px 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 25px;
+    background-color: #00FA9A;
+    border-radius: 25%;
+}

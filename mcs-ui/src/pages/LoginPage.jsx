@@ -1,26 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
 import Field from "../components/UI/Field/Field";
 import FormButton from "../components/UI/FormButton/FormButton";
 import LoginForm from "../components/UI/LoginForm/LoginForm";
 import FieldSelectbox from "../components/UI/FieldSelectbox/FieldSelectbox";
-import API from "../API/api";
 import {useDispatch} from "react-redux";
 import Requests from "../core/constants/requests";
 import {request} from "../hooks/request";
+import {fetchGroups, fetchStudents} from "../API/fetchers";
+import {EMPTY_OPTION} from "../core/constants/ui";
 
-const fetchStudents = async (groupId) => (await API.getUsersByGroup(groupId)).map(
-    user => {
-        return {'value': user.uid, 'label': `${user.surname} ${user.name} ${user.patronymic}`}
-    }
-);
-const fetchGroups = async () => (await API.getGroups()).map(
-    group => {
-        return {'value': group.uid, 'label': group.name}
-    }
-);
-
-const EMPTY_OPTION = {value: '', label: ''};
 
 /**
  * Страница входа

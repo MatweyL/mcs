@@ -1,0 +1,20 @@
+.timetableRow {
+    border: 1px solid grey;
+    border-right: none;
+    height: 30px;
+}
+
+.nameCell {
+
+}
+
+.resultCell {
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+}
+
+.resultContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

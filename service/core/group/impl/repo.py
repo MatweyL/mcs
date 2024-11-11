@@ -1,6 +1,6 @@
 from service.core.group.repo import GroupRepo
 from service.db.db import JsonDb
-from service.mapper_v2.mapper import GroupMapper, UserMapper
+from service.mapper_v2.mapper import GroupMapper, StudentMapper
 
 
 class GroupRepoImpl(GroupRepo):
@@ -8,7 +8,7 @@ class GroupRepoImpl(GroupRepo):
     def __init__(self,
                  db: JsonDb,
                  group_mapper: GroupMapper,
-                 user_mapper: UserMapper):
+                 user_mapper: StudentMapper):
         self.db = db
         self.group_mapper = group_mapper
         self.user_mapper = user_mapper

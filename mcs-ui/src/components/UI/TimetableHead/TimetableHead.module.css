@@ -1,0 +1,9 @@
+.headCell {
+    border-left: 1px solid grey;
+}
+
+.headRow {
+    border: 1px solid grey;
+    border-right: none;
+    height: 30px;
+}
