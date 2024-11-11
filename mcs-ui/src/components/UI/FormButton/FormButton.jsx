@@ -1,14 +1,20 @@
 import React from 'react';
 import classes from "./FormButton.module.css";
 
-const FormButton = ({label, enabled = true, ...props}) => {
+const FormButton = ({label, enabled = true, onClick, ...props}) => {
     const rootClasses = [
         classes.formButton,
         enabled ? null : classes.formButtonDisabled
     ];
 
+    const handleClick = () => {
+        if (enabled) {
+            onClick();
+        }
+    }
+
     return (
-        <div {...props} className={rootClasses.join(" ")}>
+        <div onClick={handleClick}  {...props} className={rootClasses.join(" ")}>
             {label}
         </div>
     );

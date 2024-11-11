@@ -3,6 +3,7 @@ import {fetchGroups, fetchGroupTimetable} from "../API/fetchers";
 import {EMPTY_OPTION} from "../core/constants/ui";
 import TimetableRow from "../components/UI/TimetableRow/TimetableRow";
 import TimetableHead from "../components/UI/TimetableHead/TimetableHead";
+import CreateTaskForm from "../components/UI/CreateTaskForm/CreateTaskForm";
 
 const GroupTimetablePage = () => {
     const [groups, setGroups] = useState([]);
@@ -17,6 +18,8 @@ const GroupTimetablePage = () => {
         if (nowGroup) {
             fetchGroupTimetable(nowGroup)
                 .then(timetable => setNowTimetable(timetable));
+        } else {
+            setNowTimetable({rows: [], classes: []})
         }
     }, [nowGroup])
 
@@ -26,14 +29,22 @@ const GroupTimetablePage = () => {
                 <h1>Занятия взводов</h1>
             </div>
             <div>
-                <table style={{borderCollapse: "collapse"}}>
-                    <TimetableHead groups={groups} setGroup={setNowGroup} classWorks={nowTimetable.classes} rowsAmount={nowTimetable.rows.length}/>
-                    <tbody>
-                    {nowTimetable?.rows.map(row =>
-                        <TimetableRow row={row}/>
-                    )}
-                    </tbody>
-                </table>
+                <div style={{display: "flex"}}>
+                    <table style={{borderCollapse: "collapse"}}>
+                        <TimetableHead groups={groups} setGroup={setNowGroup} classWorks={nowTimetable.classes}
+                                       rowsAmount={nowTimetable.rows.length}/>
+                        <tbody>
+                        {nowTimetable?.rows.map(row =>
+                            <TimetableRow row={row}/>
+                        )}
+                        </tbody>
+                    </table>
+                    {nowGroup &&
+                        <div>
+                            <CreateTaskForm/>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     );

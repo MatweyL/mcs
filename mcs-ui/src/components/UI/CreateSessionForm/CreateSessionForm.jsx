@@ -6,17 +6,9 @@ import FieldSelectbox from "../FieldSelectbox/FieldSelectbox";
 import FormButton from "../FormButton/FormButton";
 import {SessionTypes} from "../../../core/constants/session_types";
 import {request} from "../../../hooks/request";
+import Trainings from "../../../core/constants/trainings";
+import Devices from "../../../core/constants/devices";
 
-const devices = [
-    {value: "AZART", label: "Азарт Р-187"}
-]
-const trainings = [
-    {value: "", label: ""},
-    {value: "UTK1", label: "УТК-1. Включение питания"},
-    {value: "UTK2", label: "УТК-2. Настройка частоты в режиме ЧМ25"},
-    {value: "UTK3", label: "УТК-3. Настройка частоты в режиме ЧМ50"},
-    {value: "UTK4", label: "УТК-4. Настройка частоты в режиме ППРЧ"},
-]
 
 const types = [
     {value: "", label: ""},
@@ -48,8 +40,8 @@ const CreateSessionForm = ({visible, setVisible}) => {
 
     return (
         <Modal visible={visible} close={() => setVisible(false)}>
-            <FieldSelectbox title={"Устройство"} options={devices}/>
-            <FieldSelectbox title={"УТК"} options={trainings}
+            <FieldSelectbox title={"Устройство"} options={Devices.VALUES}/>
+            <FieldSelectbox title={"УТК"} options={Trainings.VALUES}
                             onChange={e => setSession({...session, training: e.target.value})}/>
             <FieldSelectbox title={"Тип"} options={types}
                             onChange={e => setSession({...session, type: e.target.value})}/>

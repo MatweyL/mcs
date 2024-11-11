@@ -13,9 +13,6 @@ const TimetableHead = ({groups, setGroup, classWorks}) => {
             {classWorks.map(classWork =>
                 <th className={classes.headCell}>{classWork.name}</th>
             )}
-            <th rowSpan="2" className={classes.headCell}>
-                12
-            </th>
         </tr>
         <tr className={classes.headRow}>
             {classWorks.map(classWork =>
