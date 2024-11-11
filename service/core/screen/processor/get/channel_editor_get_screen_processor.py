@@ -19,7 +19,7 @@ class ChannelEditorGetScreenProcessor(GetScreenProcessor):
         attributes = screen_template['attributes']
         attributes['CHANNEL_ID']['value'] = found_channel.uid
         attributes['NAME']['value'] = found_channel.name
-        attributes['CHANNEL_MODE']['value'] = found_channel.mode
+        attributes['CHANNEL_MODE']['value'] = found_channel.mode.name
         attributes['DOUBLE_FREQUENCY']['value'] = found_channel.double_frequency
         attributes['FREQUENCY']['value'] = found_channel.frequency
         attributes['FORBIDDEN_SEND']['value'] = found_channel.forbidden_send

@@ -40,7 +40,7 @@ from service.core.session.impl.use_case import GetSessionListUseCaseImpl, Create
     StartSessionUseCaseImpl, FinishSessionUseCaseImpl, ValidateTrainingSessionUseCaseImpl, \
     GetActiveDirectionBySessionIdUseCaseImpl
 from service.core.session.training import Mark
-from service.core.session.training_validator.step_validator import UTK2Step1Validator, UTK2Step2Validator, \
+from service.core.session.training_validator.step_validator_utk2 import UTK2Step1Validator, UTK2Step2Validator, \
     UTK2Step3Validator
 from service.core.session.training_validator.step_validator_utk3 import UTK3Step1Validator, UTK3Step3Validator, \
     UTK3Step2Validator

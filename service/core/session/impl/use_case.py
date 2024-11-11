@@ -13,6 +13,7 @@ from service.core.session.use_case import GetSessionListUseCase, GetSessionListR
     ValidateTrainingSessionUseCase, FindSessionListWithSameActiveFrequencyUseCase, GetActiveDirectionBySessionIdUseCase
 from service.domain.phone import Phone
 from service.domain.session import Session, SessionStatus, SessionAttempt, TrainingType
+from service.domain.training import Training
 
 
 class GetSessionListUseCaseImpl(GetSessionListUseCase):
@@ -44,7 +45,7 @@ class CreateSessionUseCaseImpl(CreateSessionUseCase):
     def __init__(self, session_repo: SessionRepo):
         self.session_repo = session_repo
         self.conversions = {
-            training_type: training_type.value for training_type in TrainingType
+            training_type.name: training_type for training_type in TrainingType
         }
 
     def apply(self, request: CreateSessionRq) -> CreatedSessionRs:
@@ -55,7 +56,7 @@ class CreateSessionUseCaseImpl(CreateSessionUseCase):
         session.date = now()
         # FIXME: оставить только training, подумать о вынесении в отдельную сущность
         session.title = self.conversions.get(dto.training, "Не определено")
-        session.training = dto.training
+        session.training = Training(kind=dto.training, params=dto.training_params)
         session.type = dto.type
         session.phone = Phone()
         session.status = SessionStatus.READY

@@ -8,6 +8,4 @@ class MessageSourceImpl(MessageSource):
 
     def get_message(self, message_code, *texts, **kwargs) -> str:
         message_by_code: str = self._message_by_code.get(message_code)
-        if texts:
-            return message_by_code.format(*texts)
-        return message_by_code
+        return message_by_code.format(*texts, **kwargs)

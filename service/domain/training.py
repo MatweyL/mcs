@@ -1,8 +1,9 @@
 import enum
-from dataclasses import dataclass, field
+from dataclasses import dataclass, asdict
 from typing import Union
+from uuid import uuid4
 
-from service.domain.channel import Channel
+from service.domain.channel import Channel, ChannelMode
 from service.domain.direction import Direction
 
 
@@ -11,6 +12,12 @@ class TrainingType(str, enum.Enum):
     UTK2 = "УТК-2"
     UTK3 = "УТК-3"
     UTK4 = "УТК-4"
+
+    @staticmethod
+    def from_name(name: str) -> 'TrainingType':
+        for training_type in TrainingType:
+            if training_type.name == name:
+                return training_type
 
 
 class UTKStepCode(str, enum.Enum):
@@ -24,8 +31,24 @@ class UTKStepCode(str, enum.Enum):
 
 @dataclass
 class Training:
-    kind: str = None
-    params: dict[str, Union[float, int, str, dict]] = field(default_factory=dict)
+    kind: TrainingType = None
+    params: dict[str, Union[float, int, str, dict]] = None
+
+    def __post_init__(self):
+        if not self.params:
+            target_channel = Channel(uid=str(uuid4()), name='КР1', frequency=45_500_000)
+            target_direction = Direction(uid=str(uuid4()), channel=target_channel.uid)
+            if self.kind == 'UTK2':
+                target_channel.mode = ChannelMode.CHM25
+                utk_params = UTK2Params(target_channel=target_channel,
+                                        target_direction=target_direction)
+            elif self.kind == 'UTK3':
+                target_channel.mode = ChannelMode.CHM50
+                utk_params = UTK3Params(target_channel=target_channel,
+                                        target_direction=target_direction)
+            else:
+                raise ValueError(f"Неизвестный УТК: {self.kind}")
+            self.params = asdict(utk_params)
 
 
 @dataclass
@@ -35,10 +58,8 @@ class UTK2Params:
 
     @staticmethod
     def from_dict(params: dict) -> 'UTK2Params':
-        target_channel = Channel(**params['channel'])
-        target_direction = Direction(**params['direction'])
-        if not target_channel.mode:
-            target_channel.mode = 'CHM25'
+        target_channel = Channel(**params['target_channel'])
+        target_direction = Direction(**params['target_direction'])
         return UTK2Params(target_channel=target_channel,
                           target_direction=target_direction, )
 
@@ -50,9 +71,7 @@ class UTK3Params:
 
     @staticmethod
     def from_dict(params: dict) -> 'UTK3Params':
-        target_channel = Channel(**params['channel'])
-        target_direction = Direction(**params['direction'])
-        if not target_channel.mode:
-            target_channel.mode = 'CHM50'
+        target_channel = Channel(**params['target_channel'])
+        target_direction = Direction(**params['target_direction'])
         return UTK3Params(target_channel,
                           target_direction=target_direction, )
