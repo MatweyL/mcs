@@ -3,7 +3,8 @@ from datetime import datetime
 from service.common.utils import from_str_datetime_to_obj
 from service.common.utils import now
 from service.core.session import StartSessionRq, StartedSessionRs, ValidateTrainingSessionRq, ValidateTrainingSessionRs, \
-    FindSessionListWithSameActiveFrequencyRq, FindSessionListWithSameActiveFrequencyRs, GetSessionRq, ActiveDirectionFrequencyRs
+    FindSessionListWithSameActiveFrequencyRq, FindSessionListWithSameActiveFrequencyRs, GetSessionRq, \
+    ActiveDirectionFrequencyRs
 from service.core.session.repo import SessionRepo
 from service.core.session.training import TrainingResultCalculatorService
 from service.core.session.training_validator.training_validator import TrainingValidatorRegistry
@@ -11,7 +12,7 @@ from service.core.session.use_case import GetSessionListUseCase, GetSessionListR
     CreateSessionRq, CreatedSessionRs, StartSessionUseCase, FinishSessionUseCase, FinishedSessionRs, FinishSessionRq, \
     ValidateTrainingSessionUseCase, FindSessionListWithSameActiveFrequencyUseCase, GetActiveDirectionBySessionIdUseCase
 from service.domain.phone import Phone
-from service.domain.session import Session, SessionStatus, SessionAttempt
+from service.domain.session import Session, SessionStatus, SessionAttempt, TrainingType
 
 
 class GetSessionListUseCaseImpl(GetSessionListUseCase):
@@ -43,10 +44,7 @@ class CreateSessionUseCaseImpl(CreateSessionUseCase):
     def __init__(self, session_repo: SessionRepo):
         self.session_repo = session_repo
         self.conversions = {
-            "UTK1": "УТК-1",
-            "UTK2": "УТК-2",
-            "UTK3": "УТК-3",
-            "UTK4": "УТК-4",
+            training_type: training_type.value for training_type in TrainingType
         }
 
     def apply(self, request: CreateSessionRq) -> CreatedSessionRs:

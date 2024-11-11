@@ -49,6 +49,9 @@ from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo, UserRepoDecorator
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
 from service.db.db import JsonDb
+from service.domain.session import TrainingType
+from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, UserMapper, \
+    GroupMapper, SessionAttemptMapper, PPRCHMapper, TrainingMapper
 from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, StudentMapper, \
     GroupMapper, SessionAttemptMapper, PPRCHMapper, TeacherMapper
 
@@ -78,7 +81,8 @@ channel_mapper = ChannelMapper()
 direction_mapper = DirectionMapper()
 pprch_mapper = PPRCHMapper()
 phone_mapper = PhoneMapper(channel_mapper, direction_mapper, pprch_mapper)
-session_mapper = SessionMapper(phone_mapper, session_attempt_mapper)
+training_mapper = TrainingMapper()
+session_mapper = SessionMapper(phone_mapper, session_attempt_mapper, training_mapper, )
 
 session_repo = InMemorySessionRepo(db, session_mapper)
 
@@ -147,11 +151,11 @@ message_source = MessageSourceImpl(message_by_code)
 training_validator_utk_2 = TrainingValidatorImpl([UTK2Step1Validator(navigator, message_source),
                                                   UTK2Step2Validator(navigator, message_source),
                                                   UTK2Step3Validator(navigator, message_source)],
-                                                 'UTK2')
+                                                 TrainingType.UTK2)
 training_validator_utk_3 = TrainingValidatorImpl([UTK3Step1Validator(navigator, message_source),
                                                   UTK3Step2Validator(navigator, message_source),
                                                   UTK3Step3Validator(navigator, message_source), ],
-                                                 'UTK3')
+                                                 TrainingType.UTK3)
 training_validator_registry = TrainingValidatorRegistry([training_validator_utk_2,
                                                          training_validator_utk_3])
 

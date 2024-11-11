@@ -7,6 +7,8 @@ from service.domain.direction import Direction
 from service.domain.group import Group
 from service.domain.phone import Phone
 from service.domain.pprch import PPRCH
+from service.domain.session import Session, SessionAttempt, SessionStatus, SessionType, Training
+from service.domain.user import User
 from service.domain.session import Session, SessionAttempt, SessionStatus, SessionType
 from service.domain.user import User, Role
 
@@ -25,9 +27,13 @@ class Mapper:
 
 
 class SessionMapper(Mapper):
-    def __init__(self, phone_mapper: 'PhoneMapper', session_attempt_mapper: 'SessionAttemptMapper'):
+    def __init__(self,
+                 phone_mapper: 'PhoneMapper',
+                 session_attempt_mapper: 'SessionAttemptMapper',
+                 training_mapper: 'TrainingMapper'):
         self.phone_mapper = phone_mapper
         self.session_attempt_mapper = session_attempt_mapper
+        self.training_mapper = training_mapper
 
     def map_to_domain(self, entity: E) -> Session:
         session = Session()
@@ -40,7 +46,7 @@ class SessionMapper(Mapper):
         session.status = entity.get('status', SessionStatus.READY)
         if entity.get('attempts'):
             session.attempts = [self.session_attempt_mapper.map_to_domain(attempt) for attempt in entity['attempts']]
-        session.training = entity.get('training')
+        session.training = self.training_mapper.map_to_domain(entity['training'])
         session.type = entity.get('type', SessionType.FREE)
 
         return session
@@ -55,7 +61,7 @@ class SessionMapper(Mapper):
         entity['phone'] = self.phone_mapper.map_to_entity(session.phone)
         entity['status'] = session.status
         entity['attempts'] = [self.session_attempt_mapper.map_to_entity(attempt) for attempt in session.attempts]
-        entity['training'] = session.training
+        entity['training'] = self.training_mapper.map_to_entity(session.training)
         entity['type'] = session.type
         return entity
 
@@ -253,4 +259,15 @@ class PPRCHMapper(Mapper):
         entity = dict(uid=domain.uid,
                       lower=domain.lower,
                       higher=domain.higher)
+        return entity
+
+
+class TrainingMapper(Mapper):
+    def map_to_domain(self, entity: dict) -> Training:
+        return Training(kind=entity['kind'],
+                        params=entity['params'])
+
+    def map_to_entity(self, domain: Training) -> dict:
+        entity = dict(kind=domain.kind,
+                      params=domain.params)
         return entity

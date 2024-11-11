@@ -8,7 +8,7 @@ class MessageSource(ABC):
     """
 
     @abstractmethod
-    def get_message(self, message_code, *args) -> str:
+    def get_message(self, message_code, *args, **kwargs) -> str:
         """
         возвращает сообщение по коду сообщения
 

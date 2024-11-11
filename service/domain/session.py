@@ -4,6 +4,7 @@ from datetime import datetime
 from typing import List
 
 from service.domain.phone import Phone
+from service.domain.training import Training, TrainingType
 
 
 class SessionStatus(str, enum.Enum):
@@ -24,19 +25,6 @@ class SessionAttempt:
     finished: datetime = None
 
 
-class TrainingValue:
-    def __init__(self, value, label):
-        self.value = value
-        self.label = label
-
-
-class Training(enum.Enum):
-    UTK1 = TrainingValue("UTK1", "УТК-1")
-    UTK2 = TrainingValue("UTK2", "УТК-2")
-    UTK3 = TrainingValue("UTK3", "УТК-3")
-    UTK4 = TrainingValue("UTK4", "УТК-4")
-
-
 @dataclass
 class Session:
     uid: str = None
@@ -46,5 +34,5 @@ class Session:
     phone: Phone = None
     status: SessionStatus = None
     attempts: List[SessionAttempt] = field(default_factory=list)
-    training: str = None
+    training: Training = None
     type: SessionType = None
