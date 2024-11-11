@@ -1,4 +1,10 @@
+import enum
 from dataclasses import dataclass
+
+
+class ChannelMode(str, enum.Enum):
+    CHM25 = 'CHM25'
+    CHM50 = 'CHM50'
 
 
 @dataclass

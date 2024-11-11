@@ -2,16 +2,17 @@ from service.common.message_source import MessageSource
 from service.common.screen_navigator import ScreenNavigator
 from service.core.session.training_validator.step_validator import BaseStepValidator
 from service.domain.session import Session
-from service.domain.training import UTK3Params, UTKStepCode
+from service.domain.training import UTK2Params, UTKStepCode
 
 
-class UTK3Step1Validator(BaseStepValidator):
+class UTK2Step1Validator(BaseStepValidator):
+
     def get_hint_message(self, session: Session) -> str:
-        utk3_params = UTK3Params.from_dict(session.training.params)
+        utk2_params = UTK2Params.from_dict(session.training.params)
         return self.message_source.get_message(self.get_step_message_code(),
-                                               channel_name=utk3_params.target_channel.name,
-                                               channel_mode=utk3_params.target_channel.mode,
-                                               channel_frequency=utk3_params.target_channel.frequency // 10 ** 6)  # MHz
+                                               channel_name=utk2_params.target_channel.name,
+                                               channel_mode=utk2_params.target_channel.mode,
+                                               channel_frequency=utk2_params.target_channel.frequency // 10 ** 6)  # MHz
 
     def __init__(self,
                  navigator: ScreenNavigator,
@@ -22,7 +23,7 @@ class UTK3Step1Validator(BaseStepValidator):
         """
         Получить код сообщения для валидатора
         """
-        return UTKStepCode.UTK_3_STEP_1_CODE
+        return UTKStepCode.UTK_2_STEP_1_CODE
 
     def is_valid(self, session: Session) -> bool:
         """
@@ -31,11 +32,11 @@ class UTK3Step1Validator(BaseStepValidator):
         phone = session.phone
         if not phone.channels:
             return False
-        utk3_params = UTK3Params.from_dict(session.training.params)
+        utk2_params = UTK2Params.from_dict(session.training.params)
         for channel in phone.channels:
-            if (channel.name == utk3_params.target_channel.name
-                    and channel.mode == utk3_params.target_channel.mode
-                    and channel.frequency == utk3_params.target_channel.frequency):
+            if (channel.name == utk2_params.target_channel.name
+                    and channel.mode == utk2_params.target_channel.mode
+                    and channel.frequency == utk2_params.target_channel.frequency):
                 return True
         return False
 
@@ -52,12 +53,12 @@ class UTK3Step1Validator(BaseStepValidator):
         return "CHANNEL_EDITOR"
 
 
-class UTK3Step2Validator(BaseStepValidator):
+class UTK2Step2Validator(BaseStepValidator):
 
     def get_hint_message(self, session: Session) -> str:
-        utk3_params = UTK3Params.from_dict(session.training.params)
+        utk2_params = UTK2Params.from_dict(session.training.params)
         return self.message_source.get_message(self.get_step_message_code(),
-                                               direction_name=utk3_params.target_direction.name, )
+                                               direction_name=utk2_params.target_direction.name, )
 
     def __init__(self,
                  navigator: ScreenNavigator,
@@ -68,7 +69,7 @@ class UTK3Step2Validator(BaseStepValidator):
         """
         Получить код сообщения для валидатора
         """
-        return UTKStepCode.UTK_3_STEP_2_CODE
+        return UTKStepCode.UTK_2_STEP_2_CODE
 
     def is_valid(self, session: Session) -> bool:
         """
@@ -97,7 +98,7 @@ class UTK3Step2Validator(BaseStepValidator):
         return "DIRECTION_EDITOR"
 
 
-class UTK3Step3Validator(BaseStepValidator):
+class UTK2Step3Validator(BaseStepValidator):
     def __init__(self,
                  navigator: ScreenNavigator,
                  message_source: MessageSource):
@@ -107,7 +108,7 @@ class UTK3Step3Validator(BaseStepValidator):
         """
         Получить код сообщения для валидатора
         """
-        return UTKStepCode.UTK_3_STEP_3_CODE
+        return UTKStepCode.UTK_2_STEP_3_CODE
 
     def is_valid(self, session: Session) -> bool:
         """
