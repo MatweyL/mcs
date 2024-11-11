@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {fetchGroups, fetchGroupTimetable} from "../API/fetchers";
-import FieldSelectbox from "../components/UI/FieldSelectbox/FieldSelectbox";
 import {EMPTY_OPTION} from "../core/constants/ui";
+import TimetableRow from "../components/UI/TimetableRow/TimetableRow";
+import TimetableHead from "../components/UI/TimetableHead/TimetableHead";
 
 const GroupTimetablePage = () => {
     const [groups, setGroups] = useState([]);
@@ -20,28 +21,16 @@ const GroupTimetablePage = () => {
     }, [nowGroup])
 
     return (
-        <div>
-            <h1>Занятия взводов</h1>
-            <div style={{width: "80%"}}>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>
-                            <FieldSelectbox options={groups} onChange={e => setNowGroup(e.target.value)}/>
-                        </th>
-                        {nowTimetable?.classes.map(classWork =>
-                            <th>{classWork.name}</th>
-                        )}
-                    </tr>
-                    </thead>
+        <div style={{width: "100%"}}>
+            <div style={{display: "flex", justifyContent: "center"}}>
+                <h1>Занятия взводов</h1>
+            </div>
+            <div>
+                <table style={{borderCollapse: "collapse"}}>
+                    <TimetableHead groups={groups} setGroup={setNowGroup} classWorks={nowTimetable.classes} rowsAmount={nowTimetable.rows.length}/>
                     <tbody>
                     {nowTimetable?.rows.map(row =>
-                        <tr>
-                            <td>{row.fio}</td>
-                            {row.results.map(result =>
-                                <td>{result.mark}</td>
-                            )}
-                        </tr>
+                        <TimetableRow row={row}/>
                     )}
                     </tbody>
                 </table>
