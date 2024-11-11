@@ -3,6 +3,7 @@ from typing import List
 
 from service.core.session.training_validator.step_validator import StepValidator, ValidationResult
 from service.domain.session import Session
+from service.domain.training import TrainingType
 
 
 class TrainingValidator(ABC):
@@ -59,6 +60,6 @@ class TrainingValidatorRegistry(TrainingValidator):
 
     def validate(self, screen_code: str, session: Session) -> ValidationResult:
         for training_validator in self.training_validators:
-            if training_validator.training == session.training.kind:
+            if training_validator.training == TrainingType.from_name(session.training.kind):
                 return training_validator.validate(screen_code, session)
         return ValidationResult.failure("Не проверено")

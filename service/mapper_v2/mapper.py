@@ -2,14 +2,14 @@ from abc import abstractmethod
 from datetime import datetime
 from typing import TypeVar
 
-from service.domain.channel import Channel
+from service.common.utils import convert_str_to_enum
+from service.domain.channel import Channel, ChannelMode
 from service.domain.direction import Direction
 from service.domain.group import Group
 from service.domain.phone import Phone
 from service.domain.pprch import PPRCH
-from service.domain.session import Session, SessionAttempt, SessionStatus, SessionType, Training
-from service.domain.user import User
 from service.domain.session import Session, SessionAttempt, SessionStatus, SessionType
+from service.domain.session import Training
 from service.domain.user import User, Role
 
 D = TypeVar('D')
@@ -128,7 +128,7 @@ class ChannelMapper(Mapper):
         channel = Channel()
 
         channel.uid = entity['uid']
-        channel.mode = entity['mode']
+        channel.mode = convert_str_to_enum(entity['mode'], ChannelMode)
         channel.name = entity['name']
         channel.double_frequency = entity.get('double_frequency')
         channel.frequency = entity.get('frequency')

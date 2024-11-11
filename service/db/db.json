@@ -54,613 +54,138 @@
   ],
   "sessions": [
     {
-      "uid": "2a084c67-f73c-4a8f-820c-da6eb30a3b89",
+      "uid": "a89186f1-f09e-4fc2-9365-fe953ab6ff7c",
       "title": "УТК-2",
-      "date": "09/09/24 15:37",
+      "date": "11/11/24 13:44",
       "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
       "phone": {
         "active_direction": null,
-        "channels": [],
-        "directions": []
+        "channels": [
+          {
+            "uid": "edad9ef3-16b9-400c-9dac-0ad25453831a",
+            "mode": "ЧМ25",
+            "name": "КР1",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": 45500000,
+            "double_frequency": null
+          }
+        ],
+        "directions": [
+          {
+            "uid": "daa56947-b82f-4495-8791-6118d2c83288",
+            "name": "Направление 2",
+            "channel_uid": "edad9ef3-16b9-400c-9dac-0ad25453831a",
+            "forbidden_send": null,
+            "tone_call": null,
+            "scan_list": "NO",
+            "economizer": "3"
+          }
+        ],
+        "pprchs": []
       },
       "status": "READY",
-      "attempts": [],
+      "attempts": [
+        {
+          "started": "2024-11-11 13:44:15.869690",
+          "finished": null
+        },
+        {
+          "started": "2024-11-11 14:02:35.689693",
+          "finished": "2024-11-11 14:02:36.432708"
+        }
+      ],
       "training": {
         "kind": "UTK2",
         "params": {
-          "": ""
-        }
-      },
-      "type": "TRAINING"
-    },
-    {
-      "uid": "7fcaa0c8-3105-477b-905f-46bdad895485",
-      "title": "УТК-3",
-      "date": "09/09/24 15:53",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [],
-        "directions": []
-      },
-      "status": "READY",
-      "attempts": [],
-      "training": "UTK3",
-      "type": "FREE"
-    },
-    {
-      "uid": "3d609989-aca3-4e65-a2ea-6a01dd610a23",
-      "title": "УТК-2",
-      "date": "09/09/24 15:54",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [],
-        "directions": []
-      },
-      "status": "READY",
-      "attempts": [],
-      "training": "UTK2",
-      "type": "TRAINING"
-    },
-    {
-      "uid": "07ffeb18-02ef-4ee7-a642-20ad857130ac",
-      "title": "УТК-2",
-      "date": "09/09/24 15:54",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [],
-        "directions": []
-      },
-      "status": "READY",
-      "attempts": [],
-      "training": "UTK2",
-      "type": "TRAINING"
-    },
-    {
-      "uid": "a5807b0b-d66d-4b21-b929-da942289ad7b",
-      "title": "УТК-4",
-      "date": "09/09/24 15:54",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [],
-        "directions": []
-      },
-      "status": "READY",
-      "attempts": [],
-      "training": "UTK4",
-      "type": "TRAINING"
-    },
-    {
-      "uid": "79fb0e78-784b-4357-b2a6-97b16daa1c00",
-      "title": "УТК-3",
-      "date": "09/09/24 15:55",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [],
-        "directions": []
-      },
-      "status": "READY",
-      "attempts": [],
-      "training": "UTK3",
-      "type": "EXAM"
-    },
-    {
-      "uid": "b80c7d8e-a4e0-4862-a910-547554161d89",
-      "title": "УТК-2",
-      "date": "09/09/24 15:55",
-      "user_uid": "e88fbc08-844f-46e7-a7f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [],
-        "directions": []
-      },
-      "status": "READY",
-      "attempts": [],
-      "training": "UTK2",
-      "type": "TRAINING"
-    },
-    {
-      "uid": "33a632a8-19e9-46bd-a04e-5e30e9f11535",
-      "title": "УТК-2",
-      "date": "09/09/24 15:57",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [],
-        "directions": []
-      },
-      "status": "READY",
-      "attempts": [],
-      "training": "UTK2",
-      "type": "TRAINING"
-    },
-    {
-      "uid": "b886d645-0f7b-4444-a545-8448109aae61",
-      "title": "УТК-2",
-      "date": "09/09/24 15:59",
-      "user_uid": "e88fbc08-844f-46e7-a7f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [],
-        "directions": []
-      },
-      "status": "READY",
-      "attempts": [],
-      "training": "UTK2",
-      "type": "TRAINING"
-    },
-    {
-      "uid": "a2dc50b1-3317-4daf-bc20-32732fdb4c8f",
-      "title": "УТК-3",
-      "date": "16/09/24 13:18",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [
-          {
-            "uid": "a2610277-b326-483e-856d-077f2f18f1b2",
-            "mode": "CHM50",
-            "name": "КВ2",
+          "target_channel": {
+            "uid": "a22b3fd8-6805-4397-a0f1-84f75ce2f683",
+            "mode": "ЧМ25",
+            "name": "КР1",
             "forbidden_send": null,
-            "ctcss": "NO",
-            "frequency": 50500000,
-            "double_frequency": null
-          }
-        ],
-        "directions": [
-          {
-            "uid": "06580370-86be-4f9e-b6b6-a97f204c3974",
-            "name": "Направление 2",
-            "channel_uid": "a2610277-b326-483e-856d-077f2f18f1b2",
-            "forbidden_send": null,
-            "tone_call": null,
-            "scan_list": "NO",
-            "economizer": "3"
-          }
-        ]
-      },
-      "status": "READY",
-      "attempts": [
-        {
-          "started": "2024-09-16 13:18:46.202405",
-          "finished": null
-        },
-        {
-          "started": "2024-09-16 13:25:33.168770",
-          "finished": null
-        },
-        {
-          "started": "2024-09-16 13:25:41.408725",
-          "finished": null
-        },
-        {
-          "started": "2024-09-16 13:25:48.926512",
-          "finished": "2024-09-16 13:25:54.709750"
-        }
-      ],
-      "training": "UTK3",
-      "type": "TRAINING"
-    },
-    {
-      "uid": "96ce6124-7f3e-4216-879d-c8b471d92550",
-      "title": "УТК-3",
-      "date": "16/09/24 13:26",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [
-          {
-            "uid": "54bcf512-9b36-4a3b-8880-acd41d2e6492",
-            "mode": "CHM50",
-            "name": "КВ2",
-            "forbidden_send": null,
-            "ctcss": "NO",
-            "frequency": 50500000,
-            "double_frequency": null
-          }
-        ],
-        "directions": [
-          {
-            "uid": "8cc2481f-5b49-4610-a0ce-91df1496e3e6",
-            "name": "",
-            "channel_uid": "IDLE",
+            "double_frequency": null,
+            "frequency": 45500000,
+            "ctcss": null
+          },
+          "target_direction": {
+            "uid": "c1bcecb5-c396-45fa-9b11-84eea77f37f0",
+            "name": null,
+            "channel": "a22b3fd8-6805-4397-a0f1-84f75ce2f683",
             "forbidden_send": null,
             "tone_call": null,
             "scan_list": null,
-            "economizer": ""
+            "economizer": null
+          }
+        }
+      },
+      "type": "TRAINING"
+    },
+    {
+      "uid": "f3d37134-bcb8-4049-ae53-845c22579dbc",
+      "title": "УТК-3",
+      "date": "11/11/24 14:02",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "active_direction": null,
+        "channels": [
+          {
+            "uid": "d0b26945-45c7-4868-a600-4499394f4cc6",
+            "mode": "ЧМ50",
+            "name": "КР1",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": 45500000,
+            "double_frequency": null
+          }
+        ],
+        "directions": [
+          {
+            "uid": "3ff7f604-3f26-423e-b863-856432cb5c7d",
+            "name": "Направление 2",
+            "channel_uid": "d0b26945-45c7-4868-a600-4499394f4cc6",
+            "forbidden_send": null,
+            "tone_call": null,
+            "scan_list": "NO",
+            "economizer": "3"
+          }
+        ],
+        "pprchs": []
+      },
+      "status": "READY",
+      "attempts": [
+        {
+          "started": "2024-11-11 14:02:57.407044",
+          "finished": null
+        },
+        {
+          "started": "2024-11-11 14:20:26.776191",
+          "finished": "2024-11-11 14:20:51.463754"
+        }
+      ],
+      "training": {
+        "kind": "UTK3",
+        "params": {
+          "target_channel": {
+            "uid": "f85b8bae-31c6-4c9c-90ac-85bac7c5f0ca",
+            "mode": "ЧМ50",
+            "name": "КР1",
+            "forbidden_send": null,
+            "double_frequency": null,
+            "frequency": 45500000,
+            "ctcss": null
           },
-          {
-            "uid": "b2ea6c03-eea2-48a4-8060-405c74679cd0",
-            "name": "Направление 2",
-            "channel_uid": "54bcf512-9b36-4a3b-8880-acd41d2e6492",
+          "target_direction": {
+            "uid": "55f6d2ee-b603-4726-b291-cff567544d94",
+            "name": null,
+            "channel": "f85b8bae-31c6-4c9c-90ac-85bac7c5f0ca",
             "forbidden_send": null,
             "tone_call": null,
-            "scan_list": "NO",
-            "economizer": "3"
+            "scan_list": null,
+            "economizer": null
           }
-        ]
-      },
-      "status": "READY",
-      "attempts": [
-        {
-          "started": "2024-09-16 13:26:09.276029",
-          "finished": null
-        },
-        {
-          "started": "2024-09-16 13:41:58.536040",
-          "finished": null
-        },
-        {
-          "started": "2024-09-16 13:42:04.379250",
-          "finished": null
-        },
-        {
-          "started": "2024-09-16 13:42:10.751315",
-          "finished": "2024-09-16 13:43:59.231163"
         }
-      ],
-      "training": "UTK3",
+      },
       "type": "TRAINING"
-    },
-    {
-      "uid": "709c380b-dc57-4e5f-ae8a-43a7105ef176",
-      "title": "УТК-3",
-      "date": "16/09/24 13:44",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [
-          {
-            "uid": "485d445c-3321-4d56-83ac-6e686bca541b",
-            "mode": "CHM50",
-            "name": "КВ2",
-            "forbidden_send": null,
-            "ctcss": "NO",
-            "frequency": 50500000,
-            "double_frequency": null
-          }
-        ],
-        "directions": [
-          {
-            "uid": "f1d46641-d225-4609-8310-90c34526784b",
-            "name": "Направление 2",
-            "channel_uid": "485d445c-3321-4d56-83ac-6e686bca541b",
-            "forbidden_send": null,
-            "tone_call": null,
-            "scan_list": "NO",
-            "economizer": "3"
-          }
-        ]
-      },
-      "status": "READY",
-      "attempts": [
-        {
-          "started": "2024-09-16 13:44:59.045185",
-          "finished": "2024-09-16 13:45:48.273178"
-        }
-      ],
-      "training": "UTK3",
-      "type": "EXAM"
-    },
-    {
-      "uid": "1051fee8-625a-4452-b32a-180b340757a6",
-      "title": "УТК-3",
-      "date": "16/09/24 13:46",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [
-          {
-            "uid": "8af0ab48-3735-455d-b71e-5e53ed788c60",
-            "mode": "CHM50",
-            "name": "КВ2",
-            "forbidden_send": null,
-            "ctcss": "NO",
-            "frequency": 50500000,
-            "double_frequency": null
-          }
-        ],
-        "directions": [
-          {
-            "uid": "d46c23a5-3188-4cd2-af0d-c930242a0c48",
-            "name": "Направление КВ2",
-            "channel_uid": "8af0ab48-3735-455d-b71e-5e53ed788c60",
-            "forbidden_send": null,
-            "tone_call": null,
-            "scan_list": "NO",
-            "economizer": "3"
-          }
-        ]
-      },
-      "status": "READY",
-      "attempts": [
-        {
-          "started": "2024-09-16 13:46:05.280564",
-          "finished": null
-        },
-        {
-          "started": "2024-09-16 13:46:57.742737",
-          "finished": "2024-09-16 13:47:51.738193"
-        }
-      ],
-      "training": "UTK3",
-      "type": "EXAM"
-    },
-    {
-      "uid": "21c59b4b-a7a0-444e-83f6-b598296705e3",
-      "title": "УТК-2",
-      "date": "16/09/24 14:03",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [],
-        "directions": []
-      },
-      "status": "READY",
-      "attempts": [],
-      "training": "UTK2",
-      "type": "TRAINING"
-    },
-    {
-      "uid": "099895f4-a907-4d54-8149-64613f17181f",
-      "title": "УТК-4",
-      "date": "16/09/24 14:20",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [],
-        "directions": []
-      },
-      "status": "STARTED",
-      "attempts": [
-        {
-          "started": "2024-09-16 14:20:49.412206",
-          "finished": null
-        }
-      ],
-      "training": "UTK4",
-      "type": "TRAINING"
-    },
-    {
-      "uid": "b437c99a-9985-4abe-b5a3-583531c40ad2",
-      "title": "УТК-1",
-      "date": "16/09/24 12:51",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": "8b7f63c5-9fcb-4d4e-81e6-96d84be638bd",
-        "channels": [
-          {
-            "uid": "4fdc27aa-26fb-4079-92e1-8a49ff3d3f41",
-            "mode": "CHM25",
-            "name": "КР1",
-            "forbidden_send": null,
-            "ctcss": "NO",
-            "frequency": 25555,
-            "double_frequency": null
-          }
-        ],
-        "directions": [
-          {
-            "uid": "8b7f63c5-9fcb-4d4e-81e6-96d84be638bd",
-            "name": "Направление 2",
-            "channel_uid": "4fdc27aa-26fb-4079-92e1-8a49ff3d3f41",
-            "forbidden_send": null,
-            "tone_call": null,
-            "scan_list": "NO",
-            "economizer": "3"
-          }
-        ]
-      },
-      "status": "READY",
-      "attempts": [],
-      "training": "UTK1",
-      "type": "FREE"
-    },
-    {
-      "uid": "218dd7bd-bf15-49bc-b837-0874a572c7c9",
-      "title": "УТК-1",
-      "date": "16/09/24 14:27",
-      "user_uid": "e88fbc08-844f-46e7-a7f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": "9d90e84d-924a-4669-a8f1-4cefa1dcc2c0",
-        "channels": [
-          {
-            "uid": "9def9ede-f13f-4605-b300-1b14b58c815d",
-            "mode": "CHM50",
-            "name": "Тестовый",
-            "forbidden_send": null,
-            "ctcss": "NO",
-            "frequency": 24500,
-            "double_frequency": null
-          }
-        ],
-        "directions": [
-          {
-            "uid": "9d90e84d-924a-4669-a8f1-4cefa1dcc2c0",
-            "name": "Направление 2",
-            "channel_uid": "9def9ede-f13f-4605-b300-1b14b58c815d",
-            "forbidden_send": null,
-            "tone_call": null,
-            "scan_list": "NO",
-            "economizer": "3"
-          }
-        ]
-      },
-      "status": "STARTED",
-      "attempts": [
-        {
-          "started": "2024-09-16 14:27:20.371838",
-          "finished": null
-        },
-        {
-          "started": "2024-09-16 16:02:51.837406",
-          "finished": null
-        },
-        {
-          "started": "2024-09-16 16:03:09.586764",
-          "finished": null
-        },
-        {
-          "started": "2024-09-16 16:03:15.756941",
-          "finished": null
-        }
-      ],
-      "training": "UTK1",
-      "type": "EXAM"
-    },
-    {
-      "uid": "e9a44e22-49c8-4d50-bbe3-8e14ac739000",
-      "title": "УТК-2",
-      "date": "16/09/24 15:58",
-      "user_uid": "e88fbc08-844f-46e7-a7f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [
-          {
-            "uid": "9c6de4f6-b3db-4b21-94e3-a577248f0de9",
-            "mode": "CHM25",
-            "name": "КР1",
-            "forbidden_send": null,
-            "ctcss": "NO",
-            "frequency": 45775000,
-            "double_frequency": null
-          }
-        ],
-        "directions": [
-          {
-            "uid": "a07f4fae-5a3c-4e9d-bfe9-3282a250e8d3",
-            "name": "Направление 2",
-            "channel_uid": "9c6de4f6-b3db-4b21-94e3-a577248f0de9",
-            "forbidden_send": null,
-            "tone_call": null,
-            "scan_list": "NO",
-            "economizer": "3"
-          }
-        ]
-      },
-      "status": "READY",
-      "attempts": [
-        {
-          "started": "2024-09-16 15:58:44.509272",
-          "finished": "2024-09-16 16:00:46.380176"
-        }
-      ],
-      "training": "UTK2",
-      "type": "TRAINING"
-    },
-    {
-      "uid": "a675d69a-e6d8-44a8-a3ee-6046c2b5f230",
-      "title": "УТК-2",
-      "date": "16/09/24 16:10",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": null,
-        "channels": [
-          {
-            "uid": "54bea2f1-e796-437d-82b5-2597c890c9d2",
-            "mode": "CHM25",
-            "name": "КР1",
-            "forbidden_send": null,
-            "ctcss": "NO",
-            "frequency": 45775000,
-            "double_frequency": null
-          }
-        ],
-        "directions": [
-          {
-            "uid": "66897a07-053d-40f8-8fc1-61f6f49a3605",
-            "name": "Направление 2",
-            "channel_uid": "54bea2f1-e796-437d-82b5-2597c890c9d2",
-            "forbidden_send": null,
-            "tone_call": null,
-            "scan_list": "NO",
-            "economizer": "3"
-          }
-        ]
-      },
-      "status": "READY",
-      "attempts": [
-        {
-          "started": "2024-09-16 16:10:50.949068",
-          "finished": "2024-09-16 16:12:24.965359"
-        }
-      ],
-      "training": "UTK2",
-      "type": "TRAINING"
-    },
-    {
-      "uid": "d88f7434-1553-4f14-bdb8-ce9ca55e7308",
-      "title": "УТК-1",
-      "date": "16/09/24 16:13",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": "5250446a-98f6-4e71-80fa-8a62f8f0fcb5",
-        "channels": [
-          {
-            "uid": "2452af41-335c-4e41-9429-0f54c9b2fae7",
-            "mode": "CHM25",
-            "name": "КР1",
-            "forbidden_send": null,
-            "ctcss": "NO",
-            "frequency": 24500,
-            "double_frequency": null
-          }
-        ],
-        "directions": [
-          {
-            "uid": "5250446a-98f6-4e71-80fa-8a62f8f0fcb5",
-            "name": "Направление 2",
-            "channel_uid": "2452af41-335c-4e41-9429-0f54c9b2fae7",
-            "forbidden_send": null,
-            "tone_call": null,
-            "scan_list": "NO",
-            "economizer": "3"
-          }
-        ]
-      },
-      "status": "READY",
-      "attempts": [],
-      "training": "UTK1",
-      "type": "FREE"
-    },
-    {
-      "uid": "bc90ee73-70dc-4083-9710-75632f7e61b4",
-      "title": "УТК-1",
-      "date": "16/09/24 19:59",
-      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
-      "phone": {
-        "active_direction": "603d5e0d-b5e0-4069-8597-49f6362dc37f",
-        "channels": [
-          {
-            "uid": "527ef31c-bb90-4ca6-9396-f7961bfe326f",
-            "mode": "CHM25",
-            "name": "КОЛЯ",
-            "forbidden_send": null,
-            "ctcss": "NO",
-            "frequency": 24500,
-            "double_frequency": null
-          }
-        ],
-        "directions": [
-          {
-            "uid": "603d5e0d-b5e0-4069-8597-49f6362dc37f",
-            "name": "Направление 2",
-            "channel_uid": "527ef31c-bb90-4ca6-9396-f7961bfe326f",
-            "forbidden_send": null,
-            "tone_call": null,
-            "scan_list": "NO",
-            "economizer": "3"
-          }
-        ]
-      },
-      "status": "READY",
-      "attempts": [],
-      "training": "UTK1",
-      "type": "FREE"
     }
   ],
   "screens": [],

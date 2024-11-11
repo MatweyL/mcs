@@ -1,7 +1,9 @@
 import json
 import os.path
 from datetime import datetime
+from enum import Enum
 from pathlib import Path
+from typing import Type, Callable
 from uuid import uuid4
 
 
@@ -44,3 +46,19 @@ def update_screen_by_alias():
     for screen_name in not_in_screen_by_alias:
         screen_by_alias[screen_name] = screen_name
     screen_by_alias_path.write_text(json.dumps(screen_by_alias, indent=2))
+
+
+def convert_str_to_enum(value: str, enum_class: Type[Enum]) -> Enum:
+    if isinstance(value, enum_class):
+        return value
+    for enum_item in enum_class:
+        if enum_item.name == value:
+            return enum_item
+    return enum_class(value)
+
+
+def convert_str_to_enum_closure(enum_class: Type[Enum]) -> Callable[[str], Enum]:
+    def _inner(value: str) -> Enum:
+        return convert_str_to_enum(value, enum_class)
+
+    return _inner

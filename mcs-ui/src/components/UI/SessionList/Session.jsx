@@ -24,7 +24,7 @@ const Session = ({session}) => {
 
     return (
         <div className={classes.session} onClick={openScreenSession} key={session.uid}>
-            <p>{trainings[session.training]}</p>
+            <p>{trainings[session.training.kind]}</p>
             <p>{session.date}</p>
         </div>
     );

@@ -1,5 +1,6 @@
 from abc import abstractmethod
-from typing import List, Optional
+from dataclasses import field
+from typing import List, Optional, Any
 
 from service.core.session.training import TrainingResult
 from service.core.use_case import UseCase, Request, Response
@@ -25,6 +26,7 @@ class GetSessionListUseCase(UseCase):
 class SessionRq(Request):
     training: str
     type: str
+    training_params: Any = None
 
 
 class GetSessionRq(Request):

@@ -53,9 +53,11 @@ async def get_sessions():
 
 @auth_router.post("/session")
 async def create_session(session: SessionRq):
-    request = CreateSessionRq(user_uid=AuthContext.get_now_user().uid, session=session)
-    return session_endpoint.create_session(request)
-
+    try:
+        request = CreateSessionRq(user_uid=AuthContext.get_now_user().uid, session=session)
+        return session_endpoint.create_session(request)
+    except BaseException as e:
+        logger.exception(e)
 
 @auth_router.post("/session/start")
 async def start_session(session_uid: str):
@@ -75,9 +77,11 @@ async def start_session(session_uid: str):
 
 @auth_router.get('/session/training/validate')
 async def validate_training_session(session_uid: str, screen_code: str):
-    request = ValidateTrainingSessionRq(session_uid=session_uid, screen_code=screen_code)
-    return session_endpoint.validate_training_session(request)
-
+    try:
+        request = ValidateTrainingSessionRq(session_uid=session_uid, screen_code=screen_code)
+        return session_endpoint.validate_training_session(request)
+    except BaseException as e:
+        logger.exception(e)
 
 not_auth_router = APIRouter()
 
