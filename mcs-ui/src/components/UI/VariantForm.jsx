@@ -3,30 +3,13 @@ import Trainings from "../../core/constants/trainings";
 import Field from "./Field/Field";
 import FormButton from "./FormButton/FormButton";
 import {clone} from "../../core/store/helper/clone_util";
-
-const templates = {
-    [Trainings.UTK1]: [
-        {"label": "Частота, МГц", "name": "frequency"},
-        {"label": "Название канала", "name": "channel_name"},
-    ],
-    [Trainings.UTK2]: [
-        {"label": "Частота, МГц", "name": "frequency"},
-        {"label": "Название канала", "name": "channel_name"},
-        {"label": "Название направление", "name": "direction_name"},
-    ],
-    [Trainings.UTK3]: [
-        {"label": "Частота, МГц", "name": "frequency"},
-        {"label": "Название канала", "name": "channel_name"},
-    ],
-    [Trainings.UTK4]: [
-        {"label": "Частота, МГц", "name": "frequency"}
-    ]
-}
+import {TrainingTemplates} from "../../core/constants/training_templates";
+import {getOrEmpty} from "../../core/store/util";
 
 const VariantForm = ({training, variants, index, setVariants, addVariant}) => {
     const [enabled, setEnabled] = useState(false);
 
-    const template = templates[training];
+    const template = TrainingTemplates.VALUES[training];
     const variant = variants[index];
 
     useEffect(() => {
@@ -42,13 +25,6 @@ const VariantForm = ({training, variants, index, setVariants, addVariant}) => {
             && amountFields === targetFields;
         setEnabled(enabled);
     }, [variant]);
-
-    const getOrDefault = (variant, name) => {
-        if (variant) {
-            return variant[name] ? variant[name] : '';
-        }
-        return ''
-    }
 
     const updateVariant = (event, name) => {
         const cloneVariants = clone(variants);
@@ -67,7 +43,7 @@ const VariantForm = ({training, variants, index, setVariants, addVariant}) => {
             {
                 template.map(field =>
                     <Field title={field.label}
-                           value={getOrDefault(variant, field.name)}
+                           value={getOrEmpty(variant, field.name)}
                            onChange={e => updateVariant(e, field.name)}
                     />
                 )

@@ -6,9 +6,12 @@ import Devices from "../../../core/constants/devices";
 import Trainings from "../../../core/constants/trainings";
 import VariantForm from "../VariantForm";
 import TextButton from "../TextButton/TextButton";
+import VariantListView from "../VarianListView/VariantListView";
 
 const CreateTaskForm = () => {
         const [visible, setVisible] = useState(false);
+        const [confirmCloseVisible, setConfirmCloseVisible] = useState(false);
+        const [confirmIssueTaskVisible, setConfirmIssueTaskVisible] = useState(false);
         const [training, setTraining] = useState('')
         const [nowForm, setNowForm] = useState(0);
         const [variants, setVariants] = useState([]);
@@ -33,9 +36,11 @@ const CreateTaskForm = () => {
             }
         }, [variants]);
 
-        const openTaskPopup = () => {
-            setVisible(true);
-        }
+
+        useEffect(() => {
+            console.log(variants)
+            console.log(nowForm)
+        }, [nowForm])
 
         const addVariant = () => {
             const nowLength = variants.length;
@@ -43,12 +48,8 @@ const CreateTaskForm = () => {
             setNowForm(nowLength + 1);
         }
 
-        const issueTask = (lastVariant) => {
-            const updatedVariants = [...variants, lastVariant];
-            setVariants(updatedVariants);
-            // send request to BE
-            console.log(updatedVariants);
-            onClose();
+        const issueTask = () => {
+            console.log(variants);
         }
 
         function getModal() {
@@ -79,14 +80,9 @@ const CreateTaskForm = () => {
                 );
         }
 
-        useEffect(() => {
-            console.log(variants)
-            console.log(nowForm)
-        }, [nowForm])
-
-
-        const onClose = () => {
+        const confirmClosing = () => {
             setVisible(false);
+            setConfirmCloseVisible(false)
             setVariants([]);
             setNowForm(0);
         }
@@ -94,9 +90,9 @@ const CreateTaskForm = () => {
         return (
             <div>
                 <div style={{width: '150px', padding: "5px"}}>
-                    <FormButton label={"Выдать задание"} onClick={openTaskPopup}/>
+                    <FormButton label={"Выдать задание"} onClick={() => setVisible(true)}/>
                 </div>
-                <Modal visible={visible} close={onClose}>
+                <Modal visible={visible} close={() => setConfirmCloseVisible(true)}>
                     <div style={{display: "flex"}}>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
                             <div>
@@ -118,13 +114,46 @@ const CreateTaskForm = () => {
                             </div>
                             {enabledIssueTask &&
                                 <div style={{width: "200px"}}>
-                                    <FormButton label={"Выдать варианты"} enabled={enabledIssueTask} onClick={issueTask}/>
+                                    <FormButton label={"Выдать варианты"}
+                                                enabled={enabledIssueTask}
+                                                onClick={() => setConfirmIssueTaskVisible(true)}/>
                                 </div>
                             }
                         </div>
                         <div style={{width: "20px"}}/>
                         <div>
                             {getForm(nowForm)}
+                        </div>
+                    </div>
+                </Modal>
+                <Modal visible={confirmCloseVisible} close={() => setConfirmCloseVisible(false)}>
+                    <div style={{display: "flex", flexDirection: "column", width: "350px"}}>
+                        <div style={{textAlign: "center"}}>
+                            Вы действительно хотите закрыть форму выдачи вариантов?
+                        </div>
+                        <div style={{height: "20px"}}/>
+                        <div style={{display: "flex", width: "100%", justifyContent: "space-between"}}>
+                            <div style={{width: "40%"}}>
+                                <FormButton label={"Закрыть форму"} onClick={confirmClosing}/>
+                            </div>
+                            <div style={{width: "40%"}}>
+                                <FormButton label={"Вернуться"} onClick={() => setConfirmCloseVisible(false)}/>
+                            </div>
+                        </div>
+                    </div>
+                </Modal>
+                <Modal visible={confirmIssueTaskVisible} close={() => setConfirmIssueTaskVisible(false)}>
+                    <div style={{display: "flex", width: "100%", justifyContent: "space-between", flexDirection: "column"}}>
+                        <VariantListView variants={variants} training={training}/>
+                        <div style={{height: "20px"}}/>
+                        <div style={{display: "flex", justifyContent: "space-between"}}>
+                            <div style={{width: "40%"}}>
+                                <FormButton label={"Вернуться к редактированию"}
+                                            onClick={() => setConfirmIssueTaskVisible(false)}/>
+                            </div>
+                            <div style={{width: "40%"}}>
+                                <FormButton label={"Выдать варианты"} onClick={issueTask}/>
+                            </div>
                         </div>
                     </div>
                 </Modal>

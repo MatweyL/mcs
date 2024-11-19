@@ -14,3 +14,10 @@ export const convertState = (state) => {
         attributes: attributesState
     };
 }
+
+export const getOrEmpty = (variant, name) => {
+    if (variant) {
+        return variant[name] ? variant[name] : '';
+    }
+    return ''
+}
