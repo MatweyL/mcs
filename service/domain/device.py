@@ -14,7 +14,6 @@ class DeviceValue:
 
 class DeviceValues(enum.Enum):
     AZART_R187 = ("Азарт Р-187", "AZART_R187", [
-        TrainingType.UTK1,
         TrainingType.UTK2,
         TrainingType.UTK3,
         TrainingType.UTK4

@@ -13,6 +13,7 @@ import {EMPTY_OPTION} from "../../../core/constants/ui";
 const types = [
     {value: "", label: ""},
     {value: SessionTypes.TRAINING, label: "Тренировка"},
+    // У студента нет возможности создать экзамен, он создается автоматически
     // {value: SessionTypes.EXAM, label: "Экзамен"},
     {value: SessionTypes.FREE, label: "Свободный"},
 ]
