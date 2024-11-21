@@ -14,9 +14,10 @@ from service.core.group.use_case import GetUserListByGroupRq
 from service.core.screen import GetScreenRq, SaveScreenRq, Screen
 from service.core.session import GetSessionListRq, CreateSessionRq, StartSessionRq, FinishSessionRq, SessionRq, \
     ValidateTrainingSessionRq, GetSessionRq, ActiveDirectionFrequencyRs
+from service.core.task.use_case import IssueTaskListRq, GetTaskRq
 from service.core.user.use_case import AuthUserRq, RegisterUserRq, LoginUserRq
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint, \
-    group_endpoint, device_endpoint
+    group_endpoint, device_endpoint, task_endpoint
 from service.domain.room import Room
 
 auth_router = APIRouter(dependencies=[Depends(auth_filter.authenticate)])
@@ -86,12 +87,24 @@ async def validate_training_session(session_uid: str, screen_code: str):
         logger.exception(e)
 
 
+@auth_router.post("/task/issue")
+async def issue_tasks(request: IssueTaskListRq):
+    logger.info(request)
+    return task_endpoint.issue_tasks(request)
+
+
+@auth_router.get("/task/description")
+async def get_task_description(session_id: str):
+    logger.info(session_id)
+    return task_endpoint.get_task_description(GetTaskRq(session_id=session_id))
+
+
 not_auth_router = APIRouter()
 
 
 @not_auth_router.get("/groups")
 async def get_groups():
-    return group_endpoint.get_users()
+    return group_endpoint.get_groups()
 
 
 @not_auth_router.get("/users")

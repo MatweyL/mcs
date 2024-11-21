@@ -383,6 +383,48 @@
         }
       },
       "type": "EXAM"
+    },
+    {
+      "uid": "08753a7f-7398-48ff-a023-d3b72ba47f98",
+      "date": "21/11/24 23:54",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "active_direction": null,
+        "channels": [],
+        "directions": [],
+        "pprchs": []
+      },
+      "status": "READY",
+      "attempts": [],
+      "training": {
+        "kind": "UTK3",
+        "params": {
+          "frequency": "20",
+          "channel_name": "КР1"
+        }
+      },
+      "type": "EXAM"
+    },
+    {
+      "uid": "536aac95-b630-4039-a254-59a28affab43",
+      "date": "21/11/24 23:54",
+      "user_uid": "e88fbc08-844f-46e7-a7f1-ebd3f59e1790",
+      "phone": {
+        "active_direction": null,
+        "channels": [],
+        "directions": [],
+        "pprchs": []
+      },
+      "status": "READY",
+      "attempts": [],
+      "training": {
+        "kind": "UTK3",
+        "params": {
+          "frequency": "24",
+          "channel_name": "КР2"
+        }
+      },
+      "type": "EXAM"
     }
   ],
   "screens": [],

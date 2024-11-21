@@ -110,6 +110,18 @@ const endpoints = {
             const hintName = HINT[screenName];
             return axios.get(`${MOCK_LOCAL_URL}/hints/${hintName}`, config())
         }
+    },
+    requestTask: {
+        [LOCAL_PY_MODE]: (sessionId) => {
+            return axios.get(`${LOCAL_PY_URL}/task/description?session_id=${sessionId}`, config())
+        },
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    issueTasks: {
+        [LOCAL_PY_MODE]: (variants, training, group) => {
+            return axios.post(`${LOCAL_PY_URL}/task/issue`, {variants, training, group_id: group}, config())
+        },
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
     }
 }
 
@@ -235,6 +247,20 @@ export default class API {
     static async validateTrainingSession(sessionId, screenName) {
         console.log(sessionId, screenName);
         const rs = await endpoints.validateTrainingSession[NOW_MODE](sessionId, screenName);
+        console.log(rs);
+        return rs.data;
+    }
+
+    static async requestTask(sessionId) {
+        console.log(sessionId);
+        const rs = await endpoints.requestTask[NOW_MODE](sessionId);
+        console.log(rs);
+        return rs.data;
+    }
+
+    static async issueTasks(variants, training, group) {
+        console.log(variants, training, group);
+        const rs = await endpoints.issueTasks[NOW_MODE](variants, training, group);
         console.log(rs);
         return rs.data;
     }

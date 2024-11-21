@@ -1,27 +1,25 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSession} from "../../../hooks/useSession";
-import {useScreenName} from "../../../hooks/useScreen";
-import {useDispatch} from "react-redux";
-import {request} from "../../../hooks/request";
-import Requests from "../../../core/constants/requests";
 import {SessionTypes} from "../../../core/constants/session_types";
 import classes from "./ExamTaskBox.module.css";
+import {fetchDescription} from "../../../API/fetchers";
 
 const ExamTaskBox = () => {
     const {type, sessionId, status} = useSession();
-
-    const screenName = useScreenName();
-    const dispatch = useDispatch();
+    const [taskDescription, setTaskDescription] = useState('');
 
     useEffect(() => {
         if (status === 'FINISHED') {
             return;
         }
 
-        if (screenName && isExam()) {
-            request(Requests.REQUEST_TASK, {sessionId}, dispatch)
+        if (isExam()) {
+            fetchDescription(sessionId).then(description => {
+                console.log(description)
+                setTaskDescription(description);
+            })
         }
-    }, [screenName, status]);
+    }, [sessionId, status]);
 
     const isExam = () => type === SessionTypes.EXAM;
 
@@ -29,6 +27,7 @@ const ExamTaskBox = () => {
         isExam()
             ? <div className={classes.examTaskBox}>
                 <div>Выполните задание!</div>
+                <div>{taskDescription}</div>
             </div>
             : null
     );

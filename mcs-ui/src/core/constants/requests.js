@@ -55,4 +55,7 @@ export default class Requests {
 
     // Запросить задачу для пользователя
     static REQUEST_TASK = "REQUEST_TASK";
+
+    // Выдать задачи студентам
+    static ISSUE_TASKS = "ISSUE_TASKS";
 }

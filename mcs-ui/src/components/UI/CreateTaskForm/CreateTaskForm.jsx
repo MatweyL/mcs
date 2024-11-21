@@ -7,8 +7,11 @@ import TextButton from "../TextButton/TextButton";
 import VariantListView from "../VarianListView/VariantListView";
 import {fetchDevices, fetchTrainingTypes} from "../../../API/fetchers";
 import {EMPTY_OPTION} from "../../../core/constants/ui";
+import {request} from "../../../hooks/request";
+import Requests from "../../../core/constants/requests";
+import {useDispatch} from "react-redux";
 
-const CreateTaskForm = () => {
+const CreateTaskForm = ({group}) => {
     const [visible, setVisible] = useState(false);
     const [confirmCloseVisible, setConfirmCloseVisible] = useState(false);
     const [confirmIssueTaskVisible, setConfirmIssueTaskVisible] = useState(false);
@@ -67,8 +70,10 @@ const CreateTaskForm = () => {
         setNowForm(nowLength + 1);
     }
 
+    const dispatch = useDispatch();
     const issueTask = () => {
         console.log(variants);
+        request(Requests.ISSUE_TASKS, {variants, training, group}, dispatch)
     }
 
     function getModal() {

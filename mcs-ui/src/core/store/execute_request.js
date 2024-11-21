@@ -185,5 +185,21 @@ export const executeRequest = async (dispatch, request) => {
             dispatch({type: Actions.UPDATE_HINT, payload: hint});
             return;
         }
+
+        // получить описание задачи
+        case Requests.REQUEST_TASK: {
+            let {sessionId} = request.payload;
+
+            const rs = await API.requestTask(sessionId);
+            return;
+        }
+
+        // выдать задачи
+        case Requests.ISSUE_TASKS: {
+            let {variants, training, group} = request.payload;
+
+            const rs = await API.issueTasks(variants, training, group);
+            return;
+        }
     }
 }

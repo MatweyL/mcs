@@ -47,6 +47,12 @@ from service.core.session.training_validator.step_validator_utk2 import UTK2Step
 from service.core.session.training_validator.step_validator_utk3 import UTK3Step1Validator, UTK3Step3Validator, \
     UTK3Step2Validator
 from service.core.session.training_validator.training_validator import TrainingValidatorImpl, TrainingValidatorRegistry
+from service.core.task.description.service import TaskDescriptionServiceImpl
+from service.core.task.description.task_description_strategy_utk2 import TaskDescriptionStrategyUTK2
+from service.core.task.description.task_description_strategy_utk3 import TaskDescriptionStrategyUTK3
+from service.core.task.description.task_description_strategy_utk4 import TaskDescriptionStrategyUTK4
+from service.core.task.endpoint import TaskEndpoint
+from service.core.task.impl.use_case import IssueTaskListUseCaseImpl, GetTaskUseCaseImpl
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo, UserRepoDecorator
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
@@ -204,4 +210,23 @@ get_training_type_list_use_case = GetTrainingTypeListUseCaseImpl()
 device_endpoint = DeviceEndpoint(
     get_device_list_use_case,
     get_training_type_list_use_case
+)
+
+issue_task_list_use_case = IssueTaskListUseCaseImpl(
+    create_session_use_case,
+    get_user_list_by_group_use_case
+)
+
+task_description_service = TaskDescriptionServiceImpl([TaskDescriptionStrategyUTK2(),
+                                                       TaskDescriptionStrategyUTK3(),
+                                                       TaskDescriptionStrategyUTK4(), ])
+
+get_task_use_case = GetTaskUseCaseImpl(
+    session_repo,
+    task_description_service
+)
+
+task_endpoint = TaskEndpoint(
+    issue_task_list_use_case,
+    get_task_use_case
 )
