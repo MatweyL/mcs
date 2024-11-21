@@ -91,7 +91,7 @@ not_auth_router = APIRouter()
 
 @not_auth_router.get("/groups")
 async def get_groups():
-    return group_endpoint.get_groups()
+    return group_endpoint.get_users()
 
 
 @not_auth_router.get("/users")

@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {RoutePaths} from "../../../router";
 import {request} from "../../../hooks/request";
 import Requests from "../../../core/constants/requests";
+import SessionLabel from "./SessionLabel";
 
 const Session = ({session}) => {
     const navigate = useNavigate();
@@ -17,8 +18,12 @@ const Session = ({session}) => {
 
     return (
         <div className={classes.session} onClick={openScreenSession} key={session.uid}>
-            <p>{session.title}</p>
-            <p>{session.date}</p>
+            <div style={{height: '10px'}}/>
+            <SessionLabel type={session.type}/>
+            <div>
+                <p>{session.title}</p>
+                <p>{session.date}</p>
+            </div>
         </div>
     );
 };

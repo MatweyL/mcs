@@ -348,7 +348,7 @@
         ],
         "pprchs": []
       },
-      "status": "STARTED",
+      "status": "READY",
       "attempts": [
         {
           "started": "2024-11-21 21:38:57.492694",
@@ -356,7 +356,7 @@
         },
         {
           "started": "2024-11-21 21:43:20.810127",
-          "finished": null
+          "finished": "2024-11-21 22:21:01.403491"
         }
       ],
       "training": {
@@ -382,7 +382,7 @@
           }
         }
       },
-      "type": "TRAINING"
+      "type": "EXAM"
     }
   ],
   "screens": [],
