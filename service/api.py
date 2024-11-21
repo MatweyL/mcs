@@ -8,6 +8,7 @@ from starlette.middleware.cors import CORSMiddleware
 from service.common.logs import logger
 from service.common.utils import generate_uid
 from service.core.auth.auth_context import AuthContext
+from service.core.device.use_case import GetDeviceListRq, GetTrainingTypeListRq
 from service.core.dictionary.use_case import GetDictionaryRq
 from service.core.group.use_case import GetUserListByGroupRq
 from service.core.screen import GetScreenRq, SaveScreenRq, Screen
@@ -15,7 +16,7 @@ from service.core.session import GetSessionListRq, CreateSessionRq, StartSession
     ValidateTrainingSessionRq, GetSessionRq, ActiveDirectionFrequencyRs
 from service.core.user.use_case import AuthUserRq, RegisterUserRq, LoginUserRq
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint, \
-    group_endpoint
+    group_endpoint, device_endpoint
 from service.domain.room import Room
 
 auth_router = APIRouter(dependencies=[Depends(auth_filter.authenticate)])
@@ -59,6 +60,7 @@ async def create_session(session: SessionRq):
     except BaseException as e:
         logger.exception(e)
 
+
 @auth_router.post("/session/start")
 async def start_session(session_uid: str):
     request = StartSessionRq(session_uid=session_uid)
@@ -83,6 +85,7 @@ async def validate_training_session(session_uid: str, screen_code: str):
     except BaseException as e:
         logger.exception(e)
 
+
 not_auth_router = APIRouter()
 
 
@@ -95,6 +98,18 @@ async def get_groups():
 async def get_users_by_group(group_uid: str):
     request = GetUserListByGroupRq(group_uid=group_uid)
     return group_endpoint.get_users_by_group(request)
+
+
+@not_auth_router.get("/devices")
+async def get_devices():
+    return device_endpoint.get_devices(GetDeviceListRq())
+
+
+@not_auth_router.get("/trainings")
+async def get_devices(device: str):
+    request = GetTrainingTypeListRq(device=device)
+    logger.info(device)
+    return device_endpoint.get_trainings(request)
 
 
 @not_auth_router.post("/test")
@@ -260,6 +275,7 @@ async def on_relay_ice(sid, *args):
 
     raw_data = {'peerID': sid, 'iceCandidate': ice_candidate}
     await app.sio.emit('ice-candidate', raw_data, peer_id)
+
 
 WITH_HTTPS = True
 

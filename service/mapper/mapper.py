@@ -39,7 +39,6 @@ class SessionMapper(Mapper):
         session = Session()
 
         session.uid = entity['uid']
-        session.title = entity['title']
         session.date = entity['date']
         session.user_uid = entity['user_uid']
         session.phone = self.phone_mapper.map_to_domain(entity['phone'])
@@ -55,7 +54,6 @@ class SessionMapper(Mapper):
         entity = dict()
 
         entity['uid'] = session.uid
-        entity['title'] = session.title
         entity['date'] = session.date
         entity['user_uid'] = session.user_uid
         entity['phone'] = self.phone_mapper.map_to_entity(session.phone)
@@ -264,10 +262,16 @@ class PPRCHMapper(Mapper):
 
 class TrainingMapper(Mapper):
     def map_to_domain(self, entity: dict) -> Training:
+        if entity is None:
+            return None
+
         return Training(kind=entity['kind'],
                         params=entity['params'])
 
     def map_to_entity(self, domain: Training) -> dict:
+        if domain is None:
+            return None
+
         entity = dict(kind=domain.kind,
                       params=domain.params)
         return entity

@@ -1,10 +1,9 @@
 from abc import abstractmethod
-from dataclasses import field
-from typing import List, Optional, Any
+from typing import List, Any, Optional
 
+from service.core.session.dto import SessionDto
 from service.core.session.training import TrainingResult
 from service.core.use_case import UseCase, Request, Response
-from service.domain.direction import Direction, DirectionDto
 from service.domain.session import Session, SessionStatus
 
 
@@ -13,7 +12,7 @@ class GetSessionListRq(Request):
 
 
 class SessionListRs(Response):
-    def __init__(self, sessions: List[Session]):
+    def __init__(self, sessions: List[SessionDto]):
         self.sessions = sessions
 
 
@@ -24,7 +23,7 @@ class GetSessionListUseCase(UseCase):
 
 
 class SessionRq(Request):
-    training: str
+    training: Optional[str] = None
     type: str
     training_params: Any = None
 
@@ -50,7 +49,7 @@ class CreateSessionRq(Request):
 
 
 class CreatedSessionRs(Response):
-    def __init__(self, session: Session):
+    def __init__(self, session: SessionDto):
         self.session = session
 
 

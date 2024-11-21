@@ -122,7 +122,6 @@
     },
     {
       "uid": "f3d37134-bcb8-4049-ae53-845c22579dbc",
-      "title": "УТК-3",
       "date": "11/11/24 14:02",
       "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
       "phone": {
@@ -151,7 +150,7 @@
         ],
         "pprchs": []
       },
-      "status": "READY",
+      "status": "STARTED",
       "attempts": [
         {
           "started": "2024-11-11 14:02:57.407044",
@@ -159,7 +158,19 @@
         },
         {
           "started": "2024-11-11 14:20:26.776191",
-          "finished": "2024-11-11 14:20:51.463754"
+          "finished": null
+        },
+        {
+          "started": "2024-11-21 21:35:50.825831",
+          "finished": null
+        },
+        {
+          "started": "2024-11-21 21:46:49.853774",
+          "finished": null
+        },
+        {
+          "started": "2024-11-21 21:47:03.803846",
+          "finished": null
         }
       ],
       "training": {
@@ -178,6 +189,192 @@
             "uid": "55f6d2ee-b603-4726-b291-cff567544d94",
             "name": null,
             "channel": "f85b8bae-31c6-4c9c-90ac-85bac7c5f0ca",
+            "forbidden_send": null,
+            "tone_call": null,
+            "scan_list": null,
+            "economizer": null
+          }
+        }
+      },
+      "type": "TRAINING"
+    },
+    {
+      "uid": "82b98cf2-a82c-419a-b606-5bddfbc4ca55",
+      "date": "21/11/24 21:10",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "active_direction": null,
+        "channels": [
+          {
+            "uid": "4d14e368-d899-43cd-9b39-cfbe0ee49f33",
+            "mode": "ЧМ25",
+            "name": "КР1",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": 45500000,
+            "double_frequency": null
+          }
+        ],
+        "directions": [
+          {
+            "uid": "400d150c-ab25-49d5-a8fd-ff4f216f614d",
+            "name": "Направление 2",
+            "channel_uid": "4d14e368-d899-43cd-9b39-cfbe0ee49f33",
+            "forbidden_send": null,
+            "tone_call": null,
+            "scan_list": "NO",
+            "economizer": "3"
+          }
+        ],
+        "pprchs": []
+      },
+      "status": "STARTED",
+      "attempts": [
+        {
+          "started": "2024-11-21 21:34:44.065067",
+          "finished": null
+        },
+        {
+          "started": "2024-11-21 21:43:34.998498",
+          "finished": null
+        },
+        {
+          "started": "2024-11-21 21:49:12.665221",
+          "finished": null
+        }
+      ],
+      "training": {
+        "kind": "UTK2",
+        "params": {
+          "target_channel": {
+            "uid": "62c1e7ec-a3a2-46fb-8f71-fc3b6e393fb9",
+            "mode": "ЧМ25",
+            "name": "КР1",
+            "forbidden_send": null,
+            "double_frequency": null,
+            "frequency": 45500000,
+            "ctcss": null
+          },
+          "target_direction": {
+            "uid": "d551a80f-9613-4ab8-8867-68f76a5de2a4",
+            "name": null,
+            "channel": "62c1e7ec-a3a2-46fb-8f71-fc3b6e393fb9",
+            "forbidden_send": null,
+            "tone_call": null,
+            "scan_list": null,
+            "economizer": null
+          }
+        }
+      },
+      "type": "TRAINING"
+    },
+    {
+      "uid": "6ffbd3af-cb34-4a45-b89f-eed5cc95f7dd",
+      "date": "21/11/24 21:11",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "active_direction": "7ed550b1-3feb-4b2d-af2f-a8b83cbc6276",
+        "channels": [
+          {
+            "uid": "7e2702ed-a35b-4e89-a79e-9441dcee5269",
+            "mode": "ЧМ25",
+            "name": "КР1",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": 25,
+            "double_frequency": null
+          }
+        ],
+        "directions": [
+          {
+            "uid": "7ed550b1-3feb-4b2d-af2f-a8b83cbc6276",
+            "name": "Направление 2",
+            "channel_uid": "7e2702ed-a35b-4e89-a79e-9441dcee5269",
+            "forbidden_send": null,
+            "tone_call": null,
+            "scan_list": "NO",
+            "economizer": "3"
+          }
+        ],
+        "pprchs": []
+      },
+      "status": "READY",
+      "attempts": [],
+      "training": null,
+      "type": "FREE"
+    },
+    {
+      "uid": "d3d01a7d-306f-4443-b808-e60c3987c734",
+      "date": "21/11/24 21:37",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "active_direction": null,
+        "channels": [],
+        "directions": [],
+        "pprchs": []
+      },
+      "status": "READY",
+      "attempts": [],
+      "training": null,
+      "type": "FREE"
+    },
+    {
+      "uid": "eaa2be8a-13aa-4c77-9933-958a6b01ff6b",
+      "date": "21/11/24 21:38",
+      "user_uid": "e88fbc08-844f-46e7-b9f1-ebd3f59e1790",
+      "phone": {
+        "active_direction": null,
+        "channels": [
+          {
+            "uid": "6c5d759c-1d78-4bbb-bd75-9c2ff123d3dd",
+            "mode": "ЧМ25",
+            "name": "КР1",
+            "forbidden_send": null,
+            "ctcss": "NO",
+            "frequency": 45500000,
+            "double_frequency": null
+          }
+        ],
+        "directions": [
+          {
+            "uid": "6ef07419-0231-4f05-96d3-83c34086b6be",
+            "name": "Направление 2",
+            "channel_uid": "6c5d759c-1d78-4bbb-bd75-9c2ff123d3dd",
+            "forbidden_send": null,
+            "tone_call": null,
+            "scan_list": "NO",
+            "economizer": "3"
+          }
+        ],
+        "pprchs": []
+      },
+      "status": "STARTED",
+      "attempts": [
+        {
+          "started": "2024-11-21 21:38:57.492694",
+          "finished": null
+        },
+        {
+          "started": "2024-11-21 21:43:20.810127",
+          "finished": null
+        }
+      ],
+      "training": {
+        "kind": "UTK2",
+        "params": {
+          "target_channel": {
+            "uid": "5aff94aa-4b48-4f04-beb0-ada0e6b37684",
+            "mode": "ЧМ25",
+            "name": "КР1",
+            "forbidden_send": null,
+            "double_frequency": null,
+            "frequency": 45500000,
+            "ctcss": null
+          },
+          "target_direction": {
+            "uid": "2a73e166-d208-4896-a3a4-19947f536d97",
+            "name": null,
+            "channel": "5aff94aa-4b48-4f04-beb0-ada0e6b37684",
             "forbidden_send": null,
             "tone_call": null,
             "scan_list": null,

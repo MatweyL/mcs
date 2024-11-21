@@ -7,6 +7,8 @@ from service.common.impl.screen_navigator import ScreenNavigatorImpl
 from service.common.mapper import Mapper
 from service.common.utils import get_root_path, update_screen_by_alias
 from service.core.auth.filter import AuthFilter
+from service.core.device.endpoint import DeviceEndpoint
+from service.core.device.impl.use_case import GetDeviceListUseCaseImpl, GetTrainingTypeListUseCaseImpl
 from service.core.dictionary.endpoint import DictionaryEndpoint
 from service.core.dictionary.impl import GetDictionaryUseCaseImpl
 from service.core.dictionary.provider.get.get_dictionary_provider import DefaultDictionaryProvider
@@ -49,10 +51,11 @@ from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo, UserRepoDecorator
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
 from service.db.db import JsonDb
-from service.domain.session import TrainingType
-from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, StudentMapper, \
+from service.domain.training import TrainingType
+from service.mapper.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, StudentMapper, \
     GroupMapper, SessionAttemptMapper, PPRCHMapper, TeacherMapper
-from service.mapper_v2.mapper import TrainingMapper
+from service.mapper.mapper import TrainingMapper
+from service.mapper.mapper_dto import SessionDtoMapper
 
 update_screen_by_alias()
 
@@ -122,6 +125,7 @@ training_result_calculator = TrainingResultCalculatorServiceImpl(
 screen_graph = {
     "MAIN_SCREEN": [
         "MAIN_MENU",
+        "SELECT_ACTIVE_DIRECTION"
     ],
     "MAIN_MENU": [
         "SERVICE_MENU"
@@ -158,8 +162,10 @@ training_validator_utk_3 = TrainingValidatorImpl([UTK3Step1Validator(navigator, 
 training_validator_registry = TrainingValidatorRegistry([training_validator_utk_2,
                                                          training_validator_utk_3])
 
-get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
-create_session_use_case = CreateSessionUseCaseImpl(session_repo)
+session_dto_mapper = SessionDtoMapper()
+get_session_list_use_case = GetSessionListUseCaseImpl(session_repo, session_dto_mapper)
+create_session_use_case = CreateSessionUseCaseImpl(session_repo, session_dto_mapper)
+
 start_session_use_case = StartSessionUseCaseImpl(session_repo)
 finish_session_use_case = FinishSessionUseCaseImpl(session_repo, training_result_calculator)
 get_active_direction_by_session_id = GetActiveDirectionBySessionIdUseCaseImpl(session_repo)
@@ -190,4 +196,12 @@ get_user_list_by_group_use_case = GetUserListByGroupUseCaseImpl(group_repo)
 group_endpoint = GroupEndpoint(
     get_group_list_use_case,
     get_user_list_by_group_use_case
+)
+
+get_device_list_use_case = GetDeviceListUseCaseImpl()
+get_training_type_list_use_case = GetTrainingTypeListUseCaseImpl()
+
+device_endpoint = DeviceEndpoint(
+    get_device_list_use_case,
+    get_training_type_list_use_case
 )

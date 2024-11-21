@@ -73,6 +73,14 @@ const endpoints = {
         [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/groups`),
         [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
     },
+    getDevices: {
+        [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/devices`),
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    getTrainingTypes: {
+        [LOCAL_PY_MODE]: (device) => axios.get(`${LOCAL_PY_URL}/trainings?device=${device}`),
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
     getGroupTimetable: {
         [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/groups`, config()),
         [MOCK_LOCAL_MODE]: groupId => axios.get(`${MOCK_LOCAL_URL}/mock-timetables/data-${groupId}.json`),
@@ -177,6 +185,18 @@ export default class API {
         const rs = await endpoints.getGroups[NOW_MODE]();
         console.log(rs);
         return rs.data.groups;
+    }
+
+    static async getDevices() {
+        const rs = await endpoints.getDevices[NOW_MODE]();
+        console.log(rs);
+        return rs.data.devices;
+    }
+
+    static async getTrainingTypes(device) {
+        const rs = await endpoints.getTrainingTypes[NOW_MODE](device);
+        console.log(rs);
+        return rs.data.types;
     }
 
     static async getGroupTimetable(groupId) {

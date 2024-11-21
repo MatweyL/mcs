@@ -12,19 +12,24 @@ from service.core.session.use_case import GetSessionListUseCase, GetSessionListR
     CreateSessionRq, CreatedSessionRs, StartSessionUseCase, FinishSessionUseCase, FinishedSessionRs, FinishSessionRq, \
     ValidateTrainingSessionUseCase, FindSessionListWithSameActiveFrequencyUseCase, GetActiveDirectionBySessionIdUseCase
 from service.domain.phone import Phone
-from service.domain.session import Session, SessionStatus, SessionAttempt, TrainingType
-from service.domain.training import Training
+from service.domain.session import Session, SessionStatus, SessionAttempt
+from service.domain.training import Training, TrainingType
+from service.mapper.mapper_dto import SessionDtoMapper
 
 
 class GetSessionListUseCaseImpl(GetSessionListUseCase):
-    def __init__(self, session_repo: SessionRepo):
+    def __init__(self,
+                 session_repo: SessionRepo,
+                 session_dto_mapper: SessionDtoMapper):
         self.session_repo = session_repo
+        self.session_dto_mapper = session_dto_mapper
 
     def apply(self, request: GetSessionListRq) -> SessionListRs:
         sessions = self.session_repo.get_sessions(request.user_uid)
         sessions.sort(key=lambda s: -from_str_datetime_to_obj(s.date).timestamp())
 
-        return SessionListRs(sessions=sessions)
+        session_dto_list = [self.session_dto_mapper.map_to_dto(session) for session in sessions]
+        return SessionListRs(sessions=session_dto_list)
 
 
 class GetActiveDirectionBySessionIdUseCaseImpl(GetActiveDirectionBySessionIdUseCase):
@@ -42,11 +47,12 @@ class GetActiveDirectionBySessionIdUseCaseImpl(GetActiveDirectionBySessionIdUseC
 
 class CreateSessionUseCaseImpl(CreateSessionUseCase):
 
-    def __init__(self, session_repo: SessionRepo):
+    def __init__(self,
+                 session_repo: SessionRepo,
+                 session_dto_mapper: SessionDtoMapper):
         self.session_repo = session_repo
-        self.conversions = {
-            training_type.name: training_type for training_type in TrainingType
-        }
+        self.session_dto_mapper = session_dto_mapper
+
 
     def apply(self, request: CreateSessionRq) -> CreatedSessionRs:
         dto = request.session
@@ -54,16 +60,17 @@ class CreateSessionUseCaseImpl(CreateSessionUseCase):
         session = Session()
         session.user_uid = request.user_uid
         session.date = now()
-        # FIXME: оставить только training, подумать о вынесении в отдельную сущность
-        session.title = self.conversions.get(dto.training, "Не определено")
-        session.training = Training(kind=dto.training, params=dto.training_params)
+        if dto.type != 'FREE':
+            session.training = Training(kind=dto.training, params=dto.training_params)
         session.type = dto.type
         session.phone = Phone()
         session.status = SessionStatus.READY
 
         saved_session = self.session_repo.save_session(session)
 
-        return CreatedSessionRs(session=saved_session)
+        session_dto = self.session_dto_mapper.map_to_dto(saved_session)
+
+        return CreatedSessionRs(session=session_dto)
 
 
 class StartSessionUseCaseImpl(StartSessionUseCase):

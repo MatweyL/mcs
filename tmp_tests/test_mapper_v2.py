@@ -4,7 +4,7 @@ from service.domain.phone import Phone
 from service.domain.pprch import PPRCH
 from service.domain.session import Session
 from service.domain.user import User
-from service.mapper_v2.mapper import SessionMapper, PhoneMapper, DirectionMapper, ChannelMapper, StudentMapper, PPRCHMapper
+from service.mapper.mapper import SessionMapper, PhoneMapper, DirectionMapper, ChannelMapper, StudentMapper, PPRCHMapper
 
 channel_mapper = ChannelMapper()
 direction_mapper = DirectionMapper()

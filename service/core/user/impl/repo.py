@@ -4,7 +4,7 @@ from service.common.utils import generate_uid
 from service.core.user.repo import UserRepo
 from service.db.db import JsonDb
 from service.domain.user import User
-from service.mapper_v2.mapper import UserMapper
+from service.mapper.mapper import UserMapper
 
 
 class UserRepoDecorator(UserRepo):

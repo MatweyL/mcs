@@ -19,3 +19,7 @@ export const fetchGroups = async () => (await API.getGroups()).map(
 );
 
 export const fetchGroupTimetable = async (groupId) => (await API.getGroupTimetable(groupId));
+
+export const fetchDevices = async () => (await API.getDevices());
+
+export const fetchTrainingTypes = async (device) => (await API.getTrainingTypes(device))

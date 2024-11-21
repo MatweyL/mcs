@@ -10,13 +10,6 @@ const Session = ({session}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const trainings = {
-        "UTK1": "УТК-1. Включение питания",
-        "UTK2": "УТК-2. Настройка частоты в режиме ЧМ25",
-        "UTK3": "УТК-3. Настройка частоты в режиме ЧМ50",
-        "UTK4": "УТК-4. Настройка частоты в режиме ППРЧ"
-    }
-
     const openScreenSession = () => {
         request(Requests.OPEN_SCREEN_SESSION, {sessionId: session.uid, status: session.status}, dispatch);
         navigate(RoutePaths.SCREEN);
@@ -24,7 +17,7 @@ const Session = ({session}) => {
 
     return (
         <div className={classes.session} onClick={openScreenSession} key={session.uid}>
-            <p>{trainings[session.training.kind]}</p>
+            <p>{session.title}</p>
             <p>{session.date}</p>
         </div>
     );
