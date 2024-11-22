@@ -5,7 +5,7 @@ from typing import Dict
 from service.common.logs import logger
 from service.core.session import TrainingResult
 from service.core.session.training import TrainingResultCalculatorStrategy, Mark, TrainingResultCalculatorService
-from service.domain.session import Session, TrainingType
+from service.domain.session import Session
 from service.domain.training import UTK2Params, UTK3Params
 
 

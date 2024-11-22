@@ -45,11 +45,13 @@ from service.core.session.training_validator.step_validator_utk2 import UTK2Step
 from service.core.session.training_validator.step_validator_utk3 import UTK3Step1Validator, UTK3Step3Validator, \
     UTK3Step2Validator
 from service.core.session.training_validator.training_validator import TrainingValidatorImpl, TrainingValidatorRegistry
+from service.core.students_marks.endpoint import StudentsMarksEndpoint
+from service.core.students_marks.impl.students_marks import GetStudentsMarksTableUseCaseImpl
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo, UserRepoDecorator
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
 from service.db.db import JsonDb
-from service.domain.session import TrainingType
+from service.domain.training import TrainingType
 from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, StudentMapper, \
     GroupMapper, SessionAttemptMapper, PPRCHMapper, TeacherMapper
 from service.mapper_v2.mapper import TrainingMapper
@@ -191,3 +193,6 @@ group_endpoint = GroupEndpoint(
     get_group_list_use_case,
     get_user_list_by_group_use_case
 )
+students_marks_endpoint = StudentsMarksEndpoint(GetStudentsMarksTableUseCaseImpl(training_result_calculator,
+                                                                                 session_repo,
+                                                                                 group_repo,))

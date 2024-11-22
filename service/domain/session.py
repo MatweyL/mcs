@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import List
 
 from service.domain.phone import Phone
-from service.domain.training import Training, TrainingType
+from service.domain.training import Training
 
 
 class SessionStatus(str, enum.Enum):

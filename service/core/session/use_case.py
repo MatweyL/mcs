@@ -1,10 +1,8 @@
 from abc import abstractmethod
-from dataclasses import field
-from typing import List, Optional, Any
+from typing import List, Any
 
 from service.core.session.training import TrainingResult
 from service.core.use_case import UseCase, Request, Response
-from service.domain.direction import Direction, DirectionDto
 from service.domain.session import Session, SessionStatus
 
 
