@@ -1,6 +1,7 @@
 from abc import abstractmethod
 from typing import List, Dict
 
+from service.core.task.template.template_field import TemplateField
 from service.core.use_case import Response, UseCase, Request
 
 
@@ -32,4 +33,19 @@ class IssueTaskListRs(Response):
 class IssueTaskListUseCase(UseCase):
     @abstractmethod
     def apply(self, request: IssueTaskListRq) -> IssueTaskListRs:
+        pass
+
+
+class GetTaskTemplateRq(Request):
+    kind: str
+
+
+class TaskTemplateRs(Response):
+    def __init__(self, template: List[TemplateField]):
+        self.template = template
+
+
+class GetTaskTemplateUseCase(UseCase):
+    @abstractmethod
+    def apply(self, request: GetTaskTemplateRq) -> TaskTemplateRs:
         pass

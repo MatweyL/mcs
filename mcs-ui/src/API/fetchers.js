@@ -24,4 +24,6 @@ export const fetchDevices = async () => (await API.getDevices());
 
 export const fetchTrainingTypes = async (device) => (await API.getTrainingTypes(device));
 
-export const fetchDescription = async (sessionId) => (await API.requestTask(sessionId)).description
+export const fetchDescription = async (sessionId) => (await API.getTaskDescription(sessionId)).description
+
+export const fetchTemplate = async (training) => (await API.getTaskTemplate(training)).template

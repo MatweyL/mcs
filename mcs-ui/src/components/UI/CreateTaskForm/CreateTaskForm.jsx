@@ -5,7 +5,7 @@ import FieldSelectbox from "../FieldSelectbox/FieldSelectbox";
 import VariantForm from "../VariantForm";
 import TextButton from "../TextButton/TextButton";
 import VariantListView from "../VarianListView/VariantListView";
-import {fetchDevices, fetchTrainingTypes} from "../../../API/fetchers";
+import {fetchDevices, fetchTemplate, fetchTrainingTypes} from "../../../API/fetchers";
 import {EMPTY_OPTION} from "../../../core/constants/ui";
 import {request} from "../../../hooks/request";
 import Requests from "../../../core/constants/requests";
@@ -15,9 +15,15 @@ const CreateTaskForm = ({group}) => {
     const [visible, setVisible] = useState(false);
     const [confirmCloseVisible, setConfirmCloseVisible] = useState(false);
     const [confirmIssueTaskVisible, setConfirmIssueTaskVisible] = useState(false);
+
     const [training, setTraining] = useState('')
+    const [trainingLabel, setTrainingLabel] = useState('')
+
     const [nowForm, setNowForm] = useState(0);
+
     const [variants, setVariants] = useState([]);
+    const [template, setTemplate] = useState([]);
+
     const [enabledVariants, setEnabledVariants] = useState(false);
     const [enabledIssueTask, setEnabledIssueTask] = useState(false);
 
@@ -44,6 +50,8 @@ const CreateTaskForm = ({group}) => {
         setVariants([]);
         if (training) {
             setEnabledVariants(true);
+            setTrainingLabel(kinds[training]?.rich_label)
+            fetchTemplate(training).then(template => setTemplate(template))
         } else {
             setEnabledVariants(false);
         }
@@ -95,7 +103,8 @@ const CreateTaskForm = ({group}) => {
             ? getModal()
             : (
                 <VariantForm
-                    training={training}
+                    trainingLabel={trainingLabel}
+                    template={template}
                     index={index - 1}
                     variants={variants}
                     setVariants={setVariants}
@@ -168,7 +177,7 @@ const CreateTaskForm = ({group}) => {
             </Modal>
             <Modal visible={confirmIssueTaskVisible} close={() => setConfirmIssueTaskVisible(false)}>
                 <div style={{display: "flex", width: "100%", justifyContent: "space-between", flexDirection: "column"}}>
-                    <VariantListView variants={variants} training={training}/>
+                    <VariantListView variants={variants} trainingLabel={trainingLabel} template={template}/>
                     <div style={{height: "20px"}}/>
                     <div style={{display: "flex", justifyContent: "space-between"}}>
                         <div style={{width: "40%"}}>

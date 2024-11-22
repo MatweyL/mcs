@@ -23,6 +23,7 @@ class GetTrainingTypeListUseCaseImpl(GetTrainingTypeListUseCase):
 
         types = []
         for training_type in device_value.kinds:
-            types.append(Label(training_type.value, training_type.name))
+            # FIXME: Добавить развернутое описание вида тренировки
+            types.append(Label(training_type.value, training_type.name, '123'))
 
         return TrainingTypeListRs(types)

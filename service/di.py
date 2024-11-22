@@ -52,7 +52,8 @@ from service.core.task.description.task_description_strategy_utk2 import TaskDes
 from service.core.task.description.task_description_strategy_utk3 import TaskDescriptionStrategyUTK3
 from service.core.task.description.task_description_strategy_utk4 import TaskDescriptionStrategyUTK4
 from service.core.task.endpoint import TaskEndpoint
-from service.core.task.impl.use_case import IssueTaskListUseCaseImpl, GetTaskUseCaseImpl
+from service.core.task.impl.use_case import IssueTaskListUseCaseImpl, GetTaskUseCaseImpl, GetTaskTemplateUseCaseImpl
+from service.core.task.template.service import TaskTemplateServiceImpl
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo, UserRepoDecorator
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
@@ -226,7 +227,14 @@ get_task_use_case = GetTaskUseCaseImpl(
     task_description_service
 )
 
+task_template_service = TaskTemplateServiceImpl()
+
+get_task_template_use_case = GetTaskTemplateUseCaseImpl(
+    task_template_service
+)
+
 task_endpoint = TaskEndpoint(
     issue_task_list_use_case,
-    get_task_use_case
+    get_task_use_case,
+    get_task_template_use_case
 )

@@ -1,11 +1,7 @@
 import React from 'react';
-import {TrainingTemplates} from "../../../core/constants/training_templates";
-import Trainings from "../../../core/constants/trainings";
 import VariantItemView from "../VariantItemView/VariantItemView";
 
-const VariantListView = ({variants, training}) => {
-    const template = TrainingTemplates.VALUES[training];
-
+const VariantListView = ({variants, template, trainingLabel}) => {
     return (
         <div style={{display: "flex", flexDirection: "column"}}>
             <div style={{textAlign: "center"}}>
@@ -13,7 +9,7 @@ const VariantListView = ({variants, training}) => {
                     Проверьте корректность вариантов
                 </div>
                 <di>
-                    <div><b>{Trainings.getLabel(training)}</b></div>
+                    <div><b>{trainingLabel}</b></div>
                 </di>
             </div>
             <div style={{height: "20px"}}/>

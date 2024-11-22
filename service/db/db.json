@@ -425,6 +425,43 @@
         }
       },
       "type": "EXAM"
+    },
+    {
+      "uid": "1c481f24-6424-407b-9473-b277f3fa30ef",
+      "date": "22/11/24 16:22",
+      "user_uid": "e88fbc08-844f-46e7-a7f1-ebd3f59e1790",
+      "phone": {
+        "active_direction": null,
+        "channels": [],
+        "directions": [],
+        "pprchs": []
+      },
+      "status": "READY",
+      "attempts": [],
+      "training": {
+        "kind": "UTK2",
+        "params": {
+          "target_channel": {
+            "uid": "f485f501-20a4-4cd8-a4ef-071afe985416",
+            "mode": "ЧМ25",
+            "name": "КР1",
+            "forbidden_send": null,
+            "double_frequency": null,
+            "frequency": 45500000,
+            "ctcss": null
+          },
+          "target_direction": {
+            "uid": "490b3d21-e3e5-4247-86c9-b5d7a62a66dc",
+            "name": null,
+            "channel": "f485f501-20a4-4cd8-a4ef-071afe985416",
+            "forbidden_send": null,
+            "tone_call": null,
+            "scan_list": null,
+            "economizer": null
+          }
+        }
+      },
+      "type": "TRAINING"
     }
   ],
   "screens": [],

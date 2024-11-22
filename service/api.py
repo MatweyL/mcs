@@ -14,7 +14,7 @@ from service.core.group.use_case import GetUserListByGroupRq
 from service.core.screen import GetScreenRq, SaveScreenRq, Screen
 from service.core.session import GetSessionListRq, CreateSessionRq, StartSessionRq, FinishSessionRq, SessionRq, \
     ValidateTrainingSessionRq, GetSessionRq, ActiveDirectionFrequencyRs
-from service.core.task.use_case import IssueTaskListRq, GetTaskRq
+from service.core.task.use_case import IssueTaskListRq, GetTaskRq, GetTaskTemplateRq
 from service.core.user.use_case import AuthUserRq, RegisterUserRq, LoginUserRq
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint, \
     group_endpoint, device_endpoint, task_endpoint
@@ -97,6 +97,12 @@ async def issue_tasks(request: IssueTaskListRq):
 async def get_task_description(session_id: str):
     logger.info(session_id)
     return task_endpoint.get_task_description(GetTaskRq(session_id=session_id))
+
+
+@auth_router.get("/task/template")
+async def get_task_description(training_kind: str):
+    logger.info(training_kind)
+    return task_endpoint.get_task_template(GetTaskTemplateRq(kind=training_kind))
 
 
 not_auth_router = APIRouter()

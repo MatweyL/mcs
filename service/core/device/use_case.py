@@ -13,6 +13,7 @@ class GetDeviceListRq(Request):
 class Label:
     label: str = None
     value: str = None
+    rich_label: str = None
 
 
 class DeviceListRs(Response):

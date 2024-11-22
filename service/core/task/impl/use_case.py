@@ -1,8 +1,12 @@
+from typing import List
+
 from service.core.group.use_case import GetUserListByGroupUseCase, GetUserListByGroupRq
 from service.core.session import CreateSessionUseCase, CreateSessionRq, SessionRq, SessionRepo
 from service.core.task.description.service import TaskDescriptionService
+from service.core.task.template.service import TaskTemplateService
+from service.core.task.template.template_field import TemplateField
 from service.core.task.use_case import IssueTaskListUseCase, IssueTaskListRq, IssueTaskListRs, GetTaskUseCase, \
-    GetTaskRq, TaskRs
+    GetTaskRq, TaskRs, GetTaskTemplateUseCase, GetTaskTemplateRq, TaskTemplateRs
 from service.domain.session import SessionType
 
 
@@ -50,3 +54,13 @@ class IssueTaskListUseCaseImpl(IssueTaskListUseCase):
         response = self.get_user_list_by_group_use_case.apply(request)
 
         return response.users
+
+
+class GetTaskTemplateUseCaseImpl(GetTaskTemplateUseCase):
+    def __init__(self, task_template_service: TaskTemplateService):
+        self.task_template_service = task_template_service
+
+    def apply(self, request: GetTaskTemplateRq) -> TaskTemplateRs:
+        template: List[TemplateField] = self.task_template_service.get_template(request.kind)
+
+        return TaskTemplateRs(template)

@@ -111,9 +111,15 @@ const endpoints = {
             return axios.get(`${MOCK_LOCAL_URL}/hints/${hintName}`, config())
         }
     },
-    requestTask: {
+    getTaskDescription: {
         [LOCAL_PY_MODE]: (sessionId) => {
             return axios.get(`${LOCAL_PY_URL}/task/description?session_id=${sessionId}`, config())
+        },
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    getTaskTemplate: {
+        [LOCAL_PY_MODE]: (training) => {
+            return axios.get(`${LOCAL_PY_URL}/task/template?training_kind=${training}`, config())
         },
         [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
     },
@@ -251,9 +257,15 @@ export default class API {
         return rs.data;
     }
 
-    static async requestTask(sessionId) {
+    static async getTaskDescription(sessionId) {
         console.log(sessionId);
-        const rs = await endpoints.requestTask[NOW_MODE](sessionId);
+        const rs = await endpoints.getTaskDescription[NOW_MODE](sessionId);
+        console.log(rs);
+        return rs.data;
+    }
+
+    static async getTaskTemplate(training) {
+        const rs = await endpoints.getTaskTemplate[NOW_MODE](training);
         console.log(rs);
         return rs.data;
     }

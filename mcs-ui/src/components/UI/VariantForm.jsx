@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import Trainings from "../../core/constants/trainings";
 import Field from "./Field/Field";
 import FormButton from "./FormButton/FormButton";
 import {clone} from "../../core/store/helper/clone_util";
-import {TrainingTemplates} from "../../core/constants/training_templates";
 import {getOrEmpty} from "../../core/store/util";
 
-const VariantForm = ({training, variants, index, setVariants, addVariant}) => {
+const VariantForm = ({trainingLabel, template, variants, index, setVariants, addVariant}) => {
     const [enabled, setEnabled] = useState(false);
 
-    const template = TrainingTemplates.VALUES[training];
     const variant = variants[index];
 
     useEffect(() => {
@@ -38,7 +35,7 @@ const VariantForm = ({training, variants, index, setVariants, addVariant}) => {
         <div style={{display: "flex", flexDirection: "column", width: "300px"}}>
             <div style={{display: "flex", flexDirection: "column"}}>
                 <div>Вариант №{index + 1}</div>
-                <div>{Trainings.getLabel(training)}</div>
+                <div>{trainingLabel}</div>
             </div>
             {
                 template.map(field =>

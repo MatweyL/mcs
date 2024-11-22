@@ -186,14 +186,6 @@ export const executeRequest = async (dispatch, request) => {
             return;
         }
 
-        // получить описание задачи
-        case Requests.REQUEST_TASK: {
-            let {sessionId} = request.payload;
-
-            const rs = await API.requestTask(sessionId);
-            return;
-        }
-
         // выдать задачи
         case Requests.ISSUE_TASKS: {
             let {variants, training, group} = request.payload;
