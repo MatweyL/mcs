@@ -13,9 +13,10 @@ from service.core.group.use_case import GetUserListByGroupRq
 from service.core.screen import GetScreenRq, SaveScreenRq, Screen
 from service.core.session import GetSessionListRq, CreateSessionRq, StartSessionRq, FinishSessionRq, SessionRq, \
     ValidateTrainingSessionRq, GetSessionRq, ActiveDirectionFrequencyRs
+from service.core.students_marks.use_case import GetStudentsMarksTableRq
 from service.core.user.use_case import AuthUserRq, RegisterUserRq, LoginUserRq
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint, \
-    group_endpoint
+    group_endpoint, students_marks_endpoint
 from service.domain.room import Room
 
 auth_router = APIRouter(dependencies=[Depends(auth_filter.authenticate)])
@@ -84,6 +85,12 @@ async def validate_training_session(session_uid: str, screen_code: str):
         logger.exception(e)
 
 not_auth_router = APIRouter()
+
+
+@not_auth_router.get("/students/marks")
+async def get_students_marks(group_uid: str):
+    request = GetStudentsMarksTableRq(group_uid=group_uid)
+    return students_marks_endpoint.get_students_marks_table(request)
 
 
 @not_auth_router.get("/groups")

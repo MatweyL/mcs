@@ -12,8 +12,8 @@ from service.core.session.use_case import GetSessionListUseCase, GetSessionListR
     CreateSessionRq, CreatedSessionRs, StartSessionUseCase, FinishSessionUseCase, FinishedSessionRs, FinishSessionRq, \
     ValidateTrainingSessionUseCase, FindSessionListWithSameActiveFrequencyUseCase, GetActiveDirectionBySessionIdUseCase
 from service.domain.phone import Phone
-from service.domain.session import Session, SessionStatus, SessionAttempt, TrainingType
-from service.domain.training import Training
+from service.domain.session import Session, SessionStatus, SessionAttempt
+from service.domain.training import Training, TrainingType
 
 
 class GetSessionListUseCaseImpl(GetSessionListUseCase):

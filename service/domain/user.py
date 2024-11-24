@@ -16,3 +16,14 @@ class User:
     group: str = None
     role: Role = None
     password: str = None
+
+    @property
+    def fio(self) -> str:
+        if not self.patronymic:
+            return f"{self.surname} {self.name}"
+        return f"{self.surname} {self.name} {self.patronymic}"
+    def __hash__(self):
+        return hash(self.uid)
+
+    def __eq__(self, other):
+        return isinstance(other, User) and self.uid == other.uid
