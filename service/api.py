@@ -8,16 +8,16 @@ from starlette.middleware.cors import CORSMiddleware
 from service.common.logs import logger
 from service.common.utils import generate_uid
 from service.core.auth.auth_context import AuthContext
-from service.core.device.use_case import GetDeviceListRq, GetTrainingTypeListRq
 from service.core.dictionary.use_case import GetDictionaryRq
 from service.core.group.use_case import GetUserListByGroupRq
 from service.core.screen import GetScreenRq, SaveScreenRq, Screen
 from service.core.session import GetSessionListRq, CreateSessionRq, StartSessionRq, FinishSessionRq, SessionRq, \
     ValidateTrainingSessionRq, GetSessionRq, ActiveDirectionFrequencyRs
-from service.core.task.use_case import IssueTaskListRq, GetTaskRq, GetTaskTemplateRq
 from service.core.user.use_case import AuthUserRq, RegisterUserRq, LoginUserRq
 from service.di import screen_endpoint, user_endpoint, session_endpoint, auth_filter, dictionary_endpoint, \
-    group_endpoint, device_endpoint, task_endpoint
+    group_endpoint
+
+group_endpoint, students_marks_endpoint
 from service.domain.room import Room
 
 auth_router = APIRouter(dependencies=[Depends(auth_filter.authenticate)])
@@ -60,6 +60,7 @@ async def create_session(session: SessionRq):
         return session_endpoint.create_session(request)
     except BaseException as e:
         logger.exception(e)
+
 
 
 @auth_router.post("/session/start")
@@ -105,7 +106,14 @@ async def get_task_description(training_kind: str):
     return task_endpoint.get_task_template(GetTaskTemplateRq(kind=training_kind))
 
 
+
 not_auth_router = APIRouter()
+
+
+@not_auth_router.get("/students/marks")
+async def get_students_marks(group_uid: str):
+    request = GetStudentsMarksTableRq(group_uid=group_uid)
+    return students_marks_endpoint.get_students_marks_table(request)
 
 
 @not_auth_router.get("/groups")
@@ -294,6 +302,7 @@ async def on_relay_ice(sid, *args):
 
     raw_data = {'peerID': sid, 'iceCandidate': ice_candidate}
     await app.sio.emit('ice-candidate', raw_data, peer_id)
+
 
 
 WITH_HTTPS = True

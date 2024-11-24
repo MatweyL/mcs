@@ -54,12 +54,16 @@ from service.core.task.description.task_description_strategy_utk4 import TaskDes
 from service.core.task.endpoint import TaskEndpoint
 from service.core.task.impl.use_case import IssueTaskListUseCaseImpl, GetTaskUseCaseImpl, GetTaskTemplateUseCaseImpl
 from service.core.task.template.service import TaskTemplateServiceImpl
+from service.core.students_marks.endpoint import StudentsMarksEndpoint
+from service.core.students_marks.impl.students_marks import GetStudentsMarksTableUseCaseImpl
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo, UserRepoDecorator
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
 from service.db.db import JsonDb
 from service.domain.training import TrainingType
 from service.mapper.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, StudentMapper, \
+from service.domain.training import TrainingType
+from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, StudentMapper, \
     GroupMapper, SessionAttemptMapper, PPRCHMapper, TeacherMapper
 from service.mapper.mapper import TrainingMapper
 from service.mapper.mapper_dto import SessionDtoMapper
@@ -204,6 +208,9 @@ group_endpoint = GroupEndpoint(
     get_group_list_use_case,
     get_user_list_by_group_use_case
 )
+students_marks_endpoint = StudentsMarksEndpoint(GetStudentsMarksTableUseCaseImpl(training_result_calculator,
+                                                                                 session_repo,
+                                                                                 group_repo,))
 
 get_device_list_use_case = GetDeviceListUseCaseImpl()
 get_training_type_list_use_case = GetTrainingTypeListUseCaseImpl()

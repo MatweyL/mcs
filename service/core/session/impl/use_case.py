@@ -14,6 +14,8 @@ from service.core.session.use_case import GetSessionListUseCase, GetSessionListR
 from service.domain.phone import Phone
 from service.domain.session import Session, SessionStatus, SessionAttempt
 from service.domain.training import Training, TrainingType
+from service.domain.session import Session, SessionStatus, SessionAttempt
+from service.domain.training import Training, TrainingType
 from service.mapper.mapper_dto import SessionDtoMapper
 
 
