@@ -6,14 +6,15 @@ import FieldSelectbox from "../FieldSelectbox/FieldSelectbox";
 import FormButton from "../FormButton/FormButton";
 import {SessionTypes} from "../../../core/constants/session_types";
 import {request} from "../../../hooks/request";
-import Trainings from "../../../core/constants/trainings";
-import Devices from "../../../core/constants/devices";
+import {fetchDevices, fetchTrainingTypes} from "../../../API/fetchers";
+import {EMPTY_OPTION} from "../../../core/constants/ui";
 
 
 const types = [
     {value: "", label: ""},
     {value: SessionTypes.TRAINING, label: "Тренировка"},
-    {value: SessionTypes.EXAM, label: "Экзамен"},
+    // У студента нет возможности создать экзамен, он создается автоматически
+    // {value: SessionTypes.EXAM, label: "Экзамен"},
     {value: SessionTypes.FREE, label: "Свободный"},
 ]
 
@@ -21,6 +22,29 @@ const CreateSessionForm = ({visible, setVisible}) => {
     const dispatch = useDispatch();
     const [session, setSession] = useState({training: "", type: ""})
     const [enabled, enableButton] = useState(false)
+
+    const [devices, setDevices] = useState([]);
+    const [nowDevice, setNowDevice] = useState('');
+
+    const [kinds, setKinds] = useState([]);
+
+    useEffect(() => {
+        fetchDevices().then(devices => {
+            setDevices(devices);
+            setNowDevice(devices[0].value);
+        })
+    }, []);
+
+    useEffect(() => {
+        if (session.type === SessionTypes.TRAINING) {
+            setKinds([]);
+            setSession({...session, training: null})
+        }
+
+        if (nowDevice && session.type === SessionTypes.TRAINING) {
+            fetchTrainingTypes(nowDevice).then(kinds => setKinds([EMPTY_OPTION, ...kinds]))
+        }
+    }, [nowDevice, session.type])
 
     const createSession = () => {
         if (session && enabled) {
@@ -31,6 +55,11 @@ const CreateSessionForm = ({visible, setVisible}) => {
     }
 
     useEffect(() => {
+        if (session.type === SessionTypes.FREE) {
+            enableButton(true)
+            return;
+        }
+
         if (session.training && session.type) {
             enableButton(true);
         } else {
@@ -40,11 +69,14 @@ const CreateSessionForm = ({visible, setVisible}) => {
 
     return (
         <Modal visible={visible} close={() => setVisible(false)}>
-            <FieldSelectbox title={"Устройство"} options={Devices.VALUES}/>
-            <FieldSelectbox title={"УТК"} options={Trainings.VALUES}
-                            onChange={e => setSession({...session, training: e.target.value})}/>
+            <FieldSelectbox title={"Устройство"} options={devices}
+                            onChange={e => setNowDevice(e.target.value)}/>
             <FieldSelectbox title={"Тип"} options={types}
                             onChange={e => setSession({...session, type: e.target.value})}/>
+            {session.type === SessionTypes.TRAINING &&
+                <FieldSelectbox title={"УТК"} options={kinds}
+                                onChange={e => setSession({...session, training: e.target.value})}/>
+            }
             <div style={{marginTop: "20px"}}>
                 <FormButton onClick={createSession} label={"Создать сессию"} enabled={enabled}/>
             </div>

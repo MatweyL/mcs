@@ -73,6 +73,14 @@ const endpoints = {
         [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/groups`),
         [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
     },
+    getDevices: {
+        [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/devices`),
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    getTrainingTypes: {
+        [LOCAL_PY_MODE]: (device) => axios.get(`${LOCAL_PY_URL}/trainings?device=${device}`),
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
     getGroupTimetable: {
         [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/groups`, config()),
         [MOCK_LOCAL_MODE]: groupId => axios.get(`${MOCK_LOCAL_URL}/mock-timetables/data-${groupId}.json`),
@@ -102,6 +110,24 @@ const endpoints = {
             const hintName = HINT[screenName];
             return axios.get(`${MOCK_LOCAL_URL}/hints/${hintName}`, config())
         }
+    },
+    getTaskDescription: {
+        [LOCAL_PY_MODE]: (sessionId) => {
+            return axios.get(`${LOCAL_PY_URL}/task/description?session_id=${sessionId}`, config())
+        },
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    getTaskTemplate: {
+        [LOCAL_PY_MODE]: (training) => {
+            return axios.get(`${LOCAL_PY_URL}/task/template?training_kind=${training}`, config())
+        },
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
+    },
+    issueTasks: {
+        [LOCAL_PY_MODE]: (variants, training, group) => {
+            return axios.post(`${LOCAL_PY_URL}/task/issue`, {variants, training, group_id: group}, config())
+        },
+        [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
     }
 }
 
@@ -179,6 +205,18 @@ export default class API {
         return rs.data.groups;
     }
 
+    static async getDevices() {
+        const rs = await endpoints.getDevices[NOW_MODE]();
+        console.log(rs);
+        return rs.data.devices;
+    }
+
+    static async getTrainingTypes(device) {
+        const rs = await endpoints.getTrainingTypes[NOW_MODE](device);
+        console.log(rs);
+        return rs.data.types;
+    }
+
     static async getGroupTimetable(groupId) {
         const rs = await endpoints.getGroupTimetable[MOCK_LOCAL_MODE](groupId);
         console.log(rs);
@@ -215,6 +253,26 @@ export default class API {
     static async validateTrainingSession(sessionId, screenName) {
         console.log(sessionId, screenName);
         const rs = await endpoints.validateTrainingSession[NOW_MODE](sessionId, screenName);
+        console.log(rs);
+        return rs.data;
+    }
+
+    static async getTaskDescription(sessionId) {
+        console.log(sessionId);
+        const rs = await endpoints.getTaskDescription[NOW_MODE](sessionId);
+        console.log(rs);
+        return rs.data;
+    }
+
+    static async getTaskTemplate(training) {
+        const rs = await endpoints.getTaskTemplate[NOW_MODE](training);
+        console.log(rs);
+        return rs.data;
+    }
+
+    static async issueTasks(variants, training, group) {
+        console.log(variants, training, group);
+        const rs = await endpoints.issueTasks[NOW_MODE](variants, training, group);
         console.log(rs);
         return rs.data;
     }

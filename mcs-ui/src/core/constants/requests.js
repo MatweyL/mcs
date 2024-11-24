@@ -52,4 +52,7 @@ export default class Requests {
 
     // Запросить подсказку для пользователя
     static REQUEST_HINT = "REQUEST_HINT";
+
+    // Выдать задачи студентам
+    static ISSUE_TASKS = "ISSUE_TASKS";
 }

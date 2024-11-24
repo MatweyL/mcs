@@ -16,6 +16,7 @@ import {cacheService} from "../core/di";
 import {CacheKeys} from "../core/store/cache_service";
 import CallNotification from "../components/UI/Screen/CallNotification";
 import CallMedia from "../components/UI/Screen/CallMedia";
+import ExamTaskBox from "../components/UI/ExamTaskBox/ExamTaskBox";
 
 /**
  * Страница экрана телефона
@@ -53,6 +54,7 @@ const ScreenPage = () => {
                 </div>
                 <div style={{height: "100%", display: "flex", flexDirection: "column", justifyContent: "end"}}>
                     <div style={{marginBottom: "100px", width: "250px"}}>
+                        <ExamTaskBox/>
                         <TrainingHintBox/>
                     </div>
                 </div>

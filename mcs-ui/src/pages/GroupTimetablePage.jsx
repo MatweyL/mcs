@@ -41,7 +41,7 @@ const GroupTimetablePage = () => {
                     </table>
                     {nowGroup &&
                         <div>
-                            <CreateTaskForm/>
+                            <CreateTaskForm group={nowGroup}/>
                         </div>
                     }
                 </div>

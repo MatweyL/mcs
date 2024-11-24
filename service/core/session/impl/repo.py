@@ -5,7 +5,7 @@ from service.common.utils import generate_uid, from_str_datetime_to_obj
 from service.core.session.repo import SessionRepo
 from service.db.db import JsonDb
 from service.domain.session import Session
-from service.mapper_v2.mapper import SessionMapper
+from service.mapper.mapper import SessionMapper
 
 
 class InMemorySessionRepo(SessionRepo):

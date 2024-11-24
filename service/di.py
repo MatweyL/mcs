@@ -7,6 +7,8 @@ from service.common.impl.screen_navigator import ScreenNavigatorImpl
 from service.common.mapper import Mapper
 from service.common.utils import get_root_path, update_screen_by_alias
 from service.core.auth.filter import AuthFilter
+from service.core.device.endpoint import DeviceEndpoint
+from service.core.device.impl.use_case import GetDeviceListUseCaseImpl, GetTrainingTypeListUseCaseImpl
 from service.core.dictionary.endpoint import DictionaryEndpoint
 from service.core.dictionary.impl import GetDictionaryUseCaseImpl
 from service.core.dictionary.provider.get.get_dictionary_provider import DefaultDictionaryProvider
@@ -47,14 +49,21 @@ from service.core.session.training_validator.step_validator_utk3 import UTK3Step
 from service.core.session.training_validator.training_validator import TrainingValidatorImpl, TrainingValidatorRegistry
 from service.core.students_marks.endpoint import StudentsMarksEndpoint
 from service.core.students_marks.impl.students_marks import GetStudentsMarksTableUseCaseImpl
+from service.core.task.description.service import TaskDescriptionServiceImpl
+from service.core.task.description.task_description_strategy_utk2 import TaskDescriptionStrategyUTK2
+from service.core.task.description.task_description_strategy_utk3 import TaskDescriptionStrategyUTK3
+from service.core.task.description.task_description_strategy_utk4 import TaskDescriptionStrategyUTK4
+from service.core.task.endpoint import TaskEndpoint
+from service.core.task.impl.use_case import IssueTaskListUseCaseImpl, GetTaskUseCaseImpl, GetTaskTemplateUseCaseImpl
+from service.core.task.template.service import TaskTemplateServiceImpl
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo, UserRepoDecorator
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
 from service.db.db import JsonDb
 from service.domain.training import TrainingType
-from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, StudentMapper, \
-    GroupMapper, SessionAttemptMapper, PPRCHMapper, TeacherMapper
-from service.mapper_v2.mapper import TrainingMapper
+from service.mapper.mapper import TrainingMapper, SessionAttemptMapper, ChannelMapper, DirectionMapper, PPRCHMapper, \
+    PhoneMapper, SessionMapper, StudentMapper, TeacherMapper, GroupMapper
+from service.mapper.mapper_dto import SessionDtoMapper
 
 update_screen_by_alias()
 
@@ -124,6 +133,7 @@ training_result_calculator = TrainingResultCalculatorServiceImpl(
 screen_graph = {
     "MAIN_SCREEN": [
         "MAIN_MENU",
+        "SELECT_ACTIVE_DIRECTION"
     ],
     "MAIN_MENU": [
         "SERVICE_MENU"
@@ -160,8 +170,10 @@ training_validator_utk_3 = TrainingValidatorImpl([UTK3Step1Validator(navigator, 
 training_validator_registry = TrainingValidatorRegistry([training_validator_utk_2,
                                                          training_validator_utk_3])
 
-get_session_list_use_case = GetSessionListUseCaseImpl(session_repo)
-create_session_use_case = CreateSessionUseCaseImpl(session_repo)
+session_dto_mapper = SessionDtoMapper()
+get_session_list_use_case = GetSessionListUseCaseImpl(session_repo, session_dto_mapper)
+create_session_use_case = CreateSessionUseCaseImpl(session_repo, session_dto_mapper)
+
 start_session_use_case = StartSessionUseCaseImpl(session_repo)
 finish_session_use_case = FinishSessionUseCaseImpl(session_repo, training_result_calculator)
 get_active_direction_by_session_id = GetActiveDirectionBySessionIdUseCaseImpl(session_repo)
@@ -195,4 +207,38 @@ group_endpoint = GroupEndpoint(
 )
 students_marks_endpoint = StudentsMarksEndpoint(GetStudentsMarksTableUseCaseImpl(training_result_calculator,
                                                                                  session_repo,
-                                                                                 group_repo,))
+                                                                                 group_repo, ))
+
+get_device_list_use_case = GetDeviceListUseCaseImpl()
+get_training_type_list_use_case = GetTrainingTypeListUseCaseImpl()
+
+device_endpoint = DeviceEndpoint(
+    get_device_list_use_case,
+    get_training_type_list_use_case
+)
+
+issue_task_list_use_case = IssueTaskListUseCaseImpl(
+    create_session_use_case,
+    get_user_list_by_group_use_case
+)
+
+task_description_service = TaskDescriptionServiceImpl([TaskDescriptionStrategyUTK2(),
+                                                       TaskDescriptionStrategyUTK3(),
+                                                       TaskDescriptionStrategyUTK4(), ])
+
+get_task_use_case = GetTaskUseCaseImpl(
+    session_repo,
+    task_description_service
+)
+
+task_template_service = TaskTemplateServiceImpl()
+
+get_task_template_use_case = GetTaskTemplateUseCaseImpl(
+    task_template_service
+)
+
+task_endpoint = TaskEndpoint(
+    issue_task_list_use_case,
+    get_task_use_case,
+    get_task_template_use_case
+)

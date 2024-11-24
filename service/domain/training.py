@@ -38,7 +38,9 @@ class Training:
         if not self.params:
             target_channel = Channel(uid=str(uuid4()), name='КР1', frequency=45_500_000)
             target_direction = Direction(uid=str(uuid4()), channel=target_channel.uid)
-            if self.kind == 'UTK2':
+            if self.kind == 'UTK1':
+                utk_params = {}
+            elif self.kind == 'UTK2':
                 target_channel.mode = ChannelMode.CHM25
                 utk_params = UTK2Params(target_channel=target_channel,
                                         target_direction=target_direction)

@@ -9,7 +9,7 @@ import {useSession} from "../../../hooks/useSession";
 import {useScreenName} from "../../../hooks/useScreen";
 
 const TrainingHintBox = () => {
-    const {type, sessionId} = useSession();
+    const {type, sessionId, status} = useSession();
 
     const screenName = useScreenName();
     const dispatch = useDispatch();
@@ -17,10 +17,14 @@ const TrainingHintBox = () => {
     const hint = useHint();
 
     useEffect(() => {
+        if (status === 'FINISHED') {
+            return;
+        }
+
         if (screenName && isTraining()) {
             request(Requests.REQUEST_HINT, {sessionId, screenName}, dispatch)
         }
-    }, [screenName]);
+    }, [screenName, status]);
 
     const isTraining = () => type === SessionTypes.TRAINING;
 

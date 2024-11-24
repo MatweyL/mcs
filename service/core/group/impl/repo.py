@@ -3,7 +3,7 @@ from typing import List
 from service.core.group.repo import GroupRepo
 from service.db.db import JsonDb
 from service.domain.user import User
-from service.mapper_v2.mapper import GroupMapper, StudentMapper
+from service.mapper.mapper import GroupMapper, StudentMapper
 
 
 class GroupRepoImpl(GroupRepo):
