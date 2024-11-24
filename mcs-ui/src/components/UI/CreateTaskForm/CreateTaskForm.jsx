@@ -66,12 +66,6 @@ const CreateTaskForm = ({group}) => {
         }
     }, [variants]);
 
-
-    useEffect(() => {
-        console.log(variants)
-        console.log(nowForm)
-    }, [nowForm])
-
     const addVariant = () => {
         const nowLength = variants.length;
         setVariants([...variants, nowLength === 0 ? {} : variants[nowLength - 1]])

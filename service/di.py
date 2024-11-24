@@ -47,6 +47,8 @@ from service.core.session.training_validator.step_validator_utk2 import UTK2Step
 from service.core.session.training_validator.step_validator_utk3 import UTK3Step1Validator, UTK3Step3Validator, \
     UTK3Step2Validator
 from service.core.session.training_validator.training_validator import TrainingValidatorImpl, TrainingValidatorRegistry
+from service.core.students_marks.endpoint import StudentsMarksEndpoint
+from service.core.students_marks.impl.students_marks import GetStudentsMarksTableUseCaseImpl
 from service.core.task.description.service import TaskDescriptionServiceImpl
 from service.core.task.description.task_description_strategy_utk2 import TaskDescriptionStrategyUTK2
 from service.core.task.description.task_description_strategy_utk3 import TaskDescriptionStrategyUTK3
@@ -54,18 +56,13 @@ from service.core.task.description.task_description_strategy_utk4 import TaskDes
 from service.core.task.endpoint import TaskEndpoint
 from service.core.task.impl.use_case import IssueTaskListUseCaseImpl, GetTaskUseCaseImpl, GetTaskTemplateUseCaseImpl
 from service.core.task.template.service import TaskTemplateServiceImpl
-from service.core.students_marks.endpoint import StudentsMarksEndpoint
-from service.core.students_marks.impl.students_marks import GetStudentsMarksTableUseCaseImpl
 from service.core.user.endpoint import UserEndpoint
 from service.core.user.impl.repo import InMemoryUserRepo, UserRepoDecorator
 from service.core.user.impl.use_case import RegisterUserUseCaseImpl, AuthenticateUserUseCaseImpl, LoginUserUseCaseImpl
 from service.db.db import JsonDb
 from service.domain.training import TrainingType
-from service.mapper.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, StudentMapper, \
-from service.domain.training import TrainingType
-from service.mapper_v2.mapper import ChannelMapper, DirectionMapper, PhoneMapper, SessionMapper, StudentMapper, \
-    GroupMapper, SessionAttemptMapper, PPRCHMapper, TeacherMapper
-from service.mapper.mapper import TrainingMapper
+from service.mapper.mapper import TrainingMapper, SessionAttemptMapper, ChannelMapper, DirectionMapper, PPRCHMapper, \
+    PhoneMapper, SessionMapper, StudentMapper, TeacherMapper, GroupMapper
 from service.mapper.mapper_dto import SessionDtoMapper
 
 update_screen_by_alias()
@@ -210,7 +207,7 @@ group_endpoint = GroupEndpoint(
 )
 students_marks_endpoint = StudentsMarksEndpoint(GetStudentsMarksTableUseCaseImpl(training_result_calculator,
                                                                                  session_repo,
-                                                                                 group_repo,))
+                                                                                 group_repo, ))
 
 get_device_list_use_case = GetDeviceListUseCaseImpl()
 get_training_type_list_use_case = GetTrainingTypeListUseCaseImpl()

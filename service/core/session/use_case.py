@@ -1,6 +1,7 @@
 from abc import abstractmethod
-from typing import List, Any
+from typing import List, Any, Optional
 
+from service.core.session.dto import SessionDto
 from service.core.session.training import TrainingResult
 from service.core.use_case import UseCase, Request, Response
 from service.domain.session import Session, SessionStatus
