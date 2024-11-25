@@ -47,7 +47,7 @@ class UTK2TrainingFactoryStrategy(TrainingFactoryStrategy):
         else:
             params = {CHANNEL_NAME: variant[CHANNEL_NAME],
                       CHANNEL_MODE: ChannelMode.CHM25.name,
-                      FREQUENCY: int(variant[FREQUENCY]) * 10**6}
+                      FREQUENCY: int(float(variant[FREQUENCY]) * 10**6)}
 
         return Training(TrainingType.UTK2, params)
 
@@ -64,7 +64,7 @@ class UTK3TrainingFactoryStrategy(TrainingFactoryStrategy):
         else:
             params = {CHANNEL_NAME: variant[CHANNEL_NAME],
                       CHANNEL_MODE: ChannelMode.CHM50.name,
-                      FREQUENCY: int(variant[FREQUENCY]) * 10**6}
+                      FREQUENCY: int(float(variant[FREQUENCY]) * 10**6)}
 
         return Training(TrainingType.UTK3, params)
 

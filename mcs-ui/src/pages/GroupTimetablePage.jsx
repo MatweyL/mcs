@@ -4,11 +4,13 @@ import {EMPTY_OPTION} from "../core/constants/ui";
 import TimetableRow from "../components/UI/TimetableRow/TimetableRow";
 import TimetableHead from "../components/UI/TimetableHead/TimetableHead";
 import CreateTaskForm from "../components/UI/CreateTaskForm/CreateTaskForm";
+import {useRefreshTimetable} from "../hooks/useRefreshTimetable";
 
 const GroupTimetablePage = () => {
     const [groups, setGroups] = useState([]);
     const [nowGroup, setNowGroup] = useState('');
     const [nowTimetable, setNowTimetable] = useState({rows: [], classes: []})
+    const refreshTimetable = useRefreshTimetable();
 
     useEffect(() => {
         fetchGroups().then(groups => setGroups([EMPTY_OPTION, ...groups]));
@@ -21,7 +23,7 @@ const GroupTimetablePage = () => {
         } else {
             setNowTimetable({rows: [], classes: []})
         }
-    }, [nowGroup])
+    }, [nowGroup, refreshTimetable])
 
     return (
         <div style={{width: "100%"}}>

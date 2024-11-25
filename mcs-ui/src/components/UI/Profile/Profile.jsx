@@ -36,16 +36,19 @@ const Profile = () => {
 
     return (
         authenticated
-            ? <div className={classes.profileWrapper}>
-                <div className={classes.profile} onClick={toggle}>
-                    <p>{fio}</p>
-                    <div className={classes.profileIcon}/>
-                </div>
-                <div className={classes.profileContainer} style={{opacity: visible ? '1.0' : '0'}}>
-                    <div className={classes.profileMenu}>
-                        <p>В профиль</p>
-                        <p onClick={logout}>Выйти</p>
+            ?
+            <div className={classes.profileWrapper}>
+                <div className={[classes.profileContainer, visible ? classes.profileWhiteSmokeBack : classes.profileWhiteBack].join(' ')}>
+                    <div className={classes.profile} onClick={toggle}>
+                        <p>{fio}</p>
+                        <div className={classes.profileIcon}/>
                     </div>
+                    {visible &&
+                        <div className={classes.profileMenu}>
+                            <p>В профиль</p>
+                            <p onClick={logout}>Выйти</p>
+                        </div>
+                    }
                 </div>
             </div>
             : null
