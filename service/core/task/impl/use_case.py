@@ -36,10 +36,11 @@ class IssueTaskListUseCaseImpl(IssueTaskListUseCase):
         variants = request.variants
 
         for index in range(len(users)):
+            variant = variants[index % len(variants)]
             session = SessionRq(
                 training=request.training,
                 type=SessionType.EXAM,
-                training_params=variants[index % len(variants)]
+                training_params=variant
             )
 
             user = users[index]

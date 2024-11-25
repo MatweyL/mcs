@@ -2,7 +2,7 @@ from abc import abstractmethod
 from typing import List
 
 from service.core.task.template.template_field import TemplateField
-from service.domain.training import TrainingType
+from service.domain.training import TrainingType, CHANNEL_NAME, FREQUENCY
 
 
 class TaskTemplateService:
@@ -10,19 +10,18 @@ class TaskTemplateService:
     def get_template(self, kind: str) -> List[TemplateField]:
         pass
 
-
 TEMPLATES = {
     TrainingType.UTK2.name: [
-        TemplateField(label='Частота, МГц', name='frequency'),
-        TemplateField(label='Название канала', name='channel_name')
+        TemplateField(label='Частота, МГц', name=FREQUENCY),
+        TemplateField(label='Название канала', name=CHANNEL_NAME)
     ],
     TrainingType.UTK3.name: [
-        TemplateField(label='Частота, МГц', name='frequency'),
-        TemplateField(label='Название канала', name='channel_name')
+        TemplateField(label='Частота, МГц', name=FREQUENCY),
+        TemplateField(label='Название канала', name=CHANNEL_NAME)
     ],
     TrainingType.UTK4.name: [
-        TemplateField(label='Частота, МГц', name='frequency'),
-        TemplateField(label='Название канала', name='channel_name')
+        TemplateField(label='Частота, МГц', name=FREQUENCY),
+        TemplateField(label='Название канала', name=CHANNEL_NAME)
     ]
 }
 

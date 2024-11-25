@@ -26,7 +26,7 @@ const ExamTaskBox = () => {
     return (
         isExam()
             ? <div className={classes.examTaskBox}>
-                <div>Выполните задание!</div>
+                <div><b>Задание</b></div>
                 <div>{taskDescription}</div>
             </div>
             : null

@@ -10,7 +10,7 @@ class UTK3Step1Validator(BaseStepValidator):
         utk3_params = UTK3Params.from_dict(session.training.params)
         return self.message_source.get_message(self.get_step_message_code(),
                                                channel_name=utk3_params.target_channel.name,
-                                               channel_mode=utk3_params.target_channel.mode,
+                                               channel_mode=utk3_params.target_channel.mode.value,
                                                channel_frequency=utk3_params.target_channel.frequency / 10 ** 6)  # MHz
 
     def __init__(self,
@@ -57,7 +57,7 @@ class UTK3Step2Validator(BaseStepValidator):
     def get_hint_message(self, session: Session) -> str:
         utk3_params = UTK3Params.from_dict(session.training.params)
         return self.message_source.get_message(self.get_step_message_code(),
-                                               direction_name=utk3_params.target_direction.name, )
+                                               channel_name=utk3_params.target_channel.name, )
 
     def __init__(self,
                  navigator: ScreenNavigator,

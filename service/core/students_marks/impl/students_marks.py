@@ -38,7 +38,7 @@ class GetStudentsMarksTableUseCaseImpl(GetStudentsMarksTableUseCase):
         for user_sessions in users_sessions:
             for session in user_sessions:
                 if session.type == SessionType.EXAM:
-                    cls = Class(name=session.title, date=session.date)
+                    cls = Class(name=session.training.kind, date=session.date)
                     classes.add(cls)
         classes_sorted_by_date = sorted(classes, key=lambda c: from_str_datetime_to_obj(c.date))
         return classes_sorted_by_date
@@ -60,10 +60,16 @@ class GetStudentsMarksTableUseCaseImpl(GetStudentsMarksTableUseCase):
         for cls in classes:
             if cls.date in session_by_date:
                 session = session_by_date[cls.date]
-                training_result = self.training_result_calculator.calculate(session)
-                mark = training_result.mark
+                mark = self.get_mark(session)
                 student_mark = StudentMark(session_id=session.date, mark=mark)
             else:
                 student_mark = StudentMark(session_id=None, mark=Mark.NOT_DEFINED)
             student_marks.results.append(student_mark)
         return student_marks
+
+    def get_mark(self, session):
+        try:
+            training_result = self.training_result_calculator.calculate(session)
+            return training_result.mark
+        except Exception:
+            return Mark.NOT_DEFINED

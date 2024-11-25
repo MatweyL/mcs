@@ -10,6 +10,7 @@ from service.domain.phone import Phone
 from service.domain.pprch import PPRCH
 from service.domain.session import Session, SessionAttempt, SessionStatus, SessionType
 from service.domain.session import Training
+from service.domain.training import TrainingType
 from service.domain.user import User, Role
 
 D = TypeVar('D')
@@ -140,7 +141,7 @@ class ChannelMapper(Mapper):
         entity = dict()
 
         entity['uid'] = channel.uid
-        entity['mode'] = channel.mode
+        entity['mode'] = channel.mode.name
         entity['name'] = channel.name
         entity['forbidden_send'] = channel.forbidden_send
         entity['ctcss'] = channel.ctcss
@@ -236,7 +237,7 @@ class SessionAttemptMapper(Mapper):
     def map_to_domain(self, entity: E) -> D:
         session_attempt = SessionAttempt()
         session_attempt.started = datetime.fromisoformat(entity['started'])
-        if session_attempt.finished:
+        if entity.get('finished', None):
             session_attempt.finished = datetime.fromisoformat(entity['finished'])
         return session_attempt
 
@@ -265,13 +266,13 @@ class TrainingMapper(Mapper):
         if entity is None:
             return None
 
-        return Training(kind=entity['kind'],
+        return Training(kind=TrainingType.from_name(entity['kind']),
                         params=entity['params'])
 
     def map_to_entity(self, domain: Training) -> dict:
         if domain is None:
             return None
 
-        entity = dict(kind=domain.kind,
+        entity = dict(kind=domain.kind.name,
                       params=domain.params)
         return entity

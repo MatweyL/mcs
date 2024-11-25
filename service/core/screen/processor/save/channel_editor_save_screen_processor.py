@@ -2,7 +2,7 @@ from typing import Dict, Any
 
 from service.common.utils import generate_uid
 from service.core.screen.processor.save.save_screen_processor import SaveScreenProcessor
-from service.domain.channel import Channel
+from service.domain.channel import Channel, ChannelMode
 from service.domain.session import Session
 
 
@@ -19,7 +19,7 @@ class ChannelEditorSaveScreenProcessor(SaveScreenProcessor):
             phone.channels.append(channel)
 
     def _fill_channel(self, channel: Channel, attributes: Dict[str, Any]):
-        channel.mode = attributes.get('CHANNEL_MODE')
+        channel.mode = ChannelMode.from_name(attributes.get('CHANNEL_MODE'))
         channel.name = attributes.get('NAME')
         channel.double_frequency = attributes.get('DOUBLE_FREQUENCY')
         channel.frequency = attributes.get('FREQUENCY')

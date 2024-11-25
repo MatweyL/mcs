@@ -14,7 +14,7 @@ class TaskDescriptionStrategy:
     def get_description(self, training):
         pass
 
-    def get_training_kind(self):
+    def get_training_kind(self) -> TrainingType:
         pass
 
 
@@ -23,7 +23,6 @@ class TaskDescriptionServiceImpl(TaskDescriptionService):
         self.strategies = strategies
 
     def get_description(self, training: Training):
-        training_kind = TrainingType.from_name(training.kind)
         for strategy in self.strategies:
-            if strategy.get_training_kind() == training_kind:
+            if strategy.get_training_kind() == training.kind:
                 return strategy.get_description(training)

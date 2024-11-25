@@ -82,7 +82,7 @@ const endpoints = {
         [MOCK_LOCAL_MODE]: endpoint => console.error(WARNING),
     },
     getGroupTimetable: {
-        [LOCAL_PY_MODE]: endpoint => axios.get(`${LOCAL_PY_URL}/groups`, config()),
+        [LOCAL_PY_MODE]: groupId => axios.get(`${LOCAL_PY_URL}/students/marks?group_uid=${groupId}`, config()),
         [MOCK_LOCAL_MODE]: groupId => axios.get(`${MOCK_LOCAL_URL}/mock-timetables/data-${groupId}.json`),
     },
     getTeachers: {
@@ -218,7 +218,7 @@ export default class API {
     }
 
     static async getGroupTimetable(groupId) {
-        const rs = await endpoints.getGroupTimetable[MOCK_LOCAL_MODE](groupId);
+        const rs = await endpoints.getGroupTimetable[NOW_MODE](groupId);
         console.log(rs);
         return rs.data.timetable;
     }

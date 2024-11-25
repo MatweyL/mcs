@@ -9,7 +9,7 @@ class TaskDescriptionStrategyUTK2(TaskDescriptionStrategy):
         return f"""Выполните настройку частоты в режиме ЧМ25. 
         Создайте канал с рабочей частотой {params.target_channel.frequency} МГц 
         и названием {params.target_channel.name}. 
-        Создайте и выберите для данного канал направление"""
+        Создайте и выберите для данного канала направление"""
 
     def get_training_kind(self):
         return TrainingType.UTK2
