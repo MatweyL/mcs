@@ -19,4 +19,5 @@ class GetUserListByGroupUseCaseImpl(GetUserListByGroupUseCase):
 
     def apply(self, request: GetUserListByGroupRq) -> UserListRs:
         users = self.group_repo.get_users_in_group(request.group_uid)
+        users.sort(key=lambda u: u.fio)
         return UserListRs(users=users)

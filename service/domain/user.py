@@ -22,6 +22,7 @@ class User:
         if not self.patronymic:
             return f"{self.surname} {self.name}"
         return f"{self.surname} {self.name} {self.patronymic}"
+
     def __hash__(self):
         return hash(self.uid)
 
