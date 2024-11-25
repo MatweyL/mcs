@@ -11,7 +11,7 @@ class UTK2Step1Validator(BaseStepValidator):
         utk2_params = UTK2Params.from_dict(session.training.params)
         return self.message_source.get_message(self.get_step_message_code(),
                                                channel_name=utk2_params.target_channel.name,
-                                               channel_mode=utk2_params.target_channel.mode,
+                                               channel_mode=utk2_params.target_channel.mode.value,
                                                channel_frequency=utk2_params.target_channel.frequency / 10 ** 6)  # MHz
 
     def __init__(self,
@@ -58,7 +58,7 @@ class UTK2Step2Validator(BaseStepValidator):
     def get_hint_message(self, session: Session) -> str:
         utk2_params = UTK2Params.from_dict(session.training.params)
         return self.message_source.get_message(self.get_step_message_code(),
-                                               direction_name=utk2_params.target_direction.name, )
+                                               channel_name=utk2_params.target_channel.name, )
 
     def __init__(self,
                  navigator: ScreenNavigator,

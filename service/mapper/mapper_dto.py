@@ -20,10 +20,10 @@ class Mapper:
 class SessionDtoMapper(Mapper):
     def __init__(self):
         self.conversions = {
-            "UTK1": "УТК-1. Включение питания",
-            "UTK2": "УТК-2. Настройка частоты в режиме ЧМ25",
-            "UTK3": "УТК-3. Настройка частоты в режиме ЧМ50",
-            "UTK4": "УТК-4. Настройка частоты в режиме ППРЧ"
+            TrainingType.UTK1: "УТК-1. Включение питания",
+            TrainingType.UTK2: "УТК-2. Настройка частоты в режиме ЧМ25",
+            TrainingType.UTK3: "УТК-3. Настройка частоты в режиме ЧМ50",
+            TrainingType.UTK4: "УТК-4. Настройка частоты в режиме ППРЧ"
         }
 
     def map_to_dto(self, domain: Session) -> SessionDto:

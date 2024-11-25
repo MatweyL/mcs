@@ -1,4 +1,6 @@
+from abc import abstractmethod
 from datetime import datetime
+from typing import Optional, Dict, Any
 
 from service.common.utils import from_str_datetime_to_obj
 from service.common.utils import now
@@ -10,10 +12,9 @@ from service.core.session.training import TrainingResultCalculatorService
 from service.core.session.training_validator.training_validator import TrainingValidatorRegistry
 from service.core.session.use_case import GetSessionListUseCase, GetSessionListRq, SessionListRs, CreateSessionUseCase, \
     CreateSessionRq, CreatedSessionRs, StartSessionUseCase, FinishSessionUseCase, FinishedSessionRs, FinishSessionRq, \
-    ValidateTrainingSessionUseCase, FindSessionListWithSameActiveFrequencyUseCase, GetActiveDirectionBySessionIdUseCase
+    ValidateTrainingSessionUseCase, FindSessionListWithSameActiveFrequencyUseCase, GetActiveDirectionBySessionIdUseCase, \
+    SessionRq
 from service.domain.phone import Phone
-from service.domain.session import Session, SessionStatus, SessionAttempt
-from service.domain.training import Training, TrainingType
 from service.domain.session import Session, SessionStatus, SessionAttempt
 from service.domain.training import Training, TrainingType
 from service.mapper.mapper_dto import SessionDtoMapper
@@ -47,14 +48,21 @@ class GetActiveDirectionBySessionIdUseCaseImpl(GetActiveDirectionBySessionIdUseC
         return ActiveDirectionFrequencyRs(frequency=str(channel.frequency))
 
 
+class TrainingFactory:
+    @abstractmethod
+    def create(self, training_kind: TrainingType, variant: Optional[Dict[str, Any]]) -> Training:
+        pass
+
+
 class CreateSessionUseCaseImpl(CreateSessionUseCase):
 
     def __init__(self,
                  session_repo: SessionRepo,
+                 training_factory: TrainingFactory,
                  session_dto_mapper: SessionDtoMapper):
         self.session_repo = session_repo
+        self.training_factory = training_factory
         self.session_dto_mapper = session_dto_mapper
-
 
     def apply(self, request: CreateSessionRq) -> CreatedSessionRs:
         dto = request.session
@@ -63,7 +71,7 @@ class CreateSessionUseCaseImpl(CreateSessionUseCase):
         session.user_uid = request.user_uid
         session.date = now()
         if dto.type != 'FREE':
-            session.training = Training(kind=dto.training, params=dto.training_params)
+            session.training = self.create_training(dto)
         session.type = dto.type
         session.phone = Phone()
         session.status = SessionStatus.READY
@@ -73,6 +81,10 @@ class CreateSessionUseCaseImpl(CreateSessionUseCase):
         session_dto = self.session_dto_mapper.map_to_dto(saved_session)
 
         return CreatedSessionRs(session=session_dto)
+
+    def create_training(self, dto: SessionRq):
+        training_kind = TrainingType.from_name(dto.training)
+        return self.training_factory.create(training_kind=training_kind, variant=dto.training_params)
 
 
 class StartSessionUseCaseImpl(StartSessionUseCase):

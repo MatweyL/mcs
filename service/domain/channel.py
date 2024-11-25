@@ -8,6 +8,11 @@ class ChannelMode(str, enum.Enum):
     CHM25 = 'ЧМ25'
     CHM50 = 'ЧМ50'
 
+    @staticmethod
+    def from_name(name: str) -> 'ChannelMode':
+        for channel_mode in ChannelMode:
+            if channel_mode.name == name:
+                return channel_mode
 
 
 @dataclass

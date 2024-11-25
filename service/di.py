@@ -42,6 +42,8 @@ from service.core.session.impl.use_case import GetSessionListUseCaseImpl, Create
     StartSessionUseCaseImpl, FinishSessionUseCaseImpl, ValidateTrainingSessionUseCaseImpl, \
     GetActiveDirectionBySessionIdUseCaseImpl
 from service.core.session.training import Mark
+from service.core.session.training_factory.training_factory import TrainingFactoryImpl, UTK2TrainingFactoryStrategy, \
+    UTK3TrainingFactoryStrategy
 from service.core.session.training_validator.step_validator_utk2 import UTK2Step1Validator, UTK2Step2Validator, \
     UTK2Step3Validator
 from service.core.session.training_validator.step_validator_utk3 import UTK3Step1Validator, UTK3Step3Validator, \
@@ -172,7 +174,12 @@ training_validator_registry = TrainingValidatorRegistry([training_validator_utk_
 
 session_dto_mapper = SessionDtoMapper()
 get_session_list_use_case = GetSessionListUseCaseImpl(session_repo, session_dto_mapper)
-create_session_use_case = CreateSessionUseCaseImpl(session_repo, session_dto_mapper)
+
+training_factory = TrainingFactoryImpl([
+    UTK2TrainingFactoryStrategy(),
+    UTK3TrainingFactoryStrategy()
+])
+create_session_use_case = CreateSessionUseCaseImpl(session_repo, training_factory, session_dto_mapper)
 
 start_session_use_case = StartSessionUseCaseImpl(session_repo)
 finish_session_use_case = FinishSessionUseCaseImpl(session_repo, training_result_calculator)

@@ -3,6 +3,7 @@ export class MarkColors {
     static FOUR = "#F1F2AC"
     static THREE = "#F2C9AC"
     static TWO = "#F2ACAC"
+    static UNDEFINED = "#D5D5D5"
 
     static _colors = {
         5: MarkColors.FIVE,
@@ -14,7 +15,7 @@ export class MarkColors {
     static of(value) {
         const color = MarkColors._colors[value];
         if (!color) {
-            throw new Error(`Неизвестное значение для цвета оценки - ${value}`);
+            return this.UNDEFINED
         }
         return color;
     }
