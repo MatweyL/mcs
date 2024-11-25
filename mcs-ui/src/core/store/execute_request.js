@@ -191,6 +191,8 @@ export const executeRequest = async (dispatch, request) => {
             let {variants, training, group} = request.payload;
 
             const rs = await API.issueTasks(variants, training, group);
+
+            dispatch({type: Actions.TASKS_ISSUED})
             return;
         }
     }

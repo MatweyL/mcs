@@ -7,7 +7,7 @@ class TaskDescriptionStrategyUTK2(TaskDescriptionStrategy):
         params: UTK2Params = UTK2Params.from_dict(training.params)
 
         return f"""Выполните настройку частоты в режиме ЧМ25. 
-        Создайте канал с рабочей частотой {params.target_channel.frequency} МГц 
+        Создайте канал с рабочей частотой {params.target_channel.frequency} Гц 
         и названием {params.target_channel.name}. 
         Создайте и выберите для данного канала направление"""
 

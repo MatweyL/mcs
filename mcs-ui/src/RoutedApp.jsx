@@ -9,9 +9,9 @@ const RoutedApp = () => {
 
     return (
         <BrowserRouter>
+            <Profile/>
             <Link to="/login"/>
             <AppRouter/>
-            <Profile/>
         </BrowserRouter>
     );
 };

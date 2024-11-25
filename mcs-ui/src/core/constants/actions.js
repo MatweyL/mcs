@@ -68,4 +68,6 @@ export default class Actions {
     static START_CALL = 'START_CALL';
 
     static END_CALL = 'END_CALL';
+
+    static TASKS_ISSUED = 'TASKS_ISSUED';
 }
