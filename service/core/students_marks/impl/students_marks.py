@@ -39,7 +39,7 @@ class GetStudentsMarksTableUseCaseImpl(GetStudentsMarksTableUseCase):
         for user_sessions in users_sessions:
             for session in user_sessions:
                 if session.type == SessionType.EXAM:
-                    cls = Class(name=session.training.kind, date=session.date)
+                    cls = Class(name=session.training.kind, date=session.date, class_uid=session.class_uid)
                     classes.add(cls)
         classes_sorted_by_date = sorted(classes, key=lambda c: from_str_datetime_to_obj(c.date))
         return classes_sorted_by_date
@@ -57,12 +57,12 @@ class GetStudentsMarksTableUseCaseImpl(GetStudentsMarksTableUseCase):
 
     def get_student_row(self, classes: List[Class], sessions: List[Session], user: User) -> StudentMarks:
         student_marks = StudentMarks(fio=user.fio, )
-        session_by_date = {session.date: session for session in sessions}
+        session_by_class_uid = {session.class_uid: session for session in sessions}
         for cls in classes:
-            if cls.date in session_by_date:
-                session = session_by_date[cls.date]
+            if cls.class_uid in session_by_class_uid:
+                session = session_by_class_uid[cls.class_uid]
                 mark = self.get_mark(session)
-                student_mark = StudentMark(session_id=session.date, mark=mark)
+                student_mark = StudentMark(session_id=session.date, mark=mark, class_uid=cls.class_uid)
             else:
                 student_mark = StudentMark(session_id=None, mark=Mark.NOT_DEFINED)
             student_marks.results.append(student_mark)

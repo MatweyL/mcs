@@ -35,3 +35,4 @@ class Session:
     attempts: List[SessionAttempt] = field(default_factory=list)
     training: Training = None
     type: SessionType = None
+    class_uid: str = None

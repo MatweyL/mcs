@@ -1,5 +1,5 @@
 from datetime import timedelta, datetime
-from random import randint
+from random import randint, choice
 from typing import List, Dict
 from uuid import uuid4
 
@@ -14,6 +14,7 @@ from service.core.students_marks.impl.students_marks import GetStudentsMarksTabl
 from service.domain.group import Group
 from service.domain.phone import Phone
 from service.domain.session import Session, SessionAttempt, SessionType
+from service.domain.training import Training, TrainingType
 from service.domain.user import User
 
 
@@ -54,15 +55,18 @@ def mock_group_repo():
     return MockGroupRepo()
 
 
-def generate_mock_session(title: str, date: str, session_type: SessionType = SessionType.EXAM, ) -> Session:
+def generate_mock_session(date: str,
+                          session_type: SessionType = SessionType.EXAM,
+                          class_uid: str = None) -> Session:
     datetime_now = datetime.now()
     return Session(uid=str(uuid4()),
-                   title=title,
                    date=date,
                    attempts=[SessionAttempt(started=datetime_now - timedelta(seconds=randint(30, 250)),
                                             finished=datetime_now)],
 
-                   type=session_type, )
+                   type=session_type,
+                   training=Training(kind=TrainingType.UTK2),
+                   class_uid=class_uid, )
 
 
 @pytest.fixture()
@@ -70,16 +74,19 @@ def mock_session_repo():
     class MockSessionRepo(SessionRepo):
 
         def __init__(self):
+            uid1 = str(uuid4())
+            uid2 = str(uuid4())
+            uid3 = str(uuid4())
             self._sessions_by_user_uid: Dict[str, List[Session]] = {
-                '1': [generate_mock_session('УТК-2', date='11/11/24 13:44'),
-                      generate_mock_session('УТК-3', date='11/11/24 15:20'),
-                      generate_mock_session('УТК-4', date='18/11/24 11:50')],
+                '1': [generate_mock_session('11/11/24 13:44', class_uid=uid1),
+                      generate_mock_session('11/11/24 15:20', class_uid=uid2),
+                      generate_mock_session('18/11/24 11:50', class_uid=uid3)],
 
-                '2': [generate_mock_session('УТК-2', date='11/11/24 13:44'),
-                      generate_mock_session('УТК-3', date='11/11/24 15:20'),
-                      generate_mock_session('УТК-4', date='18/11/24 11:50', session_type=SessionType.TRAINING)],
-                '3': [generate_mock_session('УТК-2', date='11/11/24 13:44'),
-                      generate_mock_session('УТК-3', date='11/11/24 15:20')],
+                '2': [generate_mock_session('11/11/24 13:44', class_uid=uid1),
+                      generate_mock_session('11/11/24 15:20', class_uid=uid2),
+                      generate_mock_session('18/11/24 11:50', class_uid=uid3, session_type=SessionType.TRAINING)],
+                '3': [generate_mock_session('11/11/24 13:44', class_uid=uid1),
+                      generate_mock_session('11/11/24 15:20', class_uid=uid3)],
             }
 
         def get_sessions(self, user_id: str) -> List[Session]:

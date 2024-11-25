@@ -1,4 +1,5 @@
 from typing import List
+from uuid import uuid4
 
 from service.core.group.use_case import GetUserListByGroupUseCase, GetUserListByGroupRq
 from service.core.session import CreateSessionUseCase, CreateSessionRq, SessionRq, SessionRepo
@@ -34,13 +35,15 @@ class IssueTaskListUseCaseImpl(IssueTaskListUseCase):
     def apply(self, request: IssueTaskListRq) -> IssueTaskListRs:
         users = self.get_users(request.group_id)
         variants = request.variants
+        class_uid = str(uuid4())
 
         for index in range(len(users)):
             variant = variants[index % len(variants)]
             session = SessionRq(
                 training=request.training,
                 type=SessionType.EXAM,
-                training_params=variant
+                training_params=variant,
+                class_uid=class_uid,
             )
 
             user = users[index]

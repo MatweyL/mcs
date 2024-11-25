@@ -75,6 +75,7 @@ class CreateSessionUseCaseImpl(CreateSessionUseCase):
         session.type = dto.type
         session.phone = Phone()
         session.status = SessionStatus.READY
+        session.class_uid = request.session.class_uid
 
         saved_session = self.session_repo.save_session(session)
 
