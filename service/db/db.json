@@ -822,6 +822,52 @@
         }
       },
       "type": "TRAINING"
+    },
+    {
+      "uid": "dd897740-c44e-4aa0-a899-cb829c14af41",
+      "date": "25/11/24 15:20",
+      "user_uid": "1668b4b4-6fee-4369-9108-b49403fb516e",
+      "phone": {
+        "active_direction": null,
+        "channels": [],
+        "directions": [],
+        "pprchs": []
+      },
+      "status": "READY",
+      "attempts": [],
+      "training": {
+        "kind": "UTK2",
+        "params": {
+          "channel_name": "re",
+          "channel_mode": "CHM25",
+          "frequency": 123000000
+        }
+      },
+      "type": "EXAM",
+      "class_uid": "71232ea5-7963-42c8-9fce-6d1c075e202d"
+    },
+    {
+      "uid": "de0034e8-22b2-4769-9460-62a091a405d6",
+      "date": "25/11/24 15:20",
+      "user_uid": "e66fbc08-833f-46e7-a7f1-ebd3f59e1790",
+      "phone": {
+        "active_direction": null,
+        "channels": [],
+        "directions": [],
+        "pprchs": []
+      },
+      "status": "READY",
+      "attempts": [],
+      "training": {
+        "kind": "UTK2",
+        "params": {
+          "channel_name": "re",
+          "channel_mode": "CHM25",
+          "frequency": 1000000
+        }
+      },
+      "type": "EXAM",
+      "class_uid": "71232ea5-7963-42c8-9fce-6d1c075e202d"
     }
   ],
   "screens": [],

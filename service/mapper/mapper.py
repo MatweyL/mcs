@@ -48,6 +48,7 @@ class SessionMapper(Mapper):
             session.attempts = [self.session_attempt_mapper.map_to_domain(attempt) for attempt in entity['attempts']]
         session.training = self.training_mapper.map_to_domain(entity['training'])
         session.type = entity.get('type', SessionType.FREE)
+        session.class_uid = entity.get('class_uid')
 
         return session
 
@@ -62,6 +63,7 @@ class SessionMapper(Mapper):
         entity['attempts'] = [self.session_attempt_mapper.map_to_entity(attempt) for attempt in session.attempts]
         entity['training'] = self.training_mapper.map_to_entity(session.training)
         entity['type'] = session.type
+        entity['class_uid'] = session.class_uid
         return entity
 
 

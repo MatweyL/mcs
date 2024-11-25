@@ -6,18 +6,21 @@ from typing import List
 class Class:
     name: str
     date: str
+    class_uid: str
 
     def __hash__(self):
-        return hash(f"{self.name} {self.date}")
+        return hash(f"{self.class_uid}")
 
     def __eq__(self, other):
-        return isinstance(other, Class) and self.name == other.name and self.date == other.date
+        return (isinstance(other, Class)
+                and self.class_uid == other.class_uid)
 
 
 @dataclass
 class StudentMark:
     session_id: str
     mark: str
+    class_uid: str = None
 
 
 @dataclass

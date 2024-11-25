@@ -26,6 +26,7 @@ class SessionRq(Request):
     training: Optional[str] = None
     type: str
     training_params: Any = None
+    class_uid: Optional[str] = None
 
 
 class GetSessionRq(Request):
