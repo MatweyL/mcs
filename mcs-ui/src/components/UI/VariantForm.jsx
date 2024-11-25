@@ -38,8 +38,9 @@ const VariantForm = ({trainingLabel, template, variants, index, setVariants, add
                 <div>{trainingLabel}</div>
             </div>
             {
-                template.map(field =>
-                    <Field title={field.label}
+                template.map((field, index) =>
+                    <Field key={index}
+                           title={field.label}
                            value={getOrEmpty(variant, field.name)}
                            onChange={e => updateVariant(e, field.name)}
                     />

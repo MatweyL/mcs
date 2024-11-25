@@ -8,14 +8,14 @@ const VariantListView = ({variants, template, trainingLabel}) => {
                 <div>
                     Проверьте корректность вариантов
                 </div>
-                <di>
+                <div>
                     <div><b>{trainingLabel}</b></div>
-                </di>
+                </div>
             </div>
             <div style={{height: "20px"}}/>
             <div style={{display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridGap: "20px"}}>
                 {variants.map((variant, index) =>
-                    <VariantItemView template={template} variant={variant} index={index}/>
+                    <VariantItemView key={index} template={template} variant={variant} index={index}/>
                 )}
             </div>
         </div>

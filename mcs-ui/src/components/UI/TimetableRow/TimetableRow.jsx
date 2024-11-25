@@ -6,8 +6,8 @@ const TimetableRow = ({row, params}) => {
     return (
         <tr className={classes.timetableRow}>
             <td className={classes.nameCell}>{row.fio}</td>
-            {row.results.map(result =>
-                <td className={classes.resultCell}>
+            {row.results.map((result, index) =>
+                <td key={index} className={classes.resultCell}>
                     <div className={classes.resultContainer}>
                         <Mark result={result}/>
                     </div>

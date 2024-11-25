@@ -22,7 +22,9 @@ export const fetchGroupTimetable = async (groupId) => (await API.getGroupTimetab
 
 export const fetchDevices = async () => (await API.getDevices());
 
-export const fetchTrainingTypes = async (device) => (await API.getTrainingTypes(device));
+export const fetchTrainingTypes = async (device) => (await API.getTrainingTypes(device)).map(
+    kind => {return {...kind, description: kind.rich_label};}
+);
 
 export const fetchDescription = async (sessionId) => (await API.getTaskDescription(sessionId)).description
 

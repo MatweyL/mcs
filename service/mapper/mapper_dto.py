@@ -2,8 +2,8 @@ from abc import abstractmethod
 from typing import TypeVar
 
 from service.core.session import SessionDto
+from service.domain.constants.training_names import TRAINING_NAMES
 from service.domain.session import Session, SessionType
-from service.domain.training import TrainingType
 
 D = TypeVar('D')
 E = TypeVar('E', bound=dict)
@@ -15,16 +15,9 @@ class Mapper:
         pass
 
 
-
-
 class SessionDtoMapper(Mapper):
     def __init__(self):
-        self.conversions = {
-            TrainingType.UTK1: "УТК-1. Включение питания",
-            TrainingType.UTK2: "УТК-2. Настройка частоты в режиме ЧМ25",
-            TrainingType.UTK3: "УТК-3. Настройка частоты в режиме ЧМ50",
-            TrainingType.UTK4: "УТК-4. Настройка частоты в режиме ППРЧ"
-        }
+        self.conversions = TRAINING_NAMES
 
     def map_to_dto(self, domain: Session) -> SessionDto:
         dto = SessionDto()
