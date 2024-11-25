@@ -10,7 +10,6 @@ export const useNavbarRoutes = (setNavbarRoutes) => {
     const role = useRole();
 
     return useEffect(() => {
-        console.log(authenticated, role);
         if (authenticated) {
             let targetRoutes = role === Roles.TEACHER
                 ? teacherRoutes

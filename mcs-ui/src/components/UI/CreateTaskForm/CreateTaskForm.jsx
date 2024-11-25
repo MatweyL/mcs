@@ -11,8 +11,7 @@ import {request} from "../../../hooks/request";
 import Requests from "../../../core/constants/requests";
 import {useDispatch} from "react-redux";
 
-const CreateTaskForm = ({group}) => {
-    const [visible, setVisible] = useState(false);
+const CreateTaskForm = ({group, visible, setVisible}) => {
     const [confirmCloseVisible, setConfirmCloseVisible] = useState(false);
     const [confirmIssueTaskVisible, setConfirmIssueTaskVisible] = useState(false);
 
@@ -50,7 +49,9 @@ const CreateTaskForm = ({group}) => {
         setVariants([]);
         if (training) {
             setEnabledVariants(true);
-            setTrainingLabel(kinds[training]?.rich_label)
+            const nowKind = kinds.find(kind => kind.value === training)
+            const label = nowKind ? nowKind.description: '';
+            setTrainingLabel(label);
             fetchTemplate(training).then(template => setTemplate(template))
         } else {
             setEnabledVariants(false);
@@ -58,7 +59,6 @@ const CreateTaskForm = ({group}) => {
     }, [training]);
 
     useEffect(() => {
-        console.log(variants);
         if (variants.length > 0) {
             setEnabledIssueTask(true)
         } else {
@@ -117,9 +117,6 @@ const CreateTaskForm = ({group}) => {
 
     return (
         <div>
-            <div style={{width: '150px', padding: "5px"}}>
-                <FormButton label={"Выдать задание"} onClick={() => setVisible(true)}/>
-            </div>
             <Modal visible={visible} close={() => setConfirmCloseVisible(true)}>
                 <div style={{display: "flex"}}>
                     <div style={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
@@ -132,7 +129,7 @@ const CreateTaskForm = ({group}) => {
                                 {
                                     variants.map((value, index) => {
                                         return (
-                                            <TextButton onClick={() => setNowForm(index + 1)}>
+                                            <TextButton key={index} onClick={() => setNowForm(index + 1)}>
                                                 Вариант {index + 1}
                                             </TextButton>
                                         )

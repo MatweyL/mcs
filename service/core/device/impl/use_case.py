@@ -1,5 +1,6 @@
 from service.core.device.use_case import GetDeviceListUseCase, GetDeviceListRq, DeviceListRs, \
     GetTrainingTypeListUseCase, GetTrainingTypeListRq, TrainingTypeListRs, Label
+from service.domain.constants.training_names import TRAINING_NAMES
 from service.domain.device import DeviceValues, DeviceValue
 
 
@@ -23,7 +24,6 @@ class GetTrainingTypeListUseCaseImpl(GetTrainingTypeListUseCase):
 
         types = []
         for training_type in device_value.kinds:
-            # FIXME: Добавить развернутое описание вида тренировки
-            types.append(Label(training_type.value, training_type.name, '123'))
+            types.append(Label(training_type.value, training_type.name, TRAINING_NAMES[training_type]))
 
         return TrainingTypeListRs(types)

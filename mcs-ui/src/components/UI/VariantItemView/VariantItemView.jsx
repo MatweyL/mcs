@@ -5,9 +5,9 @@ const VariantItemView = ({index, variant, template}) => {
     return (
         <div style={{backgroundColor: "lightgrey", borderRadius: "20px", padding: "20px"}} >
             <div>Вариант {index + 1}</div>
-            {template.map(field =>
+            {template.map((field, fieldIndex) =>
                 (
-                    <div >
+                    <div key={`${index}${field.name}${fieldIndex}`}>
                         <div style={{fontSize: "12px"}} >{field.label}</div>
                         <div>{getOrEmpty(variant, field.name)}</div>
                     </div>
