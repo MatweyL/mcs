@@ -3,6 +3,12 @@
     border-right: 1px solid grey;
 }
 
+.headDateCell {
+    font-size: 12px;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+}
+
 .headRow {
     border: 1px solid grey;
     border-right: none;

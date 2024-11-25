@@ -74,8 +74,8 @@ const CreateTaskForm = ({group}) => {
 
     const dispatch = useDispatch();
     const issueTask = () => {
-        console.log(variants);
         request(Requests.ISSUE_TASKS, {variants, training, group}, dispatch)
+        confirmClosing();
     }
 
     function getModal() {
@@ -109,7 +109,8 @@ const CreateTaskForm = ({group}) => {
 
     const confirmClosing = () => {
         setVisible(false);
-        setConfirmCloseVisible(false)
+        setConfirmCloseVisible(false);
+        setConfirmIssueTaskVisible(false);
         setVariants([]);
         setNowForm(0);
     }
