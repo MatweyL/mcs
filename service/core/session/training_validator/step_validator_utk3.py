@@ -113,13 +113,51 @@ class UTK3Step3Validator(BaseStepValidator):
         """
         Проверить валидность тренировки в сессии
         """
-        return False
+        target_direction = None
+        for channel in session.phone.channels:
+            for direction in session.phone.directions:
+                if direction.channel == channel.uid:
+                    target_direction = direction.uid
+                    break
+
+        return session.phone.active_direction == target_direction
 
     def get_order(self) -> int:
         """
         Получить номер шага
         """
         return 3
+
+    def get_target_screen_code(self) -> str:
+        """
+        Получить код экрана, на к-м нужно отобразить сообщение
+        """
+        return "SELECT_ACTIVE_DIRECTION"
+
+
+class UTK3Step4Validator(BaseStepValidator):
+    def __init__(self,
+                 navigator: ScreenNavigator,
+                 message_source: MessageSource):
+        super().__init__(navigator, message_source)
+
+    def get_step_message_code(self) -> str:
+        """
+        Получить код сообщения для валидатора
+        """
+        return UTKStepCode.UTK_3_STEP_4_CODE
+
+    def is_valid(self, session: Session) -> bool:
+        """
+        Проверить валидность тренировки в сессии
+        """
+        return False
+
+    def get_order(self) -> int:
+        """
+        Получить номер шага
+        """
+        return 4
 
     def get_target_screen_code(self) -> str:
         """

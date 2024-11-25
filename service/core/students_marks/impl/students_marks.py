@@ -29,6 +29,7 @@ class GetStudentsMarksTableUseCaseImpl(GetStudentsMarksTableUseCase):
                                for user_sessions in users_sessions]
         classes = self.get_classes(exam_users_sessions)
         student_marks_rows = self.get_students_rows(classes, exam_users_sessions, users)
+        student_marks_rows.sort(key=lambda sm: sm.fio)
         students_marks_table = StudentsMarksTable(classes=classes,
                                                   rows=student_marks_rows)
         return GetStudentsMarksTableRs(timetable=students_marks_table)
