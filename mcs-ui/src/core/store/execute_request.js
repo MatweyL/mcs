@@ -131,8 +131,12 @@ export const executeRequest = async (dispatch, request) => {
 
         // удаление выбранного элемента
         case Requests.DELETE: {
-            const {attribute, sessionId} = request.payload;
-            console.log(attribute)
+            const {attribute, sessionId, state} = request.payload;
+            const id = attribute[attribute.fieldName];
+            cacheService.put(CacheKeys.ELEMENT_ID_KEY, id);
+
+            const screenRs = await screenService.removeElementScreen(state.name, sessionId, id);
+            dispatch({type: Actions.INIT, payload: screenRs});
             return;
         }
 
@@ -141,7 +145,7 @@ export const executeRequest = async (dispatch, request) => {
             const {attribute, sessionId} = request.payload;
             console.log(attribute)
             const screen = attribute.openOnCreate;
-            const screenRs = await screenService.getScreen(screen, sessionId);
+            const screenRs = await screenService.createScreen(screen, sessionId);
             dispatch({type: Actions.INIT, payload: screenRs});
             return;
         }

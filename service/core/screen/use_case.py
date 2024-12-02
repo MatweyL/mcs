@@ -28,5 +28,11 @@ class GetScreenRq(Request):
 
 class GetScreenUseCase:
     @abstractmethod
+    def apply(self, request: GetScreenRq) -> dict:
+        pass
+
+
+class RemoveElementScreenUseCase:
+    @abstractmethod
     def apply(self, request: GetScreenRq) -> VoidResponse:
         pass

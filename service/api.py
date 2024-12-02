@@ -37,6 +37,13 @@ async def get_screen(screen_name: str, session_id: str, element_id: str = None):
     return screen_endpoint.get_screen(request)
 
 
+@auth_router.delete('/screen')
+async def remove_element_in_screen(screen_name: str, session_id: str, element_id: str = None):
+    logger.info(f'SESSION ID: {session_id}')
+    request = GetScreenRq(screen_name=screen_name, session_id=session_id, uid=element_id)
+    return screen_endpoint.remove_element_screen(request)
+
+
 @auth_router.post('/screen')
 async def save_screen(screen: Screen, session_id: str):
     request = SaveScreenRq(session_id=session_id, screen=screen)

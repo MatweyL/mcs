@@ -1,6 +1,7 @@
 from typing import Dict, Any
 
 from service.common.logs import logger
+from service.core.screen.constants.screen_constants import MAIN_SCREEN
 from service.core.screen.processor.get.get_screen_processor import GetScreenProcessor
 from service.domain.session import Session
 
@@ -21,4 +22,4 @@ class MainScreenGetScreenProcessor(GetScreenProcessor):
         attributes['MAIN_SCREEN_ATTRIBUTE']['activeChannelName'] = channel.name
 
     def get_screen_name(self) -> str:
-        return 'MAIN_SCREEN'
+        return MAIN_SCREEN

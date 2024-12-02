@@ -1,10 +1,15 @@
 from service.common.logs import logger
 from service.core.screen import ScreenRepo
 from service.core.screen.processor.get.get_screen_processor_registry import GetScreenProcessorRegistry
+from service.core.screen.processor.remove.remove_screen_element_processor import RemoveScreenElementProcessor
+from service.core.screen.processor.remove.remove_screen_element_processor_registry import \
+    RemoveScreenElementProcessorRegistry
 from service.core.screen.processor.save.save_screen_processor_registry import SaveScreenProcessorRegistry
-from service.core.screen.use_case import SaveScreenUseCase, GetScreenUseCase, GetScreenRq, SaveScreenRq
+from service.core.screen.use_case import SaveScreenUseCase, GetScreenUseCase, GetScreenRq, SaveScreenRq, \
+    RemoveElementScreenUseCase
 from service.core.session.repo import SessionRepo
 from service.core.use_case import VoidResponse
+from service.domain.session import Session
 
 
 class SaveScreenUseCaseImpl(SaveScreenUseCase):
@@ -51,3 +56,20 @@ class GetScreenUseCaseImpl(GetScreenUseCase):
         screen_template['status'] = session.status
 
         return screen_template
+
+
+class RemoveElementScreenUseCaseImpl(RemoveElementScreenUseCase):
+    def __init__(self,
+                 session_repo: SessionRepo,
+                 registry: RemoveScreenElementProcessorRegistry):
+        self.session_repo = session_repo
+        self.registry = registry
+
+    def apply(self, request: GetScreenRq) -> VoidResponse:
+        processor: RemoveScreenElementProcessor = self.registry.get_processor(request.screen_name)
+
+        session: Session = self.session_repo.get_session(request.session_id)
+        processor.process(session=session, element_id=request.uid)
+        self.session_repo.save_session(session)
+
+        return VoidResponse()
