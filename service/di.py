@@ -19,7 +19,7 @@ from service.core.group.impl.repo import GroupRepoImpl
 from service.core.group.impl.use_case import GetGroupListUseCaseImpl, GetUserListByGroupUseCaseImpl
 from service.core.screen import FileSystemScreenRepo
 from service.core.screen import ScreenEndpoint
-from service.core.screen.impl import SaveScreenUseCaseImpl, GetScreenUseCaseImpl
+from service.core.screen.impl import SaveScreenUseCaseImpl, GetScreenUseCaseImpl, RemoveElementScreenUseCaseImpl
 from service.core.screen.processor.get.channel_editor_get_screen_processor import ChannelEditorGetScreenProcessor
 from service.core.screen.processor.get.channel_list_get_screen_processor import ChannelListGetScreenProcessor
 from service.core.screen.processor.get.direction_editor_get_screen_processor import DirectionEditorGetScreenProcessor
@@ -29,6 +29,10 @@ from service.core.screen.processor.get.get_screen_processor_registry import GetS
 from service.core.screen.processor.get.main_screen_get_screen_processor import MainScreenGetScreenProcessor
 from service.core.screen.processor.get.select_active_direction_get_screen_processor import \
     SelectActiveDirectionGetScreenProcessor
+from service.core.screen.processor.remove.channel_remove_processor import ChannelRemoveElementScreenProcessor
+from service.core.screen.processor.remove.direction_remove_processor import DirectionRemoveElementScreenProcessor
+from service.core.screen.processor.remove.remove_screen_element_processor_registry import \
+    RemoveScreenElementProcessorRegistry
 from service.core.screen.processor.save import ChannelEditorSaveScreenProcessor
 from service.core.screen.processor.save.direction_editor_save_screen_processor import DirectionEditorSaveScreenProcessor
 from service.core.screen.processor.save.save_screen_processor_registry import SaveScreenProcessorRegistry
@@ -85,6 +89,11 @@ get_screen_processor_registry = GetScreenProcessorRegistry([ChannelListGetScreen
                                                             MainScreenGetScreenProcessor()],
                                                            DefaultGetScreenProcessor())
 
+remove_element_screen_processor_registry = RemoveScreenElementProcessorRegistry([
+    ChannelRemoveElementScreenProcessor(),
+    DirectionRemoveElementScreenProcessor()
+])
+
 screens_dir_path = get_root_path().joinpath('mcs-ui/public/screen')  # TODO: migrate to storage (mongo, redis, pg)
 screens_storage = FileSystemScreenRepo(screens_dir_path)
 
@@ -100,10 +109,12 @@ session_repo = InMemorySessionRepo(db, session_mapper)
 
 save_screen_use_case = SaveScreenUseCaseImpl(session_repo, save_screen_processor_registry)
 get_screen_use_case = GetScreenUseCaseImpl(session_repo, get_screen_processor_registry, screens_storage)
+remove_element_screen_use_case = RemoveElementScreenUseCaseImpl(session_repo, remove_element_screen_processor_registry)
 
 screen_endpoint = ScreenEndpoint(
     save_screen_use_case,
-    get_screen_use_case
+    get_screen_use_case,
+    remove_element_screen_use_case
 )
 
 student_mapper = StudentMapper()

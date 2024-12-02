@@ -13,7 +13,8 @@ class SelectActiveDirectionGetScreenProcessor(GetScreenProcessor):
             attributes[direction.uid] = {
                 'type': 'SELECTABLE_CARD_ITEM',
                 'label': direction.name,
-                'uid': direction.uid
+                'uid': direction.uid,
+                'used': session.phone.active_direction == direction.uid
             }
 
     def get_screen_name(self) -> str:

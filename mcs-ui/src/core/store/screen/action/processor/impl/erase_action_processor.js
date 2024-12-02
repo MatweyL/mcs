@@ -6,7 +6,12 @@ export class EraseActionProcessor extends ActionProcessor {
 
     process(state, action) {
         const attribute = state.attributes[state.selectedAttribute];
-        attribute.value = AttributeHelper.getTextValueOrEmpty(attribute).slice(0, -1);
+        let notNullValue = AttributeHelper.getTextValueOrEmpty(attribute)
+        if (attribute.numeric) {
+            attribute.value = parseInt(String(notNullValue).slice(0, -1))
+        } else {
+            attribute.value = notNullValue.slice(0, -1);
+        }
         return {...state, attributes: {...state.attributes, [attribute.name]: attribute}};
     }
 

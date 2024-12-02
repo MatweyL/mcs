@@ -1,5 +1,6 @@
 from typing import Dict, Any
 
+from service.core.screen.constants.screen_constants import DIRECTION_LIST
 from service.core.screen.processor.get.get_screen_processor import GetScreenProcessor
 from service.domain.session import Session
 
@@ -12,8 +13,9 @@ class DirectionListGetScreenProcessor(GetScreenProcessor):
             attributes[direction.uid] = {
                 'type': 'CARD_ITEM',
                 'label': direction.name,
-                'uid': direction.uid
+                'uid': direction.uid,
+                'used': session.phone.active_direction == direction.uid
             }
 
     def get_screen_name(self) -> str:
-        return 'DIRECTION_LIST'
+        return DIRECTION_LIST

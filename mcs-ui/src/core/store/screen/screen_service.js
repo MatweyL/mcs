@@ -6,6 +6,20 @@ import {cacheService} from "../../di";
 import {CacheKeys} from "../cache_service";
 
 export class ScreenService {
+    async removeElementScreen(screenName, sessionId, id) {
+        if (!sessionId) {
+            sessionId = cacheService.get(CacheKeys.SESSION_ID_KEY);
+        }
+
+        if (!id) {
+            id = cacheService.get(CacheKeys.ELEMENT_ID_KEY);
+        }
+
+        const response = await API.removeElementScreen(screenName, sessionId, id);
+
+        return await this.processResponse(response, sessionId);
+    }
+
     async getScreen(screenName, sessionId, id) {
         if (!sessionId) {
             sessionId = cacheService.get(CacheKeys.SESSION_ID_KEY);
@@ -16,6 +30,22 @@ export class ScreenService {
         }
 
         const response = await API.getScreen(screenName, sessionId, id);
+
+        return await this.processResponse(response, sessionId);
+    }
+
+
+    async createScreen(screenName, sessionId) {
+        if (!sessionId) {
+            sessionId = cacheService.get(CacheKeys.SESSION_ID_KEY);
+        }
+
+        const response = await API.createNewScreen(screenName, sessionId);
+
+        return this.processResponse(response, sessionId);
+    }
+
+    async processResponse(response, sessionId) {
         const data = response.data;
 
         const attributes = data.attributes;
@@ -28,7 +58,6 @@ export class ScreenService {
             await this.fillDictionary(attributes[dictionaryName], sessionId);
         }
         navigator.push(data.name);
-
         return data;
     }
 

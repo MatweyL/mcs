@@ -1,6 +1,7 @@
 from typing import Dict, Any
 
 from service.common.logs import logger
+from service.core.screen.constants.screen_constants import CHANNEL_EDITOR
 from service.core.screen.processor.get.get_screen_processor import GetScreenProcessor
 from service.domain.session import Session
 
@@ -26,4 +27,4 @@ class ChannelEditorGetScreenProcessor(GetScreenProcessor):
         attributes['CTCSS']['value'] = found_channel.ctcss
 
     def get_screen_name(self) -> str:
-        return "CHANNEL_EDITOR"
+        return CHANNEL_EDITOR

@@ -40,5 +40,6 @@ class SessionEndpoint:
     def validate_training_session(self, request: ValidateTrainingSessionRq) -> ValidateTrainingSessionRs:
         return self.validate_training_session_use_case.apply(request)
 
+    # FIXME: 02.12.2024 Сессия не должна знать про phone
     def get_active_direction_by_session_id(self, request: GetSessionRq) -> ActiveDirectionFrequencyRs:
         return self.get_active_direction_by_session_id_use_case.apply(request)

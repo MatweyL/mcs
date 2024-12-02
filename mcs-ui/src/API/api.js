@@ -40,6 +40,11 @@ const endpoints = {
             return axios.get(`${MOCK_LOCAL_URL}/screen/${screenName}/screen.json`, config())
         }
     },
+    removeScreenElement: {
+        [LOCAL_PY_MODE]: async (screenName, sessionId, id) => {
+            return axios.delete(`${LOCAL_PY_URL}/screen?screen_name=${screenName}&session_id=${sessionId}&element_id=${id}`, config())
+        }
+    },
     saveScreen: {
         [LOCAL_PY_MODE]: async (body, sessionId) => {
             return axios.post(`${LOCAL_PY_URL}/screen?session_id=${sessionId}`, body, config())
@@ -136,6 +141,18 @@ export default class API {
 
     static async getScreen(screenName, sessionId, id) {
         const rs = await endpoints.getScreen[NOW_MODE](screenName, sessionId, id);
+        console.log(rs)
+        return rs;
+    }
+
+    static async createNewScreen(screenName, sessionId) {
+        const rs = await endpoints.getScreen[NOW_MODE](screenName, sessionId);
+        console.log(rs)
+        return rs;
+    }
+
+    static async removeElementScreen(screenName, sessionId, id) {
+        const rs = await endpoints.removeScreenElement[NOW_MODE](screenName, sessionId, id);
         console.log(rs)
         return rs;
     }

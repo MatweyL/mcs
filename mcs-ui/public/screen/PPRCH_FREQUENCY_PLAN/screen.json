@@ -4,7 +4,8 @@
   "attributes": {
     "EMPTY": {
       "type": "CARD_ITEM",
-      "label": "Пустой список"
+      "label": "Пустой список",
+      "default": true
     }
   }
 }
