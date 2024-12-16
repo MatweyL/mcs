@@ -69,3 +69,7 @@ class UTK3Params:
         )
         # target_direction = Direction(**params['target_direction'])
         return UTK3Params(target_channel)
+
+
+class UTK4Params:
+    pass

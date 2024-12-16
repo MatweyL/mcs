@@ -5,6 +5,7 @@ from typing import TypeVar
 from service.common.utils import convert_str_to_enum
 from service.domain.channel import Channel, ChannelMode
 from service.domain.direction import Direction
+from service.domain.frequency_plan import FrequencyPlan
 from service.domain.group import Group
 from service.domain.phone import Phone
 from service.domain.pprch import PPRCH
@@ -71,10 +72,10 @@ class PhoneMapper(Mapper):
     def __init__(self,
                  channel_mapper: 'ChannelMapper',
                  direction_mapper: 'DirectionMapper',
-                 pprch_mapper: 'PPRCHMapper'):
+                 frequency_plan_mapper: 'FrequencyPlanMapper'):
         self.direction_mapper = direction_mapper
         self.channel_mapper = channel_mapper
-        self.pprch_mapper = pprch_mapper
+        self.frequency_plan_mapper = frequency_plan_mapper
 
     def map_to_domain(self, entity: E) -> D:
         phone = Phone()
@@ -82,7 +83,7 @@ class PhoneMapper(Mapper):
         phone.channels = [self.channel_mapper.map_to_domain(c) for c in entity['channels']]
         phone.directions = [self.direction_mapper.map_to_domain(d) for d in entity['directions']]
         # get with default arg for backward compatibility
-        phone.pprchs = [self.pprch_mapper.map_to_domain(p) for p in entity.get('pprchs', [])]
+        phone.pprchs = [self.frequency_plan_mapper.map_to_domain(p) for p in entity.get('frequency_plans', [])]
         return phone
 
     def map_to_entity(self, phone: Phone) -> E:
@@ -90,7 +91,7 @@ class PhoneMapper(Mapper):
         entity['active_direction'] = phone.active_direction
         entity['channels'] = [self.channel_mapper.map_to_entity(c) for c in phone.channels]
         entity['directions'] = [self.direction_mapper.map_to_entity(d) for d in phone.directions]
-        entity['pprchs'] = [self.pprch_mapper.map_to_entity(p) for p in phone.pprchs]
+        entity['pprchs'] = [self.frequency_plan_mapper.map_to_entity(p) for p in phone.frequency_plans]
 
         return entity
 
@@ -121,6 +122,26 @@ class DirectionMapper(Mapper):
         entity['scan_list'] = direction.scan_list
         entity['economizer'] = direction.economizer
 
+        return entity
+
+
+class FrequencyPlanMapper(Mapper):
+
+    def __init__(self, pprch_mapper: 'PPRCHMapper'):
+        self.pprch_mapper = pprch_mapper
+
+    def map_to_domain(self, entity: E) -> FrequencyPlan:
+        frequency_plan = FrequencyPlan()
+
+        frequency_plan.uid = entity['uid']
+        frequency_plan.pprchs = [self.pprch_mapper.map_to_domain(p) for p in entity.get('pprchs', [])]
+        return frequency_plan
+
+    def map_to_entity(self, domain: FrequencyPlan) -> E:
+        entity = dict()
+
+        entity['uid'] = domain.uid
+        entity['pprchs'] = [self.pprch_mapper.map_to_entity(p) for p in domain.pprchs]
         return entity
 
 

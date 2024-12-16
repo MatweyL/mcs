@@ -1,0 +1,19 @@
+{
+  "name": "PPRCH_FREQUENCY_PLAN_EDITOR",
+  "label": "Частотный план",
+  "attributes": {
+    "PLAN_ID": {
+      "label": "Скрытый атрибут с идентификатором плана",
+      "visible": false,
+      "type": "TEXT"
+    },
+    "EMPTY": {
+      "type": "CARD_ITEM",
+      "label": "Пустой список",
+      "default": true,
+      "openOnCreate": "FREQUENCY_RANGE_EDITOR",
+      "openOnEdit": "FREQUENCY_RANGE_EDITOR",
+      "fieldName": "uid"
+    }
+  }
+}

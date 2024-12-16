@@ -6,7 +6,7 @@ from service.common.logs import logger
 from service.core.session import TrainingResult
 from service.core.session.training import TrainingResultCalculatorStrategy, Mark, TrainingResultCalculatorService
 from service.domain.session import Session
-from service.domain.training import UTK2Params, UTK3Params, TrainingType
+from service.domain.training import UTK2Params, UTK3Params, TrainingType, UTK4Params
 
 
 class CalculateMarkByTime:
@@ -130,6 +130,36 @@ class UTK3ResultCalculatorStrategy(TrainingResultCalculatorStrategy):
     def get_name(self):
         return TrainingType.UTK3
 
+
+class UTK4ResultCalculatorStrategy(TrainingResultCalculatorStrategy):
+
+    def __init__(self, mark_by_time_calculator: CalculateMarkByTime):
+        self.mark_by_time_calculator = mark_by_time_calculator
+
+    def calculate(self, session: Session) -> TrainingResult:
+        training_result = self.mark_by_time_calculator.calculate(session)
+
+        utk4_params = UTK4Params.from_dict(session.training.params)
+        target_channel = None
+        for channel in session.phone.channels:
+            if (channel.name == utk4_params.target_channel.name
+                    and channel.frequency == utk4_params.target_channel.frequency
+                    and channel.mode == utk4_params.target_channel.mode):
+                target_channel = channel
+                break
+        if not target_channel:
+            logger.info(f'{session.uid} has not correct channel')
+            training_result.mark = Mark.ONE
+            return training_result
+        has_correct_direction = any(direction.channel == target_channel.uid for direction in session.phone.directions)
+        if not has_correct_direction:
+            logger.info(f'{session.uid} has not correct direction')
+            training_result.mark = Mark.ONE
+            return training_result
+        return training_result
+
+    def get_name(self):
+        return TrainingType.UTK3
 
 class TrainingResultCalculatorServiceImpl(TrainingResultCalculatorService):
     def calculate(self, session: Session) -> TrainingResult:
