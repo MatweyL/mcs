@@ -14,6 +14,7 @@ export default class Buttons {
     static CLOSE_SELECT_BOX_BUTTON = {action: {type: Actions.CLOSE_SELECT_BOX}, label: Labels.BACK}
 
     static OPEN_MENU_BUTTON = {action: {type: Actions.OPEN_MENU}, label: Labels.MENU}
+    static CLICK_BUTTON = {action: {type: Actions.EMPTY_ACTION}, label: Labels.CLICK}
 
     static SELECT_CARD_ITEM = {action: {type: Requests.SAVE, request: true}, label: Labels.SELECT}
 
@@ -22,6 +23,8 @@ export default class Buttons {
     }
 
     static OPEN_SELECT_BOX_BUTTON = {action: {type: Actions.OPEN_SELECT_BOX}, label: Labels.SELECT}
+
+    // кнопка для мультивыбора (дефолтная)
     static MULTISELECT_BUTTON = {
         action: {type: Actions.MULTISELECT},
         label: Labels.SELECT,
@@ -31,6 +34,8 @@ export default class Buttons {
             {label: Labels.DELETE, active: false, action: {type: Requests.DELETE, request: true}},
         ]
     }
+
+    // кнопка для мультивыбора
 
     static SAVE_SELECTED_BUTTON = {action: {type: Actions.SAVE_SELECTED}, label: Labels.SELECT}
 }

@@ -5,6 +5,7 @@ export default class Labels {
     static SAVE = 'Сохранить';
     static BACK = 'Назад';
     static MENU = 'Меню';
+    static CLICK = 'Нажать';
     static SELECT = 'Выбрать';
     static ADD = 'Добавить';
     static DELETE = 'Удалить';

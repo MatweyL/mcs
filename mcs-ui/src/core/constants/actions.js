@@ -5,6 +5,9 @@ export default class Actions {
     // Обновление атрибута
     static UPDATE_ATTRIBUTE = "UPDATE_ATTRIBUTE";
 
+    // Пустое действие
+    static EMPTY_ACTION = "EMPTY_ACTION";
+
     // Выбор следующего атрибута кнопкой "Вверх"
     static UP = "UP";
 

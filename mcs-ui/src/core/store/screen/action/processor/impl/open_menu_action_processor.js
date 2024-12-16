@@ -8,16 +8,20 @@ export class OpenMenuActionProcessor extends ActionProcessor {
         const nowAttributeName = state.selectedAttribute;
         const nowAttribute = state.attributes[nowAttributeName];
 
-        state.buttons.leftButton = this._getLeftButtons(nowAttribute.default);
+        state.buttons.leftButton = this._getLeftButtons(nowAttribute);
         state.buttons.leftButton.open = true;
         state.buttons.rightButton = Buttons.CLOSE_MENU_BUTTON;
 
         return {...state}
     }
 
-    _getLeftButtons(empty) {
+    _getLeftButtons(attribute) {
+        if (attribute.menu) {
+            return attribute.menu;
+        }
+
         let button = {...Buttons.MULTISELECT_BUTTON};
-        if (!empty) {
+        if (!attribute.default) {
             return button
         }
 

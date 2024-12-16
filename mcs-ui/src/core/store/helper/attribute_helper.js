@@ -8,6 +8,10 @@ export default class AttributeHelper {
         return attribute.visible !== false;
     }
 
+    static isClickable(attribute) {
+        return attribute.type !== Attributes.STATIC_TEXT;
+    }
+
     static isNotVisible(attribute) {
         return attribute.visible !== true;
     }
