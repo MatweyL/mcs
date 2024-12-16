@@ -22,7 +22,7 @@ class FrequencyRangeEditorSaveScreenProcessor(SaveScreenProcessor):
         else:
             channel = PPRCH(uid=generate_uid())
             self._fill_pprch(channel, attributes)
-            phone.channels.append(channel)
+            # FIXME: добавить проставление в frequency_plans
 
     def _fill_pprch(self, pprch: PPRCH, attributes: Dict[str, Any]):
         pprch.higher = attributes.get('HIGH_FREQUENCY')

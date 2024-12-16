@@ -35,6 +35,8 @@ from service.core.screen.processor.remove.remove_screen_element_processor_regist
     RemoveScreenElementProcessorRegistry
 from service.core.screen.processor.save import ChannelEditorSaveScreenProcessor
 from service.core.screen.processor.save.direction_editor_save_screen_processor import DirectionEditorSaveScreenProcessor
+from service.core.screen.processor.save.frequency_range_editor_save_screen_processor import \
+    FrequencyRangeEditorSaveScreenProcessor
 from service.core.screen.processor.save.save_screen_processor_registry import SaveScreenProcessorRegistry
 from service.core.screen.processor.save.select_active_direction_save_screen_processor import \
     SelectActiveDirectionSaveScreenProcessor
@@ -75,7 +77,8 @@ update_screen_by_alias()
 
 save_screen_processor_registry = SaveScreenProcessorRegistry([ChannelEditorSaveScreenProcessor(),
                                                               DirectionEditorSaveScreenProcessor(),
-                                                              SelectActiveDirectionSaveScreenProcessor()])
+                                                              SelectActiveDirectionSaveScreenProcessor(),
+                                                              FrequencyRangeEditorSaveScreenProcessor()])
 
 db_json_path = get_root_path().joinpath('service/db/db.json')
 db = JsonDb(db_json_path)

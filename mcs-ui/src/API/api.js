@@ -52,7 +52,7 @@ const endpoints = {
     },
     saveScreen: {
         [LOCAL_PY_MODE]: async (body, sessionId) => {
-            return axios.post(`${LOCAL_PY_URL}/screen?session_id=${sessionId}`, body, config())
+            return axios.put(`${LOCAL_PY_URL}/screen?session_id=${sessionId}`, body, config())
         },
         [MOCK_LOCAL_MODE]: (body, sessionId) => {
             console.log(body)
