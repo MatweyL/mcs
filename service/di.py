@@ -68,7 +68,7 @@ from service.core.user.impl.use_case import RegisterUserUseCaseImpl, Authenticat
 from service.db.db import JsonDb
 from service.domain.training import TrainingType
 from service.mapper.mapper import TrainingMapper, SessionAttemptMapper, ChannelMapper, DirectionMapper, PPRCHMapper, \
-    PhoneMapper, SessionMapper, StudentMapper, TeacherMapper, GroupMapper
+    PhoneMapper, SessionMapper, StudentMapper, TeacherMapper, GroupMapper, FrequencyPlanMapper
 from service.mapper.mapper_dto import SessionDtoMapper
 
 update_screen_by_alias()
@@ -101,7 +101,8 @@ session_attempt_mapper = SessionAttemptMapper()
 channel_mapper = ChannelMapper()
 direction_mapper = DirectionMapper()
 pprch_mapper = PPRCHMapper()
-phone_mapper = PhoneMapper(channel_mapper, direction_mapper, pprch_mapper)
+frequency_plan_mapper = FrequencyPlanMapper(pprch_mapper)
+phone_mapper = PhoneMapper(channel_mapper, direction_mapper, frequency_plan_mapper)
 training_mapper = TrainingMapper()
 session_mapper = SessionMapper(phone_mapper, session_attempt_mapper, training_mapper, )
 

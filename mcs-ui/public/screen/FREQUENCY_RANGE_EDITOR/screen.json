@@ -2,6 +2,11 @@
   "name": "FREQUENCY_RANGE_EDITOR",
   "label": "Редактор частоты",
   "attributes": {
+    "PPRCH_ID": {
+      "label": "Скрытый атрибут с идентификатором ППРЧ",
+      "visible": false,
+      "type": "TEXT"
+    },
     "LOW_FREQUENCY": {
       "name": "LOW_FREQUENCY",
       "label": "Нижняя:",
