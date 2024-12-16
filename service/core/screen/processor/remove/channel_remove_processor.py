@@ -9,5 +9,9 @@ class ChannelRemoveElementScreenProcessor(RemoveScreenElementProcessor):
         founded = phone.find_channel(element_id)
         phone.channels.remove(founded)
 
+        for direction in phone.directions:
+            if direction.channel == element_id:
+                direction.channel = None
+
     def get_screen_name(self) -> str:
         return CHANNEL_LIST

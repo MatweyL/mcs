@@ -5,7 +5,6 @@ import Buttons from "../../../constants/buttons";
 export class ButtonsFactory {
     create(attributeType) {
 
-
         const leftButton = BUTTONS_STATE[ButtonsLayout.LEFT][attributeType];
         const rightButton = BUTTONS_STATE[ButtonsLayout.RIGHT][attributeType];
 

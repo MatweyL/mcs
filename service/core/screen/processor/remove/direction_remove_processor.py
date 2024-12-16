@@ -9,5 +9,8 @@ class DirectionRemoveElementScreenProcessor(RemoveScreenElementProcessor):
         founded = phone.find_direction(element_id)
         phone.directions.remove(founded)
 
+        if phone.active_direction == element_id:
+            phone.active_direction = None
+
     def get_screen_name(self) -> str:
         return DIRECTION_LIST
