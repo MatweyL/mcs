@@ -31,7 +31,7 @@ export class ScreenService {
 
         const response = await API.getScreen(screenName, sessionId, id);
 
-        return await this.processResponse(response, sessionId);
+        return await this.processResponse(response, sessionId, id);
     }
 
 
@@ -45,7 +45,7 @@ export class ScreenService {
         return this.processResponse(response, sessionId);
     }
 
-    async processResponse(response, sessionId) {
+    async processResponse(response, sessionId, id) {
         const data = response.data;
 
         const attributes = data.attributes;
@@ -57,7 +57,7 @@ export class ScreenService {
             console.log(dictionaryName);
             await this.fillDictionary(attributes[dictionaryName], sessionId);
         }
-        navigator.push(data.name);
+        navigator.push({name: data.name, id});
         return data;
     }
 

@@ -35,6 +35,8 @@ from service.core.screen.processor.remove.remove_screen_element_processor_regist
     RemoveScreenElementProcessorRegistry
 from service.core.screen.processor.save import ChannelEditorSaveScreenProcessor
 from service.core.screen.processor.save.direction_editor_save_screen_processor import DirectionEditorSaveScreenProcessor
+from service.core.screen.processor.save.frequency_range_editor_save_screen_processor import \
+    FrequencyRangeEditorSaveScreenProcessor
 from service.core.screen.processor.save.save_screen_processor_registry import SaveScreenProcessorRegistry
 from service.core.screen.processor.save.select_active_direction_save_screen_processor import \
     SelectActiveDirectionSaveScreenProcessor
@@ -68,14 +70,15 @@ from service.core.user.impl.use_case import RegisterUserUseCaseImpl, Authenticat
 from service.db.db import JsonDb
 from service.domain.training import TrainingType
 from service.mapper.mapper import TrainingMapper, SessionAttemptMapper, ChannelMapper, DirectionMapper, PPRCHMapper, \
-    PhoneMapper, SessionMapper, StudentMapper, TeacherMapper, GroupMapper
+    PhoneMapper, SessionMapper, StudentMapper, TeacherMapper, GroupMapper, FrequencyPlanMapper
 from service.mapper.mapper_dto import SessionDtoMapper
 
 update_screen_by_alias()
 
 save_screen_processor_registry = SaveScreenProcessorRegistry([ChannelEditorSaveScreenProcessor(),
                                                               DirectionEditorSaveScreenProcessor(),
-                                                              SelectActiveDirectionSaveScreenProcessor()])
+                                                              SelectActiveDirectionSaveScreenProcessor(),
+                                                              FrequencyRangeEditorSaveScreenProcessor()])
 
 db_json_path = get_root_path().joinpath('service/db/db.json')
 db = JsonDb(db_json_path)
@@ -101,7 +104,8 @@ session_attempt_mapper = SessionAttemptMapper()
 channel_mapper = ChannelMapper()
 direction_mapper = DirectionMapper()
 pprch_mapper = PPRCHMapper()
-phone_mapper = PhoneMapper(channel_mapper, direction_mapper, pprch_mapper)
+frequency_plan_mapper = FrequencyPlanMapper(pprch_mapper)
+phone_mapper = PhoneMapper(channel_mapper, direction_mapper, frequency_plan_mapper)
 training_mapper = TrainingMapper()
 session_mapper = SessionMapper(phone_mapper, session_attempt_mapper, training_mapper, )
 

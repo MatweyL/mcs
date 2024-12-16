@@ -1,6 +1,7 @@
 import axios from "axios";
 import {dictionaryCache} from "../core/store/dictionary_cache";
 import {cacheService} from "../core/di";
+import {navigator} from "../core/store/screen/navigator";
 import {HINT} from "./api_helper";
 import {CacheKeys} from "../core/store/cache_service";
 
@@ -21,6 +22,10 @@ const config = () => {
     return {headers: {Authorization: `Bearer ${token()}`}}
 }
 
+const navigatorContext = () => {
+    return {"navigation_steps": navigator._get()};
+}
+
 const WARNING = "Отсутствует заглушка"
 
 const endpoints = {
@@ -34,7 +39,7 @@ const endpoints = {
     },
     getScreen: {
         [LOCAL_PY_MODE]: async (screenName, sessionId, id) => {
-            return axios.get(`${LOCAL_PY_URL}/screen?screen_name=${screenName}&session_id=${sessionId}&element_id=${id}`, config())
+            return axios.post(`${LOCAL_PY_URL}/screen?screen_name=${screenName}&session_id=${sessionId}&element_id=${id}`, navigatorContext(), config())
         },
         [MOCK_LOCAL_MODE]: (screenName, sessionId, id) => {
             return axios.get(`${MOCK_LOCAL_URL}/screen/${screenName}/screen.json`, config())
@@ -47,7 +52,7 @@ const endpoints = {
     },
     saveScreen: {
         [LOCAL_PY_MODE]: async (body, sessionId) => {
-            return axios.post(`${LOCAL_PY_URL}/screen?session_id=${sessionId}`, body, config())
+            return axios.put(`${LOCAL_PY_URL}/screen?session_id=${sessionId}`, body, config())
         },
         [MOCK_LOCAL_MODE]: (body, sessionId) => {
             console.log(body)

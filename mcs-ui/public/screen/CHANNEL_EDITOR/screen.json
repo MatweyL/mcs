@@ -85,7 +85,7 @@
         }
       ]
     },
-        "MCC": {
+    "MCC": {
       "name": "MCC",
       "label": "MCC",
       "type": "TEXT",

@@ -11,7 +11,7 @@ from service.core.auth.auth_context import AuthContext
 from service.core.device.use_case import GetDeviceListRq, GetTrainingTypeListRq
 from service.core.dictionary.use_case import GetDictionaryRq
 from service.core.group.use_case import GetUserListByGroupRq
-from service.core.screen import GetScreenRq, SaveScreenRq, Screen
+from service.core.screen import GetScreenRq, SaveScreenRq, Screen, NavigatorContext
 from service.core.session import GetSessionListRq, CreateSessionRq, StartSessionRq, FinishSessionRq, SessionRq, \
     ValidateTrainingSessionRq, GetSessionRq, ActiveDirectionFrequencyRs
 from service.core.students_marks.use_case import GetStudentsMarksTableRq
@@ -30,10 +30,13 @@ async def get_dictionary(dictionary_type: str, session_id: str):
     return dictionary_endpoint.get_dictionary(request)
 
 
-@auth_router.get('/screen')
-async def get_screen(screen_name: str, session_id: str, element_id: str = None):
+@auth_router.post('/screen')
+async def get_screen(navigator_context: NavigatorContext, screen_name: str, session_id: str, element_id: str = None):
+    navigation_steps = navigator_context.navigation_steps
+    logger.info(f'NAVIGATIONS STEPS: {navigation_steps}')
     logger.info(f'SESSION ID: {session_id}')
-    request = GetScreenRq(screen_name=screen_name, session_id=session_id, uid=element_id)
+    request = GetScreenRq(screen_name=screen_name, session_id=session_id, uid=element_id,
+                          navigation_steps=navigation_steps)
     return screen_endpoint.get_screen(request)
 
 
@@ -44,7 +47,7 @@ async def remove_element_in_screen(screen_name: str, session_id: str, element_id
     return screen_endpoint.remove_element_screen(request)
 
 
-@auth_router.post('/screen')
+@auth_router.put('/screen')
 async def save_screen(screen: Screen, session_id: str):
     request = SaveScreenRq(session_id=session_id, screen=screen)
     return screen_endpoint.save_screen(request)

@@ -1,6 +1,8 @@
 import ButtonsLayout from "../../../constants/buttons_layout";
 import Attributes from "../../../constants/attributes";
 import Buttons from "../../../constants/buttons";
+import Actions from "../../../constants/actions";
+import Labels from "../../../constants/labels";
 
 export class ButtonsFactory {
     create(attributeType) {
@@ -27,6 +29,7 @@ const BUTTONS_STATE = {
         [Attributes.MENU_ITEM]: Buttons.SELECT_BUTTON_PARAMS,
         [Attributes.CARD_ITEM]: Buttons.OPEN_MENU_BUTTON,
         [Attributes.SELECTABLE_CARD_ITEM]: Buttons.SELECT_CARD_ITEM,
+        [Attributes.BUTTON]: {action: {type: Actions.EMPTY_ACTION}, label: Labels.BACK},
         [Attributes.MAIN_SCREEN]: Buttons.OPEN_SPECIFIC_SCREEN("MAIN_MENU"),
     },
     [ButtonsLayout.RIGHT]: {
@@ -36,6 +39,7 @@ const BUTTONS_STATE = {
         [Attributes.MENU_ITEM]: Buttons.RETURN_BACK_BUTTON,
         [Attributes.CARD_ITEM]: Buttons.RETURN_BACK_BUTTON,
         [Attributes.SELECTABLE_CARD_ITEM]: Buttons.RETURN_BACK_BUTTON,
+        [Attributes.BUTTON]: Buttons.CLICK_BUTTON,
         [Attributes.MAIN_SCREEN]: Buttons.OPEN_SPECIFIC_SCREEN("SELECT_ACTIVE_DIRECTION"),
     }
 }
