@@ -7,13 +7,36 @@
       "visible": false,
       "type": "TEXT"
     },
+    "PLAN_EDITOR_TITLE": {
+      "name": "PLAN_EDITOR_TITLE",
+      "type": "STATIC_TEXT",
+      "label": "2 Частотный план"
+    },
+    "PLAN_LIST_HEADER": {
+      "type": "STATIC_TEXT",
+      "label": "Список диапазонов",
+      "ui:options": {
+        "className": "pprch"
+      }
+    },
     "EMPTY": {
       "type": "CARD_ITEM",
       "label": "Пустой список",
       "default": true,
       "openOnCreate": "FREQUENCY_RANGE_EDITOR",
       "openOnEdit": "FREQUENCY_RANGE_EDITOR",
-      "fieldName": "uid"
+      "fieldName": "uid",
+      "menu": {
+        "action": {"type":  "MULTISELECT"},
+        "label": "Выбрать",
+        "items": [
+          {"label": "Редактировать", "active": true, "action":  {"type":  "OPEN", "request":  true}},
+          {"label": "Добавить диапазон", "active": false, "action":  {"type":  "CREATE", "request":  true} },
+          {"label": "Удалить диапазон", "active": false, "action":  {"type":  "DELETE", "request":  true}},
+          {"label": "Тестировать план", "active": false, "disabled": true, "action":  {"type":  "EMPTY_ACTION"}},
+          {"label": "Авто.формирование", "active": false, "disabled": true, "action":  {"type":  "EMPTY_ACTION"}}
+        ]
+      }
     }
   }
 }

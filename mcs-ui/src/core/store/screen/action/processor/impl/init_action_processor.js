@@ -28,7 +28,7 @@ export class InitActionProcessor extends ActionProcessor {
         state.name = name;
         state.attributes = this._processAttributes(attributes);
 
-        const firstVisibleAttribute = this._findFirstVisibleAttribute(state.attributes);
+        const firstVisibleAttribute = this._findFirstVisibleClickableAttribute(state.attributes);
         if (!firstVisibleAttribute) {
             return state;
         }
@@ -97,9 +97,9 @@ export class InitActionProcessor extends ActionProcessor {
         return processedAttributes;
     }
 
-    _findFirstVisibleAttribute(attributes) {
+    _findFirstVisibleClickableAttribute(attributes) {
         return Object.values(attributes)
-            .find(attribute => AttributeHelper.isVisible(attribute));
+            .find(attribute => AttributeHelper.isVisible(attribute) && AttributeHelper.isClickable(attribute));
     }
 
     getType() {

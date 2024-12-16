@@ -7,7 +7,7 @@ const NAVIGATOR = "navigator";
 class Navigator {
     push(item) {
         let navigator = this._get();
-        if (navigator.includes(item)) {
+        if (navigator.find(i => i.name === item.name)) {
             return;
         }
         navigator.push(item);
@@ -21,9 +21,10 @@ class Navigator {
         return popped;
     }
 
-    tail() {
+    tailName() {
         let navigator = this._get();
-        return navigator.slice(-1)[0];
+        const tail = navigator.slice(-1)[0];
+        return tail ? tail.name : tail;
     }
 
     clear() {

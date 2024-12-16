@@ -2,6 +2,9 @@ export default class Attributes {
     // Текстовое поле
     static TEXT = "TEXT";
 
+    // Нередактируемое (статичное) текстовое поле
+    static STATIC_TEXT = "STATIC_TEXT";
+
     // Чек-бокс
     static BOOLEAN = "BOOLEAN";
     static CHECKBOX = this.BOOLEAN;
@@ -19,15 +22,20 @@ export default class Attributes {
     /// Карточка объекта, которую можно выбрать
     static SELECTABLE_CARD_ITEM = "SELECTABLE_CARD_ITEM";
 
+    // Кнопка
+    static BUTTON = "BUTTON";
+
     static MAIN_SCREEN = "MAIN_SCREEN";
 
     static _height = {
         [this.TEXT]: 25,
+        [this.STATIC_TEXT]: 25,
         [this.BOOLEAN]: 25,
         [this.DICTIONARY]: 25,
         [this.MENU_ITEM]: 26.4,
         [this.CARD_ITEM]: 25,
         [this.SELECTABLE_CARD_ITEM]: 25,
+        [this.BUTTON]: 25,
         [this.MAIN_SCREEN]: 25,
     }
 

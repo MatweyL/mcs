@@ -13,7 +13,7 @@
       "type": "TEXT",
       "numeric": true,
       "postfix": "Гц",
-      "events": []
+      "events": [ ]
     },
     "HIGH_FREQUENCY": {
       "name": "HIGH_FREQUENCY",
@@ -21,7 +21,13 @@
       "type": "TEXT",
       "numeric": true,
       "postfix": "Гц",
-      "events": []
+      "events": [ ]
+    },
+    "TEST_BUTTON": {
+      "name": "TEST_BUTTON",
+      "label": "Тестировать",
+      "type": "BUTTON",
+      "events": [ ]
     }
   }
 }

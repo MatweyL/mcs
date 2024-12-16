@@ -21,7 +21,7 @@ export class AttributeSelector extends Selector {
 
         let nextIndex = this.calculator.calculateNextByDirection(direction, index, names.length);
         let nextAttribute = Object.values(state.attributes).at(nextIndex);
-        while (AttributeHelper.isNotVisible(nextAttribute)) {
+        while (AttributeHelper.isNotVisible(nextAttribute) || !AttributeHelper.isClickable(nextAttribute)) {
             nextIndex = this.calculator.calculateNextByDirection(direction, nextIndex, names.length);
             nextAttribute = Object.values(state.attributes).at(nextIndex);
         }

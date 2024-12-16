@@ -1,5 +1,7 @@
 from abc import abstractmethod
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
+
+from pydantic import BaseModel
 
 from service.core.use_case import UseCase, Request, VoidResponse
 
@@ -20,10 +22,20 @@ class SaveScreenUseCase(UseCase):
         pass
 
 
+class NavigatorContext(BaseModel):
+    navigation_steps: List['NavigationStep']
+
+
+class NavigationStep(BaseModel):
+    name: str
+    id: Optional[str] = None
+
+
 class GetScreenRq(Request):
     screen_name: str
     session_id: str
     uid: Optional[str]
+    navigation_steps: List[NavigationStep]
 
 
 class GetScreenUseCase:
