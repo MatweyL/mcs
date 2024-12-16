@@ -20,10 +20,10 @@
       "type": "MENU_ITEM",
       "label": "Списки сканирования"
     },
-    "PPRCH_FREQUENCY_PLAN": {
+    "PPRCH_FREQUENCY_PLAN_LIST": {
       "type": "MENU_ITEM",
       "label": "Частотные планы ППРЧ",
-      "value": "PPRCH_FREQUENCY_PLAN"
+      "value": "PPRCH_FREQUENCY_PLAN_LIST"
     },
     "KEYS": {
       "type": "MENU_ITEM",

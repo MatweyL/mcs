@@ -1,0 +1,14 @@
+{
+  "name": "PPRCH_FREQUENCY_PLAN_LIST",
+  "label": "Частотные планы ППРЧ",
+  "attributes": {
+    "EMPTY": {
+      "type": "CARD_ITEM",
+      "label": "Пустой список",
+      "default": true,
+      "openOnCreate": "PPRCH_FREQUENCY_PLAN_EDITOR",
+      "openOnEdit": "PPRCH_FREQUENCY_PLAN_EDITOR",
+      "fieldName": "uid"
+    }
+  }
+}

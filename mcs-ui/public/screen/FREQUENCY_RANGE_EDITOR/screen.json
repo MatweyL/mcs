@@ -1,0 +1,28 @@
+{
+  "name": "FREQUENCY_RANGE_EDITOR",
+  "label": "Редактор частоты",
+  "attributes": {
+    "LOW_FREQUENCY": {
+      "name": "LOW_FREQUENCY",
+      "label": "Нижняя:",
+      "type": "TEXT",
+      "numeric": true,
+      "postfix": "Гц",
+      "events": [ ]
+    },
+    "HIGH_FREQUENCY": {
+      "name": "HIGH_FREQUENCY",
+      "label": "Верхняя:",
+      "type": "TEXT",
+      "numeric": true,
+      "postfix": "Гц",
+      "events": [ ]
+    },
+    "TEST_BUTTON": {
+      "name": "TEST_BUTTON",
+      "label": "Тестировать",
+      "type": "BUTTON",
+      "events": [ ]
+    }
+  }
+}
