@@ -33,8 +33,8 @@
           {"label": "Редактировать", "active": true, "action":  {"type":  "OPEN", "request":  true}},
           {"label": "Добавить диапазон", "active": false, "action":  {"type":  "CREATE", "request":  true} },
           {"label": "Удалить диапазон", "active": false, "action":  {"type":  "DELETE", "request":  true}},
-          {"label": "Тестировать план", "active": false, "action":  {"type":  "EMPTY_ACTION"}},
-          {"label": "Авто.формирование", "active": false, "action":  {"type":  "EMPTY_ACTION"}}
+          {"label": "Тестировать план", "active": false, "disabled": true, "action":  {"type":  "EMPTY_ACTION"}},
+          {"label": "Авто.формирование", "active": false, "disabled": true, "action":  {"type":  "EMPTY_ACTION"}}
         ]
       }
     }

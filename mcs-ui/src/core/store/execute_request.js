@@ -15,7 +15,7 @@ export const executeRequest = async (dispatch, request) => {
         case Requests.BACK: {
             const {sessionId} = request.payload;
             navigator.pop();
-            const prevScreen = navigator.tail();
+            const prevScreen = navigator.tailName();
             const screenRs = await screenService.getScreen(prevScreen, sessionId);
             dispatch({type: Actions.INIT, payload: screenRs});
             return;
@@ -44,7 +44,7 @@ export const executeRequest = async (dispatch, request) => {
 
         case Requests.LOAD: {
             let {sessionId} = request.payload
-            const nowScreen = navigator.tail();
+            const nowScreen = navigator.tailName();
 
             // FIXME: для отладки возвращается константа, когда навигатор пустой
             const screen = nowScreen === undefined ? FIRST_SCREEN : nowScreen;
@@ -58,7 +58,7 @@ export const executeRequest = async (dispatch, request) => {
             await screenService.saveScreen(state, sessionId);
 
             navigator.pop();
-            const prevScreen = navigator.tail();
+            const prevScreen = navigator.tailName();
             const screenRs = await screenService.getScreen(prevScreen, sessionId);
             dispatch({type: Actions.INIT, payload: screenRs});
             return;
